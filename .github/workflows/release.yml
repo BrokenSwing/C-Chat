@@ -40,9 +40,14 @@ jobs:
       - uses: actions/checkout@v2.1.0
       - name: Build CMake
         uses: ashutoshvarma/action-cmake-build@v1
-      - name: ZIP Artifacts
+      - name: ZIP Artifacts Unix
+        if: contains(matrix.os, 'ubuntu') || contains(matrix.os, 'macos')
         run: |
           zip -r artifacts.zip ${{ runner.workspace }}/build
+      - name: ZIP Artificats Windows
+        if: contains(matrix.os, 'windows')
+        run: |
+          Compress-Archive -Path '${{ runner.workspace }}/build' -DestinationPath ./artifacts.zip
       - name: Load Release URL File from release job
         uses: actions/download-artifact@v1
         with:
