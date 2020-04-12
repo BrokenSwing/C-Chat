@@ -1,0 +1,22 @@
+name: CI Documentation
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  job:
+    name: Build and Publish documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2.1.0
+      - name: Build documentation
+        uses: mattnotmitt/doxygen-action@v1
+      - name: Publish Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/html
+          publish_branch: docs
+
