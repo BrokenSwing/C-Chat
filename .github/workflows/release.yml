@@ -85,9 +85,9 @@ jobs:
       - name: Get release file name & upload URL
         id: get_release_info_windows
         run: |
-          echo '::set-output name=file_name::${REPOSITORY_NAME##*/}-${TAG_REF_NAME##*/v}'
+          echo "::set-output name=file_name::${REPOSITORY_NAME##*/}-${TAG_REF_NAME##*/v}"
           $value=(Get-Content release_url/release_url.txt)
-          echo '::set-output name=upload_url::$value'
+          echo "::set-output name=upload_url::$value"
         env:
           TAG_REF_NAME: ${{ github.ref }}
           REPOSITORY_NAME: ${{ github.repository }}
