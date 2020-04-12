@@ -100,6 +100,6 @@ jobs:
         with:
           upload_url: ${{ steps.get_release_info_windows.outputs.upload_url }}
           asset_path: ./artifacts.zip
-          asset_name: ${{ steps.get_release_info_windows.outputs.file_name }}-${{ matrix.os }}.zip
+          asset_name: ${{ steps.get_release_info_windows.outputs.file_name }}-windows-latest.zip
           asset_content_type: application/zip
 
