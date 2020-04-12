@@ -2,6 +2,8 @@
 
 *A C-based chat system*
 
+![](./assets/c-chat-logo.svg)
+
 ## Building
 
 * Use CMake
