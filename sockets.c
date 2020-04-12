@@ -3,7 +3,7 @@
 #include "sockets.h"
 
 #define CLIENTS_BACKLOG 5
-#ifdef __unix__
+#if defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__linux__)
 
     #include <sys/socket.h>
     #include <netinet/in.h>
