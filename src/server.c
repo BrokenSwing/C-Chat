@@ -1,20 +1,48 @@
+/**
+ * \file server.c
+ * \brief Serveur file.
+ * 
+ * Allows connection of two clients. Then transmits messages form one client to another client.
+ * 
+ */
+
 #include "sockets.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
 
+/**
+ * \def MSG_MAX_LENGTH
+ * \brief Maximum message size.
+ */
 #define MSG_MAX_LENGTH 250
 
+/**
+ * \brief Catch interrupt signal.
+ * 
+ * \param signal Incoming signal.
+ */
 void handleServerClose(int signal) {
     cleanUp();
     printf("Server closed.\n");
     exit(EXIT_SUCCESS);
 }
 
+/**
+ * \brief Verifies if the end of the communication is requested.
+ * 
+ * \param buffer A message.
+ * \return 1 if the message is "fin", else 0.
+ */
 int receivedEndMessage(const char* buffer) {
     return buffer[0] == 'f' && buffer[1] == 'i' && buffer[2] == 'n' && buffer[3] == '\0';
 }
 
+/**
+ * \brief Program entry.
+ * 
+ * \return EXIT_SUCCESS - normal program termination.
+ */
 int main () {
     SocketInfo serverSocket = createServerSocket("27015");
     signal(SIGINT, handleServerClose);

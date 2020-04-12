@@ -1,3 +1,11 @@
+/**
+ * \file sockets.c
+ * \brief API for sockets.
+ * 
+ * Implementation of "sockets.h" file.
+ * 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "sockets.h"
