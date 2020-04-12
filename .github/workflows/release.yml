@@ -6,8 +6,31 @@ on:
       - 'v*'
 
 jobs:
-  job:
+  release:
+    name: Create Github Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: contains(github.ref, 'SNAPSHOT')
+          prerelease: contains(github.ref, 'PRE')
+      - name: Output Release URL File
+        run: echo "${{ steps.create_release.outputs.upload_url }}" > release_url.txt
+      - name: Save release URL file for publish
+        uses: actions/upload-artifact@latest
+        with:
+          name: release_url
+          path: release_url.txt
+
+  build:
     name: ${{ matrix.os }}-build
+    needs: [release]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -20,23 +43,22 @@ jobs:
       - name: ZIP Artifacts
         run: |
           zip -r artifacts.zip ${{ runner.workspace }}/build
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
+      - name: Get release file name & upload URL
+        id: get_release_info
+        run: |
+          echo ::set-output name=file_name::${REPOSITORY_NAME##*/}-${TAG_REF_NAME##*/v} # RepositoryName-v1.0.0
+          value=`cat release_url/release_url.txt`
+          echo ::set-output name=upload_url::$value
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: contains(github.ref, 'SNAPSHOT')
-          prerelease: contains(github.ref, 'PRE')
+          TAG_REF_NAME: ${{ github.ref }}
+          REPOSITORY_NAME: ${{ github.repository }}
       - name: Upload binary
         uses: actions/upload-release-asset@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.get_release_info.outputs.upload_url }}
           asset_path: ./artifacts.zip
-          asset_name: client-and-server.zip
+          asset_name: ${{ steps.get_release_info.outputs.file_name }}-${{ matrix.os }}.zip
           asset_content_type: application/zip
 
