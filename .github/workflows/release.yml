@@ -54,7 +54,7 @@ jobs:
           name: release_url
       - name: Get release file name & upload URL (Unix)
         if: contains(matrix.os, 'ubuntu') || contains(matrix.os, 'macos')
-        id: get_release_info
+        id: get_release_info_unix
         run: |
           echo ::set-output name=file_name::${REPOSITORY_NAME##*/}-${TAG_REF_NAME##*/v} # RepositoryName-v1.0.0
           value=`cat release_url/release_url.txt`
@@ -64,7 +64,7 @@ jobs:
           REPOSITORY_NAME: ${{ github.repository }}
       - name: Get release file name & upload URL (Windows)
         if: contains(matrix.os, 'windows')
-        id: get_release_info
+        id: get_release_info_windows
         run: |
           echo ::set-output name=file_name::${REPOSITORY_NAME##*/}-${TAG_REF_NAME##*/v} # RepositoryName-v1.0.0
           $value=(Get-Content release_url/release_url.txt)
@@ -72,13 +72,24 @@ jobs:
         env:
           TAG_REF_NAME: ${{ github.ref }}
           REPOSITORY_NAME: ${{ github.repository }}
-      - name: Upload binary
+      - name: Upload binary (Unix)
+        if: contains(matrix.os, 'ubuntu') || contains(matrix.os, 'macos')
         uses: actions/upload-release-asset@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+          upload_url: ${{ steps.get_release_info_unix.outputs.upload_url }}
           asset_path: ./artifacts.zip
-          asset_name: ${{ steps.get_release_info.outputs.file_name }}-${{ matrix.os }}.zip
+          asset_name: ${{ steps.get_release_info_unix.outputs.file_name }}-${{ matrix.os }}.zip
+          asset_content_type: application/zip
+      - name: Upload binary (Windows)
+        if: contains(matrix.os, 'windows')
+        uses: actions/upload-release-asset@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_release_info_windows.outputs.upload_url }}
+          asset_path: ./artifacts.zip
+          asset_name: ${{ steps.get_release_info_windows.outputs.file_name }}-${{ matrix.os }}.zip
           asset_content_type: application/zip
 
