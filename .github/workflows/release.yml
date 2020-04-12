@@ -42,7 +42,9 @@ jobs:
         uses: ashutoshvarma/action-cmake-build@v1
       - name: ZIP Artifacts
         run: |
-          zip -r artifacts.zip ${{ runner.workspace }}/build
+          cd build
+          zip ../artifacts.zip ./Client ./Server
+          cd ..
       - name: Load Release URL File from release job
         uses: actions/download-artifact@v1
         with:
@@ -77,7 +79,9 @@ jobs:
         uses: ashutoshvarma/action-cmake-build@v1
       - name: ZIP Artifacts
         run: |
-          Compress-Archive -Path '${{ runner.workspace }}/build' -DestinationPath ./artifacts.zip
+          cd ./build/Release
+          Compress-Archive -Path *.exe -DestinationPath ./artifacts.zip
+          cd ../..
       - name: Load Release URL File from release job
         uses: actions/download-artifact@v1
         with:
