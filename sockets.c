@@ -107,7 +107,7 @@
         } else if(callSuccess < 0) {
             printf("Unable to received data.\n");
             close(socketInfo->socket);
-            exit(EXEXIT_FAILURE);
+            exit(EXIT_FAILURE);
         }
 
         return callSuccess;
