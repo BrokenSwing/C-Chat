@@ -30,7 +30,7 @@
 
         if (connect(s, (struct sockaddr *)&adS, lgA) == -1) {
             printf("Unable to connect to server.\n");
-            exit(EXIT_FAILURE)
+            exit(EXIT_FAILURE);
         }
 
         struct UnixSocketInfo *socketInfo = malloc(sizeof(struct UnixSocketInfo));
