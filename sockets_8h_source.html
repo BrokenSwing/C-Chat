@@ -69,49 +69,33 @@ $(function() {
 <div class="title">sockets.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="struct_socket_info.html">    2</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_socket_info.html">SocketInfo</a> {</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    <span class="keywordtype">void</span>* info;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;} <a class="code" href="struct_socket_info.html">SocketInfo</a>;</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">    Creates a socket meant to be used to connect to a server socket</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">    and initialize a connection with the server.</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<a class="code" href="struct_socket_info.html">SocketInfo</a> createClientSocket(<span class="keyword">const</span> <span class="keywordtype">char</span>* ipAddress, <span class="keyword">const</span> <span class="keywordtype">char</span>* port);</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">    Creates a socket meant to receive connection from clients sockets.</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<a class="code" href="struct_socket_info.html">SocketInfo</a> createServerSocket(<span class="keyword">const</span> <span class="keywordtype">char</span>* port);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">    Waits for a client to connect to the given server socket.</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">    Returns the socket for the connected client.</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<a class="code" href="struct_socket_info.html">SocketInfo</a> acceptClient(<a class="code" href="struct_socket_info.html">SocketInfo</a> serverSocket);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    Receives through from the given socket.</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">int</span> receiveFrom(<a class="code" href="struct_socket_info.html">SocketInfo</a> clientSocket, <span class="keywordtype">char</span>* buffer, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bufferSize);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    Sends data through the given socket.</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">int</span> sendTo(<a class="code" href="struct_socket_info.html">SocketInfo</a> clientSocket, <span class="keyword">const</span> <span class="keywordtype">char</span>* buffer, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bufferSize);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    Closes the given socket.</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> closeSocket(<a class="code" href="struct_socket_info.html">SocketInfo</a> socket);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    Performs any required resources cleanup. Must be called once all sockets usage is finished.</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">void</span> cleanUp();</div>
+<a href="sockets_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="struct_socket_info.html">   16</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_socket_info.html">SocketInfo</a> {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span>* info;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;} <a class="code" href="struct_socket_info.html">SocketInfo</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<a class="code" href="struct_socket_info.html">SocketInfo</a> <a class="code" href="sockets_8h.html#a161e3dd779ad9df45e658ac9b2ec6e67">createClientSocket</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* ipAddress, <span class="keyword">const</span> <span class="keywordtype">char</span>* port);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<a class="code" href="struct_socket_info.html">SocketInfo</a> <a class="code" href="sockets_8h.html#a1e6e7f430e310ab8461e5dcfea9fd618">createServerSocket</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* port);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<a class="code" href="struct_socket_info.html">SocketInfo</a> <a class="code" href="sockets_8h.html#a9f4809ff7818fd0956b809cfc1228916">acceptClient</a>(<a class="code" href="struct_socket_info.html">SocketInfo</a> serverSocket);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">int</span> <a class="code" href="sockets_8h.html#a06172a10e4be71680501d6f7a7b3604e">receiveFrom</a>(<a class="code" href="struct_socket_info.html">SocketInfo</a> clientSocket, <span class="keywordtype">char</span>* buffer, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bufferSize);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordtype">int</span> <a class="code" href="sockets_8h.html#abf0c58c8074e6bd0e1b101082f48fed0">sendTo</a>(<a class="code" href="struct_socket_info.html">SocketInfo</a> clientSocket, <span class="keyword">const</span> <span class="keywordtype">char</span>* buffer, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bufferSize);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordtype">void</span> <a class="code" href="sockets_8h.html#ab870b123fba7fab03b90ff8336913ade">closeSocket</a>(<a class="code" href="struct_socket_info.html">SocketInfo</a> socket);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">void</span> <a class="code" href="sockets_8h.html#ae900b054a1598c54acaa67902f87185d">cleanUp</a>();</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astruct_socket_info_html"><div class="ttname"><a href="struct_socket_info.html">SocketInfo</a></div><div class="ttdef"><b>Definition:</b> sockets.h:2</div></div>
+<div class="ttc" id="asockets_8h_html_ae900b054a1598c54acaa67902f87185d"><div class="ttname"><a href="sockets_8h.html#ae900b054a1598c54acaa67902f87185d">cleanUp</a></div><div class="ttdeci">void cleanUp()</div><div class="ttdoc">Performs any required resources cleanup. Must be called once all sockets usage is finished.</div></div>
+<div class="ttc" id="asockets_8h_html_abf0c58c8074e6bd0e1b101082f48fed0"><div class="ttname"><a href="sockets_8h.html#abf0c58c8074e6bd0e1b101082f48fed0">sendTo</a></div><div class="ttdeci">int sendTo(SocketInfo clientSocket, const char *buffer, unsigned int bufferSize)</div><div class="ttdoc">Sends data through the given socket.</div></div>
+<div class="ttc" id="astruct_socket_info_html"><div class="ttname"><a href="struct_socket_info.html">SocketInfo</a></div><div class="ttdoc">Informations of a socket.</div><div class="ttdef"><b>Definition:</b> sockets.h:16</div></div>
+<div class="ttc" id="asockets_8h_html_a9f4809ff7818fd0956b809cfc1228916"><div class="ttname"><a href="sockets_8h.html#a9f4809ff7818fd0956b809cfc1228916">acceptClient</a></div><div class="ttdeci">SocketInfo acceptClient(SocketInfo serverSocket)</div><div class="ttdoc">Waits for a client to connect to the given server socket. Returns the socket for the connected client...</div></div>
+<div class="ttc" id="asockets_8h_html_a1e6e7f430e310ab8461e5dcfea9fd618"><div class="ttname"><a href="sockets_8h.html#a1e6e7f430e310ab8461e5dcfea9fd618">createServerSocket</a></div><div class="ttdeci">SocketInfo createServerSocket(const char *port)</div><div class="ttdoc">Creates a socket meant to receive connection from clients sockets.</div></div>
+<div class="ttc" id="asockets_8h_html_a161e3dd779ad9df45e658ac9b2ec6e67"><div class="ttname"><a href="sockets_8h.html#a161e3dd779ad9df45e658ac9b2ec6e67">createClientSocket</a></div><div class="ttdeci">SocketInfo createClientSocket(const char *ipAddress, const char *port)</div><div class="ttdoc">Creates a socket meant to be used to connect to a server socket and initialize a connection with the ...</div></div>
+<div class="ttc" id="asockets_8h_html_ab870b123fba7fab03b90ff8336913ade"><div class="ttname"><a href="sockets_8h.html#ab870b123fba7fab03b90ff8336913ade">closeSocket</a></div><div class="ttdeci">void closeSocket(SocketInfo socket)</div><div class="ttdoc">Closes the given socket.</div></div>
+<div class="ttc" id="asockets_8h_html_a06172a10e4be71680501d6f7a7b3604e"><div class="ttname"><a href="sockets_8h.html#a06172a10e4be71680501d6f7a7b3604e">receiveFrom</a></div><div class="ttdeci">int receiveFrom(SocketInfo clientSocket, char *buffer, unsigned int bufferSize)</div><div class="ttdoc">Receives through from the given socket.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

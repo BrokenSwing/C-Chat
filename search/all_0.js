@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['socketinfo_0',['SocketInfo',['../struct_socket_info.html',1,'']]]
+  ['acceptclient_0',['acceptClient',['../sockets_8h.html#a9f4809ff7818fd0956b809cfc1228916',1,'sockets.h']]]
 ];
