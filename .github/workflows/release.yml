@@ -19,7 +19,7 @@ jobs:
         uses: ashutoshvarma/action-cmake-build@v1
       - name: ZIP Artifacts
         run: |
-          zip -r artifacts.zip ./build
+          zip -r artifacts.zip ${{ runner.workspace }}/build
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
