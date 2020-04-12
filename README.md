@@ -2,7 +2,7 @@
 
 *A C-based chat system*
 
-![](./assets/c-chat-logo.svg)
+![](assets/logo-512x512.png)
 
 ## Building
 
