@@ -84,7 +84,7 @@ jobs:
       - name: ZIP Artifacts
         run: |
           cd ./build/Release
-          Compress-Archive -Path *.exe -DestinationPath ./artifacts.zip
+          Compress-Archive -Path *.exe -DestinationPath ../../artifacts.zip
           cd ../..
       - name: Load Release URL File from release job
         uses: actions/download-artifact@v1
