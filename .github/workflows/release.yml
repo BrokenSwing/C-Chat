@@ -85,7 +85,9 @@ jobs:
       - name: Get release file name & upload URL
         id: get_release_info_windows
         run: |
-          echo "::set-output name=file_name::${REPOSITORY_NAME##*/}-${TAG_REF_NAME##*/v}"
+          $repoName = $env:REPOSITORY_NAME.split('/')[1]
+          $version = $env:TAG_REF_NAME.split('/v')[1]
+          echo "::set-output name=file_name::$repoName-$version"
           $value=(Get-Content release_url/release_url.txt)
           echo "::set-output name=upload_url::$value"
         env:
