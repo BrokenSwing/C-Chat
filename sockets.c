@@ -137,7 +137,7 @@
         // Nothing to cleanup under Unix
     }
 
-#else // Can assume we're on Windows
+#elif defined(_WIN32) || defined(_WIN64) || defined(_WINDOWS)
 
 	#define WIN32_LEAN_AND_MEAN
 	#include <windows.h>
@@ -313,6 +313,8 @@
             WSACleanup();
             exit(EXIT_FAILURE);
         }
+
+        return callSuccess;
     }
 
     void closeSocket(SocketInfo socket) {
