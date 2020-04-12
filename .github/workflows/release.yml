@@ -43,6 +43,10 @@ jobs:
       - name: ZIP Artifacts
         run: |
           zip -r artifacts.zip ${{ runner.workspace }}/build
+      - name: Load Release URL File from release job
+        uses: actions/download-artifact@v1
+        with:
+          name: release_url
       - name: Get release file name & upload URL
         id: get_release_info
         run: |
