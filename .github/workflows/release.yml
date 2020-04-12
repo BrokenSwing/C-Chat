@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  job:
+    name: ${{ matrix.os }}-build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v2.1.0
+      - name: Build CMake
+        uses: ashutoshvarma/action-cmake-build@v1
+      - name: ZIP Artifacts
+        run: |
+          zip -r artifacts.zip ./build
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: contains(github.ref, 'SNAPSHOT')
+          prerelease: contains(github.ref, 'PRE')
+      - name: Upload binary
+        uses: actions/upload-release-asset@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./artifacts.zip
+          asset_name: client-and-server.zip
+          asset_content_type: application/zip
+
