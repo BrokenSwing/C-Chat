@@ -28,33 +28,27 @@ jobs:
           name: release_url
           path: release_url.txt
 
-  build:
+  build-unix:
     name: ${{ matrix.os }}-build
     needs: [release]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v2.1.0
-      - name: Build CMake
+      - name: Build
         uses: ashutoshvarma/action-cmake-build@v1
-      - name: ZIP Artifacts Unix
-        if: contains(matrix.os, 'ubuntu') || contains(matrix.os, 'macos')
+      - name: ZIP Artifacts
         run: |
           zip -r artifacts.zip ${{ runner.workspace }}/build
-      - name: ZIP Artificats Windows
-        if: contains(matrix.os, 'windows')
-        run: |
-          Compress-Archive -Path '${{ runner.workspace }}/build' -DestinationPath ./artifacts.zip
       - name: Load Release URL File from release job
         uses: actions/download-artifact@v1
         with:
           name: release_url
-      - name: Get release file name & upload URL (Unix)
-        if: contains(matrix.os, 'ubuntu') || contains(matrix.os, 'macos')
-        id: get_release_info_unix
+      - name: Get release file name & upload URL
+        id: get_release_info
         run: |
           echo ::set-output name=file_name::${REPOSITORY_NAME##*/}-${TAG_REF_NAME##*/v} # RepositoryName-v1.0.0
           value=`cat release_url/release_url.txt`
@@ -62,8 +56,33 @@ jobs:
         env:
           TAG_REF_NAME: ${{ github.ref }}
           REPOSITORY_NAME: ${{ github.repository }}
-      - name: Get release file name & upload URL (Windows)
-        if: contains(matrix.os, 'windows')
+      - name: Upload binary
+        uses: actions/upload-release-asset@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+          asset_path: ./artifacts.zip
+          asset_name: ${{ steps.get_release_info.outputs.file_name }}-${{ matrix.os }}.zip
+          asset_content_type: application/zip
+
+  build-windows:
+    name: windows-latest-build
+    needs: [release]
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2.1.0
+      - name: Build
+        uses: ashutoshvarma/action-cmake-build@v1
+      - name: ZIP Artifacts
+        run: |
+          Compress-Archive -Path '${{ runner.workspace }}/build' -DestinationPath ./artifacts.zip
+      - name: Load Release URL File from release job
+        uses: actions/download-artifact@v1
+        with:
+          name: release_url
+      - name: Get release file name & upload URL
         id: get_release_info_windows
         run: |
           echo ::set-output name=file_name::${REPOSITORY_NAME##*/}-${TAG_REF_NAME##*/v} # RepositoryName-v1.0.0
@@ -72,18 +91,7 @@ jobs:
         env:
           TAG_REF_NAME: ${{ github.ref }}
           REPOSITORY_NAME: ${{ github.repository }}
-      - name: Upload binary (Unix)
-        if: contains(matrix.os, 'ubuntu') || contains(matrix.os, 'macos')
-        uses: actions/upload-release-asset@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.get_release_info_unix.outputs.upload_url }}
-          asset_path: ./artifacts.zip
-          asset_name: ${{ steps.get_release_info_unix.outputs.file_name }}-${{ matrix.os }}.zip
-          asset_content_type: application/zip
-      - name: Upload binary (Windows)
-        if: contains(matrix.os, 'windows')
+      - name: Upload binary
         uses: actions/upload-release-asset@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
