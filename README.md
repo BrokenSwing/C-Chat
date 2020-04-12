@@ -6,8 +6,8 @@
 
 * Use CMake
 * Use `gcc` :
-    * Build client : `gcc client.c sockets.c -o client`
-    * Build server : `gcc server.c sockets.c -o server`
+    * Build client : `gcc src/client.c src/sockets.c -o client`
+    * Build server : `gcc src/server.c src/sockets.c -o server`
     
 ## Running
 
