@@ -40,7 +40,8 @@ jobs:
       - uses: actions/checkout@v2.1.0
       - name: Build
         uses: ashutoshvarma/action-cmake-build@v1
-        build-dir: ./build
+        with:
+          build-dir: ./build
       - name: ZIP Artifacts
         run: |
           cd build
@@ -78,7 +79,8 @@ jobs:
       - uses: actions/checkout@v2.1.0
       - name: Build
         uses: ashutoshvarma/action-cmake-build@v1
-        build-dir: ./build
+        with:
+          build-dir: ./build
       - name: ZIP Artifacts
         run: |
           cd ./build/Release
