@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['receivedendmessage_29',['receivedEndMessage',['../server_8c.html#a591cef1c733707db69a0bbd0e0de0b13',1,'server.c']]],
-  ['receivefrom_30',['receiveFrom',['../sockets_8h.html#a06172a10e4be71680501d6f7a7b3604e',1,'sockets.h']]]
+  ['receivedendmessage_36',['receivedEndMessage',['../server_8c.html#a591cef1c733707db69a0bbd0e0de0b13',1,'server.c']]],
+  ['receivefrom_37',['receiveFrom',['../sockets_8h.html#a06172a10e4be71680501d6f7a7b3604e',1,'sockets.h']]]
 ];
