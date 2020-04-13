@@ -1,5 +1,5 @@
 # cmake_minimum_required(VERSION <specify CMake version here>)
-project(Projet_FAR C)
+project(C-Chat C)
 
 set(CMAKE_C_STANDARD 99)
 
