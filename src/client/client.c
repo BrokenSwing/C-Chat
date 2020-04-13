@@ -28,14 +28,14 @@ int main() {
     SocketInfo socket = createClientSocket("127.0.0.1", "27015");
 
     receiveFrom(socket, buffer, BUFFER_SIZE);
-    ui_informationMessage("Hi, you're connected to server !\n");
+    ui_informationMessage("Hi, you're connected to server !");
 
     if (buffer[0] == '2') {
-        ui_informationMessage("What do you want to send to other connected client ?\n");
+        ui_informationMessage("What do you want to send to other connected client ?");
         ui_getUserInput(buffer, BUFFER_SIZE);
         sendTo(socket, buffer, strlen(buffer));
     } else {
-        ui_informationMessage("Wait for an other client to receive a message.\n");
+        ui_informationMessage("Wait for an other client to receive a message.");
     }
 
     int bytesCount;
@@ -49,7 +49,7 @@ int main() {
         }
     } while (bytesCount != 0);
 
-    ui_informationMessage("End of chat.\n");
+    ui_informationMessage("End of chat.");
     cleanUp();
     return EXIT_SUCCESS;
 }

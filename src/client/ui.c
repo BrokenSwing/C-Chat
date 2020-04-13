@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ui.h"
+#include "console-color.h"
 
 void ui_getUserInput(char* buffer, int buffer_size) {
     do {
@@ -21,5 +22,7 @@ void ui_messageReceived(const char* sender, const char* message) {
 }
 
 void ui_informationMessage(const char* message) {
+    setTextColor(FG_YELLOW);
     printf("%s\n", message);
+    resetColor();
 }
