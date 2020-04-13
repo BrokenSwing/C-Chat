@@ -13,7 +13,7 @@ void ui_getUserInput(char* buffer, int buffer_size) {
     } while((strlen(buffer) - 1) == 0);
 
     // Trim carriage return
-    buffer[strlen(buffer)] = '\0';
+    buffer[strlen(buffer) - 1] = '\0';
 }
 
 void ui_messageReceived(const char* sender, const char* message) {
