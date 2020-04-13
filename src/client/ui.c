@@ -1,3 +1,10 @@
+/**
+ * \file ui.c
+ * \brief Implementation for ui.h functions
+ *
+ * This implementation displays received messages to the console.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

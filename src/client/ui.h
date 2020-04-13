@@ -1,4 +1,12 @@
 /**
+ * \file ui.h
+ * \brief API to communicate with user.
+ *
+ * This adds an abstraction between main program logic and the way messages
+ * are displayed to client.
+ */
+
+/**
  * \brief Get the entered message by the user.
  *
  * The user input returned in buffer does not contain an ending carriage return.

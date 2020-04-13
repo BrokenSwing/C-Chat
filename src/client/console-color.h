@@ -1,3 +1,9 @@
+/**
+ * \file color-console.h
+ * \brief API to control text color in console.
+ *
+ */
+
 #ifndef C_CHAT_CONSOLE_COLOR_H
 #define C_CHAT_CONSOLE_COLOR_H
 
@@ -21,8 +27,20 @@ void resetColor();
 
 #include <stdio.h>
 
+/**
+ * \def FG_RED
+ * \brief Red text color constant.
+ */
 #define FG_RED 31
+/**
+ * \def FG_YELLOW
+ * \brief Yellow text color constant.
+ */
 #define FG_YELLOW 33
+/**
+ * \def FG_WHITE
+ * \brief White text color constant.
+ */
 #define FG_WHITE 39
 
 void setTextColor(unsigned int colorCode) {
@@ -36,8 +54,20 @@ void setTextColor(unsigned int colorCode) {
 #define WIN32_LEAN_AND_MEAN
 #endif
 
+/**
+ * \def FG_RED
+ * \brief Red text color constant.
+ */
 #define FG_RED FOREGROUND_RED | FOREGROUND_INTENSITY
+/**
+ * \def FG_YELLOW
+ * \brief Yellow text color constant.
+ */
 #define FG_YELLOW FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY
+/**
+ * \def FG_WHITE
+ * \brief White text color constant.
+ */
 #define FG_WHITE FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY
 
 void setTextColor(unsigned int colorCode) {
