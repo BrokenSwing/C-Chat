@@ -6,7 +6,7 @@
  * 
  */
 
-#include "sockets.h"
+#include "../common/sockets.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
