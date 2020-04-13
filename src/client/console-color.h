@@ -1,5 +1,5 @@
 /**
- * \file color-console.h
+ * \file console-color.h
  * \brief API to control text color in console.
  *
  */
