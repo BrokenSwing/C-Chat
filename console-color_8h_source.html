@@ -70,13 +70,13 @@ $(function() {
 <div class="title">console-color.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<a href="console-color_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef C_CHAT_CONSOLE_COLOR_H</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define C_CHAT_CONSOLE_COLOR_H</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span> setTextColor(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> colorCode);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span> <a class="code" href="console-color_8h.html#a0bf72a7e3dba93a4a09a5c1ff1c55a95">setTextColor</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> colorCode);</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> resetColor();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> <a class="code" href="console-color_8h.html#afe00396766eb6b8ca4674de4c5d3d949">resetColor</a>();</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#if defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__linux__)</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
@@ -88,7 +88,7 @@ $(function() {
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#define FG_WHITE 39</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">void</span> setTextColor(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> colorCode) {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">void</span> <a class="code" href="console-color_8h.html#a0bf72a7e3dba93a4a09a5c1ff1c55a95">setTextColor</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> colorCode) {</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    printf(<span class="stringliteral">&quot;\033[%dm&quot;</span>, colorCode);</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
@@ -105,19 +105,21 @@ $(function() {
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#define FG_WHITE FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY</span></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordtype">void</span> setTextColor(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> colorCode) {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordtype">void</span> <a class="code" href="console-color_8h.html#a0bf72a7e3dba93a4a09a5c1ff1c55a95">setTextColor</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> colorCode) {</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">// Implementing here so macros got defined an have associated value</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keywordtype">void</span> resetColor() {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    setTextColor(FG_WHITE);</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="console-color_8h.html#afe00396766eb6b8ca4674de4c5d3d949">   80</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="console-color_8h.html#afe00396766eb6b8ca4674de4c5d3d949">resetColor</a>() {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="console-color_8h.html#a0bf72a7e3dba93a4a09a5c1ff1c55a95">setTextColor</a>(FG_WHITE);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif //C_CHAT_CONSOLE_COLOR_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aconsole-color_8h_html_a0bf72a7e3dba93a4a09a5c1ff1c55a95"><div class="ttname"><a href="console-color_8h.html#a0bf72a7e3dba93a4a09a5c1ff1c55a95">setTextColor</a></div><div class="ttdeci">void setTextColor(unsigned int colorCode)</div><div class="ttdoc">Sets output text color.</div></div>
+<div class="ttc" id="aconsole-color_8h_html_afe00396766eb6b8ca4674de4c5d3d949"><div class="ttname"><a href="console-color_8h.html#afe00396766eb6b8ca4674de4c5d3d949">resetColor</a></div><div class="ttdeci">void resetColor()</div><div class="ttdoc">Set output text color to white.</div><div class="ttdef"><b>Definition:</b> console-color.h:80</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
