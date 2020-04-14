@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['handleserverclose_38',['handleServerClose',['../server_8c.html#aade192ddf7e8a5315aa6c2efab6dc26d',1,'server.c']]]
+  ['destroythread_48',['destroyThread',['../threads_8h.html#a26b3febd7277f4d8b637a0f6f102f0dc',1,'threads.h']]]
 ];

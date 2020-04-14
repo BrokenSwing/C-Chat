@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['socketinfo_25',['SocketInfo',['../struct_socket_info.html',1,'']]]
+  ['socketinfo_32',['SocketInfo',['../struct_socket_info.html',1,'']]]
 ];

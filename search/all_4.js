@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['main_9',['main',['../client_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;client.c'],['../server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;server.c']]],
-  ['msg_5fmax_5flength_10',['MSG_MAX_LENGTH',['../server_8c.html#af0d1fa332610c5ebdf75ae745359636b',1,'server.c']]]
+  ['handleserverclose_10',['handleServerClose',['../server_8c.html#aade192ddf7e8a5315aa6c2efab6dc26d',1,'server.c']]]
 ];
