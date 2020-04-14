@@ -11,12 +11,35 @@
 #include "../common/sockets.h"
 #include <string.h>
 #include "ui.h"
+#include ""
 
 /**
  * \def BUFFER_SIZE
  * \brief The buffer size.
  */
 #define BUFFER_SIZE 250
+
+static SocketInfo socket;
+
+THREAD_ENTRY_POINT sendMessage(void* data) {
+    char buffer[BUFFER_SIZE + 1];
+    while(1) {
+        ui_getUserInput(buffer, BUFFER_SIZE);
+        sendTo(socket, buffer, strlen(buffer));
+    }
+}
+
+THREAD_ENTRY_POINT receiveMessage(void* data) {
+    char buffer[BUFFER_SIZE + 1];
+    int bytesCount;
+    do {
+        bytesCount = receiveFrom(socket, buffer, BUFFER_SIZE);
+        if (bytesCount != 0) {
+            buffer[bytesCount] = '\0';
+            ui_messageReceived("Him", buffer);
+        }
+    } while (bytesCount != 0);
+}
 
 /**
  * \brief Program entry.
@@ -30,24 +53,11 @@ int main() {
     receiveFrom(socket, buffer, BUFFER_SIZE);
     ui_informationMessage("Hi, you're connected to server !");
 
-    if (buffer[0] == '2') {
-        ui_informationMessage("What do you want to send to other connected client ?");
-        ui_getUserInput(buffer, BUFFER_SIZE);
-        sendTo(socket, buffer, strlen(buffer));
-    } else {
-        ui_informationMessage("Wait for an other client to receive a message.");
-    }
+    Thread senderThread = createThread(sendMessage);
+    Thread receiverThread = createThread(receiveMessage);
 
-    int bytesCount;
-    do {
-        bytesCount = receiveFrom(socket, buffer, BUFFER_SIZE);
-        if (bytesCount != 0) {
-            buffer[bytesCount] = '\0';
-            ui_messageReceived("Him", buffer);
-            ui_getUserInput(buffer, BUFFER_SIZE);
-            sendTo(socket, buffer, strlen(buffer));
-        }
-    } while (bytesCount != 0);
+    joinThread(receiverThread);
+    destroyThread(senderThread);
 
     ui_informationMessage("End of chat.");
     cleanUp();

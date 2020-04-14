@@ -17,6 +17,10 @@
  */
 #define MSG_MAX_LENGTH 250
 
+#define NUMBER_CLIENT_MAX 2
+
+SocketInfo clientSocket[NUMBER_CLIENT_MAX];
+
 /**
  * \brief Catch interrupt signal.
  * 
@@ -38,6 +42,41 @@ int receivedEndMessage(const char* buffer) {
     return buffer[0] == 'f' && buffer[1] == 'i' && buffer[2] == 'n' && buffer[3] == '\0';
 }
 
+THREAD_ENTRY_POINT Message(void* data) {
+    char buffer[MSG_MAX_LENGTH + 1];
+    int bytesCount;
+    do {
+
+        bytesCount = receiveFrom(clientSocket[(int)data], buffer, MSG_MAX_LENGTH);
+        if (bytesCount == 0) { // Connection with sender is lost
+            closeSocket(clientSocket[(int)data]);
+            printf("Connection interrupted by sender.\n");
+            break;
+        }
+        buffer[bytesCount] = '\0';
+
+        if (receivedEndMessage(buffer)) {
+            printf("A client want to leave. Closing sockets.\n");
+            for(int i = 0; i < NUMBER_CLIENT_MAX; i++) {
+                closeSocket(clientSocket[i]);
+            }
+            break;
+        }
+
+        for(int i = 0; i < NUMBER_CLIENT_MAX; i++) {
+            if(i != (int)data) {
+                bytesCount = sendTo(clientSocket[i], buffer, bytesCount);
+                if (bytesCount == 0) { // Connection with receiver is lost
+                    closeSocket(clientSocket[(int)data]);
+                    printf("Connection interrupted by receiver.\n");
+                    break;
+                }
+            }
+        }
+
+    } while (1);
+}
+
 /**
  * \brief Program entry.
  * 
@@ -51,42 +90,21 @@ int main () {
 
     do {
         printf("Waiting for first client to connect.\n");
-        SocketInfo receiver = acceptClient(serverSocket);
-        sendTo(receiver, "1", 1);
+        clientSocket[0] = acceptClient(serverSocket);
+        sendTo(clientSocket[0], "1", 1);
         printf("Waiting for second client to connect.\n");
-        SocketInfo sender = acceptClient(serverSocket);
-        sendTo(sender, "2", 1);
+        clientSocket[1] = acceptClient(serverSocket);
+        sendTo(clientSocket[1], "2", 1);
 
         printf("Two clients connected !\n");
 
         do {
-            int bytesCount = receiveFrom(sender, buffer, MSG_MAX_LENGTH);
-            if (bytesCount == 0) { // Connection with sender is lost
-                closeSocket(receiver);
-                printf("Connection interrupted by sender.\n");
-                break;
-            }
-            buffer[bytesCount] = '\0';
 
-            if (receivedEndMessage(buffer)) {
-                printf("A client want to leave. Closing sockets.\n");
-                closeSocket(sender);
-                closeSocket(receiver);
-                break;
-            }
+            Thread OneToTwo = createThread(Message);
+            Thread TwoToOne = createThread(Message);
 
-            bytesCount = sendTo(receiver, buffer, bytesCount);
-            if (bytesCount == 0) { // Connection with receiver is lost
-                closeSocket(sender);
-                printf("Connection interrupted by receiver.\n");
-                break;
-            }
-
-            printf("Relayed message : %s\n", buffer);
-
-            SocketInfo tmp = sender;
-            sender = receiver;
-            receiver = tmp;
+            joinThread(OneToTwo);
+            joinThread(TwoToOne);
 
         } while(1);
     } while(1);
