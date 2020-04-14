@@ -1,7 +1,37 @@
 #include "threads.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 #if defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__linux__)
+
+#include <pthread.h>
+
+struct PosixThread {
+    pthread_t id;
+};
+
+Thread createThread(THREAD_FUNCTION_POINTER entryPoint) {
+    pthread_t t;
+    pthread_create(&t, 0, entryPoint, 0);
+
+    struct PosixThread *posixThread = malloc(sizeof(struct PosixThread));
+    posixThread->id = t;
+
+    Thread t;
+    t.info = posixThread;
+
+    return t;
+}
+
+void joinThread(Thread thread) {
+    struct PosixThread *posixThread = thread.info;
+    pthread_join(posixThread->id, 0);
+}
+
+void destroyThread(Thread thread) {
+    struct PosixThread *posixThread = thread.info;
+    pthread_cancel(posixThread->id);
+}
 
 #elif defined(_WIN32) || defined(_WIN64) || defined(_WINDOWS)
 
