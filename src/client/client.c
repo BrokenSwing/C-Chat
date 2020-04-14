@@ -11,7 +11,7 @@
 #include "../common/sockets.h"
 #include <string.h>
 #include "ui.h"
-#include ""
+#include "../common/threads.h"
 
 /**
  * \def BUFFER_SIZE
@@ -19,13 +19,13 @@
  */
 #define BUFFER_SIZE 250
 
-static SocketInfo socket;
+static SocketInfo clientSocket;
 
 THREAD_ENTRY_POINT sendMessage(void* data) {
     char buffer[BUFFER_SIZE + 1];
     while(1) {
         ui_getUserInput(buffer, BUFFER_SIZE);
-        sendTo(socket, buffer, strlen(buffer));
+        sendTo(clientSocket, buffer, strlen(buffer));
     }
 }
 
@@ -33,12 +33,13 @@ THREAD_ENTRY_POINT receiveMessage(void* data) {
     char buffer[BUFFER_SIZE + 1];
     int bytesCount;
     do {
-        bytesCount = receiveFrom(socket, buffer, BUFFER_SIZE);
+        bytesCount = receiveFrom(clientSocket, buffer, BUFFER_SIZE);
         if (bytesCount != 0) {
             buffer[bytesCount] = '\0';
             ui_messageReceived("Him", buffer);
         }
     } while (bytesCount != 0);
+    return 0;
 }
 
 /**
@@ -48,9 +49,9 @@ THREAD_ENTRY_POINT receiveMessage(void* data) {
  */
 int main() {
     char buffer[BUFFER_SIZE + 1];
-    SocketInfo socket = createClientSocket("127.0.0.1", "27015");
+    clientSocket = createClientSocket("127.0.0.1", "27015");
 
-    receiveFrom(socket, buffer, BUFFER_SIZE);
+    receiveFrom(clientSocket, buffer, BUFFER_SIZE);
     ui_informationMessage("Hi, you're connected to server !");
 
     Thread senderThread = createThread(sendMessage);

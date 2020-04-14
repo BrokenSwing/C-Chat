@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
+#include "../common/threads.h"
 
 /**
  * \def MSG_MAX_LENGTH
@@ -19,7 +20,8 @@
 
 #define NUMBER_CLIENT_MAX 2
 
-SocketInfo clientSocket[NUMBER_CLIENT_MAX];
+static SocketInfo clientSocket[NUMBER_CLIENT_MAX];
+static int totalClients = 0;
 
 /**
  * \brief Catch interrupt signal.
@@ -45,11 +47,12 @@ int receivedEndMessage(const char* buffer) {
 THREAD_ENTRY_POINT Message(void* data) {
     char buffer[MSG_MAX_LENGTH + 1];
     int bytesCount;
+    int clientId = totalClients++ // TODO: Replace static variable by passed data
     do {
 
-        bytesCount = receiveFrom(clientSocket[(int)data], buffer, MSG_MAX_LENGTH);
+        bytesCount = receiveFrom(clientSocket[(int)clientId], buffer, MSG_MAX_LENGTH);
         if (bytesCount == 0) { // Connection with sender is lost
-            closeSocket(clientSocket[(int)data]);
+            closeSocket(clientSocket[(int)clientId]);
             printf("Connection interrupted by sender.\n");
             break;
         }
@@ -64,10 +67,10 @@ THREAD_ENTRY_POINT Message(void* data) {
         }
 
         for(int i = 0; i < NUMBER_CLIENT_MAX; i++) {
-            if(i != (int)data) {
+            if(i != (int)clientId) {
                 bytesCount = sendTo(clientSocket[i], buffer, bytesCount);
                 if (bytesCount == 0) { // Connection with receiver is lost
-                    closeSocket(clientSocket[(int)data]);
+                    closeSocket(clientSocket[(int)clientId]);
                     printf("Connection interrupted by receiver.\n");
                     break;
                 }
@@ -75,6 +78,8 @@ THREAD_ENTRY_POINT Message(void* data) {
         }
 
     } while (1);
+
+    return 0;
 }
 
 /**
@@ -86,8 +91,6 @@ int main () {
     SocketInfo serverSocket = createServerSocket("27015");
     signal(SIGINT, handleServerClose);
 
-    char buffer[MSG_MAX_LENGTH + 1];
-
     do {
         printf("Waiting for first client to connect.\n");
         clientSocket[0] = acceptClient(serverSocket);
@@ -98,14 +101,11 @@ int main () {
 
         printf("Two clients connected !\n");
 
-        do {
+        Thread OneToTwo = createThread(Message);
+        Thread TwoToOne = createThread(Message);
 
-            Thread OneToTwo = createThread(Message);
-            Thread TwoToOne = createThread(Message);
-
-            joinThread(OneToTwo);
-            joinThread(TwoToOne);
-
-        } while(1);
+        joinThread(OneToTwo);
+        joinThread(TwoToOne);
+        // TODO: Fix server crash when a client leaves
     } while(1);
 }
