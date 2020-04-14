@@ -11,11 +11,11 @@ struct PosixThread {
 };
 
 Thread createThread(THREAD_FUNCTION_POINTER entryPoint) {
-    pthread_t t;
-    pthread_create(&t, 0, entryPoint, 0);
+    pthread_t tId;
+    pthread_create(&tId, 0, entryPoint, 0);
 
     struct PosixThread *posixThread = malloc(sizeof(struct PosixThread));
-    posixThread->id = t;
+    posixThread->id = tId;
 
     Thread t;
     t.info = posixThread;
