@@ -13,6 +13,7 @@
 
 static int queryingUserInput = 0;
 
+// TODO: Use semaphore to sync theses calls between threads
 void _beginUserInput();
 void _endUserInput(int properly);
 
