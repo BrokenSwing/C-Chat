@@ -25,6 +25,7 @@ THREAD_ENTRY_POINT sendMessage(void* data) {
     char buffer[BUFFER_SIZE + 1];
     while(1) {
         ui_getUserInput(buffer, BUFFER_SIZE);
+        ui_messageReceived("Me", buffer);
         sendTo(clientSocket, buffer, strlen(buffer));
     }
 }
