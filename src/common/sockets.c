@@ -115,7 +115,6 @@
         } else if(callSuccess < 0) {
             printf("Unable to received data.\n");
             close(socketInfo->socket);
-            exit(EXIT_FAILURE);
         }
 
         return callSuccess;
@@ -130,7 +129,6 @@
         } else if (callSuccess < 0) {
             printf("Unable to send data through socket.\n");
             close(socketInfo->socket);
-            exit(EXIT_FAILURE);
         }
 
         return callSuccess;
@@ -305,7 +303,6 @@
         } else if(callSuccess < 0) {
             printf("Unable to received data. Error code : %d\n", WSAGetLastError());
             closesocket(socketInfo->socket);
-            exit(EXIT_FAILURE);
         }
 
         return callSuccess;
@@ -318,8 +315,6 @@
         if (callSuccess == SOCKET_ERROR) {
             printf("Unable to send data through socket. Error code : %d\n", WSAGetLastError());
             closesocket(socketInfo->socket);
-            WSACleanup();
-            exit(EXIT_FAILURE);
         }
 
         return callSuccess;
