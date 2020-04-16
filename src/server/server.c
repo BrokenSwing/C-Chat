@@ -47,7 +47,7 @@ int receivedEndMessage(const char* buffer) {
 THREAD_ENTRY_POINT Message(void* data) {
     char buffer[MSG_MAX_LENGTH + 1];
     int bytesCount;
-    int clientId = totalClients++ // TODO: Replace static variable by passed data
+    int clientId = totalClients++; // TODO: Replace static variable by passed data
     do {
 
         bytesCount = receiveFrom(clientSocket[(int)clientId], buffer, MSG_MAX_LENGTH);
@@ -101,8 +101,8 @@ int main () {
 
         printf("Two clients connected !\n");
 
-        Thread OneToTwo = createThread(Message);
-        Thread TwoToOne = createThread(Message);
+        Thread OneToTwo = createThread(Message, NULL);
+        Thread TwoToOne = createThread(Message, NULL);
 
         joinThread(OneToTwo);
         joinThread(TwoToOne);

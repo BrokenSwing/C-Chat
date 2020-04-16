@@ -54,8 +54,8 @@ int main() {
     receiveFrom(clientSocket, buffer, BUFFER_SIZE);
     ui_informationMessage("Hi, you're connected to server !");
 
-    Thread senderThread = createThread(sendMessage);
-    Thread receiverThread = createThread(receiveMessage);
+    Thread senderThread = createThread(sendMessage, NULL);
+    Thread receiverThread = createThread(receiveMessage, NULL);
 
     joinThread(receiverThread);
     destroyThread(senderThread);
