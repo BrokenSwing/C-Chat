@@ -117,9 +117,9 @@
 
         int callSuccess = recv(socketInfo->socket, buffer, bufferSize, 0);
         if (callSuccess == 0) {
-            printf("Connection closed.\n");
+            DEBUG_CALL(printf("Connection closed.\n"));
         } else if(callSuccess < 0) {
-            printf("Unable to received data.\n");
+            DEBUG_CALL(printf("Unable to received data.\n"));
             close(socketInfo->socket);
         }
 
@@ -131,9 +131,9 @@
 
         int callSuccess = send(socketInfo->socket, buffer, bufferSize, 0);
         if (callSuccess == 0) {
-            printf("Connection closed.\n");
+            DEBUG_CALL(printf("Connection closed.\n"));
         } else if (callSuccess < 0) {
-            printf("Unable to send data through socket.\n");
+            DEBUG_CALL(printf("Unable to send data through socket.\n"));
             close(socketInfo->socket);
         }
 
