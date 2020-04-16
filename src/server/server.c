@@ -51,7 +51,7 @@ THREAD_ENTRY_POINT Message(void* data) {
     do {
 
         bytesCount = receiveFrom(clientSocket[(int)clientId], buffer, MSG_MAX_LENGTH);
-        if (bytesCount == 0) { // Connection with sender is lost
+        if (bytesCount <= 0) { // Connection with sender is lost
             closeSocket(clientSocket[(int)clientId]);
             printf("Connection interrupted by sender.\n");
             break;
@@ -59,7 +59,7 @@ THREAD_ENTRY_POINT Message(void* data) {
         buffer[bytesCount] = '\0';
 
         if (receivedEndMessage(buffer)) {
-            printf("A client want to leave. Closing sockets.\n");
+            printf("A client wants to leave. Closing sockets.\n");
             for(int i = 0; i < NUMBER_CLIENT_MAX; i++) {
                 closeSocket(clientSocket[i]);
             }
@@ -69,7 +69,7 @@ THREAD_ENTRY_POINT Message(void* data) {
         for(int i = 0; i < NUMBER_CLIENT_MAX; i++) {
             if(i != (int)clientId) {
                 bytesCount = sendTo(clientSocket[i], buffer, bytesCount);
-                if (bytesCount == 0) { // Connection with receiver is lost
+                if (bytesCount <= 0) { // Connection with receiver is lost
                     closeSocket(clientSocket[(int)clientId]);
                     printf("Connection interrupted by receiver.\n");
                     break;
@@ -94,10 +94,9 @@ int main () {
     do {
         printf("Waiting for first client to connect.\n");
         clientSocket[0] = acceptClient(serverSocket);
-        sendTo(clientSocket[0], "1", 1);
+
         printf("Waiting for second client to connect.\n");
         clientSocket[1] = acceptClient(serverSocket);
-        sendTo(clientSocket[1], "2", 1);
 
         printf("Two clients connected !\n");
 
@@ -106,6 +105,5 @@ int main () {
 
         joinThread(OneToTwo);
         joinThread(TwoToOne);
-        // TODO: Fix server crash when a client leaves
     } while(1);
 }

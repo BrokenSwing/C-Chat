@@ -50,8 +50,6 @@ THREAD_ENTRY_POINT receiveMessage(void* data) {
 int main() {
     char buffer[BUFFER_SIZE + 1];
     clientSocket = createClientSocket("127.0.0.1", "27015");
-
-    receiveFrom(clientSocket, buffer, BUFFER_SIZE);
     ui_informationMessage("Hi, you're connected to server !");
 
     Thread senderThread = createThread(sendMessage, NULL);
