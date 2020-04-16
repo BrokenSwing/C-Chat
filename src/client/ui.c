@@ -27,7 +27,7 @@ void _endUserInput(int properly) {
     if (properly) {
         printf("\033[A");
     }
-    printf("\33[2K");
+    printf("\33[2K\r");
     queryingUserInput = 0;
 }
 
