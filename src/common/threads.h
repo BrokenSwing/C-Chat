@@ -57,9 +57,10 @@ typedef struct Thread {
  *  }
  *
  * \param entryPoint The entry point for the thread
+ * \param data A pointer to be passed to thread's entry point
  * \return the created thread
  */
-Thread createThread(THREAD_FUNCTION_POINTER entryPoint);
+Thread createThread(THREAD_FUNCTION_POINTER entryPoint, void* data);
 
 /**
  * \brief Destroys the given thread.

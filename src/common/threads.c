@@ -10,9 +10,9 @@ struct PosixThread {
     pthread_t id;
 };
 
-Thread createThread(THREAD_FUNCTION_POINTER entryPoint) {
+Thread createThread(THREAD_FUNCTION_POINTER entryPoint, void* data) {
     pthread_t tId;
-    pthread_create(&tId, 0, entryPoint, 0);
+    pthread_create(&tId, 0, entryPoint, data);
 
     struct PosixThread *posixThread = malloc(sizeof(struct PosixThread));
     posixThread->id = tId;
@@ -48,9 +48,9 @@ struct WinThread {
     HANDLE handle;
 };
 
-Thread createThread(THREAD_FUNCTION_POINTER entryPoint) {
+Thread createThread(THREAD_FUNCTION_POINTER entryPoint, void* data) {
     DWORD threadId;
-    HANDLE threadHandle = CreateThread(NULL, 0, entryPoint, NULL, 0, &threadId);
+    HANDLE threadHandle = CreateThread(NULL, 0, entryPoint, data, 0, &threadId);
     if (threadHandle == NULL) {
         printf("Unable to create thread. Error code : %d\n", GetLastError());
         exit(EXIT_FAILURE);
