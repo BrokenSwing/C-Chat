@@ -105,5 +105,7 @@ int main () {
 
         joinThread(OneToTwo);
         joinThread(TwoToOne);
+
+        totalClients = 0;
     } while(1);
 }
