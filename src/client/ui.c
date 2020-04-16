@@ -13,6 +13,9 @@
 
 static int queryingUserInput = 0;
 
+void _beginUserInput();
+void _endUserInput(int properly);
+
 #if defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__linux__)
 
 void _beginUserInput() {
@@ -20,8 +23,11 @@ void _beginUserInput() {
     printf("You : ");
 }
 
-void _endUserInput() {
-    printf("\033[A\33[2K");
+void _endUserInput(int properly) {
+    if (properly) {
+        printf("\033[A");
+    }
+    printf("\33[2K");
     queryingUserInput = 0;
 }
 
@@ -38,7 +44,7 @@ void _beginUserInput() {
     printf("You : ");
 }
 
-void _endUserInput() {
+void _endUserInput(int properly) {
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleCursorPosition(handle, cursorCoord);
     CONSOLE_SCREEN_BUFFER_INFO screenBufferInfo;
@@ -58,11 +64,11 @@ void ui_getUserInput(char* buffer, int buffer_size) {
         _beginUserInput();
         fgets(buffer, buffer_size, stdin);
         if ((strlen(buffer) - 1) == 0) { // If user entered an empty message.
-            _endUserInput();
+            _endUserInput(1);
             printf("You can't send an empty message.\n");
         }
     } while((strlen(buffer) - 1) == 0);
-    _endUserInput();
+    _endUserInput(1);
 
     // Trim carriage return
     buffer[strlen(buffer) - 1] = '\0';
@@ -70,7 +76,7 @@ void ui_getUserInput(char* buffer, int buffer_size) {
 
 void ui_messageReceived(const char* sender, const char* message) {
     if (queryingUserInput) {
-        _endUserInput();
+        _endUserInput(0);
         printf("[%s] %s\n", sender, message);
         _beginUserInput();
     } else {
@@ -80,7 +86,7 @@ void ui_messageReceived(const char* sender, const char* message) {
 
 void ui_informationMessage(const char* message) {
     if (queryingUserInput) {
-        _endUserInput();
+        _endUserInput(0);
         setTextColor(FG_YELLOW);
         printf("%s\n", message);
         resetColor();
