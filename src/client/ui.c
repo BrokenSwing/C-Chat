@@ -16,11 +16,13 @@ static int queryingUserInput = 0;
 #if defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__linux__)
 
 void _beginUserInput() {
-   printf("You : ");
+    queryingUserInput = 1;
+    printf("You : ");
 }
 
 void _endUserInput() {
     printf("\033[A\33[2K");
+    queryingUserInput = 0;
 }
 
 #elif defined(_WIN32) || defined(_WIN64) || defined(_WINDOWS)
