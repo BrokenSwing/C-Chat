@@ -58,7 +58,7 @@ void destroyReadWriteLock(ReadWriteLock lock) {
 
     Mutex createMutex() {
         struct UnixMutex* unixMutex = malloc(sizeof(struct UnixMutex));
-        pthread_mutex_init(unixMutex->mutex, NULL);
+        pthread_mutex_init(&(unixMutex->mutex), NULL);
 
         Mutex m;
         m.info = unixMutex;
