@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['acceptclient_0',['acceptClient',['../sockets_8h.html#a9f4809ff7818fd0956b809cfc1228916',1,'sockets.h']]]
+  ['_5fclient_0',['_Client',['../struct___client.html',1,'']]],
+  ['_5fmutex_1',['_Mutex',['../struct___mutex.html',1,'']]],
+  ['_5freadwritelock_2',['_ReadWriteLock',['../struct___read_write_lock.html',1,'']]]
 ];

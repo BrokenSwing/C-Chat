@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['buffer_5fsize_61',['BUFFER_SIZE',['../client_8c.html#a6b20d41d6252e9871430c242cb1a56e7',1,'client.c']]]
+  ['msg_5fmax_5flength_115',['MSG_MAX_LENGTH',['../constants_8h.html#af0d1fa332610c5ebdf75ae745359636b',1,'constants.h']]]
 ];

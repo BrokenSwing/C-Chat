@@ -67,50 +67,142 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">server.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Serveur file.  
+<p>Server file.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="sockets_8h_source.html">../common/sockets.h</a>&quot;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;signal.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="threads_8h_source.html">../common/threads.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="constants_8h_source.html">../common/constants.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="synchronization_8h_source.html">../common/synchronization.h</a>&quot;</code><br />
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___client.html">_Client</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:af0d1fa332610c5ebdf75ae745359636b"><td class="memItemLeft" align="right" valign="top"><a id="af0d1fa332610c5ebdf75ae745359636b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#af0d1fa332610c5ebdf75ae745359636b">MSG_MAX_LENGTH</a>&#160;&#160;&#160;250</td></tr>
-<tr class="memdesc:af0d1fa332610c5ebdf75ae745359636b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum message size. <br /></td></tr>
-<tr class="separator:af0d1fa332610c5ebdf75ae745359636b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad172719f11bc41562233eec71e151cff"><td class="memItemLeft" align="right" valign="top"><a id="ad172719f11bc41562233eec71e151cff"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>NUMBER_CLIENT_MAX</b>&#160;&#160;&#160;2</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ad172719f11bc41562233eec71e151cff">NUMBER_CLIENT_MAX</a>&#160;&#160;&#160;10</td></tr>
+<tr class="memdesc:ad172719f11bc41562233eec71e151cff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum of simultaneous connected clients. <br /></td></tr>
 <tr class="separator:ad172719f11bc41562233eec71e151cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a04efab6d88efaa8d803643ca7791e6e8"><td class="memItemLeft" align="right" valign="top"><a id="a04efab6d88efaa8d803643ca7791e6e8"></a>
+typedef struct <a class="el" href="struct___client.html">_Client</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Client</b></td></tr>
+<tr class="separator:a04efab6d88efaa8d803643ca7791e6e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ab37e88dfc833c4ba909999902705f3ba"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ab37e88dfc833c4ba909999902705f3ba">scanForFreeSocketSlot</a> ()</td></tr>
+<tr class="memdesc:ab37e88dfc833c4ba909999902705f3ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scan clients slots for an available slot.  <a href="server_8c.html#ab37e88dfc833c4ba909999902705f3ba">More...</a><br /></td></tr>
+<tr class="separator:ab37e88dfc833c4ba909999902705f3ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aade192ddf7e8a5315aa6c2efab6dc26d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#aade192ddf7e8a5315aa6c2efab6dc26d">handleServerClose</a> (int signal)</td></tr>
 <tr class="memdesc:aade192ddf7e8a5315aa6c2efab6dc26d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Catch interrupt signal.  <a href="server_8c.html#aade192ddf7e8a5315aa6c2efab6dc26d">More...</a><br /></td></tr>
 <tr class="separator:aade192ddf7e8a5315aa6c2efab6dc26d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3f5fa9a434fc6535db702c02d130896"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ae3f5fa9a434fc6535db702c02d130896">initClientConnection</a> (<a class="el" href="class_client.html">Client</a> *client)</td></tr>
+<tr class="memdesc:ae3f5fa9a434fc6535db702c02d130896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a client connection to be ready to discuss.  <a href="server_8c.html#ae3f5fa9a434fc6535db702c02d130896">More...</a><br /></td></tr>
+<tr class="separator:ae3f5fa9a434fc6535db702c02d130896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af00e8215717a1018bf79b8e40ffaba66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#af00e8215717a1018bf79b8e40ffaba66">disconnectClient</a> (int id)</td></tr>
+<tr class="memdesc:af00e8215717a1018bf79b8e40ffaba66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnects the client and free allocated memory.  <a href="server_8c.html#af00e8215717a1018bf79b8e40ffaba66">More...</a><br /></td></tr>
+<tr class="separator:af00e8215717a1018bf79b8e40ffaba66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a591cef1c733707db69a0bbd0e0de0b13"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a591cef1c733707db69a0bbd0e0de0b13">receivedEndMessage</a> (const char *buffer)</td></tr>
 <tr class="memdesc:a591cef1c733707db69a0bbd0e0de0b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if the end of the communication is requested.  <a href="server_8c.html#a591cef1c733707db69a0bbd0e0de0b13">More...</a><br /></td></tr>
 <tr class="separator:a591cef1c733707db69a0bbd0e0de0b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba7caad62d29c4b5daa8f77c529d9b04"><td class="memItemLeft" align="right" valign="top"><a id="aba7caad62d29c4b5daa8f77c529d9b04"></a>
-<a class="el" href="threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f">THREAD_ENTRY_POINT</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Message</b> (void *data)</td></tr>
-<tr class="separator:aba7caad62d29c4b5daa8f77c529d9b04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
-<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Program entry.  <a href="server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">More...</a><br /></td></tr>
+<tr class="memitem:a32c007c29bcb41b02a6c432f146eabbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a32c007c29bcb41b02a6c432f146eabbb">broadcast</a> (const char *buffer, int size)</td></tr>
+<tr class="memdesc:a32c007c29bcb41b02a6c432f146eabbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasts a message to every clients.  <a href="server_8c.html#a32c007c29bcb41b02a6c432f146eabbb">More...</a><br /></td></tr>
+<tr class="separator:a32c007c29bcb41b02a6c432f146eabbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">relayClientMessages</a> (<a class="el" href="class_client.html">Client</a> *client)</td></tr>
+<tr class="memdesc:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relay messages sent by given client to all known clients.  <a href="server_8c.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">More...</a><br /></td></tr>
+<tr class="separator:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a485255282d99bd18b166b6424a500224"><td class="memItemLeft" align="right" valign="top"><a id="a485255282d99bd18b166b6424a500224"></a>
+<a class="el" href="threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f">THREAD_ENTRY_POINT</a>&#160;</td><td class="memItemRight" valign="bottom"><b>clientThread</b> (void *idPnt)</td></tr>
+<tr class="separator:a485255282d99bd18b166b6424a500224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top"><a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Program entry point. <br /></td></tr>
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Serveur file. </p>
-<p>Allows connection of two clients. Then transmits messages form one client to another client. </p>
+<div class="textblock"><p>Server file. </p>
+<p>Allows multiple clients to discuss, relaying messages between them. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a32c007c29bcb41b02a6c432f146eabbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32c007c29bcb41b02a6c432f146eabbb">&#9670;&nbsp;</a></span>broadcast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void broadcast </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Broadcasts a message to every clients. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>The message to broacast </td></tr>
+    <tr><td class="paramname">size</td><td>The message length </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af00e8215717a1018bf79b8e40ffaba66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af00e8215717a1018bf79b8e40ffaba66">&#9670;&nbsp;</a></span>disconnectClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void disconnectClient </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disconnects the client and free allocated memory. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The client slot id </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aade192ddf7e8a5315aa6c2efab6dc26d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aade192ddf7e8a5315aa6c2efab6dc26d">&#9670;&nbsp;</a></span>handleServerClose()</h2>
 
@@ -130,30 +222,38 @@ Functions</h2></td></tr>
 <p>Catch interrupt signal. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">signal</td><td>Incoming signal. </td></tr>
+    <tr><td class="paramname">signal</td><td>Incoming signal </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
+<a id="ae3f5fa9a434fc6535db702c02d130896"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3f5fa9a434fc6535db702c02d130896">&#9670;&nbsp;</a></span>initClientConnection()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int main </td>
+          <td class="memname">int initClientConnection </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_client.html">Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Program entry. </p>
-<dl class="section return"><dt>Returns</dt><dd>EXIT_SUCCESS - normal program termination. </dd></dl>
+<p>Initialize a client connection to be ready to discuss. </p>
+<p>Receives the client username and performs checks to ensure its validity.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">client</td><td>A pointer to an integer which contains the slot id of the client to initialize </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>EXIT_SUCCESS if client initialized correctly, else EXIT_FAILURE </dd></dl>
 
 </div>
 </div>
@@ -181,6 +281,54 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>1 if the message is "fin", else 0. </dd></dl>
+
+</div>
+</div>
+<a id="af1f91fbc99a1d4fd38d0b2cb98ec5a1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">&#9670;&nbsp;</a></span>relayClientMessages()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void relayClientMessages </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_client.html">Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Relay messages sent by given client to all known clients. </p>
+<p>Waits for an incoming message, and broadcast it (in a correctly formed relayed message) to all known clients.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">client</td><td>The client to wait messages from </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab37e88dfc833c4ba909999902705f3ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab37e88dfc833c4ba909999902705f3ba">&#9670;&nbsp;</a></span>scanForFreeSocketSlot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int scanForFreeSocketSlot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Scan clients slots for an available slot. </p>
+<p>Iterates over clients slots to find an empty slot.</p>
+<dl class="section return"><dt>Returns</dt><dd>-1 if no empty slot was found, else an available slot id </dd></dl>
 
 </div>
 </div>
