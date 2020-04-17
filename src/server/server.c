@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
+#include <string.h>
 #include "../common/threads.h"
 #include "../common/constants.h"
 #include "../common/synchronization.h"
