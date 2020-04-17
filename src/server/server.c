@@ -12,6 +12,7 @@
 #include <signal.h>
 #include "../common/threads.h"
 #include "../common/constants.h"
+#include "../common/synchronization.h"
 
 /**
  * \def NUMBER_CLIENT_MAX
@@ -37,6 +38,7 @@ typedef struct _Client {
     Thread thread;
 } Client;
 
+static ReadWriteLock clientsLock;
 static Client* clients[NUMBER_CLIENT_MAX] = {NULL};
 
 /**
@@ -117,6 +119,7 @@ void handleServerClose(int signal) {
         }
     }
     cleanUp();
+    destroyReadWriteLock(clientsLock);
     printf("Server closed.\n");
     exit(EXIT_SUCCESS);
 }
@@ -150,17 +153,24 @@ int initClientConnection(Client* client) {
     if (validUsername) {
         /* Telling client its username is valid */
         sendTo(client->socket, "Ok", strlen(okUsername));
+        acquireWrite(clientsLock);
+        // BEGIN CRITICAL SECTION
         client->joined = 1;
+        // END CRITICAL SECTION
+        releaseWrite(clientsLock);
         printf("A client connected with username: %s\n", client->username);
     }
     return validUsername ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
 void disconnectClient(int id) {
-    // TODO: Synchronize first two statements, clients array modifications must be synchronized.
+    acquireWrite(clientsLock);
+    // BEGIN CRITICAL SECTION
     Client* client = clients[id];
-    /* Free slot */
     clients[id] = NULL;
+    // END CRITICAL SECTION
+    releaseWrite(clientsLock);
+
     /* Closing connection with client */
     closeSocket(client->socket);
 
@@ -175,12 +185,16 @@ int receivedEndMessage(const char* buffer) {
 }
 
 void broadcast(const char* buffer, int size) {
+    acquireRead(clientsLock);
+    // BEGIN CRITICAL SECTION
     for (int i = 0; i < NUMBER_CLIENT_MAX; i++) {
         Client* c = clients[i];
         if (c != NULL && c->joined) {
             sendTo(c->socket, buffer, size);
         }
     }
+    // END CRITICAL SECTION
+    releaseRead(clientsLock);
 }
 
 void relayClientMessages(Client* client) {
@@ -222,6 +236,8 @@ THREAD_ENTRY_POINT clientThread(void* idPnt) {
  * \brief Program entry point.
  */
 int main () {
+    clientsLock = createReadWriteLock();
+
     /* Create server socket */
     SocketInfo serverSocket = createServerSocket("27015");
     /* Capture interruption signal to be able to cleanup allocated resources when server stops */
@@ -251,7 +267,9 @@ int main () {
         Client *client = malloc(sizeof(Client)); // Free-ed in disconnectClient function
         client->socket = clientSocket;
         client->joined = 0;
+        acquireWrite(clientsLock);
         clients[slotId] = client;
+        releaseWrite(clientsLock);
 
         /* Create thread to initialize connection with client and passing client slot id to this thread */
         int* id = malloc(sizeof(int)); // Free-ed in clientThread function
