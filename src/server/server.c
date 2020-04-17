@@ -21,7 +21,6 @@
 #define NUMBER_CLIENT_MAX 2
 
 static SocketInfo clientSocket[NUMBER_CLIENT_MAX];
-static int totalClients = 0;
 
 /**
  * \brief Catch interrupt signal.
@@ -47,12 +46,12 @@ int receivedEndMessage(const char* buffer) {
 THREAD_ENTRY_POINT Message(void* data) {
     char buffer[MSG_MAX_LENGTH + 1];
     int bytesCount;
-    int clientId = totalClients++; // TODO: Replace static variable by passed data
+    int clientId = *((int*)data);
     do {
 
-        bytesCount = receiveFrom(clientSocket[(int)clientId], buffer, MSG_MAX_LENGTH);
+        bytesCount = receiveFrom(clientSocket[clientId], buffer, MSG_MAX_LENGTH);
         if (bytesCount <= 0) { // Connection with sender is lost
-            closeSocket(clientSocket[(int)clientId]);
+            closeSocket(clientSocket[clientId]);
             printf("Connection interrupted by sender.\n");
             break;
         }
@@ -70,7 +69,7 @@ THREAD_ENTRY_POINT Message(void* data) {
             if(i != (int)clientId) {
                 bytesCount = sendTo(clientSocket[i], buffer, bytesCount);
                 if (bytesCount <= 0) { // Connection with receiver is lost
-                    closeSocket(clientSocket[(int)clientId]);
+                    closeSocket(clientSocket[clientId]);
                     printf("Connection interrupted by receiver.\n");
                     break;
                 }
@@ -99,13 +98,17 @@ int main () {
         clientSocket[1] = acceptClient(serverSocket);
 
         printf("Two clients connected !\n");
-
-        Thread OneToTwo = createThread(Message, NULL);
-        Thread TwoToOne = createThread(Message, NULL);
+        int* client1 = malloc(sizeof(int));
+        *client1 = 0;
+        int* client2 = malloc(sizeof(int));
+        *client2 = 1;
+        Thread OneToTwo = createThread(Message, client1);
+        Thread TwoToOne = createThread(Message, client2);
 
         joinThread(OneToTwo);
         joinThread(TwoToOne);
 
-        totalClients = 0;
+        free(client1);
+        free(client2);
     } while(1);
 }
