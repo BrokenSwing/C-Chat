@@ -80,6 +80,7 @@ $(function() {
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;signal.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="threads_8h_source.html">../common/threads.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -87,6 +88,9 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#af0d1fa332610c5ebdf75ae745359636b">MSG_MAX_LENGTH</a>&#160;&#160;&#160;250</td></tr>
 <tr class="memdesc:af0d1fa332610c5ebdf75ae745359636b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum message size. <br /></td></tr>
 <tr class="separator:af0d1fa332610c5ebdf75ae745359636b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad172719f11bc41562233eec71e151cff"><td class="memItemLeft" align="right" valign="top"><a id="ad172719f11bc41562233eec71e151cff"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>NUMBER_CLIENT_MAX</b>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:ad172719f11bc41562233eec71e151cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -96,6 +100,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a591cef1c733707db69a0bbd0e0de0b13"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a591cef1c733707db69a0bbd0e0de0b13">receivedEndMessage</a> (const char *buffer)</td></tr>
 <tr class="memdesc:a591cef1c733707db69a0bbd0e0de0b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if the end of the communication is requested.  <a href="server_8c.html#a591cef1c733707db69a0bbd0e0de0b13">More...</a><br /></td></tr>
 <tr class="separator:a591cef1c733707db69a0bbd0e0de0b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba7caad62d29c4b5daa8f77c529d9b04"><td class="memItemLeft" align="right" valign="top"><a id="aba7caad62d29c4b5daa8f77c529d9b04"></a>
+<a class="el" href="threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f">THREAD_ENTRY_POINT</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Message</b> (void *data)</td></tr>
+<tr class="separator:aba7caad62d29c4b5daa8f77c529d9b04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
 <tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Program entry.  <a href="server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">More...</a><br /></td></tr>
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
