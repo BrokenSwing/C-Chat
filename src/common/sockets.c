@@ -10,6 +10,12 @@
 #include <stdlib.h>
 #include "sockets.h"
 
+#ifdef DEBUG
+#define DEBUG_CALL(x) (x)
+#else
+#define DEBUG_CALL(x)
+#endif
+
 #define CLIENTS_BACKLOG 5
 #if defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__linux__)
 
@@ -111,11 +117,10 @@
 
         int callSuccess = recv(socketInfo->socket, buffer, bufferSize, 0);
         if (callSuccess == 0) {
-            printf("Connection closed.\n");
+            DEBUG_CALL(printf("Connection closed.\n"));
         } else if(callSuccess < 0) {
-            printf("Unable to received data.\n");
+            DEBUG_CALL(printf("Unable to received data.\n"));
             close(socketInfo->socket);
-            exit(EXIT_FAILURE);
         }
 
         return callSuccess;
@@ -126,11 +131,10 @@
 
         int callSuccess = send(socketInfo->socket, buffer, bufferSize, 0);
         if (callSuccess == 0) {
-            printf("Connection closed.\n");
+            DEBUG_CALL(printf("Connection closed.\n"));
         } else if (callSuccess < 0) {
-            printf("Unable to send data through socket.\n");
+            DEBUG_CALL(printf("Unable to send data through socket.\n"));
             close(socketInfo->socket);
-            exit(EXIT_FAILURE);
         }
 
         return callSuccess;
@@ -301,11 +305,10 @@
 
         int callSuccess = recv(socketInfo->socket, buffer, bufferSize, 0);
         if (callSuccess == 0) {
-            printf("Connection closed.\n");
+            DEBUG_CALL(printf("Connection closed.\n"));
         } else if(callSuccess < 0) {
-            printf("Unable to received data. Error code : %d\n", WSAGetLastError());
+            DEBUG_CALL(printf("Unable to received data. Error code : %d\n", WSAGetLastError()));
             closesocket(socketInfo->socket);
-            exit(EXIT_FAILURE);
         }
 
         return callSuccess;
@@ -316,10 +319,8 @@
 
         int callSuccess = send(socketInfo->socket, buffer, bufferSize, 0);
         if (callSuccess == SOCKET_ERROR) {
-            printf("Unable to send data through socket. Error code : %d\n", WSAGetLastError());
+            DEBUG_CALL(printf("Unable to send data through socket. Error code : %d\n", WSAGetLastError()));
             closesocket(socketInfo->socket);
-            WSACleanup();
-            exit(EXIT_FAILURE);
         }
 
         return callSuccess;
