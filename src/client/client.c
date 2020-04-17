@@ -12,35 +12,60 @@
 #include <string.h>
 #include "ui.h"
 #include "../common/threads.h"
-
-/**
- * \def BUFFER_SIZE
- * \brief The buffer size.
- */
-#define BUFFER_SIZE 250
+#include "../common/constants.h"
 
 static SocketInfo clientSocket;
 
 THREAD_ENTRY_POINT sendMessage(void* data) {
-    char buffer[BUFFER_SIZE + 1];
+    char buffer[MSG_MAX_LENGTH + 1];
     while(1) {
-        ui_getUserInput(buffer, BUFFER_SIZE);
-        ui_messageReceived("Me", buffer);
+        ui_getUserInput(buffer, MSG_MAX_LENGTH);
         sendTo(clientSocket, buffer, strlen(buffer));
     }
 }
 
 THREAD_ENTRY_POINT receiveMessage(void* data) {
-    char buffer[BUFFER_SIZE + 1];
+    char buffer[MSG_MAX_LENGTH + USERNAME_MAX_LENGTH + 2];
     int bytesCount;
     do {
-        bytesCount = receiveFrom(clientSocket, buffer, BUFFER_SIZE);
+        bytesCount = receiveFrom(clientSocket, buffer, MSG_MAX_LENGTH + USERNAME_MAX_LENGTH + 2);
         if (bytesCount != 0) {
-            buffer[bytesCount] = '\0';
-            ui_messageReceived("Him", buffer);
+            ui_messageReceived(buffer + MSG_MAX_LENGTH + 1, buffer);
         }
     } while (bytesCount != 0);
     return 0;
+}
+
+void pickUsername() {
+    int success = 0;
+    do {
+        char username[50];
+        ui_getUserInput(username, 20);
+        int bytesReceived = sendTo(clientSocket, username, strlen(username));
+
+        if (bytesReceived < 0) {
+            ui_informationMessage("Connection with server lost. Exiting.");
+            closeSocket(clientSocket);
+            cleanUp();
+            exit(EXIT_FAILURE);
+        }
+
+        bytesReceived = receiveFrom(clientSocket, username, 100);
+        if (bytesReceived > 0) {
+            username[bytesReceived] = '\0';
+            int passwordOk = username[0] == 'O' && username[1] == 'k';
+            if (passwordOk) {
+                success = 1;
+            } else {
+                ui_informationMessage(username);
+            }
+        } else {
+            ui_informationMessage("Connection with server lost. Exiting.");
+            closeSocket(clientSocket);
+            cleanUp();
+            exit(EXIT_FAILURE);
+        }
+    } while (!success);
 }
 
 /**
@@ -49,9 +74,12 @@ THREAD_ENTRY_POINT receiveMessage(void* data) {
  * \return EXIT_SUCCESS - normal program termination.
  */
 int main() {
-    char buffer[BUFFER_SIZE + 1];
     clientSocket = createClientSocket("127.0.0.1", "27015");
     ui_informationMessage("Hi, you're connected to server !");
+
+    pickUsername();
+
+    ui_informationMessage("Joined room.");
 
     Thread senderThread = createThread(sendMessage, NULL);
     Thread receiverThread = createThread(receiveMessage, NULL);

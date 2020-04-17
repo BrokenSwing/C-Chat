@@ -1,8 +1,8 @@
 /**
  * \file server.c
- * \brief Serveur file.
+ * \brief Server file.
  * 
- * Allows connection of two clients. Then transmits messages form one client to another client.
+ * Allows multiple clients to discuss, relaying messages between them.
  * 
  */
 
@@ -10,105 +10,272 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
+#include <string.h>
 #include "../common/threads.h"
+#include "../common/constants.h"
+#include "../common/synchronization.h"
 
 /**
- * \def MSG_MAX_LENGTH
- * \brief Maximum message size.
+ * \def NUMBER_CLIENT_MAX
+ * \brief Maximum of simultaneous connected clients
  */
-#define MSG_MAX_LENGTH 250
+#define NUMBER_CLIENT_MAX 10
 
-#define NUMBER_CLIENT_MAX 2
+/**
+ * \class Client
+ * \brief A type representing a connected client
+ */
+typedef struct _Client {
+    /** The socket from server to the client */
+    SocketInfo socket;
+    /** A buffer meant to contain client username */
+    char username[USERNAME_MAX_LENGTH + 1];
+    /**
+     * A short indicating whether or not, the client joined discussion.
+     * Equal to 0 if client isn't in the discussion, else 1.
+     */
+    short joined;
+    /** Thread relaying messages sent by user */
+    Thread thread;
+} Client;
 
-static SocketInfo clientSocket[NUMBER_CLIENT_MAX];
+static ReadWriteLock clientsLock;
+static Client* clients[NUMBER_CLIENT_MAX] = {NULL};
+
+/**
+ * \brief Scan clients slots for an available slot.
+ *
+ * Iterates over clients slots to find an empty slot.
+ *
+ * \return -1 if no empty slot was found, else an available slot id
+ */
+int scanForFreeSocketSlot();
 
 /**
  * \brief Catch interrupt signal.
- * 
- * \param signal Incoming signal.
+ *
+ * \param signal Incoming signal
  */
+void handleServerClose(int signal);
+
+/**
+ * \brief Initialize a client connection to be ready to discuss.
+ *
+ * Receives the client username and performs checks to ensure its validity.
+ *
+ * \param client A pointer to an integer which contains the slot id of the client to initialize
+ * \return EXIT_SUCCESS if client initialized correctly, else EXIT_FAILURE
+ */
+int initClientConnection(Client* client);
+
+/**
+ * \brief Disconnects the client and free allocated memory
+ *
+ * \param id The client slot id
+ */
+void disconnectClient(int id);
+
+/**
+ * \brief Verifies if the end of the communication is requested.
+ *
+ * \param buffer A message.
+ * \return 1 if the message is "fin", else 0.
+ */
+int receivedEndMessage(const char* buffer);
+
+/**
+ * \brief Broadcasts a message to every clients
+ *
+ * @param buffer The message to broacast
+ * @param size The message length
+ */
+void broadcast(const char* buffer, int size);
+
+/**
+ * \brief Relay messages sent by given client to all known clients.
+ *
+ * Waits for an incoming message, and broadcast it (in a correctly formed relayed message) to all
+ * known clients.
+ *
+ * @param client The client to wait messages from
+ */
+void relayClientMessages(Client* client);
+
+int scanForFreeSocketSlot() {
+    int i = 0;
+    while(i < NUMBER_CLIENT_MAX && clients[i] != NULL) {
+        i++;
+    }
+    return i == NUMBER_CLIENT_MAX ? -1 : i;
+}
+
 void handleServerClose(int signal) {
+    for (int i = 0; i < NUMBER_CLIENT_MAX; i++) {
+        Client* client = clients[i];
+        if (client != NULL) {
+            clients[i] = NULL;
+            closeSocket(client->socket);
+            destroyThread(client->thread);
+            free(client);
+        }
+    }
     cleanUp();
+    destroyReadWriteLock(clientsLock);
     printf("Server closed.\n");
     exit(EXIT_SUCCESS);
 }
 
-/**
- * \brief Verifies if the end of the communication is requested.
- * 
- * \param buffer A message.
- * \return 1 if the message is "fin", else 0.
- */
+int initClientConnection(Client* client) {
+    /* Message sent when receiving empty username */
+    const char* emptyUsername = "Error. Username can't be empty.";
+    const char* okUsername = "Ok";
+
+    SocketInfo socket = client->socket;
+
+    short validUsername = 0;
+    int bytesReceived;
+    do {
+        /* Receiving client username */
+        bytesReceived = receiveFrom(socket, client->username, USERNAME_MAX_LENGTH);
+
+        /* If we received data */
+        if (bytesReceived >= 0) {
+            client->username[bytesReceived] = '\0';
+
+            /* We don't allow empty username */
+            if (strlen(client->username) == 0) {
+                sendTo(socket, emptyUsername, strlen(emptyUsername));
+            } else {
+                validUsername = 1;
+            }
+        }
+    } while(!validUsername && bytesReceived >= 0); // Keep iterating while we receive data and username is invalid
+
+    if (validUsername) {
+        /* Telling client its username is valid */
+        sendTo(client->socket, "Ok", strlen(okUsername));
+        acquireWrite(clientsLock);
+        // BEGIN CRITICAL SECTION
+        client->joined = 1;
+        // END CRITICAL SECTION
+        releaseWrite(clientsLock);
+        printf("A client connected with username: %s\n", client->username);
+    }
+    return validUsername ? EXIT_SUCCESS : EXIT_FAILURE;
+}
+
+void disconnectClient(int id) {
+    acquireWrite(clientsLock);
+    // BEGIN CRITICAL SECTION
+    Client* client = clients[id];
+    clients[id] = NULL;
+    // END CRITICAL SECTION
+    releaseWrite(clientsLock);
+
+    /* Closing connection with client */
+    closeSocket(client->socket);
+
+    printf("Client disconnected : %s\n", client->username);
+
+    /* Free heap-allocated memory for client */
+    free(client);
+}
+
 int receivedEndMessage(const char* buffer) {
     return buffer[0] == 'f' && buffer[1] == 'i' && buffer[2] == 'n' && buffer[3] == '\0';
 }
 
-THREAD_ENTRY_POINT Message(void* data) {
-    char buffer[MSG_MAX_LENGTH + 1];
-    int bytesCount;
-    int clientId = *((int*)data);
+void broadcast(const char* buffer, int size) {
+    acquireRead(clientsLock);
+    // BEGIN CRITICAL SECTION
+    for (int i = 0; i < NUMBER_CLIENT_MAX; i++) {
+        Client* c = clients[i];
+        if (c != NULL && c->joined) {
+            sendTo(c->socket, buffer, size);
+        }
+    }
+    // END CRITICAL SECTION
+    releaseRead(clientsLock);
+}
+
+void relayClientMessages(Client* client) {
+    char buffer[MSG_MAX_LENGTH + USERNAME_MAX_LENGTH + 2];
+    memcpy(buffer + MSG_MAX_LENGTH + 1, client->username, sizeof(client->username));
+
+    int bytesReceived;
     do {
-
-        bytesCount = receiveFrom(clientSocket[clientId], buffer, MSG_MAX_LENGTH);
-        if (bytesCount <= 0) { // Connection with sender is lost
-            closeSocket(clientSocket[clientId]);
-            printf("Connection interrupted by sender.\n");
-            break;
-        }
-        buffer[bytesCount] = '\0';
-
-        if (receivedEndMessage(buffer)) {
-            printf("A client wants to leave. Closing sockets.\n");
-            for(int i = 0; i < NUMBER_CLIENT_MAX; i++) {
-                closeSocket(clientSocket[i]);
-            }
-            break;
-        }
-
-        for(int i = 0; i < NUMBER_CLIENT_MAX; i++) {
-            if(i != (int)clientId) {
-                bytesCount = sendTo(clientSocket[i], buffer, bytesCount);
-                if (bytesCount <= 0) { // Connection with receiver is lost
-                    closeSocket(clientSocket[clientId]);
-                    printf("Connection interrupted by receiver.\n");
-                    break;
-                }
+        bytesReceived = receiveFrom(client->socket, buffer, MSG_MAX_LENGTH);
+        if (bytesReceived > 0) {
+            buffer[bytesReceived] = '\0';
+            if (strlen(buffer) > 0 && !receivedEndMessage(buffer)) {
+                broadcast(buffer, MSG_MAX_LENGTH + USERNAME_MAX_LENGTH + 2);
             }
         }
+    } while (bytesReceived >= 0 && !receivedEndMessage(buffer));
+}
 
-    } while (1);
+THREAD_ENTRY_POINT clientThread(void* idPnt) {
+    /* Retrieving client's slot id to initialize, and remove heap-allocated int */
+    int id = *((int*)idPnt);
+    free(idPnt);
 
-    return 0;
+    Client* client = clients[id];
+
+    int success = initClientConnection(client);
+    if (success == EXIT_FAILURE) {
+        disconnectClient(id);
+        return EXIT_FAILURE;
+    }
+
+    relayClientMessages(client);
+    disconnectClient(id);
+
+    return EXIT_SUCCESS;
 }
 
 /**
- * \brief Program entry.
- * 
- * \return EXIT_SUCCESS - normal program termination.
+ * \brief Program entry point.
  */
 int main () {
+    clientsLock = createReadWriteLock();
+
+    /* Create server socket */
     SocketInfo serverSocket = createServerSocket("27015");
+    /* Capture interruption signal to be able to cleanup allocated resources when server stops */
     signal(SIGINT, handleServerClose);
 
-    do {
-        printf("Waiting for first client to connect.\n");
-        clientSocket[0] = acceptClient(serverSocket);
+    printf("Server ready to accept connections.\n");
 
-        printf("Waiting for second client to connect.\n");
-        clientSocket[1] = acceptClient(serverSocket);
+    while(1) {
+        /* Waiting for a client to connect */
+        SocketInfo clientSocket = acceptClient(serverSocket);
 
-        printf("Two clients connected !\n");
-        int* client1 = malloc(sizeof(int));
-        *client1 = 0;
-        int* client2 = malloc(sizeof(int));
-        *client2 = 1;
-        Thread OneToTwo = createThread(Message, client1);
-        Thread TwoToOne = createThread(Message, client2);
+        /* Looking for a valid id for connected client */
+        int slotId = scanForFreeSocketSlot();
 
-        joinThread(OneToTwo);
-        joinThread(TwoToOne);
+        /* If no valid slot id was found, closing connection with client */
+        if (slotId == -1) {
+            printf("Accepted client but we're full. Closing connection.\n");
+            const char* full = "Full.";
+            sendTo(clientSocket, full, strlen(full));
+            closeSocket(clientSocket);
+            continue;
+        }
 
-        free(client1);
-        free(client2);
-    } while(1);
+        printf("Found slot %d for the new client.\n", slotId);
+
+        /* Allocating memory for client */
+        Client *client = malloc(sizeof(Client)); // Free-ed in disconnectClient function
+        client->socket = clientSocket;
+        client->joined = 0;
+        acquireWrite(clientsLock);
+        clients[slotId] = client;
+        releaseWrite(clientsLock);
+
+        /* Create thread to initialize connection with client and passing client slot id to this thread */
+        int* id = malloc(sizeof(int)); // Free-ed in clientThread function
+        *id = slotId;
+        Thread thread = createThread(clientThread, id);
+        client->thread = thread;
+    }
 }
