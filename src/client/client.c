@@ -19,7 +19,7 @@ static SocketInfo clientSocket;
 THREAD_ENTRY_POINT sendMessage(void* data) {
     char buffer[MSG_MAX_LENGTH + 1];
     while(1) {
-        ui_getUserInput(buffer, MSG_MAX_LENGTH);
+        ui_getUserInput("Your message : ", buffer, MSG_MAX_LENGTH);
         sendTo(clientSocket, buffer, strlen(buffer));
     }
 }
@@ -40,7 +40,7 @@ void pickUsername() {
     int success = 0;
     do {
         char username[50];
-        ui_getUserInput(username, 20);
+        ui_getUserInput("Your username : ", username, 20);
         int bytesReceived = sendTo(clientSocket, username, strlen(username));
 
         if (bytesReceived < 0) {
@@ -74,6 +74,7 @@ void pickUsername() {
  * \return EXIT_SUCCESS - normal program termination.
  */
 int main() {
+    ui_init();
     clientSocket = createClientSocket("127.0.0.1", "27015");
     ui_informationMessage("Hi, you're connected to server !");
 
@@ -87,7 +88,11 @@ int main() {
     joinThread(&receiverThread);
     destroyThread(&senderThread);
 
+    ui_reset();
+
     ui_informationMessage("End of chat.");
+    ui_cleanUp();
+
     closeSocket(&clientSocket);
     cleanUp();
     return EXIT_SUCCESS;

@@ -5,31 +5,50 @@
  * This implementation displays received messages to the console.
  */
 
+// This file is a mess
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "ui.h"
 #include "console-color.h"
+#include "../common/synchronization.h"
 
-static int queryingUserInput = 0;
+#define PROMPT_MAX_LENGTH 50
+#define QUERYING 1
+#define INPUT_STORED 2
+static short inputState;
+static char promptBuffer[PROMPT_MAX_LENGTH];
+static Mutex inputStateMutex;
 
-// TODO: Use semaphore to sync theses calls between threads
 void _beginUserInput();
-void _endUserInput(int properly);
+void _endUserInput();
+void _storeUserInput();
+void _restoreUserInput();
 
 #if defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__linux__)
 
 void _beginUserInput() {
-    queryingUserInput = 1;
-    printf("You : ");
+    inputState = QUERYING;
 }
 
-void _endUserInput(int properly) {
-    if (properly) {
-        printf("\033[A");
+void _endUserInput() {
+    printf("\033[A\33[2K\r");
+    inputState = 0;
+}
+
+void _storeUserInput() {
+    if (inputState & QUERYING) {
+        printf("\33[2K\r");
+        inputState |= INPUT_STORED;
     }
-    printf("\33[2K\r");
-    queryingUserInput = 0;
+}
+
+void _restoreUserInput() {
+    if (inputState & INPUT_STORED) {
+       inputState = (currentState ^ 0) ^ INPUT_STORED;
+       printf("%s", promptBuffer);
+    }
 }
 
 #elif defined(_WIN32) || defined(_WIN64) || defined(_WINDOWS)
@@ -37,15 +56,14 @@ void _endUserInput(int properly) {
 static COORD cursorCoord;
 
 void _beginUserInput() {
-    queryingUserInput = 1;
+    inputState = QUERYING;
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_SCREEN_BUFFER_INFO screenBufferInfo;
     GetConsoleScreenBufferInfo(handle, &screenBufferInfo);
     cursorCoord = screenBufferInfo.dwCursorPosition;
-    printf("You : ");
 }
 
-void _endUserInput(int properly) {
+void _endUserInput() {
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleCursorPosition(handle, cursorCoord);
     CONSOLE_SCREEN_BUFFER_INFO screenBufferInfo;
@@ -55,46 +73,128 @@ void _endUserInput(int properly) {
         printf(" ");
     }
     printf("\r");
-    queryingUserInput = 0;
+    inputState = 0;
+}
+
+void _storeUserInput() {
+    if (inputState & QUERYING) {
+        _endUserInput();
+        inputState = INPUT_STORED | QUERYING;
+    }
+}
+
+void _restoreUserInput() {
+    if (inputState & INPUT_STORED) {
+        short currentState = inputState;
+        _beginUserInput();
+        inputState = (currentState ^ 0) ^ INPUT_STORED;
+        printf("%s", promptBuffer);
+    }
 }
 
 #endif
 
-void ui_getUserInput(char* buffer, int buffer_size) {
+void ui_init() {
+    inputStateMutex = createMutex();
+}
+
+void ui_cleanUp() {
+    destroyMutex(inputStateMutex);
+}
+
+void ui_reset() {
+    acquireMutex(inputStateMutex);
+    {
+        _storeUserInput();
+        inputState = 0;
+    }
+    releaseMutex(inputStateMutex);
+}
+
+void ui_getUserInput(const char* prompt, char* buffer, int buffer_size) {
     do {
-        _beginUserInput();
+        // Modify input state
+        acquireMutex(inputStateMutex);
+        {
+            _beginUserInput();
+            // Keep prompt in memory for future prompt restoration
+            memcpy(promptBuffer, prompt, min(strlen(prompt), PROMPT_MAX_LENGTH));
+        }
+        releaseMutex(inputStateMutex);
+
+        printf("%s", promptBuffer);
         fgets(buffer, buffer_size, stdin);
         if ((strlen(buffer) - 1) == 0) { // If user entered an empty message.
-            _endUserInput(1);
-            printf("You can't send an empty message.\n");
+            // Modify input state
+            acquireMutex(inputStateMutex);
+            {
+                _endUserInput();
+            }
+            releaseMutex(inputStateMutex);
+
+            ui_errorMessage("You can't send an empty message.");
         }
     } while((strlen(buffer) - 1) == 0);
-    _endUserInput(1);
+
+    // Modify input state
+    acquireMutex(inputStateMutex);
+    {
+        _endUserInput();
+    }
+    releaseMutex(inputStateMutex);
 
     // Trim carriage return
     buffer[strlen(buffer) - 1] = '\0';
 }
 
 void ui_messageReceived(const char* sender, const char* message) {
-    if (queryingUserInput) {
-        _endUserInput(0);
-        printf("[%s] %s\n", sender, message);
-        _beginUserInput();
-    } else {
-        printf("[%s] %s\n", sender, message);
+    acquireMutex(inputStateMutex);
+    {
+        _storeUserInput();
     }
+    releaseMutex(inputStateMutex);
+
+    printf("[%s] %s\n", sender, message);
+
+    acquireMutex(inputStateMutex);
+    {
+        _restoreUserInput();
+    }
+    releaseMutex(inputStateMutex);
 }
 
 void ui_informationMessage(const char* message) {
-    if (queryingUserInput) {
-        _endUserInput(0);
-        setTextColor(FG_YELLOW);
-        printf("%s\n", message);
-        resetColor();
-        _beginUserInput();
-    } else {
-        setTextColor(FG_YELLOW);
-        printf("%s\n", message);
-        resetColor();
+    acquireMutex(inputStateMutex);
+    {
+        _storeUserInput();
     }
+    releaseMutex(inputStateMutex);
+
+    setTextColor(FG_YELLOW);
+    printf("%s\n", message);
+    resetColor();
+
+    acquireMutex(inputStateMutex);
+    {
+        _restoreUserInput();
+    }
+    releaseMutex(inputStateMutex);
+}
+
+void ui_errorMessage(const char* message) {
+    acquireMutex(inputStateMutex);
+    {
+        _storeUserInput();
+    }
+    releaseMutex(inputStateMutex);
+
+    setTextColor(FG_RED);
+    printf("%s\n", message);
+    resetColor();
+
+    acquireMutex(inputStateMutex);
+    {
+        _restoreUserInput();
+    }
+    releaseMutex(inputStateMutex);
 }
