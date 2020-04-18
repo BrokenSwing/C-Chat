@@ -67,6 +67,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">ui.c File Reference</div>  </div>
@@ -80,31 +81,90 @@ $(function() {
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="ui_8h_source.html">ui.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="console-color_8h_source.html">console-color.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="synchronization_8h_source.html">../common/synchronization.h</a>&quot;</code><br />
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a47c832c5637604c4d8195ca0237f58a8"><td class="memItemLeft" align="right" valign="top"><a id="a47c832c5637604c4d8195ca0237f58a8"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PROMPT_MAX_LENGTH</b>&#160;&#160;&#160;50</td></tr>
+<tr class="separator:a47c832c5637604c4d8195ca0237f58a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ff893215307a0cc2774895c829ca055"><td class="memItemLeft" align="right" valign="top"><a id="a2ff893215307a0cc2774895c829ca055"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>QUERYING</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a2ff893215307a0cc2774895c829ca055"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbee388e7a80a40f696cf9449ff2a241"><td class="memItemLeft" align="right" valign="top"><a id="afbee388e7a80a40f696cf9449ff2a241"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>INPUT_STORED</b>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:afbee388e7a80a40f696cf9449ff2a241"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a5277eef4c38bb285f1590accadb1d2cd"><td class="memItemLeft" align="right" valign="top"><a id="a5277eef4c38bb285f1590accadb1d2cd"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>_beginUserInput</b> ()</td></tr>
 <tr class="separator:a5277eef4c38bb285f1590accadb1d2cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf0914cee14bdc47aaacee7daaf8dba7"><td class="memItemLeft" align="right" valign="top"><a id="adf0914cee14bdc47aaacee7daaf8dba7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_endUserInput</b> (int properly)</td></tr>
-<tr class="separator:adf0914cee14bdc47aaacee7daaf8dba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a7cefb2045314018d93db56368f5246"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#a8a7cefb2045314018d93db56368f5246">ui_getUserInput</a> (char *buffer, int buffer_size)</td></tr>
-<tr class="memdesc:a8a7cefb2045314018d93db56368f5246"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the entered message by the user.  <a href="ui_8c.html#a8a7cefb2045314018d93db56368f5246">More...</a><br /></td></tr>
-<tr class="separator:a8a7cefb2045314018d93db56368f5246"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f333f86fd85f8bdbb61aea779ed70a2"><td class="memItemLeft" align="right" valign="top"><a id="a0f333f86fd85f8bdbb61aea779ed70a2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>_endUserInput</b> ()</td></tr>
+<tr class="separator:a0f333f86fd85f8bdbb61aea779ed70a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b60a17c24aa7c2385621e5002b999db"><td class="memItemLeft" align="right" valign="top"><a id="a6b60a17c24aa7c2385621e5002b999db"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>_storeUserInput</b> ()</td></tr>
+<tr class="separator:a6b60a17c24aa7c2385621e5002b999db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4059c53bd525fd122710ba9d24db920d"><td class="memItemLeft" align="right" valign="top"><a id="a4059c53bd525fd122710ba9d24db920d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>_restoreUserInput</b> ()</td></tr>
+<tr class="separator:a4059c53bd525fd122710ba9d24db920d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6f50ea564e0ba7375ce590a5196f12f"><td class="memItemLeft" align="right" valign="top"><a id="aa6f50ea564e0ba7375ce590a5196f12f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#aa6f50ea564e0ba7375ce590a5196f12f">ui_init</a> ()</td></tr>
+<tr class="memdesc:aa6f50ea564e0ba7375ce590a5196f12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize required resources for UI. <br /></td></tr>
+<tr class="separator:aa6f50ea564e0ba7375ce590a5196f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1321f84c13363edd313f895b53417a2d"><td class="memItemLeft" align="right" valign="top"><a id="a1321f84c13363edd313f895b53417a2d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#a1321f84c13363edd313f895b53417a2d">ui_cleanUp</a> ()</td></tr>
+<tr class="memdesc:a1321f84c13363edd313f895b53417a2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free allocated resources for UI. <br /></td></tr>
+<tr class="separator:a1321f84c13363edd313f895b53417a2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a720a37bebeb708da396e192733d59549"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#a720a37bebeb708da396e192733d59549">ui_reset</a> ()</td></tr>
+<tr class="memdesc:a720a37bebeb708da396e192733d59549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset UI state.  <a href="ui_8c.html#a720a37bebeb708da396e192733d59549">More...</a><br /></td></tr>
+<tr class="separator:a720a37bebeb708da396e192733d59549"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6704021ba6d37386854aaa2f6f1211cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#a6704021ba6d37386854aaa2f6f1211cf">ui_getUserInput</a> (const char *prompt, char *buffer, int buffer_size)</td></tr>
+<tr class="memdesc:a6704021ba6d37386854aaa2f6f1211cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the entered message by the user.  <a href="ui_8c.html#a6704021ba6d37386854aaa2f6f1211cf">More...</a><br /></td></tr>
+<tr class="separator:a6704021ba6d37386854aaa2f6f1211cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2513fb853fbc8737fb3ca7549c52de2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#ae2513fb853fbc8737fb3ca7549c52de2">ui_messageReceived</a> (const char *sender, const char *message)</td></tr>
 <tr class="memdesc:ae2513fb853fbc8737fb3ca7549c52de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the given message from the given sender to the user.  <a href="ui_8c.html#ae2513fb853fbc8737fb3ca7549c52de2">More...</a><br /></td></tr>
 <tr class="separator:ae2513fb853fbc8737fb3ca7549c52de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4597eb9cb1f26760512b4d87069eed3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#ae4597eb9cb1f26760512b4d87069eed3">ui_informationMessage</a> (const char *message)</td></tr>
 <tr class="memdesc:ae4597eb9cb1f26760512b4d87069eed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays an information message to client.  <a href="ui_8c.html#ae4597eb9cb1f26760512b4d87069eed3">More...</a><br /></td></tr>
 <tr class="separator:ae4597eb9cb1f26760512b4d87069eed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07298030d1cbcbf172373b8a8d4230e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#a07298030d1cbcbf172373b8a8d4230e9">ui_errorMessage</a> (const char *message)</td></tr>
+<tr class="memdesc:a07298030d1cbcbf172373b8a8d4230e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays an error message to the client.  <a href="ui_8c.html#a07298030d1cbcbf172373b8a8d4230e9">More...</a><br /></td></tr>
+<tr class="separator:a07298030d1cbcbf172373b8a8d4230e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation for <a class="el" href="ui_8h.html" title="API to communicate with user.">ui.h</a> functions. </p>
 <p>This implementation displays received messages to the console. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a8a7cefb2045314018d93db56368f5246"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a7cefb2045314018d93db56368f5246">&#9670;&nbsp;</a></span>ui_getUserInput()</h2>
+<a id="a07298030d1cbcbf172373b8a8d4230e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07298030d1cbcbf172373b8a8d4230e9">&#9670;&nbsp;</a></span>ui_errorMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ui_errorMessage </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Displays an error message to the client. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>The error message to display to the client </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6704021ba6d37386854aaa2f6f1211cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6704021ba6d37386854aaa2f6f1211cf">&#9670;&nbsp;</a></span>ui_getUserInput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -112,6 +172,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>_endUserInput</b> (in
         <tr>
           <td class="memname">void ui_getUserInput </td>
           <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>prompt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>buffer</em>, </td>
         </tr>
@@ -133,6 +199,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>_endUserInput</b> (in
 <p>The user input returned in buffer does not contain an ending carriage return.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">prompt</td><td>Prompt message </td></tr>
     <tr><td class="paramname">buffer</td><td>Contains the entered message </td></tr>
     <tr><td class="paramname">buffer_size</td><td>The size for the given buffer </td></tr>
   </table>
@@ -201,6 +268,26 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>_endUserInput</b> (in
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a720a37bebeb708da396e192733d59549"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a720a37bebeb708da396e192733d59549">&#9670;&nbsp;</a></span>ui_reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ui_reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reset UI state. </p>
+<p>To be called in case of ui_getUserInput getting interrupted. </p>
 
 </div>
 </div>
