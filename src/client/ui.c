@@ -13,6 +13,7 @@
 #include "ui.h"
 #include "console-color.h"
 #include "../common/synchronization.h"
+#include <math.h>
 
 #define PROMPT_MAX_LENGTH 50
 #define QUERYING 1
@@ -46,7 +47,7 @@ void _storeUserInput() {
 
 void _restoreUserInput() {
     if (inputState & INPUT_STORED) {
-       inputState = (currentState ^ 0) ^ INPUT_STORED;
+       inputState = (inputState ^ 0) ^ INPUT_STORED;
        printf("%s", promptBuffer);
     }
 }
