@@ -114,7 +114,7 @@ void handleServerClose(int signal) {
         Client* client = clients[i];
         if (client != NULL) {
             clients[i] = NULL;
-            closeSocket(client->socket);
+            closeSocket(&(client->socket));
             destroyThread(client->thread);
             free(client);
         }
@@ -173,7 +173,7 @@ void disconnectClient(int id) {
     releaseWrite(clientsLock);
 
     /* Closing connection with client */
-    closeSocket(client->socket);
+    closeSocket(&(client->socket));
 
     printf("Client disconnected : %s\n", client->username);
 
@@ -258,7 +258,7 @@ int main () {
             printf("Accepted client but we're full. Closing connection.\n");
             const char* full = "Full.";
             sendTo(clientSocket, full, strlen(full));
-            closeSocket(clientSocket);
+            closeSocket(&clientSocket);
             continue;
         }
 

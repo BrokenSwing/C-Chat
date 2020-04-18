@@ -140,9 +140,13 @@
         return callSuccess;
     }
 
-    void closeSocket(SocketInfo socket) {
-        struct UnixSocketInfo *socketInfo = socket.info;
-        close(socketInfo->socket);
+    void closeSocket(SocketInfo* socket) {
+        struct UnixSocketInfo *socketInfo = socket->info;
+        if (socketInfo != NULL) {
+            close(socketInfo->socket);
+            free(socketInfo);
+            socket->info = NULL;
+        }
     }
 
     void cleanUp() {
@@ -326,10 +330,14 @@
         return callSuccess;
     }
 
-    void closeSocket(SocketInfo socket) {
-        struct WinSocketInfo *socketInfo = socket.info;
-        shutdown(socketInfo->socket, SD_BOTH);
-        closesocket(socketInfo->socket);
+    void closeSocket(SocketInfo* socket) {
+        struct WinSocketInfo *socketInfo = socket->info;
+        if (socketInfo != NULL) {
+            shutdown(socketInfo->socket, SD_BOTH);
+            closesocket(socketInfo->socket);
+            free(socketInfo);
+            socket->info = NULL;
+        }
     }
 
     void cleanUp() {

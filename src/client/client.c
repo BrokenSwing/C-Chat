@@ -45,7 +45,7 @@ void pickUsername() {
 
         if (bytesReceived < 0) {
             ui_informationMessage("Connection with server lost. Exiting.");
-            closeSocket(clientSocket);
+            closeSocket(&clientSocket);
             cleanUp();
             exit(EXIT_FAILURE);
         }
@@ -61,7 +61,7 @@ void pickUsername() {
             }
         } else {
             ui_informationMessage("Connection with server lost. Exiting.");
-            closeSocket(clientSocket);
+            closeSocket(&clientSocket);
             cleanUp();
             exit(EXIT_FAILURE);
         }
@@ -88,6 +88,7 @@ int main() {
     destroyThread(senderThread);
 
     ui_informationMessage("End of chat.");
+    closeSocket(&clientSocket);
     cleanUp();
     return EXIT_SUCCESS;
 }
