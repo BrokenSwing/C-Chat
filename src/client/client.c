@@ -84,8 +84,8 @@ int main() {
     Thread senderThread = createThread(sendMessage, NULL);
     Thread receiverThread = createThread(receiveMessage, NULL);
 
-    joinThread(receiverThread);
-    destroyThread(senderThread);
+    joinThread(&receiverThread);
+    destroyThread(&senderThread);
 
     ui_informationMessage("End of chat.");
     closeSocket(&clientSocket);

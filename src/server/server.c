@@ -115,7 +115,7 @@ void handleServerClose(int signal) {
         if (client != NULL) {
             clients[i] = NULL;
             closeSocket(&(client->socket));
-            destroyThread(client->thread);
+            destroyThread(&(client->thread));
             free(client);
         }
     }

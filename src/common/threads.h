@@ -65,15 +65,15 @@ Thread createThread(THREAD_FUNCTION_POINTER entryPoint, void* data);
 /**
  * \brief Destroys the given thread.
  *
- * \param thread The thread to destroy
+ * \param thread A pointer to the thread to destroy
  */
-void destroyThread(Thread thread);
+void destroyThread(Thread* thread);
 
 /**
  * \brief Waits for the given thread to finish.
  *
- * \param thread The thread to wait
+ * \param thread A pointer to the thread to wait
  */
-void joinThread(Thread thread);
+void joinThread(Thread* thread);
 
 #endif //C_CHAT_THREADS_H

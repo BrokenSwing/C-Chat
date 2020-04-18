@@ -23,14 +23,19 @@ Thread createThread(THREAD_FUNCTION_POINTER entryPoint, void* data) {
     return t;
 }
 
-void joinThread(Thread thread) {
-    struct PosixThread *posixThread = thread.info;
+void joinThread(Thread* thread) {
+    struct PosixThread *posixThread = thread->info;
     pthread_join(posixThread->id, 0);
+    destroyThread(thread);
 }
 
-void destroyThread(Thread thread) {
-    struct PosixThread *posixThread = thread.info;
-    pthread_cancel(posixThread->id);
+void destroyThread(Thread* thread) {
+    struct PosixThread *posixThread = thread->info;
+    if (posixThread != NULL) {
+        pthread_cancel(posixThread->id);
+        free(posixThread);
+        thread->info = NULL;
+    }
 }
 
 #elif defined(_WIN32) || defined(_WIN64) || defined(_WINDOWS)
@@ -66,13 +71,17 @@ Thread createThread(THREAD_FUNCTION_POINTER entryPoint, void* data) {
     return thread;
 }
 
-void destroyThread(Thread thread) {
-    struct WinThread *t = thread.info;
-    CloseHandle(t->handle);
+void destroyThread(Thread* thread) {
+    struct WinThread *t = thread->info;
+    if (t != NULL) {
+        CloseHandle(t->handle);
+        free(t);
+        thread->info = NULL;
+    }
 }
 
-void joinThread(Thread thread) {
-    struct WinThread *t = thread.info;
+void joinThread(Thread* thread) {
+    struct WinThread *t = thread->info;
     WaitForSingleObject(t->handle, INFINITE);
     destroyThread(thread);
 }
