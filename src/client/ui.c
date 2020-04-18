@@ -13,7 +13,6 @@
 #include "ui.h"
 #include "console-color.h"
 #include "../common/synchronization.h"
-#include <math.h>
 
 #define PROMPT_MAX_LENGTH 50
 #define QUERYING 1
@@ -119,7 +118,8 @@ void ui_getUserInput(const char* prompt, char* buffer, int buffer_size) {
         {
             _beginUserInput();
             // Keep prompt in memory for future prompt restoration
-            memcpy(promptBuffer, prompt, min(strlen(prompt), PROMPT_MAX_LENGTH));
+            int promptLength = strlen(prompt);
+            memcpy(promptBuffer, prompt, promptLength < PROMPT_MAX_LENGTH ? promptLength : PROMPT_MAX_LENGTH);
         }
         releaseMutex(inputStateMutex);
 
