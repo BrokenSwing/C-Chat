@@ -109,9 +109,9 @@ Functions</h2></td></tr>
 <tr class="memitem:abf0c58c8074e6bd0e1b101082f48fed0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#abf0c58c8074e6bd0e1b101082f48fed0">sendTo</a> (<a class="el" href="struct_socket_info.html">SocketInfo</a> clientSocket, const char *buffer, unsigned int bufferSize)</td></tr>
 <tr class="memdesc:abf0c58c8074e6bd0e1b101082f48fed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends data through the given socket.  <a href="sockets_8h.html#abf0c58c8074e6bd0e1b101082f48fed0">More...</a><br /></td></tr>
 <tr class="separator:abf0c58c8074e6bd0e1b101082f48fed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab870b123fba7fab03b90ff8336913ade"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#ab870b123fba7fab03b90ff8336913ade">closeSocket</a> (<a class="el" href="struct_socket_info.html">SocketInfo</a> socket)</td></tr>
-<tr class="memdesc:ab870b123fba7fab03b90ff8336913ade"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the given socket.  <a href="sockets_8h.html#ab870b123fba7fab03b90ff8336913ade">More...</a><br /></td></tr>
-<tr class="separator:ab870b123fba7fab03b90ff8336913ade"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a696f120638512568e37d7f3904fddbb1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#a696f120638512568e37d7f3904fddbb1">closeSocket</a> (<a class="el" href="struct_socket_info.html">SocketInfo</a> *socket)</td></tr>
+<tr class="memdesc:a696f120638512568e37d7f3904fddbb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the given socket.  <a href="sockets_8h.html#a696f120638512568e37d7f3904fddbb1">More...</a><br /></td></tr>
+<tr class="separator:a696f120638512568e37d7f3904fddbb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae900b054a1598c54acaa67902f87185d"><td class="memItemLeft" align="right" valign="top"><a id="ae900b054a1598c54acaa67902f87185d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#ae900b054a1598c54acaa67902f87185d">cleanUp</a> ()</td></tr>
 <tr class="memdesc:ae900b054a1598c54acaa67902f87185d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs any required resources cleanup. Must be called once all sockets usage is finished. <br /></td></tr>
@@ -140,16 +140,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
 <p>Waits for a client to connect to the given server socket. Returns the socket for the connected client. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">serverSocket</td><td>The server socket. </td></tr>
+    <tr><td class="paramname">serverSocket</td><td>The server socket </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="struct_socket_info.html" title="Informations of a socket.">SocketInfo</a> struct which contains the socket for the connected client. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a socket to the accepted client </dd></dl>
 
 </div>
 </div>
-<a id="ab870b123fba7fab03b90ff8336913ade"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab870b123fba7fab03b90ff8336913ade">&#9670;&nbsp;</a></span>closeSocket()</h2>
+<a id="a696f120638512568e37d7f3904fddbb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a696f120638512568e37d7f3904fddbb1">&#9670;&nbsp;</a></span>closeSocket()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -157,7 +157,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
         <tr>
           <td class="memname">void closeSocket </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_socket_info.html">SocketInfo</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_socket_info.html">SocketInfo</a> *&#160;</td>
           <td class="paramname"><em>socket</em></td><td>)</td>
           <td></td>
         </tr>
@@ -167,7 +167,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
 <p>Closes the given socket. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">socket</td><td>The given socket. </td></tr>
+    <tr><td class="paramname">socket</td><td>The a pointer to the socket to close </td></tr>
   </table>
   </dd>
 </dl>
@@ -203,12 +203,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
 <p>Creates a socket meant to be used to connect to a server socket and initialize a connection with the server. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ipAddress</td><td>Serveur IP. </td></tr>
-    <tr><td class="paramname">port</td><td>Serveur port. </td></tr>
+    <tr><td class="paramname">ipAddress</td><td>The IP address of the server to connect to </td></tr>
+    <tr><td class="paramname">port</td><td>The port to connect on </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="struct_socket_info.html" title="Informations of a socket.">SocketInfo</a> struct which contains the client socket. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a ready-to-use client socket </dd></dl>
 
 </div>
 </div>
@@ -231,11 +231,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
 <p>Creates a socket meant to receive connection from clients sockets. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">port</td><td>Serveur port. </td></tr>
+    <tr><td class="paramname">port</td><td>The port the server must listen on </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="struct_socket_info.html" title="Informations of a socket.">SocketInfo</a> struct which contains the serveur socket. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a ready-to-use server socket </dd></dl>
 
 </div>
 </div>
@@ -274,13 +274,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
 <p>Receives through from the given socket. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">clientSocket</td><td>The given socket. </td></tr>
-    <tr><td class="paramname">buffer</td><td>Contains the received message. </td></tr>
-    <tr><td class="paramname">bufferSize</td><td>Buffer size. </td></tr>
+    <tr><td class="paramname">clientSocket</td><td>The socket to receive data from </td></tr>
+    <tr><td class="paramname">buffer</td><td>A buffer to store received data in </td></tr>
+    <tr><td class="paramname">bufferSize</td><td>The maximum size of data to receive </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Number of received bytes or ERROR. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the number of bytes received or -1 if an error occurred </dd></dl>
 
 </div>
 </div>
@@ -319,13 +319,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
 <p>Sends data through the given socket. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">clientSocket</td><td>The given socket. </td></tr>
-    <tr><td class="paramname">buffer</td><td>Contains the message. </td></tr>
-    <tr><td class="paramname">bufferSize</td><td>Buffer size. </td></tr>
+    <tr><td class="paramname">clientSocket</td><td>The socket to send a message through </td></tr>
+    <tr><td class="paramname">buffer</td><td>A buffer containing to data to send </td></tr>
+    <tr><td class="paramname">bufferSize</td><td>The size of the data to send </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Number of sent bytes or ERROR. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the number of bytes sent or -1 if an error occurred </dd></dl>
 
 </div>
 </div>
