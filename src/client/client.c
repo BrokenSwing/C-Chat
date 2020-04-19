@@ -29,10 +29,10 @@ THREAD_ENTRY_POINT receiveMessage(void* data) {
     int bytesCount;
     do {
         bytesCount = receiveFrom(clientSocket, buffer, MSG_MAX_LENGTH + USERNAME_MAX_LENGTH + 2);
-        if (bytesCount != 0) {
+        if (bytesCount > 0) {
             ui_messageReceived(buffer + MSG_MAX_LENGTH + 1, buffer);
         }
-    } while (bytesCount != 0);
+    } while (bytesCount > 0);
     return 0;
 }
 
