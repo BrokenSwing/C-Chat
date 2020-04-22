@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['msg_5fmax_5flength_123',['MSG_MAX_LENGTH',['../constants_8h.html#af0d1fa332610c5ebdf75ae745359636b',1,'constants.h']]]
+  ['define_5fusername_5fmessage_5ftype_132',['DEFINE_USERNAME_MESSAGE_TYPE',['../constants_8h.html#aba5c31d7831ff3526a9a633abb986723',1,'constants.h']]]
 ];

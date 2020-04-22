@@ -1,7 +1,12 @@
 var searchData=
 [
-  ['thread_48',['Thread',['../struct_thread.html',1,'Thread'],['../struct___client.html#a971d3a35120d9813c62b7c6826fd4c39',1,'_Client::thread()']]],
-  ['thread_5fentry_5fpoint_49',['THREAD_ENTRY_POINT',['../threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f',1,'threads.h']]],
-  ['thread_5ffunction_5fpointer_50',['THREAD_FUNCTION_POINTER',['../threads_8h.html#ab6e1cf1d117c8a8ce38a6c9e7144e5ae',1,'threads.h']]],
-  ['threads_2eh_51',['threads.h',['../threads_8h.html',1,'']]]
+  ['scanforfreesocketslot_43',['scanForFreeSocketSlot',['../server_8c.html#ab37e88dfc833c4ba909999902705f3ba',1,'server.c']]],
+  ['sendto_44',['sendTo',['../sockets_8h.html#abf0c58c8074e6bd0e1b101082f48fed0',1,'sockets.h']]],
+  ['server_2ec_45',['server.c',['../server_8c.html',1,'']]],
+  ['settextcolor_46',['setTextColor',['../console-color_8h.html#a0bf72a7e3dba93a4a09a5c1ff1c55a95',1,'console-color.h']]],
+  ['socket_47',['socket',['../struct___client.html#ade9bb3076550d9fec1485331f8bd2e93',1,'_Client']]],
+  ['socketinfo_48',['SocketInfo',['../struct_socket_info.html',1,'']]],
+  ['sockets_2ec_49',['sockets.c',['../sockets_8c.html',1,'']]],
+  ['sockets_2eh_50',['sockets.h',['../sockets_8h.html',1,'']]],
+  ['synchronization_2eh_51',['synchronization.h',['../synchronization_8h.html',1,'']]]
 ];

@@ -132,6 +132,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8
 <tr class="memitem:a07298030d1cbcbf172373b8a8d4230e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#a07298030d1cbcbf172373b8a8d4230e9">ui_errorMessage</a> (const char *message)</td></tr>
 <tr class="memdesc:a07298030d1cbcbf172373b8a8d4230e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays an error message to the client.  <a href="ui_8c.html#a07298030d1cbcbf172373b8a8d4230e9">More...</a><br /></td></tr>
 <tr class="separator:a07298030d1cbcbf172373b8a8d4230e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaf38e2a9ac592ebfffeff194cba4716"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#adaf38e2a9ac592ebfffeff194cba4716">ui_joinMessage</a> (const char *username)</td></tr>
+<tr class="memdesc:adaf38e2a9ac592ebfffeff194cba4716"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays a join message to the client.  <a href="ui_8c.html#adaf38e2a9ac592ebfffeff194cba4716">More...</a><br /></td></tr>
+<tr class="separator:adaf38e2a9ac592ebfffeff194cba4716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd983899fdc724a8b4844d3c72a7b40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#a7dd983899fdc724a8b4844d3c72a7b40">ui_leaveMessage</a> (const char *username)</td></tr>
+<tr class="memdesc:a7dd983899fdc724a8b4844d3c72a7b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays a leave message to the client.  <a href="ui_8c.html#a7dd983899fdc724a8b4844d3c72a7b40">More...</a><br /></td></tr>
+<tr class="separator:a7dd983899fdc724a8b4844d3c72a7b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation for <a class="el" href="ui_8h.html" title="API to communicate with user.">ui.h</a> functions. </p>
@@ -228,6 +234,58 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">message</td><td>The information message to display to client </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="adaf38e2a9ac592ebfffeff194cba4716"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaf38e2a9ac592ebfffeff194cba4716">&#9670;&nbsp;</a></span>ui_joinMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ui_joinMessage </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>username</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Displays a join message to the client. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">username</td><td>The username of the client who joined </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7dd983899fdc724a8b4844d3c72a7b40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dd983899fdc724a8b4844d3c72a7b40">&#9670;&nbsp;</a></span>ui_leaveMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ui_leaveMessage </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>username</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Displays a leave message to the client. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">username</td><td>The username of the client who left </td></tr>
   </table>
   </dd>
 </dl>

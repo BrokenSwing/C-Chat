@@ -88,10 +88,104 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constants_8h.html#ad9dcd73dd770affdc2097d8cd0aabaf7">USERNAME_MAX_LENGTH</a>&#160;&#160;&#160;20</td></tr>
 <tr class="memdesc:ad9dcd73dd770affdc2097d8cd0aabaf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum length for a client username. <br /></td></tr>
 <tr class="separator:ad9dcd73dd770affdc2097d8cd0aabaf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbfd4ad1da4815d34065dbec64958a38"><td class="memItemLeft" align="right" valign="top"><a id="adbfd4ad1da4815d34065dbec64958a38"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constants_8h.html#adbfd4ad1da4815d34065dbec64958a38">MESSAGE_TYPE_OVERHEAD</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:adbfd4ad1da4815d34065dbec64958a38"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of bytes the type of the message is. <br /></td></tr>
+<tr class="separator:adbfd4ad1da4815d34065dbec64958a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4af6a17cc2f98499018102f83e61bee"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constants_8h.html#ac4af6a17cc2f98499018102f83e61bee">JOIN_MESSAGE_TYPE</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:ac4af6a17cc2f98499018102f83e61bee"><td class="mdescLeft">&#160;</td><td class="mdescRight">An integer representing a join message.  <a href="constants_8h.html#ac4af6a17cc2f98499018102f83e61bee">More...</a><br /></td></tr>
+<tr class="separator:ac4af6a17cc2f98499018102f83e61bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9bd3683fe2cb88fb7047416e35259f7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constants_8h.html#af9bd3683fe2cb88fb7047416e35259f7">LEAVE_MESSAGE_TYPE</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:af9bd3683fe2cb88fb7047416e35259f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">An integer representing a leave message.  <a href="constants_8h.html#af9bd3683fe2cb88fb7047416e35259f7">More...</a><br /></td></tr>
+<tr class="separator:af9bd3683fe2cb88fb7047416e35259f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab91abdd30c15d19064327e871b805d4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constants_8h.html#aab91abdd30c15d19064327e871b805d4">TEXT_MESSAGE_TYPE</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memdesc:aab91abdd30c15d19064327e871b805d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">An integer representing a text message.  <a href="constants_8h.html#aab91abdd30c15d19064327e871b805d4">More...</a><br /></td></tr>
+<tr class="separator:aab91abdd30c15d19064327e871b805d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba5c31d7831ff3526a9a633abb986723"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constants_8h.html#aba5c31d7831ff3526a9a633abb986723">DEFINE_USERNAME_MESSAGE_TYPE</a>&#160;&#160;&#160;3</td></tr>
+<tr class="memdesc:aba5c31d7831ff3526a9a633abb986723"><td class="mdescLeft">&#160;</td><td class="mdescRight">An integer representing a message meant to define the client username.  <a href="constants_8h.html#aba5c31d7831ff3526a9a633abb986723">More...</a><br /></td></tr>
+<tr class="separator:aba5c31d7831ff3526a9a633abb986723"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Defines constants used on client and server (used for consistency) </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="aba5c31d7831ff3526a9a633abb986723"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba5c31d7831ff3526a9a633abb986723">&#9670;&nbsp;</a></span>DEFINE_USERNAME_MESSAGE_TYPE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_USERNAME_MESSAGE_TYPE&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>An integer representing a message meant to define the client username. </p>
+<p>Content of packets of this type must contain :</p><ul>
+<li>the new username of client : (USERNAME_MAX_LENGTH + 1) bytes long </li>
+</ul>
+
+</div>
+</div>
+<a id="ac4af6a17cc2f98499018102f83e61bee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4af6a17cc2f98499018102f83e61bee">&#9670;&nbsp;</a></span>JOIN_MESSAGE_TYPE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define JOIN_MESSAGE_TYPE&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>An integer representing a join message. </p>
+<p>Content of packets of this type must contain :</p><ul>
+<li>the username of the joining user : (USERNAME_MAX_LENGTH + 1) bytes long </li>
+</ul>
+
+</div>
+</div>
+<a id="af9bd3683fe2cb88fb7047416e35259f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9bd3683fe2cb88fb7047416e35259f7">&#9670;&nbsp;</a></span>LEAVE_MESSAGE_TYPE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LEAVE_MESSAGE_TYPE&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>An integer representing a leave message. </p>
+<p>Content of packets of this type must contain :</p><ul>
+<li>the username of the joining user : (USERNAME_MAX_LENGTH + 1) bytes long </li>
+</ul>
+
+</div>
+</div>
+<a id="aab91abdd30c15d19064327e871b805d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab91abdd30c15d19064327e871b805d4">&#9670;&nbsp;</a></span>TEXT_MESSAGE_TYPE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TEXT_MESSAGE_TYPE&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>An integer representing a text message. </p>
+<p>Content of packets of this type must contain :</p><ul>
+<li>the text message : (MSG_MAX_LENGTH + 1) bytes long</li>
+<li>the username of the user who sent to message : (USERNAME_MAX_LENGTH + 1) bytes long </li>
+</ul>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
