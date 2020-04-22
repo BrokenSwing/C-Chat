@@ -55,3 +55,10 @@ void ui_informationMessage(const char* message);
  * \param message The error message to display to the client
  */
 void ui_errorMessage(const char* message);
+
+/**
+ * \brief Displays a join message to the client.
+ *
+ * \param username The username of the client who joined
+ */
+void ui_joinMessage(const char* username);

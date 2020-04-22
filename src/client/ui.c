@@ -199,3 +199,21 @@ void ui_errorMessage(const char* message) {
     }
     releaseMutex(inputStateMutex);
 }
+
+void ui_joinMessage(const char* username) {
+    acquireMutex(inputStateMutex);
+    {
+        _storeUserInput();
+    }
+    releaseMutex(inputStateMutex);
+
+    setTextColor(FG_YELLOW);
+    printf("%s joined the channel\n", username);
+    resetColor();
+
+    acquireMutex(inputStateMutex);
+    {
+        _restoreUserInput();
+    }
+    releaseMutex(inputStateMutex);
+}

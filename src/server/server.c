@@ -199,19 +199,20 @@ void broadcast(const char* buffer, int size) {
 }
 
 void relayClientMessages(Client* client) {
-    char buffer[MSG_MAX_LENGTH + USERNAME_MAX_LENGTH + 2];
-    memcpy(buffer + MSG_MAX_LENGTH + 1, client->username, sizeof(client->username));
+    char buffer[MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1) + (USERNAME_MAX_LENGTH + 1)];
+    buffer[0] = TEXT_MESSAGE_TYPE;
+    memcpy(buffer + MESSAGE_TYPE_OVERHEAD + MSG_MAX_LENGTH + 1, client->username, sizeof(client->username));
 
     int bytesReceived;
     do {
-        bytesReceived = receiveFrom(client->socket, buffer, MSG_MAX_LENGTH);
+        bytesReceived = receiveFrom(client->socket, buffer, MESSAGE_TYPE_OVERHEAD + MSG_MAX_LENGTH);
         if (bytesReceived > 0) {
             buffer[bytesReceived] = '\0';
             if (strlen(buffer) > 0 && !receivedEndMessage(buffer)) {
-                broadcast(buffer, MSG_MAX_LENGTH + USERNAME_MAX_LENGTH + 2);
+                broadcast(buffer, MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1) + (USERNAME_MAX_LENGTH + 1));
             }
         }
-    } while (bytesReceived >= 0 && !receivedEndMessage(buffer));
+    } while (bytesReceived >= 0 && !receivedEndMessage(buffer + MESSAGE_TYPE_OVERHEAD));
 }
 
 THREAD_ENTRY_POINT clientThread(void* idPnt) {
@@ -227,6 +228,14 @@ THREAD_ENTRY_POINT clientThread(void* idPnt) {
         return EXIT_FAILURE;
     }
 
+    char* joinMessage = malloc(sizeof(char) * (MESSAGE_TYPE_OVERHEAD + USERNAME_MAX_LENGTH + 1));
+    joinMessage[0] = JOIN_MESSAGE_TYPE;
+    acquireRead(clientsLock);
+    { // BEGIN CRITICAL SECTION
+        memcpy(joinMessage + MESSAGE_TYPE_OVERHEAD, clients[id]->username, USERNAME_MAX_LENGTH + 1);
+    } // END CRITICAL SECTION
+
+    broadcast(joinMessage, MESSAGE_TYPE_OVERHEAD + USERNAME_MAX_LENGTH + 1);
     relayClientMessages(client);
     disconnectClient(id);
 

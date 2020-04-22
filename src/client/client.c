@@ -17,20 +17,29 @@
 static SocketInfo clientSocket;
 
 THREAD_ENTRY_POINT sendMessage(void* data) {
-    char buffer[MSG_MAX_LENGTH + 1];
+    char buffer[MESSAGE_TYPE_OVERHEAD + MSG_MAX_LENGTH + 1];
+    buffer[0] = TEXT_MESSAGE_TYPE;
     while(1) {
-        ui_getUserInput("Your message : ", buffer, MSG_MAX_LENGTH);
-        sendTo(clientSocket, buffer, strlen(buffer));
+        ui_getUserInput("Your message : ", buffer + MESSAGE_TYPE_OVERHEAD, MSG_MAX_LENGTH);
+        sendTo(clientSocket, buffer, MESSAGE_TYPE_OVERHEAD + strlen(buffer + MESSAGE_TYPE_OVERHEAD));
     }
 }
 
 THREAD_ENTRY_POINT receiveMessage(void* data) {
-    char buffer[MSG_MAX_LENGTH + USERNAME_MAX_LENGTH + 2];
+    char buffer[MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1) + (USERNAME_MAX_LENGTH + 1)];
     int bytesCount;
     do {
-        bytesCount = receiveFrom(clientSocket, buffer, MSG_MAX_LENGTH + USERNAME_MAX_LENGTH + 2);
+        bytesCount = receiveFrom(clientSocket, buffer, MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1) + (USERNAME_MAX_LENGTH + 1));
         if (bytesCount > 0) {
-            ui_messageReceived(buffer + MSG_MAX_LENGTH + 1, buffer);
+            char messageType = buffer[0];
+            switch (messageType) {
+                case TEXT_MESSAGE_TYPE:
+                    ui_messageReceived(buffer + MSG_MAX_LENGTH + 2, buffer + MESSAGE_TYPE_OVERHEAD);
+                    break;
+                case JOIN_MESSAGE_TYPE:
+                    ui_joinMessage(buffer + 1);
+                    break;
+            }
         }
     } while (bytesCount > 0);
     return 0;
@@ -79,8 +88,6 @@ int main() {
     ui_informationMessage("Hi, you're connected to server !");
 
     pickUsername();
-
-    ui_informationMessage("Joined room.");
 
     Thread senderThread = createThread(sendMessage, NULL);
     Thread receiverThread = createThread(receiveMessage, NULL);
