@@ -39,6 +39,9 @@ THREAD_ENTRY_POINT receiveMessage(void* data) {
                 case JOIN_MESSAGE_TYPE:
                     ui_joinMessage(buffer + 1);
                     break;
+                case LEAVE_MESSAGE_TYPE:
+                    ui_leaveMessage(buffer + 1);
+                    break;
             }
         }
     } while (bytesCount > 0);

@@ -217,3 +217,21 @@ void ui_joinMessage(const char* username) {
     }
     releaseMutex(inputStateMutex);
 }
+
+void ui_leaveMessage(const char* username) {
+    acquireMutex(inputStateMutex);
+    {
+        _storeUserInput();
+    }
+    releaseMutex(inputStateMutex);
+
+    setTextColor(FG_YELLOW);
+    printf("%s left the channel\n", username);
+    resetColor();
+
+    acquireMutex(inputStateMutex);
+    {
+        _restoreUserInput();
+    }
+    releaseMutex(inputStateMutex);
+}

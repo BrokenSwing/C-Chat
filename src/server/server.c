@@ -172,6 +172,11 @@ void disconnectClient(int id) {
     // END CRITICAL SECTION
     releaseWrite(clientsLock);
 
+    char message[MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1)];
+    message[0] = LEAVE_MESSAGE_TYPE;
+    memcpy(message + MESSAGE_TYPE_OVERHEAD, client->username, USERNAME_MAX_LENGTH + 1);
+    broadcast(message, MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1));
+
     /* Closing connection with client */
     closeSocket(&(client->socket));
 

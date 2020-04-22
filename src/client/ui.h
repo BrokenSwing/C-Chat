@@ -62,3 +62,10 @@ void ui_errorMessage(const char* message);
  * \param username The username of the client who joined
  */
 void ui_joinMessage(const char* username);
+
+/**
+ * \brief Displays a leave message to the client.
+ *
+ * @param username The username of the client who left
+ */
+void ui_leaveMessage(const char* username);
