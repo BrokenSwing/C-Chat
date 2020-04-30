@@ -25,7 +25,7 @@ THREAD_ENTRY_POINT sendMessage(void* data) {
     }
 }
 
-THREAD_ENTRY_POINT receiveMessage(void* data) {
+void receiveMessages() {
     char buffer[MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1) + (USERNAME_MAX_LENGTH + 1)];
     int bytesCount;
     do {
@@ -45,7 +45,6 @@ THREAD_ENTRY_POINT receiveMessage(void* data) {
             }
         }
     } while (bytesCount > 0);
-    return 0;
 }
 
 void pickUsername() {
@@ -93,9 +92,9 @@ int main() {
     pickUsername();
 
     Thread senderThread = createThread(sendMessage, NULL);
-    Thread receiverThread = createThread(receiveMessage, NULL);
 
-    joinThread(&receiverThread);
+    receiveMessages();
+
     destroyThread(&senderThread);
 
     ui_reset();
