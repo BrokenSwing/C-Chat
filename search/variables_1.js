@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['socket_128',['socket',['../struct___client.html#ade9bb3076550d9fec1485331f8bd2e93',1,'_Client']]]
+  ['socket_129',['socket',['../struct_client.html#a3a8e56beeb3802c12b16fda0f2525e67',1,'Client']]]
 ];

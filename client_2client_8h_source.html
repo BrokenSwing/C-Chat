@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-chat: src/client Directory Reference</title>
+<title>C-chat: src/client/client.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -67,26 +67,23 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">client Directory Reference</div>  </div>
+<div class="title">client.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
-Files</h2></td></tr>
-<tr class="memitem:client_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html">client.c</a></td></tr>
-<tr class="memdesc:client_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="struct_client.html" title="A type representing a connected client.">Client</a> file. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:console-color_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="console-color_8h.html">console-color.h</a> <a href="console-color_8h_source.html">[code]</a></td></tr>
-<tr class="memdesc:console-color_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to control text color in console. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ui_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html">ui.c</a></td></tr>
-<tr class="memdesc:ui_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation for <a class="el" href="ui_8h.html" title="API to communicate with user.">ui.h</a> functions. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ui_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html">ui.h</a> <a href="ui_8h_source.html">[code]</a></td></tr>
-<tr class="memdesc:ui_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">API to communicate with user. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-</div><!-- contents -->
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;../common/threads.h&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#ifndef C_CHAT_CLIENT_H</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#define C_CHAT_CLIENT_H</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<a class="code" href="threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f">THREAD_ENTRY_POINT</a> <a class="code" href="client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb">sendMessage</a>(<span class="keywordtype">void</span>* data);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">void</span> <a class="code" href="client_8c.html#a84b5410d9a9376e73de5913a491e9415">receiveMessages</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif //C_CHAT_CLIENT_H</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclient_8c_html_a84b5410d9a9376e73de5913a491e9415"><div class="ttname"><a href="client_8c.html#a84b5410d9a9376e73de5913a491e9415">receiveMessages</a></div><div class="ttdeci">void receiveMessages()</div><div class="ttdoc">Receives messages from the server and display them to the client.</div><div class="ttdef"><b>Definition:</b> client.c:28</div></div>
+<div class="ttc" id="athreads_8h_html_a91f27d2387d2c4b4d574e81a0a18196f"><div class="ttname"><a href="threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f">THREAD_ENTRY_POINT</a></div><div class="ttdeci">#define THREAD_ENTRY_POINT</div><div class="ttdoc">A macro to declare a function meant to be used as an entry point for a thread.</div><div class="ttdef"><b>Definition:</b> threads.h:29</div></div>
+<div class="ttc" id="aclient_8c_html_a6d051c7b1b427efe3f668a8fbafd15fb"><div class="ttname"><a href="client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb">sendMessage</a></div><div class="ttdeci">THREAD_ENTRY_POINT sendMessage(void *data)</div><div class="ttdoc">An entry point for a thread that gets user input and send it to server.</div><div class="ttdef"><b>Definition:</b> client.c:19</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

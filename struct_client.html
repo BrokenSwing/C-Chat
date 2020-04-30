@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-chat: _Client Struct Reference</title>
+<title>C-chat: Client Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,32 +64,39 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="struct___client-members.html">List of all members</a>  </div>
+<a href="struct_client-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">_Client Struct Reference</div>  </div>
+<div class="title">Client Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A type representing a connected client.  
+ <a href="struct_client.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="server_2client_8h_source.html">client.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ade9bb3076550d9fec1485331f8bd2e93"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_socket_info.html">SocketInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___client.html#ade9bb3076550d9fec1485331f8bd2e93">socket</a></td></tr>
-<tr class="separator:ade9bb3076550d9fec1485331f8bd2e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a657b18abfd48b3a46ebd0485db33af5f"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___client.html#a657b18abfd48b3a46ebd0485db33af5f">username</a> [<a class="el" href="constants_8h.html#ad9dcd73dd770affdc2097d8cd0aabaf7">USERNAME_MAX_LENGTH</a>+1]</td></tr>
-<tr class="separator:a657b18abfd48b3a46ebd0485db33af5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8848703097087738d36affa8ee5af12e"><td class="memItemLeft" align="right" valign="top">short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___client.html#a8848703097087738d36affa8ee5af12e">joined</a></td></tr>
-<tr class="separator:a8848703097087738d36affa8ee5af12e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a971d3a35120d9813c62b7c6826fd4c39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_thread.html">Thread</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___client.html#a971d3a35120d9813c62b7c6826fd4c39">thread</a></td></tr>
-<tr class="separator:a971d3a35120d9813c62b7c6826fd4c39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a8e56beeb3802c12b16fda0f2525e67"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_socket_info.html">SocketInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_client.html#a3a8e56beeb3802c12b16fda0f2525e67">socket</a></td></tr>
+<tr class="separator:a3a8e56beeb3802c12b16fda0f2525e67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f5ba83c6457f6092e6615bcfec96053"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_client.html#a7f5ba83c6457f6092e6615bcfec96053">username</a> [<a class="el" href="constants_8h.html#ad9dcd73dd770affdc2097d8cd0aabaf7">USERNAME_MAX_LENGTH</a>+1]</td></tr>
+<tr class="separator:a7f5ba83c6457f6092e6615bcfec96053"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f68cc770a6ac242eecebdcd1d3676d4"><td class="memItemLeft" align="right" valign="top">short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_client.html#a6f68cc770a6ac242eecebdcd1d3676d4">joined</a></td></tr>
+<tr class="separator:a6f68cc770a6ac242eecebdcd1d3676d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64cbb5220335c16891724ded215171c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_thread.html">Thread</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_client.html#a64cbb5220335c16891724ded215171c8">thread</a></td></tr>
+<tr class="separator:a64cbb5220335c16891724ded215171c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a8848703097087738d36affa8ee5af12e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8848703097087738d36affa8ee5af12e">&#9670;&nbsp;</a></span>joined</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A type representing a connected client. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6f68cc770a6ac242eecebdcd1d3676d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f68cc770a6ac242eecebdcd1d3676d4">&#9670;&nbsp;</a></span>joined</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">short _Client::joined</td>
+          <td class="memname">short Client::joined</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -97,14 +104,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ade9bb3076550d9fec1485331f8bd2e93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade9bb3076550d9fec1485331f8bd2e93">&#9670;&nbsp;</a></span>socket</h2>
+<a id="a3a8e56beeb3802c12b16fda0f2525e67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a8e56beeb3802c12b16fda0f2525e67">&#9670;&nbsp;</a></span>socket</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_socket_info.html">SocketInfo</a> _Client::socket</td>
+          <td class="memname"><a class="el" href="struct_socket_info.html">SocketInfo</a> Client::socket</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -112,14 +119,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a971d3a35120d9813c62b7c6826fd4c39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a971d3a35120d9813c62b7c6826fd4c39">&#9670;&nbsp;</a></span>thread</h2>
+<a id="a64cbb5220335c16891724ded215171c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64cbb5220335c16891724ded215171c8">&#9670;&nbsp;</a></span>thread</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_thread.html">Thread</a> _Client::thread</td>
+          <td class="memname"><a class="el" href="struct_thread.html">Thread</a> Client::thread</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -127,14 +134,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a657b18abfd48b3a46ebd0485db33af5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a657b18abfd48b3a46ebd0485db33af5f">&#9670;&nbsp;</a></span>username</h2>
+<a id="a7f5ba83c6457f6092e6615bcfec96053"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f5ba83c6457f6092e6615bcfec96053">&#9670;&nbsp;</a></span>username</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char _Client::username[<a class="el" href="constants_8h.html#ad9dcd73dd770affdc2097d8cd0aabaf7">USERNAME_MAX_LENGTH</a>+1]</td>
+          <td class="memname">char Client::username[<a class="el" href="constants_8h.html#ad9dcd73dd770affdc2097d8cd0aabaf7">USERNAME_MAX_LENGTH</a>+1]</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -142,8 +149,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/server/<a class="el" href="server_8c.html">server.c</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>src/server/<a class="el" href="server_2client_8h_source.html">client.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

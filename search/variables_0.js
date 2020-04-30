@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['joined_127',['joined',['../struct___client.html#a8848703097087738d36affa8ee5af12e',1,'_Client']]]
+  ['joined_128',['joined',['../struct_client.html#a6f68cc770a6ac242eecebdcd1d3676d4',1,'Client']]]
 ];

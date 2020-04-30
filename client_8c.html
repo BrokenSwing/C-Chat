@@ -73,7 +73,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_client.html" title="A type representing a connected client.">Client</a> file.  
+<p><a class="el" href="struct_client.html" title="A type representing a connected client.">Client</a> file.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
@@ -84,12 +84,13 @@ $(function() {
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="memItemLeft" align="right" valign="top"><a id="a6d051c7b1b427efe3f668a8fbafd15fb"></a>
-<a class="el" href="threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f">THREAD_ENTRY_POINT</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sendMessage</b> (void *data)</td></tr>
+<tr class="memitem:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f">THREAD_ENTRY_POINT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb">sendMessage</a> (void *data)</td></tr>
+<tr class="memdesc:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">An entry point for a thread that gets user input and send it to server.  <a href="client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb">More...</a><br /></td></tr>
 <tr class="separator:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4dad791bafcac9a399c2460ab88658f"><td class="memItemLeft" align="right" valign="top"><a id="ae4dad791bafcac9a399c2460ab88658f"></a>
-<a class="el" href="threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f">THREAD_ENTRY_POINT</a>&#160;</td><td class="memItemRight" valign="bottom"><b>receiveMessage</b> (void *data)</td></tr>
-<tr class="separator:ae4dad791bafcac9a399c2460ab88658f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84b5410d9a9376e73de5913a491e9415"><td class="memItemLeft" align="right" valign="top"><a id="a84b5410d9a9376e73de5913a491e9415"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a84b5410d9a9376e73de5913a491e9415">receiveMessages</a> ()</td></tr>
+<tr class="memdesc:a84b5410d9a9376e73de5913a491e9415"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives messages from the server and display them to the client. <br /></td></tr>
+<tr class="separator:a84b5410d9a9376e73de5913a491e9415"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7fd3eb7b9a2fbf9510c4f2e7b49ea03"><td class="memItemLeft" align="right" valign="top"><a id="ad7fd3eb7b9a2fbf9510c4f2e7b49ea03"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>pickUsername</b> ()</td></tr>
 <tr class="separator:ad7fd3eb7b9a2fbf9510c4f2e7b49ea03"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -98,7 +99,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>pickUsername</b> ()</
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_client.html" title="A type representing a connected client.">Client</a> file. </p>
+<div class="textblock"><p><a class="el" href="struct_client.html" title="A type representing a connected client.">Client</a> file. </p>
 <p>Allows connection to a server and sending messages to another client. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
@@ -118,6 +119,34 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>pickUsername</b> ()</
 
 <p>Program entry. </p>
 <dl class="section return"><dt>Returns</dt><dd>EXIT_SUCCESS - normal program termination. </dd></dl>
+
+</div>
+</div>
+<a id="a6d051c7b1b427efe3f668a8fbafd15fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d051c7b1b427efe3f668a8fbafd15fb">&#9670;&nbsp;</a></span>sendMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f">THREAD_ENTRY_POINT</a> sendMessage </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>An entry point for a thread that gets user input and send it to server. </p>
+<p>Gets user input and sent it to the server in an appropriate way.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>a NULL pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>never </dd></dl>
 
 </div>
 </div>

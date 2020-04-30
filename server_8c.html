@@ -67,9 +67,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">server.c File Reference</div>  </div>
@@ -78,33 +75,13 @@ $(function() {
 
 <p>Server file.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="sockets_8h_source.html">../common/sockets.h</a>&quot;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;signal.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="threads_8h_source.html">../common/threads.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="constants_8h_source.html">../common/constants.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="synchronization_8h_source.html">../common/synchronization.h</a>&quot;</code><br />
+<code>#include &quot;client.h&quot;</code><br />
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___client.html">_Client</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ad172719f11bc41562233eec71e151cff"><td class="memItemLeft" align="right" valign="top"><a id="ad172719f11bc41562233eec71e151cff"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ad172719f11bc41562233eec71e151cff">NUMBER_CLIENT_MAX</a>&#160;&#160;&#160;10</td></tr>
-<tr class="memdesc:ad172719f11bc41562233eec71e151cff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum of simultaneous connected clients. <br /></td></tr>
-<tr class="separator:ad172719f11bc41562233eec71e151cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a04efab6d88efaa8d803643ca7791e6e8"><td class="memItemLeft" align="right" valign="top"><a id="a04efab6d88efaa8d803643ca7791e6e8"></a>
-typedef struct <a class="el" href="struct___client.html">_Client</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Client</b></td></tr>
-<tr class="separator:a04efab6d88efaa8d803643ca7791e6e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ab37e88dfc833c4ba909999902705f3ba"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ab37e88dfc833c4ba909999902705f3ba">scanForFreeSocketSlot</a> ()</td></tr>
@@ -113,7 +90,7 @@ Functions</h2></td></tr>
 <tr class="memitem:aade192ddf7e8a5315aa6c2efab6dc26d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#aade192ddf7e8a5315aa6c2efab6dc26d">handleServerClose</a> (int signal)</td></tr>
 <tr class="memdesc:aade192ddf7e8a5315aa6c2efab6dc26d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Catch interrupt signal.  <a href="server_8c.html#aade192ddf7e8a5315aa6c2efab6dc26d">More...</a><br /></td></tr>
 <tr class="separator:aade192ddf7e8a5315aa6c2efab6dc26d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3f5fa9a434fc6535db702c02d130896"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ae3f5fa9a434fc6535db702c02d130896">initClientConnection</a> (<a class="el" href="class_client.html">Client</a> *client)</td></tr>
+<tr class="memitem:ae3f5fa9a434fc6535db702c02d130896"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ae3f5fa9a434fc6535db702c02d130896">initClientConnection</a> (<a class="el" href="struct_client.html">Client</a> *client)</td></tr>
 <tr class="memdesc:ae3f5fa9a434fc6535db702c02d130896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a client connection to be ready to discuss.  <a href="server_8c.html#ae3f5fa9a434fc6535db702c02d130896">More...</a><br /></td></tr>
 <tr class="separator:ae3f5fa9a434fc6535db702c02d130896"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af00e8215717a1018bf79b8e40ffaba66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#af00e8215717a1018bf79b8e40ffaba66">disconnectClient</a> (int id)</td></tr>
@@ -125,7 +102,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a32c007c29bcb41b02a6c432f146eabbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a32c007c29bcb41b02a6c432f146eabbb">broadcast</a> (const char *buffer, int size)</td></tr>
 <tr class="memdesc:a32c007c29bcb41b02a6c432f146eabbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasts a message to every clients.  <a href="server_8c.html#a32c007c29bcb41b02a6c432f146eabbb">More...</a><br /></td></tr>
 <tr class="separator:a32c007c29bcb41b02a6c432f146eabbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">relayClientMessages</a> (<a class="el" href="class_client.html">Client</a> *client)</td></tr>
+<tr class="memitem:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">relayClientMessages</a> (<a class="el" href="struct_client.html">Client</a> *client)</td></tr>
 <tr class="memdesc:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relay messages sent by given client to all known clients.  <a href="server_8c.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">More...</a><br /></td></tr>
 <tr class="separator:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a485255282d99bd18b166b6424a500224"><td class="memItemLeft" align="right" valign="top"><a id="a485255282d99bd18b166b6424a500224"></a>
@@ -238,7 +215,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serve
         <tr>
           <td class="memname">int initClientConnection </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_client.html">Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_client.html">Client</a> *&#160;</td>
           <td class="paramname"><em>client</em></td><td>)</td>
           <td></td>
         </tr>
@@ -293,7 +270,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serve
         <tr>
           <td class="memname">void relayClientMessages </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_client.html">Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_client.html">Client</a> *&#160;</td>
           <td class="paramname"><em>client</em></td><td>)</td>
           <td></td>
         </tr>
