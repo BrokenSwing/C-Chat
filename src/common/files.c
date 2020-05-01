@@ -6,6 +6,7 @@
 
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <stdlib.h>
 
 FileInfo files_getInfo(const char* filename) {
     struct stat st;
@@ -26,6 +27,56 @@ FileInfo files_getInfo(const char* filename) {
     }
 
     return info;
+}
+
+unsigned long files_readFile(const char* filename, char* contentBuffer, unsigned long bufferSize) {
+    FileInfo info = files_getInfo(filename);
+    if (info.isDirectory) {
+        return -1;
+    }
+
+    FILE* file;
+
+    errno_t error = fopen_s(&file, filename, "r");
+    if (error != 0) {
+        printf("Unable to open file: %s\n", filename);
+        printf("Error code: %d\n", error);
+        return -1;
+    }
+
+    unsigned long readLength = 0;
+    while (!feof(file) && readLength < bufferSize) {
+        contentBuffer[readLength] = (char) fgetc(file);
+        readLength++;
+    }
+    fclose(file);
+
+    return readLength;
+}
+
+unsigned long files_writeFile(const char* filename, const char* contentBuffer, unsigned long bufferSize) {
+    FileInfo info = files_getInfo(filename);
+    if (info.isDirectory) {
+        return -1;
+    }
+
+    FILE* file;
+
+    errno_t error = fopen_s(&file, filename, "w+");
+    if (error != 0) {
+        printf("Unable to open file: %s\n", filename);
+        printf("Error code: %d\n", error);
+        return -1;
+    }
+
+    unsigned long writtenLength = 0;
+    while (writtenLength < bufferSize) {
+        fputc(contentBuffer[writtenLength], file);
+        writtenLength++;
+    }
+    fclose(file);
+
+    return writtenLength;
 }
 
 #elif IS_WINDOWS
