@@ -18,4 +18,11 @@ THREAD_ENTRY_POINT sendMessage(void* data);
  */
 void receiveMessages();
 
+/**
+ * \brief Handles the command represented by the given string
+ *
+ * \param command A command typed by the user
+ */
+void commandHandler(const char* command);
+
 #endif //C_CHAT_CLIENT_H

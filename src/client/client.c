@@ -13,6 +13,8 @@
 #include "ui.h"
 #include "../common/threads.h"
 #include "../common/constants.h"
+#include "client.h"
+#include "commands.h"
 
 static SocketInfo clientSocket;
 
@@ -21,9 +23,30 @@ THREAD_ENTRY_POINT sendMessage(void* data) {
     buffer[0] = TEXT_MESSAGE_TYPE;
     while(1) {
         ui_getUserInput("Your message : ", buffer + MESSAGE_TYPE_OVERHEAD, MSG_MAX_LENGTH);
-        sendTo(clientSocket, buffer, MESSAGE_TYPE_OVERHEAD + strlen(buffer + MESSAGE_TYPE_OVERHEAD));
+        if (strncmp("/", buffer + MESSAGE_TYPE_OVERHEAD, 1) == 0) { // Is a command
+            commandHandler(buffer + MESSAGE_TYPE_OVERHEAD + 1);
+        } else {
+            sendTo(clientSocket, buffer, MESSAGE_TYPE_OVERHEAD + strlen(buffer + MESSAGE_TYPE_OVERHEAD));
+        }
     }
 }
+
+COMMAND_HANDLER(command,
+COMMAND(file, "/file <send | receive>",
+        COMMAND(send, "/file send <filepath>",
+            if (strlen(command) > 0) {
+                    ui_informationMessage("Command send detected");
+                    return;
+                }
+            )
+            COMMAND(receive, "/file receive <id>",
+            if (strlen(command) > 0) {
+                    ui_informationMessage("Command receive detected");
+                    return;
+                }
+            )
+        )
+)
 
 void receiveMessages() {
     char buffer[MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1) + (USERNAME_MAX_LENGTH + 1)];

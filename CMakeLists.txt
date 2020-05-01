@@ -10,6 +10,7 @@ add_executable(Client
         src/client/client.c          src/client/client.h
         src/client/ui.c              src/client/ui.h
         src/client/console-color.h
+        src/client/commands.h
 
         src/common/constants.h
         src/common/interop.h
