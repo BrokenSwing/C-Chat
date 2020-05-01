@@ -38,7 +38,7 @@ unsigned long files_readFile(const char* filename, char* contentBuffer, unsigned
     FILE* file;
 
     file = fopen(filename, "w+");
-    if (error == -1) {
+    if (file == NULL) {
         printf("Unable to open file: %s\n", filename);
         return -1;
     }
@@ -62,7 +62,7 @@ unsigned long files_writeFile(const char* filename, const char* contentBuffer, u
     FILE* file;
 
     file = fopen(filename, "w+");
-    if (error == -1) {
+    if (file == NULL) {
         printf("Unable to open file: %s\n", filename);
         return -1;
     }
