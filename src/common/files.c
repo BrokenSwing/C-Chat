@@ -9,11 +9,11 @@
 FileInfo files_getInfo(const char* filename) {
     struct stat st;
 
-    FFileInfo info;
+    FileInfo info;
     if (stat(filename, &st) == 0) {
         info.isDirectory = S_ISDIR(st.st_mode);
         if (info.isDirectory) {
-            info.size = info.st_size;
+            info.size = st.st_size;
         } else {
             info.size = 0;
         }
