@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['thread_130',['thread',['../struct_client.html#a64cbb5220335c16891724ded215171c8',1,'Client']]]
+  ['size_134',['size',['../struct_file_info.html#ad269568d7fa05ef71dd0de872b670132',1,'FileInfo']]],
+  ['socket_135',['socket',['../struct_client.html#a3a8e56beeb3802c12b16fda0f2525e67',1,'Client']]]
 ];
