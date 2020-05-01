@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sockets.h"
+#include "interop.h"
 
 #ifdef DEBUG
 #define DEBUG_CALL(x) (x)
@@ -17,7 +18,7 @@
 #endif
 
 #define CLIENTS_BACKLOG 5
-#if defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__linux__)
+#if IS_POSIX
 
     #include <sys/socket.h>
     #include <netinet/in.h>
@@ -153,7 +154,7 @@
         // Nothing to cleanup under Unix
     }
 
-#elif defined(_WIN32) || defined(_WIN64) || defined(_WINDOWS)
+#elif IS_WINDOWS
 
 	#define WIN32_LEAN_AND_MEAN
 	#include <windows.h>

@@ -1,8 +1,9 @@
 #include "threads.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "interop.h"
 
-#if defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__linux__)
+#if IS_POSIX
 
 #include <pthread.h>
 
@@ -38,7 +39,7 @@ void destroyThread(Thread* thread) {
     }
 }
 
-#elif defined(_WIN32) || defined(_WIN64) || defined(_WINDOWS)
+#elif IS_WINDOWS
 
 #ifndef WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -57,7 +58,7 @@ Thread createThread(THREAD_FUNCTION_POINTER entryPoint, void* data) {
     DWORD threadId;
     HANDLE threadHandle = CreateThread(NULL, 0, entryPoint, data, 0, &threadId);
     if (threadHandle == NULL) {
-        printf("Unable to create thread. Error code : %d\n", GetLastError());
+        printf("Unable to create thread. Error code : %ld\n", GetLastError());
         exit(EXIT_FAILURE);
     }
 

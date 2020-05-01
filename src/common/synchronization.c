@@ -1,6 +1,7 @@
 #include "synchronization.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "interop.h"
 
 ReadWriteLock createReadWriteLock() {
     ReadWriteLock lock;
@@ -48,7 +49,7 @@ void destroyReadWriteLock(ReadWriteLock lock) {
     free(lock.readCount);
 }
 
-#if defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__linux__)
+#if IS_POSIX
 
     #include <pthread.h>
 
@@ -83,7 +84,7 @@ void destroyReadWriteLock(ReadWriteLock lock) {
     }
 
 
-#elif defined(_WIN32) || defined(_WIN64) || defined(_WINDOWS)
+#elif IS_WINDOWS
 
     #ifndef WINDOWS_LEAN_AND_MEAN
     #define WINDOWS_LEAN_AND_MEAN
