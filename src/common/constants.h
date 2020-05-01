@@ -6,6 +6,10 @@
 #ifndef C_CHAT_CONSTANTS_H
 #define C_CHAT_CONSTANTS_H
 
+//---------------------------------------------------------//
+//                     SIZES DEFINITION                    //
+//---------------------------------------------------------//
+
 /**
  * \def MSG_MAX_LENGTH
  * \brief Maximum message size.
@@ -19,10 +23,22 @@
 #define USERNAME_MAX_LENGTH 20
 
 /**
+ * \def MAX_CONCURRENT_FILES_EXCHANGE_PER_CLIENT
+ * \brief Maximum concurrent files exchange a client can operate with the server
+ *
+ * A file exchange is either receiving or sending a file.
+ */
+#define MAX_CONCURRENT_FILES_EXCHANGE_PER_CLIENT 1
+
+/**
  * \def MESSAGE_TYPE_OVERHEAD
  * \brief The number of bytes the type of the message is
  */
 #define MESSAGE_TYPE_OVERHEAD 1
+
+//---------------------------------------------------------//
+//              MESSAGES TYPES DEFINITION                  //
+//---------------------------------------------------------//
 
 /**
  * \def JOIN_MESSAGE_TYPE
