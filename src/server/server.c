@@ -11,7 +11,7 @@
 #include <signal.h>
 #include <string.h>
 #include "../common/synchronization.h"
-#include "client.h"
+#include "server.h"
 
 static ReadWriteLock clientsLock;
 static Client* clients[NUMBER_CLIENT_MAX] = {NULL};

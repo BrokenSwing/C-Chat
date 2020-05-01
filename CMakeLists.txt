@@ -12,16 +12,21 @@ add_executable(Client
         src/client/console-color.h
 
         src/common/constants.h
+        src/common/interop.h
         src/common/sockets.c         src/common/sockets.h
         src/common/threads.c         src/common/threads.h
         src/common/synchronization.c src/common/synchronization.h
+        src/common/files.c           src/common/files.h
         )
 add_executable(Server
-        src/server/server.c          src/server/client.h
+        src/server/server.c          src/server/server.h
+
         src/common/constants.h
+        src/common/interop.h
         src/common/sockets.c         src/common/sockets.h
         src/common/threads.c         src/common/threads.h
         src/common/synchronization.c src/common/synchronization.c
+        src/common/files.c           src/common/files.h
         )
 
 target_link_libraries(Client ${CMAKE_THREAD_LIBS_INIT})
