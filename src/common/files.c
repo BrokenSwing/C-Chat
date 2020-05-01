@@ -37,10 +37,9 @@ unsigned long files_readFile(const char* filename, char* contentBuffer, unsigned
 
     FILE* file;
 
-    errno_t error = fopen_s(&file, filename, "r");
-    if (error != 0) {
+    file = fopen(filename, "w+");
+    if (error == -1) {
         printf("Unable to open file: %s\n", filename);
-        printf("Error code: %d\n", error);
         return -1;
     }
 
@@ -62,10 +61,9 @@ unsigned long files_writeFile(const char* filename, const char* contentBuffer, u
 
     FILE* file;
 
-    errno_t error = fopen_s(&file, filename, "w+");
-    if (error != 0) {
+    file = fopen(filename, "w+");
+    if (error == -1) {
         printf("Unable to open file: %s\n", filename);
-        printf("Error code: %d\n", error);
         return -1;
     }
 
