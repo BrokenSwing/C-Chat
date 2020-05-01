@@ -22,7 +22,7 @@ FileInfo files_getInfo(const char* filename) {
         info.size = 0;
     }
 
-    retirn info;
+    return info;
 }
 
 #elif IS_WINDOWS
