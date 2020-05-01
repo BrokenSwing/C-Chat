@@ -2,6 +2,7 @@
 #define C_CHAT_COMMANDS_H
 
 #include "ui.h"
+#include <string.h>
 
 #define COMMAND_HANDLER(NAME, commands) \
 void NAME##Handler (const char* command) { \
