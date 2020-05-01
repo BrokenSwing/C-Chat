@@ -74,17 +74,23 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define C_CHAT_FILES_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="struct_file_info.html">    8</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_file_info.html">FileInfo</a> {</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="struct_file_info.html#afbd57064215845c3a083afb10169d254">   10</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_file_info.html#afbd57064215845c3a083afb10169d254">isDirectory</a>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="struct_file_info.html#ad269568d7fa05ef71dd0de872b670132">   12</a></span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">long</span> <a class="code" href="struct_file_info.html#ad269568d7fa05ef71dd0de872b670132">size</a>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;} <a class="code" href="struct_file_info.html">FileInfo</a>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<a class="code" href="struct_file_info.html">FileInfo</a> files_getInfo(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif //C_CHAT_FILES_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="struct_file_info.html#ae12e8cdd690fa83a94d9b5cfb5159118">   10</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_file_info.html#ae12e8cdd690fa83a94d9b5cfb5159118">exists</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="struct_file_info.html#afbd57064215845c3a083afb10169d254">   12</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_file_info.html#afbd57064215845c3a083afb10169d254">isDirectory</a>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="struct_file_info.html#ad269568d7fa05ef71dd0de872b670132">   14</a></span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">long</span> <a class="code" href="struct_file_info.html#ad269568d7fa05ef71dd0de872b670132">size</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;} <a class="code" href="struct_file_info.html">FileInfo</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<a class="code" href="struct_file_info.html">FileInfo</a> files_getInfo(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> files_readFile(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename, <span class="keywordtype">char</span>* contentBuffer, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> bufferSize);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> files_writeFile(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename, <span class="keyword">const</span> <span class="keywordtype">char</span>* contentBuffer, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> bufferSize);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif //C_CHAT_FILES_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="astruct_file_info_html_ae12e8cdd690fa83a94d9b5cfb5159118"><div class="ttname"><a href="struct_file_info.html#ae12e8cdd690fa83a94d9b5cfb5159118">FileInfo::exists</a></div><div class="ttdeci">int exists</div><div class="ttdef"><b>Definition:</b> files.h:10</div></div>
 <div class="ttc" id="astruct_file_info_html"><div class="ttname"><a href="struct_file_info.html">FileInfo</a></div><div class="ttdoc">A class containing information about a file.</div><div class="ttdef"><b>Definition:</b> files.h:8</div></div>
-<div class="ttc" id="astruct_file_info_html_afbd57064215845c3a083afb10169d254"><div class="ttname"><a href="struct_file_info.html#afbd57064215845c3a083afb10169d254">FileInfo::isDirectory</a></div><div class="ttdeci">int isDirectory</div><div class="ttdef"><b>Definition:</b> files.h:10</div></div>
-<div class="ttc" id="astruct_file_info_html_ad269568d7fa05ef71dd0de872b670132"><div class="ttname"><a href="struct_file_info.html#ad269568d7fa05ef71dd0de872b670132">FileInfo::size</a></div><div class="ttdeci">long long size</div><div class="ttdef"><b>Definition:</b> files.h:12</div></div>
+<div class="ttc" id="astruct_file_info_html_afbd57064215845c3a083afb10169d254"><div class="ttname"><a href="struct_file_info.html#afbd57064215845c3a083afb10169d254">FileInfo::isDirectory</a></div><div class="ttdeci">int isDirectory</div><div class="ttdef"><b>Definition:</b> files.h:12</div></div>
+<div class="ttc" id="astruct_file_info_html_ad269568d7fa05ef71dd0de872b670132"><div class="ttname"><a href="struct_file_info.html#ad269568d7fa05ef71dd0de872b670132">FileInfo::size</a></div><div class="ttdeci">long long size</div><div class="ttdef"><b>Definition:</b> files.h:14</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

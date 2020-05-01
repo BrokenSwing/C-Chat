@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['handleserverclose_24',['handleServerClose',['../server_8c.html#aade192ddf7e8a5315aa6c2efab6dc26d',1,'server.c']]]
+  ['fileinfo_27',['FileInfo',['../struct_file_info.html',1,'']]]
 ];

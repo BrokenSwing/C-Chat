@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['define_5fusername_5fmessage_5ftype_139',['DEFINE_USERNAME_MESSAGE_TYPE',['../constants_8h.html#aba5c31d7831ff3526a9a633abb986723',1,'constants.h']]]
+  ['command_144',['COMMAND',['../commands_8h.html#a71b31656316a73877fe104b12afc1136',1,'commands.h']]],
+  ['command_5fhandler_145',['COMMAND_HANDLER',['../commands_8h.html#a0649afb7efec529568026a83ffc3ab7f',1,'commands.h']]]
 ];

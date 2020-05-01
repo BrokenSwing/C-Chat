@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['join_5fmessage_5ftype_27',['JOIN_MESSAGE_TYPE',['../constants_8h.html#ac4af6a17cc2f98499018102f83e61bee',1,'constants.h']]],
-  ['joined_28',['joined',['../struct_client.html#a6f68cc770a6ac242eecebdcd1d3676d4',1,'Client']]],
-  ['jointhread_29',['joinThread',['../threads_8h.html#abd66887f14a3fd502b055323f7641898',1,'threads.h']]]
+  ['initclientconnection_29',['initClientConnection',['../server_8c.html#ae3f5fa9a434fc6535db702c02d130896',1,'server.c']]],
+  ['isdirectory_30',['isDirectory',['../struct_file_info.html#afbd57064215845c3a083afb10169d254',1,'FileInfo']]]
 ];

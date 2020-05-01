@@ -81,16 +81,17 @@ $(function() {
 <code>#include &quot;<a class="el" href="ui_8h_source.html">ui.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="threads_8h_source.html">../common/threads.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="constants_8h_source.html">../common/constants.h</a>&quot;</code><br />
+<code>#include &quot;client.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="commands_8h_source.html">commands.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f">THREAD_ENTRY_POINT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb">sendMessage</a> (void *data)</td></tr>
 <tr class="memdesc:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">An entry point for a thread that gets user input and send it to server.  <a href="client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb">More...</a><br /></td></tr>
 <tr class="separator:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84b5410d9a9376e73de5913a491e9415"><td class="memItemLeft" align="right" valign="top"><a id="a84b5410d9a9376e73de5913a491e9415"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a84b5410d9a9376e73de5913a491e9415">receiveMessages</a> ()</td></tr>
-<tr class="memdesc:a84b5410d9a9376e73de5913a491e9415"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives messages from the server and display them to the client. <br /></td></tr>
-<tr class="separator:a84b5410d9a9376e73de5913a491e9415"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3facd0b9141c1bf31df7b842536c22d9"><td class="memItemLeft" align="right" valign="top"><a id="a3facd0b9141c1bf31df7b842536c22d9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>COMMAND_HANDLER</b> (command, <a class="el" href="commands_8h.html#a71b31656316a73877fe104b12afc1136">COMMAND</a>(file, &quot;/file &lt;send | receive&gt;&quot;, COMMAND(send, &quot;/file send &lt;filepath&gt;&quot;, if(strlen(command) &gt; 0) { <a class="el" href="ui_8h.html#ae4597eb9cb1f26760512b4d87069eed3">ui_informationMessage</a>(&quot;Command send detected&quot;);return;}) <a class="el" href="commands_8h.html#a71b31656316a73877fe104b12afc1136">COMMAND</a>(receive, &quot;/file receive &lt;id&gt;&quot;, if(strlen(command) &gt; 0) { <a class="el" href="ui_8h.html#ae4597eb9cb1f26760512b4d87069eed3">ui_informationMessage</a>(&quot;Command receive detected&quot;);return;})))</td></tr>
+<tr class="separator:a3facd0b9141c1bf31df7b842536c22d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7fd3eb7b9a2fbf9510c4f2e7b49ea03"><td class="memItemLeft" align="right" valign="top"><a id="ad7fd3eb7b9a2fbf9510c4f2e7b49ea03"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>pickUsername</b> ()</td></tr>
 <tr class="separator:ad7fd3eb7b9a2fbf9510c4f2e7b49ea03"><td class="memSeparator" colspan="2">&#160;</td></tr>

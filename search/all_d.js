@@ -1,8 +1,14 @@
 var searchData=
 [
-  ['text_5fmessage_5ftype_55',['TEXT_MESSAGE_TYPE',['../constants_8h.html#aab91abdd30c15d19064327e871b805d4',1,'constants.h']]],
-  ['thread_56',['Thread',['../struct_thread.html',1,'Thread'],['../struct_client.html#a64cbb5220335c16891724ded215171c8',1,'Client::thread()']]],
-  ['thread_5fentry_5fpoint_57',['THREAD_ENTRY_POINT',['../threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f',1,'threads.h']]],
-  ['thread_5ffunction_5fpointer_58',['THREAD_FUNCTION_POINTER',['../threads_8h.html#ab6e1cf1d117c8a8ce38a6c9e7144e5ae',1,'threads.h']]],
-  ['threads_2eh_59',['threads.h',['../threads_8h.html',1,'']]]
+  ['scanforfreesocketslot_48',['scanForFreeSocketSlot',['../server_8c.html#ab37e88dfc833c4ba909999902705f3ba',1,'server.c']]],
+  ['sendmessage_49',['sendMessage',['../client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb',1,'client.c']]],
+  ['sendto_50',['sendTo',['../sockets_8h.html#abf0c58c8074e6bd0e1b101082f48fed0',1,'sockets.h']]],
+  ['server_2ec_51',['server.c',['../server_8c.html',1,'']]],
+  ['settextcolor_52',['setTextColor',['../console-color_8h.html#a0bf72a7e3dba93a4a09a5c1ff1c55a95',1,'console-color.h']]],
+  ['size_53',['size',['../struct_file_info.html#ad269568d7fa05ef71dd0de872b670132',1,'FileInfo']]],
+  ['socket_54',['socket',['../struct_client.html#a3a8e56beeb3802c12b16fda0f2525e67',1,'Client']]],
+  ['socketinfo_55',['SocketInfo',['../struct_socket_info.html',1,'']]],
+  ['sockets_2ec_56',['sockets.c',['../sockets_8c.html',1,'']]],
+  ['sockets_2eh_57',['sockets.h',['../sockets_8h.html',1,'']]],
+  ['synchronization_2eh_58',['synchronization.h',['../synchronization_8h.html',1,'']]]
 ];

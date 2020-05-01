@@ -1,14 +1,11 @@
 var searchData=
 [
-  ['scanforfreesocketslot_44',['scanForFreeSocketSlot',['../server_8c.html#ab37e88dfc833c4ba909999902705f3ba',1,'server.c']]],
-  ['sendmessage_45',['sendMessage',['../client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb',1,'client.c']]],
-  ['sendto_46',['sendTo',['../sockets_8h.html#abf0c58c8074e6bd0e1b101082f48fed0',1,'sockets.h']]],
-  ['server_2ec_47',['server.c',['../server_8c.html',1,'']]],
-  ['settextcolor_48',['setTextColor',['../console-color_8h.html#a0bf72a7e3dba93a4a09a5c1ff1c55a95',1,'console-color.h']]],
-  ['size_49',['size',['../struct_file_info.html#ad269568d7fa05ef71dd0de872b670132',1,'FileInfo']]],
-  ['socket_50',['socket',['../struct_client.html#a3a8e56beeb3802c12b16fda0f2525e67',1,'Client']]],
-  ['socketinfo_51',['SocketInfo',['../struct_socket_info.html',1,'']]],
-  ['sockets_2ec_52',['sockets.c',['../sockets_8c.html',1,'']]],
-  ['sockets_2eh_53',['sockets.h',['../sockets_8h.html',1,'']]],
-  ['synchronization_2eh_54',['synchronization.h',['../synchronization_8h.html',1,'']]]
+  ['readwritelock_40',['ReadWriteLock',['../class_read_write_lock.html',1,'']]],
+  ['receivedendmessage_41',['receivedEndMessage',['../server_8c.html#a591cef1c733707db69a0bbd0e0de0b13',1,'server.c']]],
+  ['receivefrom_42',['receiveFrom',['../sockets_8h.html#a06172a10e4be71680501d6f7a7b3604e',1,'sockets.h']]],
+  ['relayclientmessages_43',['relayClientMessages',['../server_8c.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d',1,'server.c']]],
+  ['releasemutex_44',['releaseMutex',['../synchronization_8h.html#ac85d8be7b9b703bb8aa8e4a33e959b73',1,'synchronization.h']]],
+  ['releaseread_45',['releaseRead',['../synchronization_8h.html#a49221060f671816d24dec651d6cc9476',1,'synchronization.c']]],
+  ['releasewrite_46',['releaseWrite',['../synchronization_8h.html#a033cc3e68703dd21dde11993f48f3f88',1,'synchronization.c']]],
+  ['resetcolor_47',['resetColor',['../console-color_8h.html#afe00396766eb6b8ca4674de4c5d3d949',1,'console-color.h']]]
 ];

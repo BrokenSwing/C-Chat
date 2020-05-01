@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['join_5fmessage_5ftype_140',['JOIN_MESSAGE_TYPE',['../constants_8h.html#ac4af6a17cc2f98499018102f83e61bee',1,'constants.h']]]
+  ['define_5fusername_5fmessage_5ftype_146',['DEFINE_USERNAME_MESSAGE_TYPE',['../constants_8h.html#aba5c31d7831ff3526a9a633abb986723',1,'constants.h']]]
 ];
