@@ -181,7 +181,9 @@ int main () {
         SocketInfo clientSocket = acceptClient(serverSocket);
 
         /* Looking for a valid id for connected client */
+        acquireRead(clientsLock);
         int slotId = scanForFreeSocketSlot();
+        releaseRead(clientsLock);
 
         /* If no valid slot id was found, closing connection with client */
         if (slotId == -1) {
