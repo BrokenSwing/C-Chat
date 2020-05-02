@@ -1,7 +1,7 @@
 #include "packets.h"
 
-const union Packet NewJoinPacket = { JOIN_MESSAGE_TYPE };
-const union Packet NewLeavePacket = { LEAVE_MESSAGE_TYPE };
+const union Packet NewPacketJoin = { JOIN_MESSAGE_TYPE };
+const union Packet NewPacketLeave = { LEAVE_MESSAGE_TYPE };
 const union Packet NewPacketText = { TEXT_MESSAGE_TYPE };
 const union Packet NewPacketDefineUsername = { DEFINE_USERNAME_MESSAGE_TYPE };
 const union Packet NewPacketServerErrorMessage = { SERVER_ERROR_MESSAGE_TYPE };

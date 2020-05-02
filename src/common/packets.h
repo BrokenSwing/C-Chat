@@ -8,13 +8,13 @@ struct PacketJoin {
     char type;
     char username[USERNAME_MAX_LENGTH + 1];
 };
-extern const union Packet NewJoinPacket;
+extern const union Packet NewPacketJoin;
 
 struct PacketLeave {
     char type;
     char username[USERNAME_MAX_LENGTH + 1];
 };
-extern const union Packet NewLeavePacket;
+extern const union Packet NewPacketLeave;
 
 struct PacketText {
     char type;
