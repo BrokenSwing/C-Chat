@@ -129,8 +129,34 @@ void relayClientMessages(Client* client) {
         bytesReceived = receiveFrom(client->socket, buffer, MESSAGE_TYPE_OVERHEAD + MSG_MAX_LENGTH);
         if (bytesReceived > 0) {
             buffer[bytesReceived] = '\0';
-            if (strlen(buffer) > 0 && !receivedEndMessage(buffer)) {
-                broadcast(buffer, MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1) + (USERNAME_MAX_LENGTH + 1));
+            switch(buffer[0]) {
+                case TEXT_MESSAGE_TYPE:
+                    if (strlen(buffer) > 0 && !receivedEndMessage(buffer + MESSAGE_TYPE_OVERHEAD)) {
+                        broadcast(buffer, MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1) + (USERNAME_MAX_LENGTH + 1));
+                    }
+                    break;
+                case DEFINE_USERNAME_MESSAGE_TYPE:
+                    unsigned int usernameLength = strlen(buffer + MESSAGE_TYPE_OVERHEAD);
+                    if (usernameLength > 0 && usernameLength <= USERNAME_MAX_LENGTH) {
+                        char changeMessage[MESSAGE_TYPE_OVERHEAD + 2 * (USERNAME_MAX_LENGTH + 1)];
+                        changeMessage[0] = USERNAME_CHANGED_MESSAGE_TYPE;
+                        memcpy(changeMessage + MESSAGE_TYPE_OVERHEAD, client->username, USERNAME_MAX_LENGTH + 1);
+                        memcpy(
+                            changeMessage + MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1),
+                            buffer + MESSAGE_TYPE_OVERHEAD,
+                            USERNAME_MAX_LENGTH + 1
+                        );
+
+                        memcpy(client->username, buffer + MESSAGE_TYPE_OVERHEAD, USERNAME_MAX_LENGTH + 1);
+                        memcpy(buffer + MESSAGE_TYPE_OVERHEAD + MSG_MAX_LENGTH + 1, client->username, sizeof(client->username));
+
+                        broadcast(changeMessage, MESSAGE_TYPE_OVERHEAD + 2 * (USERNAME_MAX_LENGTH + 1));
+                    } else {
+                        char errorMessage[MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1)];
+                        errorMessage[0] = SERVER_ERROR_MESSAGE_TYPE;
+                        memcpy(errorMessage + MESSAGE_TYPE_OVERHEAD, "Invalid username", 17);
+                        sendTo(client->socket, errorMessage, MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1));
+                    }
             }
         }
     } while (bytesReceived >= 0 && !receivedEndMessage(buffer + MESSAGE_TYPE_OVERHEAD));

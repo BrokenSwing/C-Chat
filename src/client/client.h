@@ -25,4 +25,13 @@ void receiveMessages();
  */
 void commandHandler(const char* command);
 
+/**
+ * \brief Notifies the server of username change
+ *
+ * The server can reject the new username.
+ *
+ * \param username The new username to use
+ */
+void setUsername(const char* username);
+
 #endif //C_CHAT_CLIENT_H

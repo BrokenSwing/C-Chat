@@ -32,19 +32,25 @@ THREAD_ENTRY_POINT sendMessage(void* data) {
 }
 
 COMMAND_HANDLER(command,
-COMMAND(file, "/file <send | receive>",
-        COMMAND(send, "/file send <filepath>",
+COMMAND(file, "Usage: /file <send | receive>",
+        COMMAND(send, "Usage: /file send <filepath>",
             if (strlen(command) > 0) {
                     ui_informationMessage("Command send detected");
                     return;
                 }
             )
-            COMMAND(receive, "/file receive <id>",
+            COMMAND(receive, "Usage: /file receive <id>",
             if (strlen(command) > 0) {
                     ui_informationMessage("Command receive detected");
                     return;
                 }
             )
+        )
+        COMMAND(nick, "Usage: /nick <username>",
+            if (strlen(command) > 0) {
+                setUsername(command);
+                return;
+            }
         )
 )
 
@@ -64,6 +70,25 @@ void receiveMessages() {
                     break;
                 case LEAVE_MESSAGE_TYPE:
                     ui_leaveMessage(buffer + 1);
+                    break;
+                case SERVER_ERROR_MESSAGE_TYPE:
+                    ui_errorMessage(buffer + 1);
+                    break;
+                case USERNAME_CHANGED_MESSAGE_TYPE:
+                    char changeMessage[USERNAME_MAX_LENGTH * 2 + 25 + 1];
+                    unsigned int oldUsernameLength = strlen(buffer + MESSAGE_TYPE_OVERHEAD);
+                    unsigned int newUsernameLength = strlen(buffer + MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1));
+                    memcpy(changeMessage, buffer + MESSAGE_TYPE_OVERHEAD, oldUsernameLength);
+                    memcpy(changeMessage + oldUsernameLength, " changed its username to ", 25);
+                    memcpy(
+                            changeMessage + oldUsernameLength + 25,
+                            buffer + MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1),
+                            newUsernameLength
+                    );
+                    changeMessage[oldUsernameLength + 25 + newUsernameLength] = '\0';
+                    ui_informationMessage(changeMessage);
+                    break;
+                default:
                     break;
             }
         }
@@ -100,6 +125,15 @@ void pickUsername() {
             exit(EXIT_FAILURE);
         }
     } while (!success);
+}
+
+void setUsername(const char* newUsername) {
+    char changeUsernamePacket[MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1)];
+    changeUsernamePacket[0] = DEFINE_USERNAME_MESSAGE_TYPE;
+    memcpy(changeUsernamePacket + MESSAGE_TYPE_OVERHEAD, newUsername, USERNAME_MAX_LENGTH);
+    changeUsernamePacket[MESSAGE_TYPE_OVERHEAD + USERNAME_MAX_LENGTH] = '\0';
+
+    sendTo(clientSocket, changeUsernamePacket, MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1));
 }
 
 /**

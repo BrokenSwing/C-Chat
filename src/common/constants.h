@@ -77,4 +77,23 @@
  */
 #define DEFINE_USERNAME_MESSAGE_TYPE 3
 
+/**
+ * \def SERVER_ERROR_MESSAGE_TYPE
+ * \brief An integer representing an error message sent by server
+ *
+ * Content of packets of this type must contain :
+ *  - the message sent by the server : (MSG_MAX_LENGTH + 1) bytes long
+ */
+#define SERVER_ERROR_MESSAGE_TYPE 4
+
+/**
+ * \def USERNAME_CHANGED_MESSAGE_TYPE
+ * \brief An integer representing a message meant to notify clients a client changed its username
+ *
+ * Content of packets of this type must contain:
+ *  - the old username: (USERNAME_MAX_LENGTH + 1) bytes long
+ *  - the new username: (USERNAME_MAX_LENGTH + 1) bytes long
+ */
+#define USERNAME_CHANGED_MESSAGE_TYPE 5
+
 #endif //C_CHAT_CONSTANTS_H
