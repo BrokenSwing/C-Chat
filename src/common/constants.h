@@ -96,4 +96,32 @@
  */
 #define USERNAME_CHANGED_MESSAGE_TYPE 5
 
+/**
+ * \def CLIENT_FILE_MESSAGE_TYPE
+ * \brief An integer representing a message meant to notify the server that a client want to send a file
+ *
+ * Content of packets of this type must contain :
+ *  - the file size
+ */
+#define CLIENT_FILE_MESSAGE_TYPE 6
+
+/**
+ * \def SERVEUR_FILE_MESSAGE_TYPE
+ * \brief An integer representing a message meant to notify a client that the serveur accept or refuse the file
+ *
+ * Content of packets of this type must contain :
+ *  - the file id
+ */
+#define SERVEUR_FILE_MESSAGE_TYPE 7
+
+/**
+ * \def FILE_MESSAGE_TYPE
+ * \brief An integer representing a file message
+ *
+ * Content of packets of this type must contain :
+ *  - the file id
+ *  - the file content
+ */
+#define FILE_MESSAGE_TYPE 8
+
 #endif //C_CHAT_CONSTANTS_H

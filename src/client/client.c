@@ -8,6 +8,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "../common/sockets.h"
 #include <string.h>
 #include "ui.h"
@@ -15,8 +16,11 @@
 #include "../common/constants.h"
 #include "client.h"
 #include "commands.h"
+#include "../common/files.h"
 
 static SocketInfo clientSocket;
+
+char* filename;
 
 THREAD_ENTRY_POINT sendMessage(void* data) {
     char buffer[MESSAGE_TYPE_OVERHEAD + MSG_MAX_LENGTH + 1];
@@ -31,12 +35,28 @@ THREAD_ENTRY_POINT sendMessage(void* data) {
     }
 }
 
+THREAD_ENTRY_POINT sendFile(void* idFile) {
+    
+}
+
 COMMAND_HANDLER(command,
 COMMAND(file, "Usage: /file <send | receive>",
         COMMAND(send, "Usage: /file send <filepath>",
             if (strlen(command) > 0) {
-                    ui_informationMessage("Command send detected");
-                    return;
+                    char buffer[MESSAGE_TYPE_OVERHEAD + MSG_MAX_LENGTH + 1];
+                    buffer[0] = CLIENT_FILE_MESSAGE_TYPE;
+                    FileInfo file;
+                    file = files_getInfo(command);
+                    if (file.exists == 1) {
+                        if (file.isDirectory != 1) {
+                            if (file.size != 0) {
+                                char tmp[MSG_MAX_LENGTH + 1];
+                                sprintf_s(tmp, "%lld", file.size);
+                                memcpy(buffer + 1, tmp, MSG_MAX_LENGTH + 1);
+                                sendTo(clientSocket, buffer, MESSAGE_TYPE_OVERHEAD + strlen(buffer + MESSAGE_TYPE_OVERHEAD));
+                            }
+                        }
+                    }
                 }
             )
             COMMAND(receive, "Usage: /file receive <id>",
@@ -88,6 +108,14 @@ void receiveMessages() {
                     );
                     changeMessage[oldUsernameLength + 25 + newUsernameLength] = '\0';
                     ui_informationMessage(changeMessage);
+                    break;
+                case SERVEUR_FILE_MESSAGE_TYPE:
+                    if (buffer[1] == 0) {
+                        ui_errorMessage("Unable to send file : file too large.");
+                    }
+                    else {
+                        Thread senderFileThread = createThread(sendFile, buffer + 1);
+                    }
                     break;
                 default:
                     break;
