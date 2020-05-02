@@ -6,11 +6,14 @@
  * 
  */
 
+#ifndef C_CHAT_SOCKETS_H
+#define C_CHAT_SOCKETS_H
+
 /**
  * \struct SocketInfo
- * \brief Informations of a socket.
+ * \brief Information of a socket.
  * 
- * To store informations of a socket.
+ * To store information of a socket.
  * 
  */
 typedef struct SocketInfo {
@@ -73,3 +76,5 @@ void closeSocket(SocketInfo* socket);
  * \brief Performs any required resources cleanup. Must be called once all sockets usage is finished.
 */
 void cleanUp();
+
+#endif //C_CHAT_PACKETS_H

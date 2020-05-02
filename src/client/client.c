@@ -15,6 +15,8 @@
 #include "../common/constants.h"
 #include "client.h"
 #include "commands.h"
+#include "../common/packets.h"
+#include "stdio.h"
 
 static SocketInfo clientSocket;
 
@@ -55,35 +57,34 @@ COMMAND(file, "Usage: /file <send | receive>",
 )
 
 void receiveMessages() {
-    char buffer[MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1) + (USERNAME_MAX_LENGTH + 1)];
+    Packet packet;
     int bytesCount;
     do {
-        bytesCount = receiveFrom(clientSocket, buffer, MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1) + (USERNAME_MAX_LENGTH + 1));
+        bytesCount = receiveNextPacket(clientSocket, &packet);
         if (bytesCount > 0) {
-            char messageType = buffer[0];
-            switch (messageType) {
+            switch (packet.type) {
                 case TEXT_MESSAGE_TYPE:
-                    ui_messageReceived(buffer + MSG_MAX_LENGTH + 2, buffer + MESSAGE_TYPE_OVERHEAD);
+                    ui_messageReceived(packet.textPacket.username, packet.textPacket.message);
                     break;
                 case JOIN_MESSAGE_TYPE:
-                    ui_joinMessage(buffer + 1);
+                    ui_joinMessage(packet.joinPacket.username);
                     break;
                 case LEAVE_MESSAGE_TYPE:
-                    ui_leaveMessage(buffer + 1);
+                    ui_leaveMessage(packet.leavePacket.username);
                     break;
                 case SERVER_ERROR_MESSAGE_TYPE:
-                    ui_errorMessage(buffer + 1);
+                    ui_errorMessage(packet.serverErrorMessagePacket.message);
                     break;
                 case USERNAME_CHANGED_MESSAGE_TYPE:
                     ; // https://stackoverflow.com/questions/18496282/why-do-i-get-a-label-can-only-be-part-of-a-statement-and-a-declaration-is-not-a
                     char changeMessage[USERNAME_MAX_LENGTH * 2 + 25 + 1];
-                    unsigned int oldUsernameLength = strlen(buffer + MESSAGE_TYPE_OVERHEAD);
-                    unsigned int newUsernameLength = strlen(buffer + MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1));
-                    memcpy(changeMessage, buffer + MESSAGE_TYPE_OVERHEAD, oldUsernameLength);
+                    unsigned int oldUsernameLength = strlen(packet.usernameChangedPacket.oldUsername);
+                    unsigned int newUsernameLength = strlen(packet.usernameChangedPacket.newUsername);
+                    memcpy(changeMessage, packet.usernameChangedPacket.oldUsername, oldUsernameLength);
                     memcpy(changeMessage + oldUsernameLength, " changed its username to ", 25);
                     memcpy(
                             changeMessage + oldUsernameLength + 25,
-                            buffer + MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1),
+                            packet.usernameChangedPacket.newUsername,
                             newUsernameLength
                     );
                     changeMessage[oldUsernameLength + 25 + newUsernameLength] = '\0';
