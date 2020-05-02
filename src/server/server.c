@@ -136,6 +136,7 @@ void relayClientMessages(Client* client) {
                     }
                     break;
                 case DEFINE_USERNAME_MESSAGE_TYPE:
+                    ; // https://stackoverflow.com/questions/18496282/why-do-i-get-a-label-can-only-be-part-of-a-statement-and-a-declaration-is-not-a
                     unsigned int usernameLength = strlen(buffer + MESSAGE_TYPE_OVERHEAD);
                     if (usernameLength > 0 && usernameLength <= USERNAME_MAX_LENGTH) {
                         char changeMessage[MESSAGE_TYPE_OVERHEAD + 2 * (USERNAME_MAX_LENGTH + 1)];
