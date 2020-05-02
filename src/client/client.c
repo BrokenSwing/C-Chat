@@ -73,6 +73,7 @@ COMMAND(file, "Usage: /file <send | receive>",
                             }
                         }
                     }
+                    return;
                 }
             )
             COMMAND(receive, "Usage: /file receive <id>",
