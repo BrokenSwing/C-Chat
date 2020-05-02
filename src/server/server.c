@@ -12,6 +12,7 @@
 #include <string.h>
 #include "../common/synchronization.h"
 #include "server.h"
+#include "../common/packets.h"
 
 static ReadWriteLock clientsLock;
 static Client* clients[NUMBER_CLIENT_MAX] = {NULL};
@@ -88,10 +89,9 @@ void disconnectClient(int id) {
     // END CRITICAL SECTION
     releaseWrite(clientsLock);
 
-    char message[MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1)];
-    message[0] = LEAVE_MESSAGE_TYPE;
-    memcpy(message + MESSAGE_TYPE_OVERHEAD, client->username, USERNAME_MAX_LENGTH + 1);
-    broadcast(message, MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1));
+    Packet packet = NewPacketLeave;
+    memcpy(packet.asLeavePacket.username, client->username, USERNAME_MAX_LENGTH + 1);
+    broadcast(&packet);
 
     /* Closing connection with client */
     closeSocket(&(client->socket));
@@ -106,61 +106,51 @@ int receivedEndMessage(const char* buffer) {
     return buffer[0] == 'f' && buffer[1] == 'i' && buffer[2] == 'n' && buffer[3] == '\0';
 }
 
-void broadcast(const char* buffer, int size) {
+void broadcast(Packet* packet) {
     acquireRead(clientsLock);
-    // BEGIN CRITICAL SECTION
-    for (int i = 0; i < NUMBER_CLIENT_MAX; i++) {
-        Client* c = clients[i];
-        if (c != NULL && c->joined) {
-            sendTo(c->socket, buffer, size);
+    { // BEGIN CRITICAL SECTION
+        for (int i = 0; i < NUMBER_CLIENT_MAX; i++) {
+            Client *c = clients[i];
+            if (c != NULL && c->joined) {
+                sendPacket(c->socket, packet);
+            }
         }
-    }
-    // END CRITICAL SECTION
+    } // END CRITICAL SECTION
     releaseRead(clientsLock);
 }
 
 void relayClientMessages(Client* client) {
-    char buffer[MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1) + (USERNAME_MAX_LENGTH + 1)];
-    buffer[0] = TEXT_MESSAGE_TYPE;
-    memcpy(buffer + MESSAGE_TYPE_OVERHEAD + MSG_MAX_LENGTH + 1, client->username, sizeof(client->username));
-
+    Packet packet;
     int bytesReceived;
     do {
-        bytesReceived = receiveFrom(client->socket, buffer, MESSAGE_TYPE_OVERHEAD + MSG_MAX_LENGTH);
+        bytesReceived = receiveNextPacket(client->socket, &packet);
         if (bytesReceived > 0) {
-            buffer[bytesReceived] = '\0';
-            switch(buffer[0]) {
+            switch(packet.type) {
                 case TEXT_MESSAGE_TYPE:
-                    if (strlen(buffer) > 0 && !receivedEndMessage(buffer + MESSAGE_TYPE_OVERHEAD)) {
-                        broadcast(buffer, MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1) + (USERNAME_MAX_LENGTH + 1));
+                    if (strlen(packet.asTextPacket.message) > 0 && !receivedEndMessage(packet.asTextPacket.message)) {
+                        memcpy(packet.asTextPacket.username, client->username, USERNAME_MAX_LENGTH + 1);
+                        broadcast(&packet);
                     }
                     break;
                 case DEFINE_USERNAME_MESSAGE_TYPE:
                     ; // https://stackoverflow.com/questions/18496282/why-do-i-get-a-label-can-only-be-part-of-a-statement-and-a-declaration-is-not-a
-                    unsigned int usernameLength = strlen(buffer + MESSAGE_TYPE_OVERHEAD);
+                    unsigned int usernameLength = strlen(packet.asDefineUsernamePacket.username);
                     if (usernameLength > 0 && usernameLength <= USERNAME_MAX_LENGTH) {
-                        char changeMessage[MESSAGE_TYPE_OVERHEAD + 2 * (USERNAME_MAX_LENGTH + 1)];
-                        changeMessage[0] = USERNAME_CHANGED_MESSAGE_TYPE;
-                        memcpy(changeMessage + MESSAGE_TYPE_OVERHEAD, client->username, USERNAME_MAX_LENGTH + 1);
-                        memcpy(
-                            changeMessage + MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1),
-                            buffer + MESSAGE_TYPE_OVERHEAD,
-                            USERNAME_MAX_LENGTH + 1
-                        );
+                        Packet usernameChanged = NewPacketUsernameChanged;
 
-                        memcpy(client->username, buffer + MESSAGE_TYPE_OVERHEAD, USERNAME_MAX_LENGTH + 1);
-                        memcpy(buffer + MESSAGE_TYPE_OVERHEAD + MSG_MAX_LENGTH + 1, client->username, sizeof(client->username));
+                        memcpy(usernameChanged.asUsernameChangedPacket.oldUsername, client->username, USERNAME_MAX_LENGTH + 1);
+                        memcpy(usernameChanged.asUsernameChangedPacket.newUsername, packet.asDefineUsernamePacket.username, USERNAME_MAX_LENGTH + 1);
+                        memcpy(client->username, packet.asDefineUsernamePacket.username, USERNAME_MAX_LENGTH + 1);
 
-                        broadcast(changeMessage, MESSAGE_TYPE_OVERHEAD + 2 * (USERNAME_MAX_LENGTH + 1));
+                        broadcast(&usernameChanged);
                     } else {
-                        char errorMessage[MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1)];
-                        errorMessage[0] = SERVER_ERROR_MESSAGE_TYPE;
-                        memcpy(errorMessage + MESSAGE_TYPE_OVERHEAD, "Invalid username", 17);
-                        sendTo(client->socket, errorMessage, MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1));
+                        Packet errorPacket = NewPacketServerErrorMessage;
+                        memcpy(errorPacket.asServerErrorMessagePacket.message, "Invalid username", 17);
+                        sendPacket(client->socket, &packet);
                     }
             }
         }
-    } while (bytesReceived >= 0 && !receivedEndMessage(buffer + MESSAGE_TYPE_OVERHEAD));
+    } while (bytesReceived >= 0 && !receivedEndMessage(packet.asTextPacket.message));
 }
 
 THREAD_ENTRY_POINT clientThread(void* idPnt) {
@@ -176,14 +166,13 @@ THREAD_ENTRY_POINT clientThread(void* idPnt) {
         return EXIT_FAILURE;
     }
 
-    char* joinMessage = malloc(sizeof(char) * (MESSAGE_TYPE_OVERHEAD + USERNAME_MAX_LENGTH + 1));
-    joinMessage[0] = JOIN_MESSAGE_TYPE;
+    Packet packet = NewPacketJoin;
     acquireRead(clientsLock);
     { // BEGIN CRITICAL SECTION
-        memcpy(joinMessage + MESSAGE_TYPE_OVERHEAD, clients[id]->username, USERNAME_MAX_LENGTH + 1);
+        memcpy(packet.asJoinPacket.username, clients[id]->username, USERNAME_MAX_LENGTH + 1);
     } // END CRITICAL SECTION
 
-    broadcast(joinMessage, MESSAGE_TYPE_OVERHEAD + USERNAME_MAX_LENGTH + 1);
+    broadcast(&packet);
     relayClientMessages(client);
     disconnectClient(id);
 

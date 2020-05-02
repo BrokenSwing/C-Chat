@@ -1,9 +1,10 @@
+#ifndef C_CHAT_CLIENT_H
+#define C_CHAT_CLIENT_H
+
 #include "../common/sockets.h"
 #include "../common/constants.h"
 #include "../common/threads.h"
-
-#ifndef C_CHAT_CLIENT_H
-#define C_CHAT_CLIENT_H
+#include "../common/packets.h"
 
 /**
  * \def NUMBER_CLIENT_MAX
@@ -71,12 +72,11 @@ void disconnectClient(int id);
 int receivedEndMessage(const char* buffer);
 
 /**
- * \brief Broadcasts a message to every clients
+ * \brief Broadcasts a packet to all clients
  *
- * @param buffer The message to broacast
- * @param size The message length
+ * \param packet The packet to send to all client
  */
-void broadcast(const char* buffer, int size);
+void broadcast(Packet* packet);
 
 /**
  * \brief Relay messages sent by given client to all known clients.
@@ -84,7 +84,7 @@ void broadcast(const char* buffer, int size);
  * Waits for an incoming message, and broadcast it (in a correctly formed relayed message) to all
  * known clients.
  *
- * @param client The client to wait messages from
+ * \param client The client to wait messages from
  */
 void relayClientMessages(Client* client);
 
