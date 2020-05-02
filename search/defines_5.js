@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['text_5fmessage_5ftype_152',['TEXT_MESSAGE_TYPE',['../constants_8h.html#aab91abdd30c15d19064327e871b805d4',1,'constants.h']]],
-  ['thread_5fentry_5fpoint_153',['THREAD_ENTRY_POINT',['../threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f',1,'threads.h']]]
+  ['server_5ferror_5fmessage_5ftype_156',['SERVER_ERROR_MESSAGE_TYPE',['../constants_8h.html#a2c840c2053634c5d350dd35eb28243c6',1,'constants.h']]]
 ];

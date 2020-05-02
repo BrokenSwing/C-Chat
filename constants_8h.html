@@ -107,6 +107,12 @@ Macros</h2></td></tr>
 <tr class="memitem:aba5c31d7831ff3526a9a633abb986723"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constants_8h.html#aba5c31d7831ff3526a9a633abb986723">DEFINE_USERNAME_MESSAGE_TYPE</a>&#160;&#160;&#160;3</td></tr>
 <tr class="memdesc:aba5c31d7831ff3526a9a633abb986723"><td class="mdescLeft">&#160;</td><td class="mdescRight">An integer representing a message meant to define the client username.  <a href="constants_8h.html#aba5c31d7831ff3526a9a633abb986723">More...</a><br /></td></tr>
 <tr class="separator:aba5c31d7831ff3526a9a633abb986723"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c840c2053634c5d350dd35eb28243c6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constants_8h.html#a2c840c2053634c5d350dd35eb28243c6">SERVER_ERROR_MESSAGE_TYPE</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memdesc:a2c840c2053634c5d350dd35eb28243c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">An integer representing an error message sent by server.  <a href="constants_8h.html#a2c840c2053634c5d350dd35eb28243c6">More...</a><br /></td></tr>
+<tr class="separator:a2c840c2053634c5d350dd35eb28243c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52eec94e0668008f342136fb6bca3305"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constants_8h.html#a52eec94e0668008f342136fb6bca3305">USERNAME_CHANGED_MESSAGE_TYPE</a>&#160;&#160;&#160;5</td></tr>
+<tr class="memdesc:a52eec94e0668008f342136fb6bca3305"><td class="mdescLeft">&#160;</td><td class="mdescRight">An integer representing a message meant to notify clients a client changed its username.  <a href="constants_8h.html#a52eec94e0668008f342136fb6bca3305">More...</a><br /></td></tr>
+<tr class="separator:a52eec94e0668008f342136fb6bca3305"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Defines constants used on client and server (used for consistency) </p>
@@ -185,6 +191,25 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="a2c840c2053634c5d350dd35eb28243c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c840c2053634c5d350dd35eb28243c6">&#9670;&nbsp;</a></span>SERVER_ERROR_MESSAGE_TYPE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SERVER_ERROR_MESSAGE_TYPE&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>An integer representing an error message sent by server. </p>
+<p>Content of packets of this type must contain :</p><ul>
+<li>the message sent by the server : (MSG_MAX_LENGTH + 1) bytes long </li>
+</ul>
+
+</div>
+</div>
 <a id="aab91abdd30c15d19064327e871b805d4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aab91abdd30c15d19064327e871b805d4">&#9670;&nbsp;</a></span>TEXT_MESSAGE_TYPE</h2>
 
@@ -201,6 +226,26 @@ Macros</h2></td></tr>
 <p>Content of packets of this type must contain :</p><ul>
 <li>the text message : (MSG_MAX_LENGTH + 1) bytes long</li>
 <li>the username of the user who sent to message : (USERNAME_MAX_LENGTH + 1) bytes long </li>
+</ul>
+
+</div>
+</div>
+<a id="a52eec94e0668008f342136fb6bca3305"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52eec94e0668008f342136fb6bca3305">&#9670;&nbsp;</a></span>USERNAME_CHANGED_MESSAGE_TYPE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USERNAME_CHANGED_MESSAGE_TYPE&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>An integer representing a message meant to notify clients a client changed its username. </p>
+<p>Content of packets of this type must contain:</p><ul>
+<li>the old username: (USERNAME_MAX_LENGTH + 1) bytes long</li>
+<li>the new username: (USERNAME_MAX_LENGTH + 1) bytes long </li>
 </ul>
 
 </div>
