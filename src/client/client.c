@@ -36,24 +36,40 @@ THREAD_ENTRY_POINT sendMessage(void* data) {
 }
 
 THREAD_ENTRY_POINT sendFile(void* idFile) {
-    
+    FileInfo file;
+    file = files_getInfo(filename);
+    char* contentFile = malloc(file.size);
+    char fileID = *((char*)idFile);
+    char buffer[MESSAGE_TYPE_OVERHEAD + 1 + 250];
+    buffer[0] = FILE_MESSAGE_TYPE;
+    buffer[1] = fileID;
+    if (files_readFile(filename, contentFile, file.size) != -1) {
+        long long i = 0;
+        while(i < file.size) {
+            memcpy(buffer + 2, contentFile + i, 250);
+            sendTo(clientSocket, buffer, sizeof(buffer));
+            i += 250;
+        }
+    }
+    free(contentFile);
+    return 0;
 }
 
 COMMAND_HANDLER(command,
 COMMAND(file, "Usage: /file <send | receive>",
         COMMAND(send, "Usage: /file send <filepath>",
             if (strlen(command) > 0) {
-                    char buffer[MESSAGE_TYPE_OVERHEAD + MSG_MAX_LENGTH + 1];
+                    char buffer[MESSAGE_TYPE_OVERHEAD + MSG_MAX_LENGTH];
                     buffer[0] = CLIENT_FILE_MESSAGE_TYPE;
                     FileInfo file;
                     file = files_getInfo(command);
                     if (file.exists == 1) {
                         if (file.isDirectory != 1) {
                             if (file.size != 0) {
-                                char tmp[MSG_MAX_LENGTH + 1];
+                                char tmp[MSG_MAX_LENGTH];
                                 sprintf_s(tmp, "%lld", file.size);
-                                memcpy(buffer + 1, tmp, MSG_MAX_LENGTH + 1);
-                                sendTo(clientSocket, buffer, MESSAGE_TYPE_OVERHEAD + strlen(buffer + MESSAGE_TYPE_OVERHEAD));
+                                memcpy(buffer + 1, tmp, MSG_MAX_LENGTH);
+                                sendTo(clientSocket, buffer, sizeof(buffer));
                             }
                         }
                     }
