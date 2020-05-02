@@ -81,6 +81,7 @@ $(function() {
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="synchronization_8h_source.html">../common/synchronization.h</a>&quot;</code><br />
 <code>#include &quot;server.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="packets_8h_source.html">../common/packets.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -99,9 +100,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a591cef1c733707db69a0bbd0e0de0b13"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a591cef1c733707db69a0bbd0e0de0b13">receivedEndMessage</a> (const char *buffer)</td></tr>
 <tr class="memdesc:a591cef1c733707db69a0bbd0e0de0b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if the end of the communication is requested.  <a href="server_8c.html#a591cef1c733707db69a0bbd0e0de0b13">More...</a><br /></td></tr>
 <tr class="separator:a591cef1c733707db69a0bbd0e0de0b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32c007c29bcb41b02a6c432f146eabbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a32c007c29bcb41b02a6c432f146eabbb">broadcast</a> (const char *buffer, int size)</td></tr>
-<tr class="memdesc:a32c007c29bcb41b02a6c432f146eabbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasts a message to every clients.  <a href="server_8c.html#a32c007c29bcb41b02a6c432f146eabbb">More...</a><br /></td></tr>
-<tr class="separator:a32c007c29bcb41b02a6c432f146eabbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19facf75f52f106ed2be19ea65245505"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a19facf75f52f106ed2be19ea65245505">broadcast</a> (<a class="el" href="union_packet.html">Packet</a> *packet)</td></tr>
+<tr class="memdesc:a19facf75f52f106ed2be19ea65245505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasts a packet to all clients.  <a href="server_8c.html#a19facf75f52f106ed2be19ea65245505">More...</a><br /></td></tr>
+<tr class="separator:a19facf75f52f106ed2be19ea65245505"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">relayClientMessages</a> (<a class="el" href="struct_client.html">Client</a> *client)</td></tr>
 <tr class="memdesc:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relay messages sent by given client to all known clients.  <a href="server_8c.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">More...</a><br /></td></tr>
 <tr class="separator:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,8 +118,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serve
 <div class="textblock"><p>Server file. </p>
 <p>Allows multiple clients to discuss, relaying messages between them. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a32c007c29bcb41b02a6c432f146eabbb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32c007c29bcb41b02a6c432f146eabbb">&#9670;&nbsp;</a></span>broadcast()</h2>
+<a id="a19facf75f52f106ed2be19ea65245505"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19facf75f52f106ed2be19ea65245505">&#9670;&nbsp;</a></span>broadcast()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -126,28 +127,17 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serve
         <tr>
           <td class="memname">void broadcast </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="union_packet.html">Packet</a> *&#160;</td>
+          <td class="paramname"><em>packet</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Broadcasts a message to every clients. </p>
+<p>Broadcasts a packet to all clients. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">buffer</td><td>The message to broacast </td></tr>
-    <tr><td class="paramname">size</td><td>The message length </td></tr>
+    <tr><td class="paramname">packet</td><td>The packet to send to all client </td></tr>
   </table>
   </dd>
 </dl>

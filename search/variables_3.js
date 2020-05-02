@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['size_143',['size',['../struct_file_info.html#ad269568d7fa05ef71dd0de872b670132',1,'FileInfo']]],
-  ['socket_144',['socket',['../struct_client.html#a3a8e56beeb3802c12b16fda0f2525e67',1,'Client']]]
+  ['newpacketdefineusername_169',['NewPacketDefineUsername',['../packets_8h.html#a6ec0fb53b0d3eaf38155b617d06315db',1,'packets.c']]],
+  ['newpacketjoin_170',['NewPacketJoin',['../packets_8h.html#af4b17ac320cb4417d2f9ec16581021ad',1,'packets.c']]],
+  ['newpacketleave_171',['NewPacketLeave',['../packets_8h.html#a1882d139426f11655e2f8c64e5c2ba71',1,'packets.c']]],
+  ['newpacketservererrormessage_172',['NewPacketServerErrorMessage',['../packets_8h.html#ae291625fae5ce23c63628784075bcf11',1,'packets.c']]],
+  ['newpackettext_173',['NewPacketText',['../packets_8h.html#a9f8837cfff6abc005ffc8d8167bea845',1,'packets.c']]],
+  ['newpacketusernamechanged_174',['NewPacketUsernameChanged',['../packets_8h.html#a76ae55f04ff43b7e82e7b5d04de540cc',1,'packets.c']]]
 ];
