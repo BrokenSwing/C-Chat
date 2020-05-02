@@ -75,6 +75,7 @@ void receiveMessages() {
                     ui_errorMessage(buffer + 1);
                     break;
                 case USERNAME_CHANGED_MESSAGE_TYPE:
+                    ; // https://stackoverflow.com/questions/18496282/why-do-i-get-a-label-can-only-be-part-of-a-statement-and-a-declaration-is-not-a
                     char changeMessage[USERNAME_MAX_LENGTH * 2 + 25 + 1];
                     unsigned int oldUsernameLength = strlen(buffer + MESSAGE_TYPE_OVERHEAD);
                     unsigned int newUsernameLength = strlen(buffer + MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1));
