@@ -22,9 +22,9 @@ static SocketInfo clientSocket;
 THREAD_ENTRY_POINT sendMessage(void* data) {
     Packet packet = NewPacketText;
     while(1) {
-        ui_getUserInput("Your message : ", packet.textPacket.message, MSG_MAX_LENGTH);
-        if (strncmp("/", packet.textPacket.message, 1) == 0) { // Is a command
-            commandHandler(packet.textPacket.message + 1);
+        ui_getUserInput("Your message : ", packet.asTextPacket.message, MSG_MAX_LENGTH);
+        if (strncmp("/", packet.asTextPacket.message, 1) == 0) { // Is a command
+            commandHandler(packet.asTextPacket.message + 1);
         } else {
             sendPacket(clientSocket, &packet);
         }
@@ -62,27 +62,27 @@ void receiveMessages() {
         if (bytesCount > 0) {
             switch (packet.type) {
                 case TEXT_MESSAGE_TYPE:
-                    ui_messageReceived(packet.textPacket.username, packet.textPacket.message);
+                    ui_messageReceived(packet.asTextPacket.username, packet.asTextPacket.message);
                     break;
                 case JOIN_MESSAGE_TYPE:
-                    ui_joinMessage(packet.joinPacket.username);
+                    ui_joinMessage(packet.asJoinPacket.username);
                     break;
                 case LEAVE_MESSAGE_TYPE:
-                    ui_leaveMessage(packet.leavePacket.username);
+                    ui_leaveMessage(packet.asLeavePacket.username);
                     break;
                 case SERVER_ERROR_MESSAGE_TYPE:
-                    ui_errorMessage(packet.serverErrorMessagePacket.message);
+                    ui_errorMessage(packet.asServerErrorMessagePacket.message);
                     break;
                 case USERNAME_CHANGED_MESSAGE_TYPE:
                     ; // https://stackoverflow.com/questions/18496282/why-do-i-get-a-label-can-only-be-part-of-a-statement-and-a-declaration-is-not-a
                     char changeMessage[USERNAME_MAX_LENGTH * 2 + 25 + 1];
-                    unsigned int oldUsernameLength = strlen(packet.usernameChangedPacket.oldUsername);
-                    unsigned int newUsernameLength = strlen(packet.usernameChangedPacket.newUsername);
-                    memcpy(changeMessage, packet.usernameChangedPacket.oldUsername, oldUsernameLength);
+                    unsigned int oldUsernameLength = strlen(packet.asUsernameChangedPacket.oldUsername);
+                    unsigned int newUsernameLength = strlen(packet.asUsernameChangedPacket.newUsername);
+                    memcpy(changeMessage, packet.asUsernameChangedPacket.oldUsername, oldUsernameLength);
                     memcpy(changeMessage + oldUsernameLength, " changed its username to ", 25);
                     memcpy(
                             changeMessage + oldUsernameLength + 25,
-                            packet.usernameChangedPacket.newUsername,
+                            packet.asUsernameChangedPacket.newUsername,
                             newUsernameLength
                     );
                     changeMessage[oldUsernameLength + 25 + newUsernameLength] = '\0';
@@ -135,7 +135,7 @@ void setUsername(const char* newUsername) {
     }
 
     Packet packet = NewPacketDefineUsername;
-    memcpy(packet.defineUsernamePacket.username, newUsername, userNameLength + 1);
+    memcpy(packet.asDefineUsernamePacket.username, newUsername, userNameLength + 1);
     sendPacket(clientSocket, &packet);
 }
 

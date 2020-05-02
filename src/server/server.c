@@ -90,7 +90,7 @@ void disconnectClient(int id) {
     releaseWrite(clientsLock);
 
     Packet packet = NewPacketLeave;
-    memcpy(packet.leavePacket.username, client->username, USERNAME_MAX_LENGTH + 1);
+    memcpy(packet.asLeavePacket.username, client->username, USERNAME_MAX_LENGTH + 1);
     broadcast(&packet);
 
     /* Closing connection with client */
@@ -127,31 +127,30 @@ void relayClientMessages(Client* client) {
         if (bytesReceived > 0) {
             switch(packet.type) {
                 case TEXT_MESSAGE_TYPE:
-                    // packet.textPacket.message[bytesReceived - 1] = '\0';
-                    if (strlen(packet.textPacket.message) > 0 && !receivedEndMessage(packet.textPacket.message)) {
-                        memcpy(packet.textPacket.username, client->username, USERNAME_MAX_LENGTH + 1);
+                    if (strlen(packet.asTextPacket.message) > 0 && !receivedEndMessage(packet.asTextPacket.message)) {
+                        memcpy(packet.asTextPacket.username, client->username, USERNAME_MAX_LENGTH + 1);
                         broadcast(&packet);
                     }
                     break;
                 case DEFINE_USERNAME_MESSAGE_TYPE:
                     ; // https://stackoverflow.com/questions/18496282/why-do-i-get-a-label-can-only-be-part-of-a-statement-and-a-declaration-is-not-a
-                    unsigned int usernameLength = strlen(packet.defineUsernamePacket.username);
+                    unsigned int usernameLength = strlen(packet.asDefineUsernamePacket.username);
                     if (usernameLength > 0 && usernameLength <= USERNAME_MAX_LENGTH) {
                         Packet usernameChanged = NewPacketUsernameChanged;
 
-                        memcpy(usernameChanged.usernameChangedPacket.oldUsername, client->username, USERNAME_MAX_LENGTH + 1);
-                        memcpy(usernameChanged.usernameChangedPacket.newUsername, packet.defineUsernamePacket.username, USERNAME_MAX_LENGTH + 1);
-                        memcpy(client->username, packet.defineUsernamePacket.username, USERNAME_MAX_LENGTH + 1);
+                        memcpy(usernameChanged.asUsernameChangedPacket.oldUsername, client->username, USERNAME_MAX_LENGTH + 1);
+                        memcpy(usernameChanged.asUsernameChangedPacket.newUsername, packet.asDefineUsernamePacket.username, USERNAME_MAX_LENGTH + 1);
+                        memcpy(client->username, packet.asDefineUsernamePacket.username, USERNAME_MAX_LENGTH + 1);
 
                         broadcast(&usernameChanged);
                     } else {
                         Packet errorPacket = NewPacketServerErrorMessage;
-                        memcpy(errorPacket.serverErrorMessagePacket.message, "Invalid username", 17);
+                        memcpy(errorPacket.asServerErrorMessagePacket.message, "Invalid username", 17);
                         sendPacket(client->socket, &packet);
                     }
             }
         }
-    } while (bytesReceived >= 0 && !receivedEndMessage(packet.textPacket.message));
+    } while (bytesReceived >= 0 && !receivedEndMessage(packet.asTextPacket.message));
 }
 
 THREAD_ENTRY_POINT clientThread(void* idPnt) {
@@ -170,7 +169,7 @@ THREAD_ENTRY_POINT clientThread(void* idPnt) {
     Packet packet = NewPacketJoin;
     acquireRead(clientsLock);
     { // BEGIN CRITICAL SECTION
-        memcpy(packet.joinPacket.username, clients[id]->username, USERNAME_MAX_LENGTH + 1);
+        memcpy(packet.asJoinPacket.username, clients[id]->username, USERNAME_MAX_LENGTH + 1);
     } // END CRITICAL SECTION
 
     broadcast(&packet);

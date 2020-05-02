@@ -86,12 +86,12 @@ extern const union Packet NewPacketUsernameChanged;
  */
 typedef union Packet {
     char type;
-    struct PacketJoin joinPacket;
-    struct PacketLeave leavePacket;
-    struct PacketText textPacket;
-    struct PacketDefineUsername defineUsernamePacket;
-    struct PacketServerErrorMessage serverErrorMessagePacket;
-    struct PacketUsernameChanged usernameChangedPacket;
+    struct PacketJoin asJoinPacket;
+    struct PacketLeave asLeavePacket;
+    struct PacketText asTextPacket;
+    struct PacketDefineUsername asDefineUsernamePacket;
+    struct PacketServerErrorMessage asServerErrorMessagePacket;
+    struct PacketUsernameChanged asUsernameChangedPacket;
 } Packet;
 
 /**
