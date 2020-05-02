@@ -1,5 +1,12 @@
 #include "packets.h"
 
+const union Packet NewJoinPacket = { JOIN_MESSAGE_TYPE };
+const union Packet NewLeavePacket = { LEAVE_MESSAGE_TYPE };
+const union Packet NewPacketText = { TEXT_MESSAGE_TYPE };
+const union Packet NewPacketDefineUsername = { DEFINE_USERNAME_MESSAGE_TYPE };
+const union Packet NewPacketServerErrorMessage = { SERVER_ERROR_MESSAGE_TYPE };
+const union Packet NewPacketUsernameChanged = { USERNAME_CHANGED_MESSAGE_TYPE };
+
 /**
  * \brief Retrieves the real size of the underlying type
  *
@@ -37,5 +44,5 @@ int receiveNextPacket(SocketInfo socket, Packet* packet) {
 
 int sendPacket(SocketInfo socket, Packet* packet) {
     unsigned int realSize = packets_sizeOf(packet);
-    return sendTo(socket, packet->raw, realSize);
+    return sendTo(socket, (char*) packet, realSize);
 }

@@ -6,29 +6,27 @@
  * 
  */
 
+#include "../common/packets.h"
 #include <string.h>
 #include <stdlib.h>
-#include "../common/sockets.h"
 #include <string.h>
 #include "ui.h"
-#include "../common/threads.h"
-#include "../common/constants.h"
 #include "client.h"
 #include "commands.h"
-#include "../common/packets.h"
-#include "stdio.h"
+#include "../common/constants.h"
+#include "../common/sockets.h"
+#include "../common/threads.h"
 
 static SocketInfo clientSocket;
 
 THREAD_ENTRY_POINT sendMessage(void* data) {
-    char buffer[MESSAGE_TYPE_OVERHEAD + MSG_MAX_LENGTH + 1];
-    buffer[0] = TEXT_MESSAGE_TYPE;
+    Packet packet = NewPacketText;
     while(1) {
-        ui_getUserInput("Your message : ", buffer + MESSAGE_TYPE_OVERHEAD, MSG_MAX_LENGTH);
-        if (strncmp("/", buffer + MESSAGE_TYPE_OVERHEAD, 1) == 0) { // Is a command
-            commandHandler(buffer + MESSAGE_TYPE_OVERHEAD + 1);
+        ui_getUserInput("Your message : ", packet.textPacket.message, MSG_MAX_LENGTH);
+        if (strncmp("/", packet.textPacket.message, 1) == 0) { // Is a command
+            commandHandler(packet.textPacket.message + 1);
         } else {
-            sendTo(clientSocket, buffer, MESSAGE_TYPE_OVERHEAD + strlen(buffer + MESSAGE_TYPE_OVERHEAD));
+            sendPacket(clientSocket, &packet);
         }
     }
 }
@@ -130,12 +128,15 @@ void pickUsername() {
 }
 
 void setUsername(const char* newUsername) {
-    char changeUsernamePacket[MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1)];
-    changeUsernamePacket[0] = DEFINE_USERNAME_MESSAGE_TYPE;
-    memcpy(changeUsernamePacket + MESSAGE_TYPE_OVERHEAD, newUsername, USERNAME_MAX_LENGTH);
-    changeUsernamePacket[MESSAGE_TYPE_OVERHEAD + USERNAME_MAX_LENGTH] = '\0';
+    unsigned int userNameLength = strlen(newUsername);
+    if (userNameLength > USERNAME_MAX_LENGTH) {
+        ui_errorMessage("Username is too long");
+        return;
+    }
 
-    sendTo(clientSocket, changeUsernamePacket, MESSAGE_TYPE_OVERHEAD + (USERNAME_MAX_LENGTH + 1));
+    Packet packet = NewPacketDefineUsername;
+    memcpy(packet.defineUsernamePacket.username, newUsername, userNameLength + 1);
+    sendPacket(clientSocket, &packet);
 }
 
 /**

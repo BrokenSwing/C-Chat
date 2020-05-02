@@ -7,38 +7,43 @@
 struct PacketJoin {
     char type;
     char username[USERNAME_MAX_LENGTH + 1];
-}; // NewJoinPacket = { JOIN_MESSAGE_TYPE };
+};
+extern const union Packet NewJoinPacket;
 
 struct PacketLeave {
     char type;
     char username[USERNAME_MAX_LENGTH + 1];
-}; // NewLeavePacket = { LEAVE_MESSAGE_TYPE };
+};
+extern const union Packet NewLeavePacket;
 
 struct PacketText {
     char type;
     char message[MSG_MAX_LENGTH + 1];
     char username[USERNAME_MAX_LENGTH + 1];
-}; // NewPacketText = { TEXT_MESSAGE_TYPE };
+};
+extern const union Packet NewPacketText;
 
 struct PacketDefineUsername {
     char type;
     char username[USERNAME_MAX_LENGTH + 1];
-}; // NextPacketDefineUsername = { DEFINE_USERNAME_MESSAGE_TYPE };
+};
+extern const union Packet NewPacketDefineUsername;
 
 struct PacketServerErrorMessage {
     char type;
     char message[MSG_MAX_LENGTH + 1];
-}; // NewPacketServerErrorMessage = { SERVER_ERROR_MESSAGE_TYPE };
+};
+extern const union Packet NewPacketServerErrorMessage;
 
 struct PacketUsernameChanged {
     char type;
     char oldUsername[USERNAME_MAX_LENGTH + 1];
     char newUsername[USERNAME_MAX_LENGTH + 1];
-}; // NewPacketUsernameChanged = { USERNAME_CHANGED_MESSAGE_TYPE };
+};
+extern const union Packet NewPacketUsernameChanged;
 
 typedef union Packet {
     char type;
-    char* raw;
     struct PacketJoin joinPacket;
     struct PacketLeave leavePacket;
     struct PacketText textPacket;
