@@ -78,7 +78,10 @@ COMMAND(file, "Usage: /file <send | receive>",
             )
             COMMAND(receive, "Usage: /file receive <id>",
             if (strlen(command) > 0) {
-                    ui_informationMessage("Command receive detected");
+                    char buffer[MESSAGE_TYPE_OVERHEAD + 1];
+                    buffer[0] = SERVEUR_FILE_MESSAGE_TYPE;
+                    buffer[1] = command;
+                    sendTo(clientSocket, buffer, sizeof(buffer));
                     return;
                 }
             )
@@ -132,6 +135,14 @@ void receiveMessages() {
                     }
                     else {
                         Thread senderFileThread = createThread(sendFile, buffer + 1);
+                    }
+                    break;
+                case CLIENT_FILE_MESSAGE_TYPE:
+                    if (buffer[1] == 0) {
+                        ui_errorMessage("Unable to receive file");
+                    }
+                    else {
+                        long long size = strtoll(buffer + 1, NULL, 10);
                     }
                     break;
                 default:
