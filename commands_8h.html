@@ -123,7 +123,18 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> ( \</div>
+<b>Value:</b><div class="fragment"><div class="line">{ \</div>
+<div class="line">    unsigned <span class="keywordtype">int</span> listLength = strlen(listOfCommands); \</div>
+<div class="line">    unsigned <span class="keywordtype">int</span> commandLength = strlen(usage); \</div>
+<div class="line">    char* listOfCommandsCopy = malloc(listLength + 1 + commandLength + 1); \</div>
+<div class="line">    memcpy(listOfCommandsCopy, listOfCommands, listLength); \</div>
+<div class="line">    listOfCommandsCopy[listLength] = <span class="charliteral">&#39;\n&#39;</span>; \</div>
+<div class="line">    memcpy(listOfCommandsCopy + listLength + 1, usage, commandLength); \</div>
+<div class="line">    listOfCommandsCopy[listLength + 1 + commandLength] = <span class="charliteral">&#39;\0&#39;</span>; \</div>
+<div class="line">    free(listOfCommands); \</div>
+<div class="line">    listOfCommands = listOfCommandsCopy; \</div>
+<div class="line">} \</div>
+<div class="line">if ( \</div>
 <div class="line">    strncmp(#NAME, command, strlen(#NAME)) == 0 &amp;&amp; strlen(#NAME) == strlen(command) || \</div>
 <div class="line">    strncmp(#NAME, command, strlen(#NAME)) == 0 &amp;&amp; strncmp(<span class="stringliteral">&quot; &quot;</span>, command + strlen(#NAME), 1) == 0 \</div>
 <div class="line">) {\</div>
@@ -179,8 +190,12 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="keywordtype">void</span> NAME##Handler (<span class="keyword">const</span> <span class="keywordtype">char</span>* command) { \</div>
+<div class="line">    char* listOfCommands = malloc(16); \</div>
+<div class="line">    memcpy(listOfCommands, <span class="stringliteral">&quot;Known commands:&quot;</span>, 16); \</div>
+<div class="line">    listOfCommands[15] = <span class="charliteral">&#39;\0&#39;</span>; \</div>
 <div class="line">    commands; \</div>
-<div class="line">    ui_errorMessage(<span class="stringliteral">&quot;Unknown command&quot;</span>); \</div>
+<div class="line">    ui_errorMessage(listOfCommands); \</div>
+<div class="line">    free(listOfCommands); \</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 <p>Defines a command handler. </p>
