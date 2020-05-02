@@ -32,8 +32,12 @@
  */
 #define COMMAND_HANDLER(NAME, commands) \
 void NAME##Handler (const char* command) { \
+    char* listOfCommands = malloc(16); \
+    memcpy(listOfCommands, "Known commands:", 16); \
+    listOfCommands[15] = '\0'; \
     commands; \
-    ui_errorMessage("Unknown command"); \
+    ui_errorMessage(listOfCommands); \
+    free(listOfCommands); \
 }
 
 /**
@@ -71,6 +75,17 @@ void NAME##Handler (const char* command) { \
  * \param next The code to execute on command match
  */
 #define COMMAND(NAME, usage, next) \
+{ \
+    unsigned int listLength = strlen(listOfCommands); \
+    unsigned int commandLength = strlen(usage); \
+    char* listOfCommandsCopy = malloc(listLength + 1 + commandLength + 1); \
+    memcpy(listOfCommandsCopy, listOfCommands, listLength); \
+    listOfCommandsCopy[listLength] = '\n'; \
+    memcpy(listOfCommandsCopy + listLength + 1, usage, commandLength); \
+    listOfCommandsCopy[listLength + 1 + commandLength] = '\0'; \
+    free(listOfCommands); \
+    listOfCommands = listOfCommandsCopy; \
+} \
 if ( \
     strncmp(#NAME, command, strlen(#NAME)) == 0 && strlen(#NAME) == strlen(command) || \
     strncmp(#NAME, command, strlen(#NAME)) == 0 && strncmp(" ", command + strlen(#NAME), 1) == 0 \
