@@ -97,9 +97,6 @@ Functions</h2></td></tr>
 <tr class="memitem:af00e8215717a1018bf79b8e40ffaba66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#af00e8215717a1018bf79b8e40ffaba66">disconnectClient</a> (int id)</td></tr>
 <tr class="memdesc:af00e8215717a1018bf79b8e40ffaba66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnects the client and free allocated memory.  <a href="server_8c.html#af00e8215717a1018bf79b8e40ffaba66">More...</a><br /></td></tr>
 <tr class="separator:af00e8215717a1018bf79b8e40ffaba66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a591cef1c733707db69a0bbd0e0de0b13"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a591cef1c733707db69a0bbd0e0de0b13">receivedEndMessage</a> (const char *buffer)</td></tr>
-<tr class="memdesc:a591cef1c733707db69a0bbd0e0de0b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if the end of the communication is requested.  <a href="server_8c.html#a591cef1c733707db69a0bbd0e0de0b13">More...</a><br /></td></tr>
-<tr class="separator:a591cef1c733707db69a0bbd0e0de0b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19facf75f52f106ed2be19ea65245505"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a19facf75f52f106ed2be19ea65245505">broadcast</a> (<a class="el" href="union_packet.html">Packet</a> *packet)</td></tr>
 <tr class="memdesc:a19facf75f52f106ed2be19ea65245505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasts a packet to all clients.  <a href="server_8c.html#a19facf75f52f106ed2be19ea65245505">More...</a><br /></td></tr>
 <tr class="separator:a19facf75f52f106ed2be19ea65245505"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -221,33 +218,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serve
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>EXIT_SUCCESS if client initialized correctly, else EXIT_FAILURE </dd></dl>
-
-</div>
-</div>
-<a id="a591cef1c733707db69a0bbd0e0de0b13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a591cef1c733707db69a0bbd0e0de0b13">&#9670;&nbsp;</a></span>receivedEndMessage()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int receivedEndMessage </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>buffer</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Verifies if the end of the communication is requested. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">buffer</td><td>A message. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>1 if the message is "fin", else 0. </dd></dl>
 
 </div>
 </div>
