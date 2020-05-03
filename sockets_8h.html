@@ -82,36 +82,36 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_socket_info.html">SocketInfo</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Information of a socket.  <a href="struct_socket_info.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_socket.html">Socket</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Information of a socket.  <a href="struct_socket.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a86649303b78f58890926ab3a9a571c6b"><td class="memItemLeft" align="right" valign="top"><a id="a86649303b78f58890926ab3a9a571c6b"></a>
-typedef struct <a class="el" href="struct_socket_info.html">SocketInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SocketInfo</b></td></tr>
-<tr class="separator:a86649303b78f58890926ab3a9a571c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ca40401240ec743ac7c45f6da062750"><td class="memItemLeft" align="right" valign="top"><a id="a9ca40401240ec743ac7c45f6da062750"></a>
+typedef struct <a class="el" href="struct_socket.html">Socket</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Socket</b></td></tr>
+<tr class="separator:a9ca40401240ec743ac7c45f6da062750"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a161e3dd779ad9df45e658ac9b2ec6e67"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_socket_info.html">SocketInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#a161e3dd779ad9df45e658ac9b2ec6e67">createClientSocket</a> (const char *ipAddress, const char *port)</td></tr>
-<tr class="memdesc:a161e3dd779ad9df45e658ac9b2ec6e67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a socket meant to be used to connect to a server socket and initialize a connection with the server.  <a href="sockets_8h.html#a161e3dd779ad9df45e658ac9b2ec6e67">More...</a><br /></td></tr>
-<tr class="separator:a161e3dd779ad9df45e658ac9b2ec6e67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e6e7f430e310ab8461e5dcfea9fd618"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_socket_info.html">SocketInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#a1e6e7f430e310ab8461e5dcfea9fd618">createServerSocket</a> (const char *port)</td></tr>
-<tr class="memdesc:a1e6e7f430e310ab8461e5dcfea9fd618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a socket meant to receive connection from clients sockets.  <a href="sockets_8h.html#a1e6e7f430e310ab8461e5dcfea9fd618">More...</a><br /></td></tr>
-<tr class="separator:a1e6e7f430e310ab8461e5dcfea9fd618"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f4809ff7818fd0956b809cfc1228916"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_socket_info.html">SocketInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#a9f4809ff7818fd0956b809cfc1228916">acceptClient</a> (<a class="el" href="struct_socket_info.html">SocketInfo</a> serverSocket)</td></tr>
-<tr class="memdesc:a9f4809ff7818fd0956b809cfc1228916"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for a client to connect to the given server socket. Returns the socket for the connected client.  <a href="sockets_8h.html#a9f4809ff7818fd0956b809cfc1228916">More...</a><br /></td></tr>
-<tr class="separator:a9f4809ff7818fd0956b809cfc1228916"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06172a10e4be71680501d6f7a7b3604e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#a06172a10e4be71680501d6f7a7b3604e">receiveFrom</a> (<a class="el" href="struct_socket_info.html">SocketInfo</a> clientSocket, char *buffer, unsigned int bufferSize)</td></tr>
-<tr class="memdesc:a06172a10e4be71680501d6f7a7b3604e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives through from the given socket.  <a href="sockets_8h.html#a06172a10e4be71680501d6f7a7b3604e">More...</a><br /></td></tr>
-<tr class="separator:a06172a10e4be71680501d6f7a7b3604e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf0c58c8074e6bd0e1b101082f48fed0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#abf0c58c8074e6bd0e1b101082f48fed0">sendTo</a> (<a class="el" href="struct_socket_info.html">SocketInfo</a> clientSocket, const char *buffer, unsigned int bufferSize)</td></tr>
-<tr class="memdesc:abf0c58c8074e6bd0e1b101082f48fed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends data through the given socket.  <a href="sockets_8h.html#abf0c58c8074e6bd0e1b101082f48fed0">More...</a><br /></td></tr>
-<tr class="separator:abf0c58c8074e6bd0e1b101082f48fed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a696f120638512568e37d7f3904fddbb1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#a696f120638512568e37d7f3904fddbb1">closeSocket</a> (<a class="el" href="struct_socket_info.html">SocketInfo</a> *socket)</td></tr>
-<tr class="memdesc:a696f120638512568e37d7f3904fddbb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the given socket.  <a href="sockets_8h.html#a696f120638512568e37d7f3904fddbb1">More...</a><br /></td></tr>
-<tr class="separator:a696f120638512568e37d7f3904fddbb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6938caa4565a29aad133bb99f30e72a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_socket.html">Socket</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#af6938caa4565a29aad133bb99f30e72a">createClientSocket</a> (const char *ipAddress, const char *port)</td></tr>
+<tr class="memdesc:af6938caa4565a29aad133bb99f30e72a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a socket meant to be used to connect to a server socket and initialize a connection with the server.  <a href="sockets_8h.html#af6938caa4565a29aad133bb99f30e72a">More...</a><br /></td></tr>
+<tr class="separator:af6938caa4565a29aad133bb99f30e72a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fd450c6355eb972bcad58dc9a80c28d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_socket.html">Socket</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#a0fd450c6355eb972bcad58dc9a80c28d">createServerSocket</a> (const char *port)</td></tr>
+<tr class="memdesc:a0fd450c6355eb972bcad58dc9a80c28d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a socket meant to receive connection from clients sockets.  <a href="sockets_8h.html#a0fd450c6355eb972bcad58dc9a80c28d">More...</a><br /></td></tr>
+<tr class="separator:a0fd450c6355eb972bcad58dc9a80c28d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe291bfa0272b2a353ab3c917d92d24e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_socket.html">Socket</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#abe291bfa0272b2a353ab3c917d92d24e">acceptClient</a> (<a class="el" href="struct_socket.html">Socket</a> serverSocket)</td></tr>
+<tr class="memdesc:abe291bfa0272b2a353ab3c917d92d24e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for a client to connect to the given server socket. Returns the socket for the connected client.  <a href="sockets_8h.html#abe291bfa0272b2a353ab3c917d92d24e">More...</a><br /></td></tr>
+<tr class="separator:abe291bfa0272b2a353ab3c917d92d24e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a505aeab0f36eb1b9ee8d55a9b1ac86cb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#a505aeab0f36eb1b9ee8d55a9b1ac86cb">receiveFrom</a> (<a class="el" href="struct_socket.html">Socket</a> clientSocket, char *buffer, unsigned int bufferSize)</td></tr>
+<tr class="memdesc:a505aeab0f36eb1b9ee8d55a9b1ac86cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives through from the given socket.  <a href="sockets_8h.html#a505aeab0f36eb1b9ee8d55a9b1ac86cb">More...</a><br /></td></tr>
+<tr class="separator:a505aeab0f36eb1b9ee8d55a9b1ac86cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb18230fe4b03f025362d92c796e54dd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#abb18230fe4b03f025362d92c796e54dd">sendTo</a> (<a class="el" href="struct_socket.html">Socket</a> clientSocket, const char *buffer, unsigned int bufferSize)</td></tr>
+<tr class="memdesc:abb18230fe4b03f025362d92c796e54dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends data through the given socket.  <a href="sockets_8h.html#abb18230fe4b03f025362d92c796e54dd">More...</a><br /></td></tr>
+<tr class="separator:abb18230fe4b03f025362d92c796e54dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a130f38198d63c93f013caf7ddc3ccc4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#a130f38198d63c93f013caf7ddc3ccc4a">closeSocket</a> (<a class="el" href="struct_socket.html">Socket</a> *socket)</td></tr>
+<tr class="memdesc:a130f38198d63c93f013caf7ddc3ccc4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the given socket.  <a href="sockets_8h.html#a130f38198d63c93f013caf7ddc3ccc4a">More...</a><br /></td></tr>
+<tr class="separator:a130f38198d63c93f013caf7ddc3ccc4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae900b054a1598c54acaa67902f87185d"><td class="memItemLeft" align="right" valign="top"><a id="ae900b054a1598c54acaa67902f87185d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sockets_8h.html#ae900b054a1598c54acaa67902f87185d">cleanUp</a> ()</td></tr>
 <tr class="memdesc:ae900b054a1598c54acaa67902f87185d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs any required resources cleanup. Must be called once all sockets usage is finished. <br /></td></tr>
@@ -121,16 +121,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
 <div class="textblock"><p>API for sockets. </p>
 <p>A general API to manipulate sockets. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a9f4809ff7818fd0956b809cfc1228916"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f4809ff7818fd0956b809cfc1228916">&#9670;&nbsp;</a></span>acceptClient()</h2>
+<a id="abe291bfa0272b2a353ab3c917d92d24e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe291bfa0272b2a353ab3c917d92d24e">&#9670;&nbsp;</a></span>acceptClient()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_socket_info.html">SocketInfo</a> acceptClient </td>
+          <td class="memname"><a class="el" href="struct_socket.html">Socket</a> acceptClient </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_socket_info.html">SocketInfo</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_socket.html">Socket</a>&#160;</td>
           <td class="paramname"><em>serverSocket</em></td><td>)</td>
           <td></td>
         </tr>
@@ -148,8 +148,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
 
 </div>
 </div>
-<a id="a696f120638512568e37d7f3904fddbb1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a696f120638512568e37d7f3904fddbb1">&#9670;&nbsp;</a></span>closeSocket()</h2>
+<a id="a130f38198d63c93f013caf7ddc3ccc4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a130f38198d63c93f013caf7ddc3ccc4a">&#9670;&nbsp;</a></span>closeSocket()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -157,7 +157,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
         <tr>
           <td class="memname">void closeSocket </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_socket_info.html">SocketInfo</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_socket.html">Socket</a> *&#160;</td>
           <td class="paramname"><em>socket</em></td><td>)</td>
           <td></td>
         </tr>
@@ -174,14 +174,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
 
 </div>
 </div>
-<a id="a161e3dd779ad9df45e658ac9b2ec6e67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a161e3dd779ad9df45e658ac9b2ec6e67">&#9670;&nbsp;</a></span>createClientSocket()</h2>
+<a id="af6938caa4565a29aad133bb99f30e72a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6938caa4565a29aad133bb99f30e72a">&#9670;&nbsp;</a></span>createClientSocket()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_socket_info.html">SocketInfo</a> createClientSocket </td>
+          <td class="memname"><a class="el" href="struct_socket.html">Socket</a> createClientSocket </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>ipAddress</em>, </td>
@@ -212,14 +212,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
 
 </div>
 </div>
-<a id="a1e6e7f430e310ab8461e5dcfea9fd618"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e6e7f430e310ab8461e5dcfea9fd618">&#9670;&nbsp;</a></span>createServerSocket()</h2>
+<a id="a0fd450c6355eb972bcad58dc9a80c28d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fd450c6355eb972bcad58dc9a80c28d">&#9670;&nbsp;</a></span>createServerSocket()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_socket_info.html">SocketInfo</a> createServerSocket </td>
+          <td class="memname"><a class="el" href="struct_socket.html">Socket</a> createServerSocket </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>port</em></td><td>)</td>
@@ -239,8 +239,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
 
 </div>
 </div>
-<a id="a06172a10e4be71680501d6f7a7b3604e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06172a10e4be71680501d6f7a7b3604e">&#9670;&nbsp;</a></span>receiveFrom()</h2>
+<a id="a505aeab0f36eb1b9ee8d55a9b1ac86cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a505aeab0f36eb1b9ee8d55a9b1ac86cb">&#9670;&nbsp;</a></span>receiveFrom()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -248,7 +248,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
         <tr>
           <td class="memname">int receiveFrom </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_socket_info.html">SocketInfo</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_socket.html">Socket</a>&#160;</td>
           <td class="paramname"><em>clientSocket</em>, </td>
         </tr>
         <tr>
@@ -284,8 +284,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
 
 </div>
 </div>
-<a id="abf0c58c8074e6bd0e1b101082f48fed0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf0c58c8074e6bd0e1b101082f48fed0">&#9670;&nbsp;</a></span>sendTo()</h2>
+<a id="abb18230fe4b03f025362d92c796e54dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb18230fe4b03f025362d92c796e54dd">&#9670;&nbsp;</a></span>sendTo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -293,7 +293,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sock
         <tr>
           <td class="memname">int sendTo </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_socket_info.html">SocketInfo</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_socket.html">Socket</a>&#160;</td>
           <td class="paramname"><em>clientSocket</em>, </td>
         </tr>
         <tr>

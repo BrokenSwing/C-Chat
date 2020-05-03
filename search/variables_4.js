@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['size_192',['size',['../struct_file_info.html#ad269568d7fa05ef71dd0de872b670132',1,'FileInfo']]],
-  ['socket_193',['socket',['../struct_client.html#a3a8e56beeb3802c12b16fda0f2525e67',1,'Client']]]
+  ['size_191',['size',['../struct_file_info.html#ad269568d7fa05ef71dd0de872b670132',1,'FileInfo']]],
+  ['socket_192',['socket',['../struct_client.html#aaa5b0226a45898f348e498156e6f571b',1,'Client']]]
 ];
