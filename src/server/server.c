@@ -11,6 +11,7 @@
 #include <signal.h>
 #include <string.h>
 #include "../common/synchronization.h"
+#include "../common/files.h"
 #include "server.h"
 
 static ReadWriteLock clientsLock;
@@ -121,6 +122,7 @@ void broadcast(const char* buffer, int size) {
 
 void relayClientMessages(Client* client) {
     char buffer[MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1) + (USERNAME_MAX_LENGTH + 1)];
+    int idFile = 1;
     buffer[0] = TEXT_MESSAGE_TYPE;
     memcpy(buffer + MESSAGE_TYPE_OVERHEAD + MSG_MAX_LENGTH + 1, client->username, sizeof(client->username));
 
@@ -158,6 +160,24 @@ void relayClientMessages(Client* client) {
                         memcpy(errorMessage + MESSAGE_TYPE_OVERHEAD, "Invalid username", 17);
                         sendTo(client->socket, errorMessage, MESSAGE_TYPE_OVERHEAD + (MSG_MAX_LENGTH + 1));
                     }
+                case CLIENT_FILE_MESSAGE_TYPE:
+                    if (files_getInfo(buffer[1]).exists > 0 && files_getInfo(buffer[1]).isDirectory != 1 && files_getInfo(buffer[1]).size > 0) {
+                        memcpy (buffer + CLIENT_FILE_MESSAGE_TYPE, idFile, sizeof(idFile));
+                        sendTo(client->socket, buffer, strlen(buffer));
+                    }
+                    else {
+                        memcpy (buffer + CLIENT_FILE_MESSAGE_TYPE, 0, sizeof(idFile));
+                        sendTo(client->socket, buffer, strlen(buffer));
+                    }
+                case FILE_MESSAGE_TYPE:
+                    receiveFrom(client->socket, buffer, strlen(buffer));
+                    long long size = strtoll(buffer + 1, NULL, 10);
+                    char contentFile;
+                    do {
+                        contentFile = contentFile + buffer;
+                    } while (strlen(contentFile) < size);
+                    files_writeFile(idFile, contentFile, strlen(buffer));
+                    idFile += 1;
             }
         }
     } while (bytesReceived >= 0 && !receivedEndMessage(buffer + MESSAGE_TYPE_OVERHEAD));
