@@ -52,6 +52,11 @@ COMMAND(file, "Usage: /file <send | receive>",
                 return;
             }
         )
+        COMMAND(quit, "Usage: /quit",
+            Packet quitPacket = NewPacketQuit;
+            sendPacket(clientSocket, &quitPacket);
+            return;
+        )
 )
 
 void receiveMessages() {

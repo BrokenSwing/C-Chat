@@ -6,6 +6,7 @@ const union Packet NewPacketText = { TEXT_MESSAGE_TYPE };
 const union Packet NewPacketDefineUsername = { DEFINE_USERNAME_MESSAGE_TYPE };
 const union Packet NewPacketServerErrorMessage = { SERVER_ERROR_MESSAGE_TYPE };
 const union Packet NewPacketUsernameChanged = { USERNAME_CHANGED_MESSAGE_TYPE };
+const union Packet NewPacketQuit = { QUIT_MESSAGE_TYPE };
 
 /**
  * \brief Retrieves the real size of the underlying type
@@ -27,6 +28,8 @@ unsigned int packets_sizeOf(Packet* packet) {
             return sizeof(struct PacketServerErrorMessage);
         case USERNAME_CHANGED_MESSAGE_TYPE:
             return sizeof(struct PacketUsernameChanged);
+        case QUIT_MESSAGE_TYPE:
+            return sizeof(struct PacketQuit);
         default:
             return 0;
     }

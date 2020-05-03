@@ -102,10 +102,6 @@ void disconnectClient(int id) {
     free(client);
 }
 
-int receivedEndMessage(const char* buffer) {
-    return buffer[0] == 'f' && buffer[1] == 'i' && buffer[2] == 'n' && buffer[3] == '\0';
-}
-
 void broadcast(Packet* packet) {
     acquireRead(clientsLock);
     { // BEGIN CRITICAL SECTION
@@ -127,7 +123,7 @@ void relayClientMessages(Client* client) {
         if (bytesReceived > 0) {
             switch(packet.type) {
                 case TEXT_MESSAGE_TYPE:
-                    if (strlen(packet.asTextPacket.message) > 0 && !receivedEndMessage(packet.asTextPacket.message)) {
+                    if (strlen(packet.asTextPacket.message) > 0) {
                         memcpy(packet.asTextPacket.username, client->username, USERNAME_MAX_LENGTH + 1);
                         broadcast(&packet);
                     }
@@ -148,9 +144,12 @@ void relayClientMessages(Client* client) {
                         memcpy(errorPacket.asServerErrorMessagePacket.message, "Invalid username", 17);
                         sendPacket(client->socket, &packet);
                     }
+                    break;
+                case QUIT_MESSAGE_TYPE:
+                    return; // Other option is to set bytesReceived to -1, but we want to keep semantic of variable
             }
         }
-    } while (bytesReceived >= 0 && !receivedEndMessage(packet.asTextPacket.message));
+    } while (bytesReceived >= 0);
 }
 
 THREAD_ENTRY_POINT clientThread(void* idPnt) {

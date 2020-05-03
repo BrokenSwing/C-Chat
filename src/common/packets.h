@@ -81,6 +81,15 @@ struct PacketUsernameChanged {
 extern const union Packet NewPacketUsernameChanged;
 
 /**
+ * \class PacketQuit
+ * \brief This packet is sent to server by client to notify him he wants to quit the room
+ */
+struct PacketQuit {
+    char type;
+};
+extern const union Packet NewPacketQuit;
+
+/**
  * \class Packet
  * \brief A generic union type for packets
  */
@@ -92,6 +101,7 @@ typedef union Packet {
     struct PacketDefineUsername asDefineUsernamePacket;
     struct PacketServerErrorMessage asServerErrorMessagePacket;
     struct PacketUsernameChanged asUsernameChangedPacket;
+    struct PacketQuit asQuitPacket;
 } Packet;
 
 /**

@@ -69,14 +69,6 @@ int initClientConnection(Client* client);
 void disconnectClient(int id);
 
 /**
- * \brief Verifies if the end of the communication is requested.
- *
- * \param buffer A message.
- * \return 1 if the message is "fin", else 0.
- */
-int receivedEndMessage(const char* buffer);
-
-/**
  * \brief Broadcasts a packet to all clients
  *
  * \param packet The packet to send to all client

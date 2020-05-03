@@ -96,4 +96,12 @@
  */
 #define USERNAME_CHANGED_MESSAGE_TYPE 5
 
+/**
+ * \def QUIT_MESSAGE_TYPE
+ * \brief An integer representing a message meant to notify the server the client wants to quit the room
+ *
+ * Content of packets of this type must be empty.
+ */
+#define QUIT_MESSAGE_TYPE 6
+
 #endif //C_CHAT_CONSTANTS_H
