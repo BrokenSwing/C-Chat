@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['initclientconnection_141',['initClientConnection',['../server_8c.html#ae3f5fa9a434fc6535db702c02d130896',1,'server.c']]]
+  ['handleserverclose_152',['handleServerClose',['../server_8c.html#aade192ddf7e8a5315aa6c2efab6dc26d',1,'handleServerClose(int signal):&#160;server.c'],['../server_8h.html#aade192ddf7e8a5315aa6c2efab6dc26d',1,'handleServerClose(int signal):&#160;server.c']]]
 ];

@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['_5fmutex_0',['_Mutex',['../struct___mutex.html',1,'']]],
-  ['_5freadwritelock_1',['_ReadWriteLock',['../struct___read_write_lock.html',1,'']]]
+  ['acceptclient_0',['acceptClient',['../sockets_8h.html#a9f4809ff7818fd0956b809cfc1228916',1,'sockets.h']]],
+  ['acquiremutex_1',['acquireMutex',['../synchronization_8h.html#ae2ce9a00ac8189e85f662ac86f4ac6a6',1,'synchronization.h']]],
+  ['acquireread_2',['acquireRead',['../synchronization_8h.html#ad9deb6c6d8c1237ee8881a9839ae6fd0',1,'synchronization.c']]],
+  ['acquirewrite_3',['acquireWrite',['../synchronization_8h.html#ad68e8361a3cbbea18d9c760e46e8d038',1,'synchronization.c']]]
 ];

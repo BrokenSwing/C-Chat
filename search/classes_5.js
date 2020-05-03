@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['readwritelock_109',['ReadWriteLock',['../class_read_write_lock.html',1,'']]]
+  ['socketinfo_115',['SocketInfo',['../struct_socket_info.html',1,'']]]
 ];

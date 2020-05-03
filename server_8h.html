@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-chat: src/server/server.c File Reference</title>
+<title>C-chat: src/server/server.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -67,56 +67,69 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">server.c File Reference</div>  </div>
+<div class="title">server.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Server file.  
+<p>Header file for <a class="el" href="server_8c.html" title="Server file.">server.c</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;signal.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="synchronization_8h_source.html">../common/synchronization.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="server_8h_source.html">server.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="sockets_8h_source.html">../common/sockets.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="constants_8h_source.html">../common/constants.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="threads_8h_source.html">../common/threads.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="packets_8h_source.html">../common/packets.h</a>&quot;</code><br />
-</div><table class="memberdecls">
+</div>
+<p><a href="server_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_client.html">Client</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing a connected client.  <a href="struct_client.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ad172719f11bc41562233eec71e151cff"><td class="memItemLeft" align="right" valign="top"><a id="ad172719f11bc41562233eec71e151cff"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#ad172719f11bc41562233eec71e151cff">NUMBER_CLIENT_MAX</a>&#160;&#160;&#160;10</td></tr>
+<tr class="memdesc:ad172719f11bc41562233eec71e151cff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum of simultaneous connected clients. <br /></td></tr>
+<tr class="separator:ad172719f11bc41562233eec71e151cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a7302c9ba9fef6f7473f52cc61bd4bc40"><td class="memItemLeft" align="right" valign="top"><a id="a7302c9ba9fef6f7473f52cc61bd4bc40"></a>
+typedef struct <a class="el" href="struct_client.html">Client</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Client</b></td></tr>
+<tr class="separator:a7302c9ba9fef6f7473f52cc61bd4bc40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab37e88dfc833c4ba909999902705f3ba"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ab37e88dfc833c4ba909999902705f3ba">scanForFreeSocketSlot</a> ()</td></tr>
-<tr class="memdesc:ab37e88dfc833c4ba909999902705f3ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scan clients slots for an available slot.  <a href="server_8c.html#ab37e88dfc833c4ba909999902705f3ba">More...</a><br /></td></tr>
+<tr class="memitem:ab37e88dfc833c4ba909999902705f3ba"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#ab37e88dfc833c4ba909999902705f3ba">scanForFreeSocketSlot</a> ()</td></tr>
+<tr class="memdesc:ab37e88dfc833c4ba909999902705f3ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scan clients slots for an available slot.  <a href="server_8h.html#ab37e88dfc833c4ba909999902705f3ba">More...</a><br /></td></tr>
 <tr class="separator:ab37e88dfc833c4ba909999902705f3ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aade192ddf7e8a5315aa6c2efab6dc26d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#aade192ddf7e8a5315aa6c2efab6dc26d">handleServerClose</a> (int signal)</td></tr>
-<tr class="memdesc:aade192ddf7e8a5315aa6c2efab6dc26d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Catch interrupt signal.  <a href="server_8c.html#aade192ddf7e8a5315aa6c2efab6dc26d">More...</a><br /></td></tr>
+<tr class="memitem:aade192ddf7e8a5315aa6c2efab6dc26d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#aade192ddf7e8a5315aa6c2efab6dc26d">handleServerClose</a> (int signal)</td></tr>
+<tr class="memdesc:aade192ddf7e8a5315aa6c2efab6dc26d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Catch interrupt signal.  <a href="server_8h.html#aade192ddf7e8a5315aa6c2efab6dc26d">More...</a><br /></td></tr>
 <tr class="separator:aade192ddf7e8a5315aa6c2efab6dc26d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3f5fa9a434fc6535db702c02d130896"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ae3f5fa9a434fc6535db702c02d130896">initClientConnection</a> (<a class="el" href="struct_client.html">Client</a> *client)</td></tr>
-<tr class="memdesc:ae3f5fa9a434fc6535db702c02d130896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a client connection to be ready to discuss.  <a href="server_8c.html#ae3f5fa9a434fc6535db702c02d130896">More...</a><br /></td></tr>
+<tr class="memitem:ae3f5fa9a434fc6535db702c02d130896"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#ae3f5fa9a434fc6535db702c02d130896">initClientConnection</a> (<a class="el" href="struct_client.html">Client</a> *client)</td></tr>
+<tr class="memdesc:ae3f5fa9a434fc6535db702c02d130896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a client connection to be ready to discuss.  <a href="server_8h.html#ae3f5fa9a434fc6535db702c02d130896">More...</a><br /></td></tr>
 <tr class="separator:ae3f5fa9a434fc6535db702c02d130896"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af00e8215717a1018bf79b8e40ffaba66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#af00e8215717a1018bf79b8e40ffaba66">disconnectClient</a> (int id)</td></tr>
-<tr class="memdesc:af00e8215717a1018bf79b8e40ffaba66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnects the client and free allocated memory.  <a href="server_8c.html#af00e8215717a1018bf79b8e40ffaba66">More...</a><br /></td></tr>
+<tr class="memitem:af00e8215717a1018bf79b8e40ffaba66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#af00e8215717a1018bf79b8e40ffaba66">disconnectClient</a> (int id)</td></tr>
+<tr class="memdesc:af00e8215717a1018bf79b8e40ffaba66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnects the client and free allocated memory.  <a href="server_8h.html#af00e8215717a1018bf79b8e40ffaba66">More...</a><br /></td></tr>
 <tr class="separator:af00e8215717a1018bf79b8e40ffaba66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a591cef1c733707db69a0bbd0e0de0b13"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a591cef1c733707db69a0bbd0e0de0b13">receivedEndMessage</a> (const char *buffer)</td></tr>
-<tr class="memdesc:a591cef1c733707db69a0bbd0e0de0b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if the end of the communication is requested.  <a href="server_8c.html#a591cef1c733707db69a0bbd0e0de0b13">More...</a><br /></td></tr>
+<tr class="memitem:a591cef1c733707db69a0bbd0e0de0b13"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a591cef1c733707db69a0bbd0e0de0b13">receivedEndMessage</a> (const char *buffer)</td></tr>
+<tr class="memdesc:a591cef1c733707db69a0bbd0e0de0b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if the end of the communication is requested.  <a href="server_8h.html#a591cef1c733707db69a0bbd0e0de0b13">More...</a><br /></td></tr>
 <tr class="separator:a591cef1c733707db69a0bbd0e0de0b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19facf75f52f106ed2be19ea65245505"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a19facf75f52f106ed2be19ea65245505">broadcast</a> (<a class="el" href="union_packet.html">Packet</a> *packet)</td></tr>
-<tr class="memdesc:a19facf75f52f106ed2be19ea65245505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasts a packet to all clients.  <a href="server_8c.html#a19facf75f52f106ed2be19ea65245505">More...</a><br /></td></tr>
+<tr class="memitem:a19facf75f52f106ed2be19ea65245505"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a19facf75f52f106ed2be19ea65245505">broadcast</a> (<a class="el" href="union_packet.html">Packet</a> *packet)</td></tr>
+<tr class="memdesc:a19facf75f52f106ed2be19ea65245505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasts a packet to all clients.  <a href="server_8h.html#a19facf75f52f106ed2be19ea65245505">More...</a><br /></td></tr>
 <tr class="separator:a19facf75f52f106ed2be19ea65245505"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">relayClientMessages</a> (<a class="el" href="struct_client.html">Client</a> *client)</td></tr>
-<tr class="memdesc:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relay messages sent by given client to all known clients.  <a href="server_8c.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">More...</a><br /></td></tr>
+<tr class="memitem:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">relayClientMessages</a> (<a class="el" href="struct_client.html">Client</a> *client)</td></tr>
+<tr class="memdesc:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relay messages sent by given client to all known clients.  <a href="server_8h.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">More...</a><br /></td></tr>
 <tr class="separator:af1f91fbc99a1d4fd38d0b2cb98ec5a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a485255282d99bd18b166b6424a500224"><td class="memItemLeft" align="right" valign="top"><a id="a485255282d99bd18b166b6424a500224"></a>
-<a class="el" href="threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f">THREAD_ENTRY_POINT</a>&#160;</td><td class="memItemRight" valign="bottom"><b>clientThread</b> (void *idPnt)</td></tr>
-<tr class="separator:a485255282d99bd18b166b6424a500224"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top"><a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
-<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Program entry point. <br /></td></tr>
-<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Server file. </p>
-<p>Allows multiple clients to discuss, relaying messages between them. </p>
+<div class="textblock"><p>Header file for <a class="el" href="server_8c.html" title="Server file.">server.c</a>. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a19facf75f52f106ed2be19ea65245505"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a19facf75f52f106ed2be19ea65245505">&#9670;&nbsp;</a></span>broadcast()</h2>

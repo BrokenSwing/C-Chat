@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['main_36',['main',['../client_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;client.c'],['../server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;server.c']]],
-  ['max_5fconcurrent_5ffiles_5fexchange_5fper_5fclient_37',['MAX_CONCURRENT_FILES_EXCHANGE_PER_CLIENT',['../constants_8h.html#acfe40b49ec043f2be846417808b32828',1,'constants.h']]],
-  ['message_5ftype_5foverhead_38',['MESSAGE_TYPE_OVERHEAD',['../constants_8h.html#adbfd4ad1da4815d34065dbec64958a38',1,'constants.h']]],
-  ['msg_5fmax_5flength_39',['MSG_MAX_LENGTH',['../constants_8h.html#af0d1fa332610c5ebdf75ae745359636b',1,'constants.h']]],
-  ['mutex_40',['Mutex',['../class_mutex.html',1,'']]]
+  ['newpacketdefineusername_46',['NewPacketDefineUsername',['../packets_8h.html#a6ec0fb53b0d3eaf38155b617d06315db',1,'packets.c']]],
+  ['newpacketjoin_47',['NewPacketJoin',['../packets_8h.html#af4b17ac320cb4417d2f9ec16581021ad',1,'packets.c']]],
+  ['newpacketleave_48',['NewPacketLeave',['../packets_8h.html#a1882d139426f11655e2f8c64e5c2ba71',1,'packets.c']]],
+  ['newpacketservererrormessage_49',['NewPacketServerErrorMessage',['../packets_8h.html#ae291625fae5ce23c63628784075bcf11',1,'packets.c']]],
+  ['newpackettext_50',['NewPacketText',['../packets_8h.html#a9f8837cfff6abc005ffc8d8167bea845',1,'packets.c']]],
+  ['newpacketusernamechanged_51',['NewPacketUsernameChanged',['../packets_8h.html#a76ae55f04ff43b7e82e7b5d04de540cc',1,'packets.c']]],
+  ['number_5fclient_5fmax_52',['NUMBER_CLIENT_MAX',['../server_8h.html#ad172719f11bc41562233eec71e151cff',1,'server.h']]]
 ];

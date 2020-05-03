@@ -83,6 +83,7 @@ $(function() {
 <h3><a id="index_b"></a>- b -</h3><ul>
 <li>broadcast()
 : <a class="el" href="server_8c.html#a19facf75f52f106ed2be19ea65245505">server.c</a>
+, <a class="el" href="server_8h.html#a19facf75f52f106ed2be19ea65245505">server.h</a>
 </li>
 </ul>
 
@@ -93,6 +94,9 @@ $(function() {
 </li>
 <li>closeSocket()
 : <a class="el" href="sockets_8h.html#a696f120638512568e37d7f3904fddbb1">sockets.h</a>
+</li>
+<li>commandHandler()
+: <a class="el" href="client_8h.html#aebebd601d5d0f93c8c4471da2f88684d">client.h</a>
 </li>
 <li>createClientSocket()
 : <a class="el" href="sockets_8h.html#a161e3dd779ad9df45e658ac9b2ec6e67">sockets.h</a>
@@ -124,6 +128,20 @@ $(function() {
 </li>
 <li>disconnectClient()
 : <a class="el" href="server_8c.html#af00e8215717a1018bf79b8e40ffaba66">server.c</a>
+, <a class="el" href="server_8h.html#af00e8215717a1018bf79b8e40ffaba66">server.h</a>
+</li>
+</ul>
+
+
+<h3><a id="index_f"></a>- f -</h3><ul>
+<li>files_getInfo()
+: <a class="el" href="files_8h.html#a016c9eadae4e639f911963a955709151">files.h</a>
+</li>
+<li>files_readFile()
+: <a class="el" href="files_8h.html#a8388031189313239cfe0c242d84047d6">files.h</a>
+</li>
+<li>files_writeFile()
+: <a class="el" href="files_8h.html#ae96a63488063d2230618419e3e176ad3">files.h</a>
 </li>
 </ul>
 
@@ -131,6 +149,7 @@ $(function() {
 <h3><a id="index_h"></a>- h -</h3><ul>
 <li>handleServerClose()
 : <a class="el" href="server_8c.html#aade192ddf7e8a5315aa6c2efab6dc26d">server.c</a>
+, <a class="el" href="server_8h.html#aade192ddf7e8a5315aa6c2efab6dc26d">server.h</a>
 </li>
 </ul>
 
@@ -138,6 +157,7 @@ $(function() {
 <h3><a id="index_i"></a>- i -</h3><ul>
 <li>initClientConnection()
 : <a class="el" href="server_8c.html#ae3f5fa9a434fc6535db702c02d130896">server.c</a>
+, <a class="el" href="server_8h.html#ae3f5fa9a434fc6535db702c02d130896">server.h</a>
 </li>
 </ul>
 
@@ -160,15 +180,20 @@ $(function() {
 <h3><a id="index_r"></a>- r -</h3><ul>
 <li>receivedEndMessage()
 : <a class="el" href="server_8c.html#a591cef1c733707db69a0bbd0e0de0b13">server.c</a>
+, <a class="el" href="server_8h.html#a591cef1c733707db69a0bbd0e0de0b13">server.h</a>
 </li>
 <li>receiveFrom()
 : <a class="el" href="sockets_8h.html#a06172a10e4be71680501d6f7a7b3604e">sockets.h</a>
+</li>
+<li>receiveMessages()
+: <a class="el" href="client_8h.html#a84b5410d9a9376e73de5913a491e9415">client.h</a>
 </li>
 <li>receiveNextPacket()
 : <a class="el" href="packets_8h.html#a1bd7130fc2ac8d01c4d3a701e82ef35a">packets.h</a>
 </li>
 <li>relayClientMessages()
 : <a class="el" href="server_8c.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">server.c</a>
+, <a class="el" href="server_8h.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">server.h</a>
 </li>
 <li>releaseMutex()
 : <a class="el" href="synchronization_8h.html#ac85d8be7b9b703bb8aa8e4a33e959b73">synchronization.h</a>
@@ -188,9 +213,11 @@ $(function() {
 <h3><a id="index_s"></a>- s -</h3><ul>
 <li>scanForFreeSocketSlot()
 : <a class="el" href="server_8c.html#ab37e88dfc833c4ba909999902705f3ba">server.c</a>
+, <a class="el" href="server_8h.html#ab37e88dfc833c4ba909999902705f3ba">server.h</a>
 </li>
 <li>sendMessage()
 : <a class="el" href="client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb">client.c</a>
+, <a class="el" href="client_8h.html#a6d051c7b1b427efe3f668a8fbafd15fb">client.h</a>
 </li>
 <li>sendPacket()
 : <a class="el" href="packets_8h.html#af77938a8673e48556ca4839b0d35fe2b">packets.h</a>
@@ -203,46 +230,38 @@ $(function() {
 </li>
 <li>setUsername()
 : <a class="el" href="client_8c.html#ab8a7ea1debe22a622bd5d1403497a760">client.c</a>
+, <a class="el" href="client_8h.html#a5207171e621082adea5142b4079a91d1">client.h</a>
 </li>
 </ul>
 
 
 <h3><a id="index_u"></a>- u -</h3><ul>
 <li>ui_cleanUp()
-: <a class="el" href="ui_8c.html#a1321f84c13363edd313f895b53417a2d">ui.c</a>
-, <a class="el" href="ui_8h.html#a1321f84c13363edd313f895b53417a2d">ui.h</a>
+: <a class="el" href="ui_8h.html#a1321f84c13363edd313f895b53417a2d">ui.h</a>
 </li>
 <li>ui_errorMessage()
 : <a class="el" href="ui_8h.html#a07298030d1cbcbf172373b8a8d4230e9">ui.h</a>
-, <a class="el" href="ui_8c.html#a07298030d1cbcbf172373b8a8d4230e9">ui.c</a>
 </li>
 <li>ui_getUserInput()
-: <a class="el" href="ui_8c.html#a6704021ba6d37386854aaa2f6f1211cf">ui.c</a>
-, <a class="el" href="ui_8h.html#a6704021ba6d37386854aaa2f6f1211cf">ui.h</a>
+: <a class="el" href="ui_8h.html#a6704021ba6d37386854aaa2f6f1211cf">ui.h</a>
 </li>
 <li>ui_informationMessage()
 : <a class="el" href="ui_8h.html#ae4597eb9cb1f26760512b4d87069eed3">ui.h</a>
-, <a class="el" href="ui_8c.html#ae4597eb9cb1f26760512b4d87069eed3">ui.c</a>
 </li>
 <li>ui_init()
-: <a class="el" href="ui_8c.html#aa6f50ea564e0ba7375ce590a5196f12f">ui.c</a>
-, <a class="el" href="ui_8h.html#aa6f50ea564e0ba7375ce590a5196f12f">ui.h</a>
+: <a class="el" href="ui_8h.html#aa6f50ea564e0ba7375ce590a5196f12f">ui.h</a>
 </li>
 <li>ui_joinMessage()
-: <a class="el" href="ui_8c.html#adaf38e2a9ac592ebfffeff194cba4716">ui.c</a>
-, <a class="el" href="ui_8h.html#adaf38e2a9ac592ebfffeff194cba4716">ui.h</a>
+: <a class="el" href="ui_8h.html#adaf38e2a9ac592ebfffeff194cba4716">ui.h</a>
 </li>
 <li>ui_leaveMessage()
-: <a class="el" href="ui_8c.html#a7dd983899fdc724a8b4844d3c72a7b40">ui.c</a>
-, <a class="el" href="ui_8h.html#a7dd983899fdc724a8b4844d3c72a7b40">ui.h</a>
+: <a class="el" href="ui_8h.html#a7dd983899fdc724a8b4844d3c72a7b40">ui.h</a>
 </li>
 <li>ui_messageReceived()
 : <a class="el" href="ui_8h.html#ae2513fb853fbc8737fb3ca7549c52de2">ui.h</a>
-, <a class="el" href="ui_8c.html#ae2513fb853fbc8737fb3ca7549c52de2">ui.c</a>
 </li>
 <li>ui_reset()
 : <a class="el" href="ui_8h.html#a720a37bebeb708da396e192733d59549">ui.h</a>
-, <a class="el" href="ui_8c.html#a720a37bebeb708da396e192733d59549">ui.c</a>
 </li>
 </ul>
 </div><!-- contents -->

@@ -1,9 +1,11 @@
 var searchData=
 [
-  ['newpacketdefineusername_41',['NewPacketDefineUsername',['../packets_8h.html#a6ec0fb53b0d3eaf38155b617d06315db',1,'packets.c']]],
-  ['newpacketjoin_42',['NewPacketJoin',['../packets_8h.html#af4b17ac320cb4417d2f9ec16581021ad',1,'packets.c']]],
-  ['newpacketleave_43',['NewPacketLeave',['../packets_8h.html#a1882d139426f11655e2f8c64e5c2ba71',1,'packets.c']]],
-  ['newpacketservererrormessage_44',['NewPacketServerErrorMessage',['../packets_8h.html#ae291625fae5ce23c63628784075bcf11',1,'packets.c']]],
-  ['newpackettext_45',['NewPacketText',['../packets_8h.html#a9f8837cfff6abc005ffc8d8167bea845',1,'packets.c']]],
-  ['newpacketusernamechanged_46',['NewPacketUsernameChanged',['../packets_8h.html#a76ae55f04ff43b7e82e7b5d04de540cc',1,'packets.c']]]
+  ['packet_53',['Packet',['../union_packet.html',1,'']]],
+  ['packetdefineusername_54',['PacketDefineUsername',['../struct_packet_define_username.html',1,'']]],
+  ['packetjoin_55',['PacketJoin',['../struct_packet_join.html',1,'']]],
+  ['packetleave_56',['PacketLeave',['../struct_packet_leave.html',1,'']]],
+  ['packets_2eh_57',['packets.h',['../packets_8h.html',1,'']]],
+  ['packetservererrormessage_58',['PacketServerErrorMessage',['../struct_packet_server_error_message.html',1,'']]],
+  ['packettext_59',['PacketText',['../struct_packet_text.html',1,'']]],
+  ['packetusernamechanged_60',['PacketUsernameChanged',['../struct_packet_username_changed.html',1,'']]]
 ];

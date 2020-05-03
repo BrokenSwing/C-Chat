@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-chat: Mutex Class Reference</title>
+<title>C-chat: ReadWriteLock Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,17 +62,33 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_read_write_lock-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Mutex Class Reference</div>  </div>
+<div class="title">ReadWriteLock Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>A semaphore allowing mutual exclusion.  
- <a href="class_mutex.html#details">More...</a></p>
+<p>A read/write lock to synchronize resource access.  
+ <a href="struct_read_write_lock.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="synchronization_8h_source.html">synchronization.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a2f498e3e14334cccdcb111cc45394671"><td class="memItemLeft" align="right" valign="top"><a id="a2f498e3e14334cccdcb111cc45394671"></a>
+<a class="el" href="struct_mutex.html">Mutex</a>&#160;</td><td class="memItemRight" valign="bottom"><b>writeLock</b></td></tr>
+<tr class="separator:a2f498e3e14334cccdcb111cc45394671"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb84cde39159a9b1b7eb0895c2c70455"><td class="memItemLeft" align="right" valign="top"><a id="adb84cde39159a9b1b7eb0895c2c70455"></a>
+<a class="el" href="struct_mutex.html">Mutex</a>&#160;</td><td class="memItemRight" valign="bottom"><b>readLock</b></td></tr>
+<tr class="separator:adb84cde39159a9b1b7eb0895c2c70455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7994eed07194c60092597633ffb93d23"><td class="memItemLeft" align="right" valign="top"><a id="a7994eed07194c60092597633ffb93d23"></a>
+int *&#160;</td><td class="memItemRight" valign="bottom"><b>readCount</b></td></tr>
+<tr class="separator:a7994eed07194c60092597633ffb93d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A semaphore allowing mutual exclusion. </p>
+<div class="textblock"><p>A read/write lock to synchronize resource access. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/common/<a class="el" href="synchronization_8h_source.html">synchronization.h</a></li>
 </ul>

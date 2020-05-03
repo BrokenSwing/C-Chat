@@ -1,17 +1,8 @@
 var searchData=
 [
-  ['scanforfreesocketslot_64',['scanForFreeSocketSlot',['../server_8c.html#ab37e88dfc833c4ba909999902705f3ba',1,'server.c']]],
-  ['sendmessage_65',['sendMessage',['../client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb',1,'client.c']]],
-  ['sendpacket_66',['sendPacket',['../packets_8h.html#af77938a8673e48556ca4839b0d35fe2b',1,'packets.c']]],
-  ['sendto_67',['sendTo',['../sockets_8h.html#abf0c58c8074e6bd0e1b101082f48fed0',1,'sockets.h']]],
-  ['server_2ec_68',['server.c',['../server_8c.html',1,'']]],
-  ['server_5ferror_5fmessage_5ftype_69',['SERVER_ERROR_MESSAGE_TYPE',['../constants_8h.html#a2c840c2053634c5d350dd35eb28243c6',1,'constants.h']]],
-  ['settextcolor_70',['setTextColor',['../console-color_8h.html#a0bf72a7e3dba93a4a09a5c1ff1c55a95',1,'console-color.h']]],
-  ['setusername_71',['setUsername',['../client_8c.html#ab8a7ea1debe22a622bd5d1403497a760',1,'client.c']]],
-  ['size_72',['size',['../struct_file_info.html#ad269568d7fa05ef71dd0de872b670132',1,'FileInfo']]],
-  ['socket_73',['socket',['../struct_client.html#a3a8e56beeb3802c12b16fda0f2525e67',1,'Client']]],
-  ['socketinfo_74',['SocketInfo',['../struct_socket_info.html',1,'']]],
-  ['sockets_2ec_75',['sockets.c',['../sockets_8c.html',1,'']]],
-  ['sockets_2eh_76',['sockets.h',['../sockets_8h.html',1,'']]],
-  ['synchronization_2eh_77',['synchronization.h',['../synchronization_8h.html',1,'']]]
+  ['text_5fmessage_5ftype_86',['TEXT_MESSAGE_TYPE',['../constants_8h.html#aab91abdd30c15d19064327e871b805d4',1,'constants.h']]],
+  ['thread_87',['Thread',['../struct_thread.html',1,'Thread'],['../struct_client.html#a64cbb5220335c16891724ded215171c8',1,'Client::thread()']]],
+  ['thread_5fentry_5fpoint_88',['THREAD_ENTRY_POINT',['../threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f',1,'threads.h']]],
+  ['thread_5ffunction_5fpointer_89',['THREAD_FUNCTION_POINTER',['../threads_8h.html#ab6e1cf1d117c8a8ce38a6c9e7144e5ae',1,'threads.h']]],
+  ['threads_2eh_90',['threads.h',['../threads_8h.html',1,'']]]
 ];

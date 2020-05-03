@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-chat: src/client/client.c File Reference</title>
+<title>C-chat: src/client/client.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,61 +69,58 @@ $(function() {
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">client.c File Reference</div>  </div>
+<div class="title">client.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="struct_client.html" title="A type representing a connected client.">Client</a> file.  
+<p>Header file for <a class="el" href="client_8c.html" title="Client file.">client.c</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="packets_8h_source.html">../common/packets.h</a>&quot;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="ui_8h_source.html">ui.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="client_8h_source.html">client.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="commands_8h_source.html">commands.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="constants_8h_source.html">../common/constants.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="sockets_8h_source.html">../common/sockets.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="threads_8h_source.html">../common/threads.h</a>&quot;</code><br />
-</div><table class="memberdecls">
+<div class="textblock"><code>#include &quot;<a class="el" href="threads_8h_source.html">../common/threads.h</a>&quot;</code><br />
+</div>
+<p><a href="client_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f">THREAD_ENTRY_POINT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb">sendMessage</a> (void *data)</td></tr>
-<tr class="memdesc:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">An entry point for a thread that gets user input and send it to server.  <a href="client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb">More...</a><br /></td></tr>
+<tr class="memitem:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f">THREAD_ENTRY_POINT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a6d051c7b1b427efe3f668a8fbafd15fb">sendMessage</a> (void *data)</td></tr>
+<tr class="memdesc:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">An entry point for a thread that gets user input and send it to server.  <a href="client_8h.html#a6d051c7b1b427efe3f668a8fbafd15fb">More...</a><br /></td></tr>
 <tr class="separator:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1700ef75d92a56813b2c8e6bc49de004"><td class="memItemLeft" align="right" valign="top"><a id="a1700ef75d92a56813b2c8e6bc49de004"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>COMMAND_HANDLER</b> (command, <a class="el" href="commands_8h.html#a71b31656316a73877fe104b12afc1136">COMMAND</a>(file, &quot;Usage: /file &lt;send | receive&gt;&quot;, COMMAND(send, &quot;Usage: /file send &lt;filepath&gt;&quot;, if(strlen(command) &gt; 0) { <a class="el" href="ui_8h.html#ae4597eb9cb1f26760512b4d87069eed3">ui_informationMessage</a>(&quot;Command send detected&quot;);return;}) <a class="el" href="commands_8h.html#a71b31656316a73877fe104b12afc1136">COMMAND</a>(receive, &quot;Usage: /file receive &lt;id&gt;&quot;, if(strlen(command) &gt; 0) { <a class="el" href="ui_8h.html#ae4597eb9cb1f26760512b4d87069eed3">ui_informationMessage</a>(&quot;Command receive detected&quot;);return;})) <a class="el" href="commands_8h.html#a71b31656316a73877fe104b12afc1136">COMMAND</a>(nick, &quot;Usage: /nick &lt;username&gt;&quot;, if(strlen(command) &gt; 0) { <a class="el" href="client_8h.html#a5207171e621082adea5142b4079a91d1">setUsername</a>(command);return;}))</td></tr>
-<tr class="separator:a1700ef75d92a56813b2c8e6bc49de004"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7fd3eb7b9a2fbf9510c4f2e7b49ea03"><td class="memItemLeft" align="right" valign="top"><a id="ad7fd3eb7b9a2fbf9510c4f2e7b49ea03"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>pickUsername</b> ()</td></tr>
-<tr class="separator:ad7fd3eb7b9a2fbf9510c4f2e7b49ea03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8a7ea1debe22a622bd5d1403497a760"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#ab8a7ea1debe22a622bd5d1403497a760">setUsername</a> (const char *newUsername)</td></tr>
-<tr class="memdesc:ab8a7ea1debe22a622bd5d1403497a760"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notifies the server of username change.  <a href="client_8c.html#ab8a7ea1debe22a622bd5d1403497a760">More...</a><br /></td></tr>
-<tr class="separator:ab8a7ea1debe22a622bd5d1403497a760"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
-<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Program entry.  <a href="client_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">More...</a><br /></td></tr>
-<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84b5410d9a9376e73de5913a491e9415"><td class="memItemLeft" align="right" valign="top"><a id="a84b5410d9a9376e73de5913a491e9415"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a84b5410d9a9376e73de5913a491e9415">receiveMessages</a> ()</td></tr>
+<tr class="memdesc:a84b5410d9a9376e73de5913a491e9415"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives messages from the server and display them to the client. <br /></td></tr>
+<tr class="separator:a84b5410d9a9376e73de5913a491e9415"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebebd601d5d0f93c8c4471da2f88684d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#aebebd601d5d0f93c8c4471da2f88684d">commandHandler</a> (const char *command)</td></tr>
+<tr class="memdesc:aebebd601d5d0f93c8c4471da2f88684d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the command represented by the given string.  <a href="client_8h.html#aebebd601d5d0f93c8c4471da2f88684d">More...</a><br /></td></tr>
+<tr class="separator:aebebd601d5d0f93c8c4471da2f88684d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5207171e621082adea5142b4079a91d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a5207171e621082adea5142b4079a91d1">setUsername</a> (const char *username)</td></tr>
+<tr class="memdesc:a5207171e621082adea5142b4079a91d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notifies the server of username change.  <a href="client_8h.html#a5207171e621082adea5142b4079a91d1">More...</a><br /></td></tr>
+<tr class="separator:a5207171e621082adea5142b4079a91d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="struct_client.html" title="A type representing a connected client.">Client</a> file. </p>
-<p>Allows connection to a server and sending messages to another client. </p>
+<div class="textblock"><p>Header file for <a class="el" href="client_8c.html" title="Client file.">client.c</a>. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
+<a id="aebebd601d5d0f93c8c4471da2f88684d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebebd601d5d0f93c8c4471da2f88684d">&#9670;&nbsp;</a></span>commandHandler()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int main </td>
+          <td class="memname">void commandHandler </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>command</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Program entry. </p>
-<dl class="section return"><dt>Returns</dt><dd>EXIT_SUCCESS - normal program termination. </dd></dl>
+<p>Handles the command represented by the given string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">command</td><td>A command typed by the user </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -155,8 +152,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>pickUsername</b> ()</
 
 </div>
 </div>
-<a id="ab8a7ea1debe22a622bd5d1403497a760"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8a7ea1debe22a622bd5d1403497a760">&#9670;&nbsp;</a></span>setUsername()</h2>
+<a id="a5207171e621082adea5142b4079a91d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5207171e621082adea5142b4079a91d1">&#9670;&nbsp;</a></span>setUsername()</h2>
 
 <div class="memitem">
 <div class="memproto">

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['server_5ferror_5fmessage_5ftype_189',['SERVER_ERROR_MESSAGE_TYPE',['../constants_8h.html#a2c840c2053634c5d350dd35eb28243c6',1,'constants.h']]]
+  ['number_5fclient_5fmax_202',['NUMBER_CLIENT_MAX',['../server_8h.html#ad172719f11bc41562233eec71e151cff',1,'server.h']]]
 ];
