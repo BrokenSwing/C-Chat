@@ -150,6 +150,7 @@ int main() {
     ui_informationMessage("Hi, you're connected to server !");
 
     pickUsername();
+    ui_welcomeMessage();
 
     Thread senderThread = createThread(sendMessage, NULL);
 

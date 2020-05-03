@@ -7,6 +7,8 @@
 #ifndef C_CHAT_CONSOLE_COLOR_H
 #define C_CHAT_CONSOLE_COLOR_H
 
+#include "../common/interop.h"
+
 /**
  * \brief Sets output text color.
  *
@@ -23,7 +25,7 @@ void setTextColor(unsigned int colorCode);
  */
 void resetColor();
 
-#if defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__linux__)
+#if IS_POSIX
 
 #include <stdio.h>
 
@@ -42,12 +44,17 @@ void resetColor();
  * \brief White text color constant.
  */
 #define FG_WHITE 39
+/**
+ * \def FG_BLUE
+ * \brief Blue text color constant.
+ */
+#define FG_BLUE 96
 
 void setTextColor(unsigned int colorCode) {
     printf("\033[%dm", colorCode);
 }
 
-#elif defined(_WIN32) || defined(_WIN64) || defined(_WINDOWS)
+#elif IS_WINDOWS
 
 #ifndef WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -69,6 +76,11 @@ void setTextColor(unsigned int colorCode) {
  * \brief White text color constant.
  */
 #define FG_WHITE FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY
+/**
+ * \def FG_BLUE
+ * \brief Blue text color constant.
+ */
+#define FG_BLUE FOREGROUND_BLUE | FOREGROUND_INTENSITY | FOREGROUND_GREEN
 
 void setTextColor(unsigned int colorCode) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);

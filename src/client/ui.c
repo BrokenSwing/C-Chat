@@ -228,3 +228,26 @@ void ui_leaveMessage(const char* username) {
     }
     releaseMutex(inputStateMutex);
 }
+
+void ui_welcomeMessage() {
+    acquireMutex(inputStateMutex);
+    {
+        _storeUserInput();
+    }
+    releaseMutex(inputStateMutex);
+
+    setTextColor(FG_BLUE);
+    printf("Welcome on C-Chat\n");
+    printf("To send messages in the room, just type your message and press enter\n");
+    printf("You can also use commands appending slash in front of your message\n");
+    printf("Here are the available commands:\n");
+    printf("  * file: used to send or receive a file\n");
+    printf("  * nick: used to choose a new username\n");
+    printf("  * quit: used to quit the current room\n");
+
+    acquireMutex(inputStateMutex);
+    {
+        _restoreUserInput();
+    }
+    releaseMutex(inputStateMutex);
+}

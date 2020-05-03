@@ -1,4 +1,12 @@
 /**
+ * \file ui.h
+ * \brief API to communicate with user.
+ *
+ * This adds an abstraction between main program logic and the way messages
+ * are displayed to client.
+ */
+
+/**
  * \brief Initialize required resources for UI.
  */
 void ui_init();
@@ -14,14 +22,6 @@ void ui_cleanUp();
  * To be called in case of ui_getUserInput getting interrupted.
  */
 void ui_reset();
-
-/**
- * \file ui.h
- * \brief API to communicate with user.
- *
- * This adds an abstraction between main program logic and the way messages
- * are displayed to client.
- */
 
 /**
  * \brief Get the entered message by the user.
@@ -66,6 +66,11 @@ void ui_joinMessage(const char* username);
 /**
  * \brief Displays a leave message to the client.
  *
- * @param username The username of the client who left
+ * \param username The username of the client who left
  */
 void ui_leaveMessage(const char* username);
+
+/**
+ * \brief Displays welcome message to the client.
+ */
+void ui_welcomeMessage();
