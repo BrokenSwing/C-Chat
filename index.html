@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-chat: Main Page</title>
+<title>C-chat: C-Chat &lt;img src=&quot;https://github.com/BrokenSwing/C-Chat/workflows/CI%20CMake/badge.svg&quot; alt=&quot;CI CMake&quot;/&gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,11 +61,63 @@ $(function() {
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">C-chat Documentation</div>  </div>
+<div class="title">C-Chat <img src="https://github.com/BrokenSwing/C-Chat/workflows/CI%20CMake/badge.svg" alt="CI CMake" style="pointer-events: none;" class="inline"/> </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_README"></a> <em>A C-based chat system</em></p>
+<p><img src="assets/logo-128x128.png" alt="" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Table of content</h1>
+<ul>
+<li><a href="#releases">Releases</a></li>
+<li><a href="#building-manually">Building</a></li>
+<li><a href="#running">Running</a></li>
+<li><a href="#features">Features</a></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Releases</h1>
+<p>Releases of the client and the server can be found in <a href="https://github.com/BrokenSwing/C-Chat/releases">releases tab</a>.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Version </th><th class="markdownTableHeadCenter">Multiple clients support (2+) </th><th class="markdownTableHeadCenter">Parallel messages sendng/receiving  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">v1.0.0 </td><td class="markdownTableBodyCenter">:x: </td><td class="markdownTableBodyCenter">:x:  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">v2.0.0 </td><td class="markdownTableBodyCenter">:x: </td><td class="markdownTableBodyCenter">:white_check_mark:  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">v3.0.0 </td><td class="markdownTableBodyCenter">:white_check_mark: </td><td class="markdownTableBodyCenter">:white_check_mark:  </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Building manually</h1>
+<ul>
+<li>Use CMake</li>
+<li>Using gcc<ul>
+<li>Unix : <code>gcc -lpthread src/client/** src/common/** -o client</code> and <code>gcc -lpthread src/client/** src/common/** -o server</code></li>
+<li>Windows : <code>gcc src/client/** src/common/** -o client</code> and <code>gcc src/client/** src/common/** -o server</code></li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Running</h1>
+<p>Start server binary then client binary.</p><ul>
+<li>Unix : <code>./server</code> then <code>./client</code></li>
+<li>Windows : <code>server.exe</code> then <code>client.exe</code></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Features</h1>
+<h3><a class="anchor" id="autotoc_md6"></a>
+Commands</h3>
+<p>You can use commands on client, here are the available commands :</p><ul>
+<li><code>/nick &lt;new_username&gt;</code> : defines your new username</li>
+<li><code>/file &lt;send | receive&gt;</code><ul>
+<li><code>/file send &lt;filename&gt;</code> : sends the file with the given name to other clients of the room</li>
+<li><code>/file receive &lt;file_id&gt;</code> : receives the file with the given id (file sent by a client) </li>
+</ul>
+</li>
+</ul>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

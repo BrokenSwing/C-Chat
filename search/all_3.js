@@ -13,5 +13,6 @@ var searchData=
   ['createmutex_17',['createMutex',['../synchronization_8h.html#a5ad343324c8994757524ff5a5b99210d',1,'synchronization.h']]],
   ['createreadwritelock_18',['createReadWriteLock',['../synchronization_8h.html#a392a277d0e7dee8ad9111b79bb3b23ed',1,'synchronization.c']]],
   ['createserversocket_19',['createServerSocket',['../sockets_8h.html#a1e6e7f430e310ab8461e5dcfea9fd618',1,'sockets.h']]],
-  ['createthread_20',['createThread',['../threads_8h.html#a3429a9f7c20365bdc5fbce950d5ed245',1,'threads.h']]]
+  ['createthread_20',['createThread',['../threads_8h.html#a3429a9f7c20365bdc5fbce950d5ed245',1,'threads.h']]],
+  ['c_2dchat_20_3cimg_20src_3d_22https_3a_2f_2fgithub_2ecom_2fbrokenswing_2fc_2dchat_2fworkflows_2fci_2520cmake_2fbadge_2esvg_22_20alt_3d_22ci_20cmake_22_2f_3e_21',['C-Chat &lt;img src=&quot;https://github.com/BrokenSwing/C-Chat/workflows/CI%20CMake/badge.svg&quot; alt=&quot;CI CMake&quot;/&gt;',['../index.html',1,'']]]
 ];
