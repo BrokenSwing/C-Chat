@@ -26,11 +26,11 @@
     #include <unistd.h>
     #include <inttypes.h>
 
-    struct UnixSocketInfo {
+    struct UnixSocket {
         int socket;
     };
 
-    SocketInfo createClientSocket(const char* ipAddress, const char* port) {
+    Socket createClientSocket(const char* ipAddress, const char* port) {
         int s = socket(PF_INET, SOCK_STREAM, 0);
         if (s == -1) {
             printf("Unable to create client socket.\n");
@@ -48,16 +48,16 @@
             exit(EXIT_FAILURE);
         }
 
-        struct UnixSocketInfo *socketInfo = malloc(sizeof(struct UnixSocketInfo));
+        struct UnixSocket *socketInfo = malloc(sizeof(struct UnixSocket));
         socketInfo->socket = s;
 
-        SocketInfo ret;
+        Socket ret;
         ret.info = socketInfo;
 
         return ret;
     }
 
-    SocketInfo createServerSocket(const char* port) {
+    Socket createServerSocket(const char* port) {
         int s = socket(PF_INET, SOCK_STREAM, 0);
         if (s == -1) {
             printf("Unable to create server socket.\n");
@@ -83,17 +83,17 @@
             exit(EXIT_FAILURE);
         }
 
-        struct UnixSocketInfo* socketInfo = malloc(sizeof(struct UnixSocketInfo));
+        struct UnixSocket* socketInfo = malloc(sizeof(struct UnixSocket));
         socketInfo->socket = s;
 
-        SocketInfo ret;
+        Socket ret;
         ret.info = socketInfo;
 
         return ret;
     }
 
-    SocketInfo acceptClient(SocketInfo serverSocket) {
-        struct UnixSocketInfo *socketInfo = serverSocket.info;
+    Socket acceptClient(Socket serverSocket) {
+        struct UnixSocket *socketInfo = serverSocket.info;
 
         struct sockaddr_in adClient;
         socklen_t lgA = sizeof(struct sockaddr_in);
@@ -104,17 +104,17 @@
             exit(EXIT_FAILURE);
         }
 
-        struct UnixSocketInfo *clientInfo = malloc(sizeof(struct UnixSocketInfo));
+        struct UnixSocket *clientInfo = malloc(sizeof(struct UnixSocket));
         clientInfo->socket = clientSocket;
 
-        SocketInfo ret;
+        Socket ret;
         ret.info = clientInfo;
 
         return ret;
     }
 
-    int receiveFrom(SocketInfo clientSocket, char* buffer, unsigned int bufferSize) {
-        struct UnixSocketInfo *socketInfo = clientSocket.info;
+    int receiveFrom(Socket clientSocket, char* buffer, unsigned int bufferSize) {
+        struct UnixSocket *socketInfo = clientSocket.info;
 
         int callSuccess = recv(socketInfo->socket, buffer, bufferSize, 0);
         if (callSuccess == 0) {
@@ -127,8 +127,8 @@
         return callSuccess;
     }
 
-    int sendTo(SocketInfo clientSocket, const char* buffer, unsigned int bufferSize) {
-        struct UnixSocketInfo *socketInfo = clientSocket.info;
+    int sendTo(Socket clientSocket, const char* buffer, unsigned int bufferSize) {
+        struct UnixSocket *socketInfo = clientSocket.info;
 
         int callSuccess = send(socketInfo->socket, buffer, bufferSize, 0);
         if (callSuccess == 0) {
@@ -141,8 +141,8 @@
         return callSuccess;
     }
 
-    void closeSocket(SocketInfo* socket) {
-        struct UnixSocketInfo *socketInfo = socket->info;
+    void closeSocket(Socket* socket) {
+        struct UnixSocket *socketInfo = socket->info;
         if (socketInfo != NULL) {
             close(socketInfo->socket);
             free(socketInfo);
@@ -172,7 +172,7 @@
 
     static int winLibInitialized = 0;
 
-    struct WinSocketInfo {
+    struct WinSocket {
         SOCKET socket;
     };
 
@@ -224,7 +224,7 @@
             exit(EXIT_FAILURE);
         }
 
-        struct WinSocketInfo* info = malloc(sizeof(struct WinSocketInfo));
+        struct WinSocket* info = malloc(sizeof(struct WinSocket));
         info->socket = ConnectSocket;
 
         Socket ret;
@@ -277,7 +277,7 @@
             exit(EXIT_FAILURE);
         }
 
-        struct WinSocketInfo* info = malloc(sizeof(struct WinSocketInfo));
+        struct WinSocket* info = malloc(sizeof(struct WinSocket));
         info->socket = ListenSocket;
 
         Socket ret;
@@ -287,7 +287,7 @@
     }
 
     Socket acceptClient(Socket info) {
-        struct WinSocketInfo *socketInfo = info.info;
+        struct WinSocket *socketInfo = info.info;
 
         SOCKET ClientSocket = accept(socketInfo->socket, NULL, NULL);
         if (ClientSocket == INVALID_SOCKET) {
@@ -297,7 +297,7 @@
             exit(EXIT_FAILURE);
         }
 
-        struct WinSocketInfo *clientInfo = malloc(sizeof(struct WinSocketInfo));
+        struct WinSocket *clientInfo = malloc(sizeof(struct WinSocket));
         clientInfo->socket = ClientSocket;
 
         Socket ret;
@@ -306,7 +306,7 @@
     }
 
     int receiveFrom(Socket clientSocket, char* buffer, unsigned int bufferSize) {
-        struct WinSocketInfo *socketInfo = clientSocket.info;
+        struct WinSocket *socketInfo = clientSocket.info;
 
         int callSuccess = recv(socketInfo->socket, buffer, bufferSize, 0);
         if (callSuccess == 0) {
@@ -320,7 +320,7 @@
     }
 
     int sendTo(Socket clientSocket, const char* buffer, unsigned int bufferSize) {
-        struct WinSocketInfo *socketInfo = clientSocket.info;
+        struct WinSocket *socketInfo = clientSocket.info;
 
         int callSuccess = send(socketInfo->socket, buffer, bufferSize, 0);
         if (callSuccess == SOCKET_ERROR) {
@@ -332,7 +332,7 @@
     }
 
     void closeSocket(Socket* socket) {
-        struct WinSocketInfo *socketInfo = socket->info;
+        struct WinSocket *socketInfo = socket->info;
         if (socketInfo != NULL) {
             shutdown(socketInfo->socket, SD_BOTH);
             closesocket(socketInfo->socket);
