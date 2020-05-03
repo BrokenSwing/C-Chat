@@ -46,7 +46,7 @@ int initClientConnection(Client* client) {
     const char* emptyUsername = "Error. Username can't be empty.";
     const char* okUsername = "Ok";
 
-    SocketInfo socket = client->socket;
+    Socket socket = client->socket;
 
     short validUsername = 0;
     int bytesReceived;
@@ -185,7 +185,7 @@ int main () {
     clientsLock = createReadWriteLock();
 
     /* Create server socket */
-    SocketInfo serverSocket = createServerSocket("27015");
+    Socket serverSocket = createServerSocket("27015");
     /* Capture interruption signal to be able to cleanup allocated resources when server stops */
     signal(SIGINT, handleServerClose);
 
@@ -193,7 +193,7 @@ int main () {
 
     while(1) {
         /* Waiting for a client to connect */
-        SocketInfo clientSocket = acceptClient(serverSocket);
+        Socket clientSocket = acceptClient(serverSocket);
 
         /* Looking for a valid id for connected client */
         acquireRead(clientsLock);

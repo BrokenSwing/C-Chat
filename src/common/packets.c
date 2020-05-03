@@ -35,7 +35,7 @@ unsigned int packets_sizeOf(Packet* packet) {
     }
 }
 
-int receiveNextPacket(SocketInfo socket, Packet* packet) {
+int receiveNextPacket(Socket socket, Packet* packet) {
     int bytesReceived;
     bytesReceived = receiveFrom(socket, &(packet->type), sizeof(Packet));
     if (bytesReceived <= 0) {
@@ -45,7 +45,7 @@ int receiveNextPacket(SocketInfo socket, Packet* packet) {
     return bytesReceived;
 }
 
-int sendPacket(SocketInfo socket, Packet* packet) {
+int sendPacket(Socket socket, Packet* packet) {
     unsigned int realSize = packets_sizeOf(packet);
     return sendTo(socket, (char*) packet, realSize);
 }

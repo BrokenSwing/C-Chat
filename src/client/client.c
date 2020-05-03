@@ -17,7 +17,7 @@
 #include "../common/sockets.h"
 #include "../common/threads.h"
 
-static SocketInfo clientSocket;
+static Socket clientSocket;
 
 THREAD_ENTRY_POINT sendMessage(void* data) {
     Packet packet = NewPacketText;

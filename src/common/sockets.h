@@ -10,15 +10,15 @@
 #define C_CHAT_SOCKETS_H
 
 /**
- * \struct SocketInfo
+ * \struct Socket
  * \brief Information of a socket.
  * 
  * To store information of a socket.
  * 
  */
-typedef struct SocketInfo {
+typedef struct Socket {
     void* info;
-} SocketInfo;
+} Socket;
 
 /**
  * \brief Creates a socket meant to be used to connect to a server socket and initialize a connection with the server.
@@ -27,7 +27,7 @@ typedef struct SocketInfo {
  * \param port The port to connect on
  * \return a ready-to-use client socket
 */
-SocketInfo createClientSocket(const char* ipAddress, const char* port);
+Socket createClientSocket(const char* ipAddress, const char* port);
 
 /**
  * \brief Creates a socket meant to receive connection from clients sockets.
@@ -35,7 +35,7 @@ SocketInfo createClientSocket(const char* ipAddress, const char* port);
  * \param port The port the server must listen on
  * \return a ready-to-use server socket
 */
-SocketInfo createServerSocket(const char* port);
+Socket createServerSocket(const char* port);
 
 /**
  * \brief Waits for a client to connect to the given server socket. Returns the socket for the connected client.
@@ -43,7 +43,7 @@ SocketInfo createServerSocket(const char* port);
  * \param serverSocket The server socket
  * \return a socket to the accepted client
 */
-SocketInfo acceptClient(SocketInfo serverSocket);
+Socket acceptClient(Socket serverSocket);
 
 /**
  * \brief Receives through from the given socket.
@@ -53,7 +53,7 @@ SocketInfo acceptClient(SocketInfo serverSocket);
  * \param bufferSize The maximum size of data to receive
  * \return the number of bytes received or -1 if an error occurred
 */
-int receiveFrom(SocketInfo clientSocket, char* buffer, unsigned int bufferSize);
+int receiveFrom(Socket clientSocket, char* buffer, unsigned int bufferSize);
 
 /**
  * \brief Sends data through the given socket.
@@ -63,14 +63,14 @@ int receiveFrom(SocketInfo clientSocket, char* buffer, unsigned int bufferSize);
  * \param bufferSize The size of the data to send
  * \return the number of bytes sent or -1 if an error occurred
 */
-int sendTo(SocketInfo clientSocket, const char* buffer, unsigned int bufferSize);
+int sendTo(Socket clientSocket, const char* buffer, unsigned int bufferSize);
 
 /**
  * \brief Closes the given socket.
  * 
  * \param socket The a pointer to the socket to close
 */
-void closeSocket(SocketInfo* socket);
+void closeSocket(Socket* socket);
 
 /**
  * \brief Performs any required resources cleanup. Must be called once all sockets usage is finished.

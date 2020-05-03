@@ -186,7 +186,7 @@
         }
     }
 
-    SocketInfo createClientSocket(const char* ipAdress, const char* port) {
+    Socket createClientSocket(const char* ipAdress, const char* port) {
         INIT_WIN_LIB();
         struct addrinfo *result = NULL,
                         hints;
@@ -227,13 +227,13 @@
         struct WinSocketInfo* info = malloc(sizeof(struct WinSocketInfo));
         info->socket = ConnectSocket;
 
-        SocketInfo ret;
+        Socket ret;
         ret.info = info;
 
         return ret;
     }
 
-    SocketInfo createServerSocket(const char* port) {
+    Socket createServerSocket(const char* port) {
         INIT_WIN_LIB();
         struct addrinfo *result = NULL,
                          hints;
@@ -280,13 +280,13 @@
         struct WinSocketInfo* info = malloc(sizeof(struct WinSocketInfo));
         info->socket = ListenSocket;
 
-        SocketInfo ret;
+        Socket ret;
         ret.info = info;
 
         return ret;
     }
 
-    SocketInfo acceptClient(SocketInfo info) {
+    Socket acceptClient(Socket info) {
         struct WinSocketInfo *socketInfo = info.info;
 
         SOCKET ClientSocket = accept(socketInfo->socket, NULL, NULL);
@@ -300,12 +300,12 @@
         struct WinSocketInfo *clientInfo = malloc(sizeof(struct WinSocketInfo));
         clientInfo->socket = ClientSocket;
 
-        SocketInfo ret;
+        Socket ret;
         ret.info = clientInfo;
         return ret;
     }
 
-    int receiveFrom(SocketInfo clientSocket, char* buffer, unsigned int bufferSize) {
+    int receiveFrom(Socket clientSocket, char* buffer, unsigned int bufferSize) {
         struct WinSocketInfo *socketInfo = clientSocket.info;
 
         int callSuccess = recv(socketInfo->socket, buffer, bufferSize, 0);
@@ -319,7 +319,7 @@
         return callSuccess;
     }
 
-    int sendTo(SocketInfo clientSocket, const char* buffer, unsigned int bufferSize) {
+    int sendTo(Socket clientSocket, const char* buffer, unsigned int bufferSize) {
         struct WinSocketInfo *socketInfo = clientSocket.info;
 
         int callSuccess = send(socketInfo->socket, buffer, bufferSize, 0);
@@ -331,7 +331,7 @@
         return callSuccess;
     }
 
-    void closeSocket(SocketInfo* socket) {
+    void closeSocket(Socket* socket) {
         struct WinSocketInfo *socketInfo = socket->info;
         if (socketInfo != NULL) {
             shutdown(socketInfo->socket, SD_BOTH);

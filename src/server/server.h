@@ -23,7 +23,7 @@
  */
 typedef struct Client {
     /** The socket from server to the client */
-    SocketInfo socket;
+    Socket socket;
     /** A buffer meant to contain client username */
     char username[USERNAME_MAX_LENGTH + 1];
     /**

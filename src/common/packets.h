@@ -112,7 +112,7 @@ typedef union Packet {
  *
  * \return the number of bytes received (can be lower than or equal to 0)
  */
-int receiveNextPacket(SocketInfo socket, Packet* packet);
+int receiveNextPacket(Socket socket, Packet* packet);
 
 /**
  * \brief Sends the given packet on the given socket
@@ -122,6 +122,6 @@ int receiveNextPacket(SocketInfo socket, Packet* packet);
  *
  * \return the number of bytes sent (can le lower than or equal to 0)
  */
-int sendPacket(SocketInfo socket, Packet* packet);
+int sendPacket(Socket socket, Packet* packet);
 
 #endif //C_CHAT_PACKETS_H
