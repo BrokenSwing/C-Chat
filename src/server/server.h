@@ -1,3 +1,8 @@
+/**
+ * \file server.h
+ * \brief Header file for server.c
+ */
+
 #ifndef C_CHAT_CLIENT_H
 #define C_CHAT_CLIENT_H
 

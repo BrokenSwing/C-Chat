@@ -1,3 +1,8 @@
+/**
+ * \file files.h
+ * \brief Provides an API to manipulate files
+ */
+
 #ifndef C_CHAT_FILES_H
 #define C_CHAT_FILES_H
 

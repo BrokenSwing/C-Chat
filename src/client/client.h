@@ -1,3 +1,8 @@
+/**
+ * \file client.h
+ * \brief Header file for client.c
+ */
+
 #include "../common/threads.h"
 
 #ifndef C_CHAT_CLIENT_H

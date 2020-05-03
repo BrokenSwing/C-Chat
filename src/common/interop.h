@@ -1,3 +1,11 @@
+/**
+ * \file interop.h
+ * \brief A file defining useful macros that indicate if we're on Windows or on POSIX-compliant OS
+ *
+ * Defines IS_POSIX : 0 if current OS is not POSIX-compliant, else 1
+ * Defines IS_WINDOWS : 0 if current OS is not Windows, else 1
+ */
+
 #ifndef C_CHAT_INTEROP_H
 #define C_CHAT_INTEROP_H
 
