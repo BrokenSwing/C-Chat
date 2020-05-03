@@ -10,7 +10,7 @@
  * \class Mutex
  * \brief A semaphore allowing mutual exclusion.
  */
-typedef struct _Mutex {
+typedef struct Mutex {
     void* info;
 } Mutex;
 
@@ -18,7 +18,7 @@ typedef struct _Mutex {
  * \class ReadWriteLock
  * \brief A read/write lock to synchronize resource access.
  */
-typedef struct _ReadWriteLock {
+typedef struct ReadWriteLock {
     Mutex writeLock;
     Mutex readLock;
     int* readCount;
