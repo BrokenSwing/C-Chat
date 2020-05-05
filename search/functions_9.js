@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['receivefrom_158',['receiveFrom',['../sockets_8h.html#a505aeab0f36eb1b9ee8d55a9b1ac86cb',1,'sockets.h']]],
-  ['receivemessages_159',['receiveMessages',['../client_8h.html#a84b5410d9a9376e73de5913a491e9415',1,'client.h']]],
-  ['receivenextpacket_160',['receiveNextPacket',['../packets_8h.html#a0bfd781c2eb5436c3b2485ab3bf23d83',1,'packets.c']]],
-  ['relayclientmessages_161',['relayClientMessages',['../server_8c.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d',1,'relayClientMessages(Client *client):&#160;server.c'],['../server_8h.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d',1,'relayClientMessages(Client *client):&#160;server.c']]],
-  ['releasemutex_162',['releaseMutex',['../synchronization_8h.html#ac85d8be7b9b703bb8aa8e4a33e959b73',1,'synchronization.h']]],
-  ['releaseread_163',['releaseRead',['../synchronization_8h.html#a49221060f671816d24dec651d6cc9476',1,'synchronization.c']]],
-  ['releasewrite_164',['releaseWrite',['../synchronization_8h.html#a033cc3e68703dd21dde11993f48f3f88',1,'synchronization.c']]],
-  ['resetcolor_165',['resetColor',['../console-color_8h.html#afe00396766eb6b8ca4674de4c5d3d949',1,'console-color.h']]]
+  ['sendmessage_183',['sendMessage',['../client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb',1,'sendMessage(void *data):&#160;client.c'],['../client_8h.html#a6d051c7b1b427efe3f668a8fbafd15fb',1,'sendMessage(void *data):&#160;client.c']]],
+  ['sendpacket_184',['sendPacket',['../packets_8h.html#a990a71e71ffd1e02fb7dbfce1408981c',1,'packets.c']]],
+  ['sendto_185',['sendTo',['../sockets_8h.html#abb18230fe4b03f025362d92c796e54dd',1,'sockets.h']]],
+  ['settextcolor_186',['setTextColor',['../console-color_8h.html#a0bf72a7e3dba93a4a09a5c1ff1c55a95',1,'console-color.h']]],
+  ['setusername_187',['setUsername',['../client_8c.html#ab8a7ea1debe22a622bd5d1403497a760',1,'setUsername(const char *newUsername):&#160;client.c'],['../client_8h.html#a5207171e621082adea5142b4079a91d1',1,'setUsername(const char *username):&#160;client.c']]]
 ];

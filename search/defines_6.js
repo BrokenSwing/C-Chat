@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quit_5fmessage_5ftype_205',['QUIT_MESSAGE_TYPE',['../constants_8h.html#a8bfa4147b9d58f4b97fa21c1fa675d8d',1,'constants.h']]]
+  ['number_5fclient_5fmax_228',['NUMBER_CLIENT_MAX',['../server_8h.html#ad172719f11bc41562233eec71e151cff',1,'server.h']]]
 ];

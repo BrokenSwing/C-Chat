@@ -82,29 +82,35 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="constants_8h.html#af0d1fa332610c5ebdf75ae745359636b">   18</a></span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define USERNAME_MAX_LENGTH 20</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="constants_8h.html#ad9dcd73dd770affdc2097d8cd0aabaf7">   24</a></span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#define MAX_CONCURRENT_FILES_EXCHANGE_PER_CLIENT 1</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="constants_8h.html#acfe40b49ec043f2be846417808b32828">   32</a></span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#define MESSAGE_TYPE_OVERHEAD 1</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="constants_8h.html#adbfd4ad1da4815d34065dbec64958a38">   38</a></span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">//---------------------------------------------------------//</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">//              MESSAGES TYPES DEFINITION                  //</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//---------------------------------------------------------//</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#define JOIN_MESSAGE_TYPE 0</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="constants_8h.html#ac4af6a17cc2f98499018102f83e61bee">   51</a></span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#define LEAVE_MESSAGE_TYPE 1</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="constants_8h.html#af9bd3683fe2cb88fb7047416e35259f7">   60</a></span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#define TEXT_MESSAGE_TYPE 2</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="constants_8h.html#aab91abdd30c15d19064327e871b805d4">   70</a></span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#define DEFINE_USERNAME_MESSAGE_TYPE 3</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="constants_8h.html#aba5c31d7831ff3526a9a633abb986723">   79</a></span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#define SERVER_ERROR_MESSAGE_TYPE 4</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="constants_8h.html#a2c840c2053634c5d350dd35eb28243c6">   88</a></span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#define USERNAME_CHANGED_MESSAGE_TYPE 5</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="constants_8h.html#a52eec94e0668008f342136fb6bca3305">   98</a></span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#define QUIT_MESSAGE_TYPE 6</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="constants_8h.html#a8bfa4147b9d58f4b97fa21c1fa675d8d">  106</a></span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">#endif //C_CHAT_CONSTANTS_H</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#define FILE_TRANSFER_CHUNK_SIZE 150</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="constants_8h.html#aaaf5abb14c1fa9b116362c66a01ed9ac">   30</a></span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//---------------------------------------------------------//</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">//              MESSAGES TYPES DEFINITION                  //</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">//---------------------------------------------------------//</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#define JOIN_MESSAGE_TYPE 0</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="constants_8h.html#ac4af6a17cc2f98499018102f83e61bee">   40</a></span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#define LEAVE_MESSAGE_TYPE 1</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="constants_8h.html#af9bd3683fe2cb88fb7047416e35259f7">   46</a></span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#define TEXT_MESSAGE_TYPE 2</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="constants_8h.html#aab91abdd30c15d19064327e871b805d4">   52</a></span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#define DEFINE_USERNAME_MESSAGE_TYPE 3</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="constants_8h.html#aba5c31d7831ff3526a9a633abb986723">   58</a></span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#define SERVER_ERROR_MESSAGE_TYPE 4</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="constants_8h.html#a2c840c2053634c5d350dd35eb28243c6">   64</a></span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#define USERNAME_CHANGED_MESSAGE_TYPE 5</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="constants_8h.html#a52eec94e0668008f342136fb6bca3305">   70</a></span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#define QUIT_MESSAGE_TYPE 6</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="constants_8h.html#a8bfa4147b9d58f4b97fa21c1fa675d8d">   76</a></span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#define FILE_UPLOAD_REQUEST_MESSAGE_TYPE 7</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="constants_8h.html#a95c850a27733278490df35c85a39d22c">   82</a></span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#define FILE_DOWNLOAD_REQUEST_MESSAGE_TYPE 8</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="constants_8h.html#acf72c4371ec78a076a7df37c029eb36f">   88</a></span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#define FILE_TRANSFER_VALIDATION_MESSAGE_TYPE 9</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="constants_8h.html#a228ae32a452fc2c812addbeb5b8128b0">   94</a></span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#define FILE_DATA_TRANSFER_MESSAGE_TYPE 10</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="constants_8h.html#a2fc5641ff613fc2ef232e855ffe1844b">  100</a></span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#endif //C_CHAT_CONSTANTS_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

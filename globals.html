@@ -82,8 +82,7 @@ $(function() {
 
 <h3><a id="index_b"></a>- b -</h3><ul>
 <li>broadcast()
-: <a class="el" href="server_8c.html#a19facf75f52f106ed2be19ea65245505">server.c</a>
-, <a class="el" href="server_8h.html#a19facf75f52f106ed2be19ea65245505">server.h</a>
+: <a class="el" href="communication_8h.html#a19facf75f52f106ed2be19ea65245505">communication.h</a>
 </li>
 </ul>
 
@@ -135,14 +134,25 @@ $(function() {
 <li>destroyThread()
 : <a class="el" href="threads_8h.html#a3c680ac6e494ecc602c8abd5e09b30f1">threads.h</a>
 </li>
-<li>disconnectClient()
-: <a class="el" href="server_8c.html#af00e8215717a1018bf79b8e40ffaba66">server.c</a>
-, <a class="el" href="server_8h.html#af00e8215717a1018bf79b8e40ffaba66">server.h</a>
-</li>
 </ul>
 
 
 <h3><a id="index_f"></a>- f -</h3><ul>
+<li>FILE_DATA_TRANSFER_MESSAGE_TYPE
+: <a class="el" href="constants_8h.html#a2fc5641ff613fc2ef232e855ffe1844b">constants.h</a>
+</li>
+<li>FILE_DOWNLOAD_REQUEST_MESSAGE_TYPE
+: <a class="el" href="constants_8h.html#acf72c4371ec78a076a7df37c029eb36f">constants.h</a>
+</li>
+<li>FILE_TRANSFER_CHUNK_SIZE
+: <a class="el" href="constants_8h.html#aaaf5abb14c1fa9b116362c66a01ed9ac">constants.h</a>
+</li>
+<li>FILE_TRANSFER_VALIDATION_MESSAGE_TYPE
+: <a class="el" href="constants_8h.html#a228ae32a452fc2c812addbeb5b8128b0">constants.h</a>
+</li>
+<li>FILE_UPLOAD_REQUEST_MESSAGE_TYPE
+: <a class="el" href="constants_8h.html#a95c850a27733278490df35c85a39d22c">constants.h</a>
+</li>
 <li>files_getInfo()
 : <a class="el" href="files_8h.html#a016c9eadae4e639f911963a955709151">files.h</a>
 </li>
@@ -156,17 +166,16 @@ $(function() {
 
 
 <h3><a id="index_h"></a>- h -</h3><ul>
-<li>handleServerClose()
-: <a class="el" href="server_8c.html#aade192ddf7e8a5315aa6c2efab6dc26d">server.c</a>
-, <a class="el" href="server_8h.html#aade192ddf7e8a5315aa6c2efab6dc26d">server.h</a>
+<li>handleClientsPackets()
+: <a class="el" href="server_8c.html#a15978039115b8c7cb6011cbb4df5ce02">server.c</a>
+, <a class="el" href="server_8h.html#a15978039115b8c7cb6011cbb4df5ce02">server.h</a>
 </li>
-</ul>
-
-
-<h3><a id="index_i"></a>- i -</h3><ul>
-<li>initClientConnection()
-: <a class="el" href="server_8c.html#ae3f5fa9a434fc6535db702c02d130896">server.c</a>
-, <a class="el" href="server_8h.html#ae3f5fa9a434fc6535db702c02d130896">server.h</a>
+<li>handleServerClose()
+: <a class="el" href="server_8h.html#aade192ddf7e8a5315aa6c2efab6dc26d">server.h</a>
+, <a class="el" href="server_8c.html#aade192ddf7e8a5315aa6c2efab6dc26d">server.c</a>
+</li>
+<li>handleTextMessageRelay()
+: <a class="el" href="communication_8h.html#ac0807f9c54b2374378a563879e70f0af">communication.h</a>
 </li>
 </ul>
 
@@ -193,12 +202,6 @@ $(function() {
 : <a class="el" href="client_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">client.c</a>
 , <a class="el" href="server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">server.c</a>
 </li>
-<li>MAX_CONCURRENT_FILES_EXCHANGE_PER_CLIENT
-: <a class="el" href="constants_8h.html#acfe40b49ec043f2be846417808b32828">constants.h</a>
-</li>
-<li>MESSAGE_TYPE_OVERHEAD
-: <a class="el" href="constants_8h.html#adbfd4ad1da4815d34065dbec64958a38">constants.h</a>
-</li>
 <li>MSG_MAX_LENGTH
 : <a class="el" href="constants_8h.html#af0d1fa332610c5ebdf75ae745359636b">constants.h</a>
 </li>
@@ -209,11 +212,26 @@ $(function() {
 <li>NewPacketDefineUsername
 : <a class="el" href="packets_8h.html#a6ec0fb53b0d3eaf38155b617d06315db">packets.h</a>
 </li>
+<li>NewPacketFileDataTransfer
+: <a class="el" href="packets_8h.html#afcfd189a56eb32474d813a14c2d7550d">packets.h</a>
+</li>
+<li>NewPacketFileDownloadRequest
+: <a class="el" href="packets_8h.html#a943ca8b6293a6486ee46296f1536c6e6">packets.h</a>
+</li>
+<li>NewPacketFileTransferValidation
+: <a class="el" href="packets_8h.html#af9c1ef5e7d1c1b7d362cdafbaad8ec68">packets.h</a>
+</li>
+<li>NewPacketFileUploadRequest
+: <a class="el" href="packets_8h.html#a7dd7a35236165f64a8356b7bb12a8e13">packets.h</a>
+</li>
 <li>NewPacketJoin
 : <a class="el" href="packets_8h.html#af4b17ac320cb4417d2f9ec16581021ad">packets.h</a>
 </li>
 <li>NewPacketLeave
 : <a class="el" href="packets_8h.html#a1882d139426f11655e2f8c64e5c2ba71">packets.h</a>
+</li>
+<li>NewPacketQuit
+: <a class="el" href="packets_8h.html#aa1b2f5ae3f9a1aac88f80b95ef92f90d">packets.h</a>
 </li>
 <li>NewPacketServerErrorMessage
 : <a class="el" href="packets_8h.html#ae291625fae5ce23c63628784075bcf11">packets.h</a>
@@ -247,10 +265,6 @@ $(function() {
 <li>receiveNextPacket()
 : <a class="el" href="packets_8h.html#a0bfd781c2eb5436c3b2485ab3bf23d83">packets.h</a>
 </li>
-<li>relayClientMessages()
-: <a class="el" href="server_8c.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">server.c</a>
-, <a class="el" href="server_8h.html#af1f91fbc99a1d4fd38d0b2cb98ec5a1d">server.h</a>
-</li>
 <li>releaseMutex()
 : <a class="el" href="synchronization_8h.html#ac85d8be7b9b703bb8aa8e4a33e959b73">synchronization.h</a>
 </li>
@@ -267,10 +281,6 @@ $(function() {
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
-<li>scanForFreeSocketSlot()
-: <a class="el" href="server_8c.html#ab37e88dfc833c4ba909999902705f3ba">server.c</a>
-, <a class="el" href="server_8h.html#ab37e88dfc833c4ba909999902705f3ba">server.h</a>
-</li>
 <li>sendMessage()
 : <a class="el" href="client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb">client.c</a>
 , <a class="el" href="client_8h.html#a6d051c7b1b427efe3f668a8fbafd15fb">client.h</a>
@@ -290,6 +300,12 @@ $(function() {
 <li>setUsername()
 : <a class="el" href="client_8c.html#ab8a7ea1debe22a622bd5d1403497a760">client.c</a>
 , <a class="el" href="client_8h.html#a5207171e621082adea5142b4079a91d1">client.h</a>
+</li>
+<li>SYNC_CLIENT_READ
+: <a class="el" href="server_8h.html#a40edd539950cd6e70ba11cc4e5dd561e">server.h</a>
+</li>
+<li>SYNC_CLIENT_WRITE
+: <a class="el" href="server_8h.html#ad9b5962f677b425a692d9fbb1eb89d0b">server.h</a>
 </li>
 </ul>
 

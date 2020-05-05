@@ -106,6 +106,18 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_packet_quit.html">PacketQuit</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This packet is sent to server by client to notify him he wants to quit the room.  <a href="struct_packet_quit.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_packet_file_upload_request.html">PacketFileUploadRequest</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This packet is sent to server to ask for file upload.  <a href="struct_packet_file_upload_request.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_packet_file_download_request.html">PacketFileDownloadRequest</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This packet is sent to server to ask for file download.  <a href="struct_packet_file_download_request.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_packet_file_transfer_validation.html">PacketFileTransferValidation</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This packet is sent to client by server to accept/reject a file transaction.  <a href="struct_packet_file_transfer_validation.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_packet_file_data_transfer.html">PacketFileDataTransfer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This packet is exchanged between client and server to transfer file content.  <a href="struct_packet_file_data_transfer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="union_packet.html">Packet</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A generic union type for packets.  <a href="union_packet.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,9 +151,16 @@ Variables</h2></td></tr>
 <tr class="separator:ae291625fae5ce23c63628784075bcf11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76ae55f04ff43b7e82e7b5d04de540cc"><td class="memItemLeft" align="right" valign="top">const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="packets_8h.html#a76ae55f04ff43b7e82e7b5d04de540cc">NewPacketUsernameChanged</a></td></tr>
 <tr class="separator:a76ae55f04ff43b7e82e7b5d04de540cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1b2f5ae3f9a1aac88f80b95ef92f90d"><td class="memItemLeft" align="right" valign="top"><a id="aa1b2f5ae3f9a1aac88f80b95ef92f90d"></a>
-const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td class="memItemRight" valign="bottom"><b>NewPacketQuit</b></td></tr>
+<tr class="memitem:aa1b2f5ae3f9a1aac88f80b95ef92f90d"><td class="memItemLeft" align="right" valign="top">const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="packets_8h.html#aa1b2f5ae3f9a1aac88f80b95ef92f90d">NewPacketQuit</a></td></tr>
 <tr class="separator:aa1b2f5ae3f9a1aac88f80b95ef92f90d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd7a35236165f64a8356b7bb12a8e13"><td class="memItemLeft" align="right" valign="top">const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="packets_8h.html#a7dd7a35236165f64a8356b7bb12a8e13">NewPacketFileUploadRequest</a></td></tr>
+<tr class="separator:a7dd7a35236165f64a8356b7bb12a8e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a943ca8b6293a6486ee46296f1536c6e6"><td class="memItemLeft" align="right" valign="top">const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="packets_8h.html#a943ca8b6293a6486ee46296f1536c6e6">NewPacketFileDownloadRequest</a></td></tr>
+<tr class="separator:a943ca8b6293a6486ee46296f1536c6e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9c1ef5e7d1c1b7d362cdafbaad8ec68"><td class="memItemLeft" align="right" valign="top">const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="packets_8h.html#af9c1ef5e7d1c1b7d362cdafbaad8ec68">NewPacketFileTransferValidation</a></td></tr>
+<tr class="separator:af9c1ef5e7d1c1b7d362cdafbaad8ec68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcfd189a56eb32474d813a14c2d7550d"><td class="memItemLeft" align="right" valign="top">const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="packets_8h.html#afcfd189a56eb32474d813a14c2d7550d">NewPacketFileDataTransfer</a></td></tr>
+<tr class="separator:afcfd189a56eb32474d813a14c2d7550d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Defines types of packets that are exchanged between client and server. </p>
@@ -238,6 +257,66 @@ const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td clas
 
 </div>
 </div>
+<a id="afcfd189a56eb32474d813a14c2d7550d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcfd189a56eb32474d813a14c2d7550d">&#9670;&nbsp;</a></span>NewPacketFileDataTransfer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const union <a class="el" href="union_packet.html">Packet</a> NewPacketFileDataTransfer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This instance is used to create a new PacketFileDataTransfert </p>
+
+</div>
+</div>
+<a id="a943ca8b6293a6486ee46296f1536c6e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a943ca8b6293a6486ee46296f1536c6e6">&#9670;&nbsp;</a></span>NewPacketFileDownloadRequest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const union <a class="el" href="union_packet.html">Packet</a> NewPacketFileDownloadRequest</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This instance is used to create new <a class="el" href="struct_packet_file_download_request.html" title="This packet is sent to server to ask for file download.">PacketFileDownloadRequest</a> </p>
+
+</div>
+</div>
+<a id="af9c1ef5e7d1c1b7d362cdafbaad8ec68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9c1ef5e7d1c1b7d362cdafbaad8ec68">&#9670;&nbsp;</a></span>NewPacketFileTransferValidation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const union <a class="el" href="union_packet.html">Packet</a> NewPacketFileTransferValidation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This instance is used to create new <a class="el" href="struct_packet_file_transfer_validation.html" title="This packet is sent to client by server to accept/reject a file transaction.">PacketFileTransferValidation</a> </p>
+
+</div>
+</div>
+<a id="a7dd7a35236165f64a8356b7bb12a8e13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dd7a35236165f64a8356b7bb12a8e13">&#9670;&nbsp;</a></span>NewPacketFileUploadRequest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const union <a class="el" href="union_packet.html">Packet</a> NewPacketFileUploadRequest</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This instance is used to create a new <a class="el" href="struct_packet_file_upload_request.html" title="This packet is sent to server to ask for file upload.">PacketFileUploadRequest</a> </p>
+
+</div>
+</div>
 <a id="af4b17ac320cb4417d2f9ec16581021ad"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af4b17ac320cb4417d2f9ec16581021ad">&#9670;&nbsp;</a></span>NewPacketJoin</h2>
 
@@ -265,6 +344,21 @@ const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td clas
       </table>
 </div><div class="memdoc">
 <p>This instance is used to create a new <a class="el" href="struct_packet_leave.html" title="This packet is sent to all client of a room when a client leaves the room.">PacketLeave</a> </p>
+
+</div>
+</div>
+<a id="aa1b2f5ae3f9a1aac88f80b95ef92f90d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1b2f5ae3f9a1aac88f80b95ef92f90d">&#9670;&nbsp;</a></span>NewPacketQuit</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const union <a class="el" href="union_packet.html">Packet</a> NewPacketQuit</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This instance is ued to create a new <a class="el" href="struct_packet_quit.html" title="This packet is sent to server by client to notify him he wants to quit the room.">PacketQuit</a> </p>
 
 </div>
 </div>

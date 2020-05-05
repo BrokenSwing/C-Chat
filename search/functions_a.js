@@ -1,9 +1,13 @@
 var searchData=
 [
-  ['scanforfreesocketslot_166',['scanForFreeSocketSlot',['../server_8c.html#ab37e88dfc833c4ba909999902705f3ba',1,'scanForFreeSocketSlot():&#160;server.c'],['../server_8h.html#ab37e88dfc833c4ba909999902705f3ba',1,'scanForFreeSocketSlot():&#160;server.c']]],
-  ['sendmessage_167',['sendMessage',['../client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb',1,'sendMessage(void *data):&#160;client.c'],['../client_8h.html#a6d051c7b1b427efe3f668a8fbafd15fb',1,'sendMessage(void *data):&#160;client.c']]],
-  ['sendpacket_168',['sendPacket',['../packets_8h.html#a990a71e71ffd1e02fb7dbfce1408981c',1,'packets.c']]],
-  ['sendto_169',['sendTo',['../sockets_8h.html#abb18230fe4b03f025362d92c796e54dd',1,'sockets.h']]],
-  ['settextcolor_170',['setTextColor',['../console-color_8h.html#a0bf72a7e3dba93a4a09a5c1ff1c55a95',1,'console-color.h']]],
-  ['setusername_171',['setUsername',['../client_8c.html#ab8a7ea1debe22a622bd5d1403497a760',1,'setUsername(const char *newUsername):&#160;client.c'],['../client_8h.html#a5207171e621082adea5142b4079a91d1',1,'setUsername(const char *username):&#160;client.c']]]
+  ['ui_5fcleanup_188',['ui_cleanUp',['../ui_8h.html#a1321f84c13363edd313f895b53417a2d',1,'ui.c']]],
+  ['ui_5ferrormessage_189',['ui_errorMessage',['../ui_8h.html#a07298030d1cbcbf172373b8a8d4230e9',1,'ui.c']]],
+  ['ui_5fgetuserinput_190',['ui_getUserInput',['../ui_8h.html#a6704021ba6d37386854aaa2f6f1211cf',1,'ui.c']]],
+  ['ui_5finformationmessage_191',['ui_informationMessage',['../ui_8h.html#ae4597eb9cb1f26760512b4d87069eed3',1,'ui.c']]],
+  ['ui_5finit_192',['ui_init',['../ui_8h.html#aa6f50ea564e0ba7375ce590a5196f12f',1,'ui.c']]],
+  ['ui_5fjoinmessage_193',['ui_joinMessage',['../ui_8h.html#adaf38e2a9ac592ebfffeff194cba4716',1,'ui.c']]],
+  ['ui_5fleavemessage_194',['ui_leaveMessage',['../ui_8h.html#a7dd983899fdc724a8b4844d3c72a7b40',1,'ui.c']]],
+  ['ui_5fmessagereceived_195',['ui_messageReceived',['../ui_8h.html#ae2513fb853fbc8737fb3ca7549c52de2',1,'ui.c']]],
+  ['ui_5freset_196',['ui_reset',['../ui_8h.html#a720a37bebeb708da396e192733d59549',1,'ui.c']]],
+  ['ui_5fwelcomemessage_197',['ui_welcomeMessage',['../ui_8h.html#ab9e95c10d2a62e16bae06dae7eaf5df4',1,'ui.c']]]
 ];
