@@ -87,7 +87,54 @@ extern const union Packet NewPacketUsernameChanged;
 struct PacketQuit {
     char type;
 };
+/** This instance is ued to create a new PacketQuit */
 extern const union Packet NewPacketQuit;
+
+/**
+ * \class PacketFileUploadRequest
+ * \brief This packet is sent to server to ask for file upload
+ */
+struct PacketFileUploadRequest {
+    char type;
+    long long fileSize;
+};
+/** This instance is used to create a new PacketFileUploadRequest */
+extern const union Packet NewPacketFileUploadRequest;
+
+/**
+ * \class PacketFileDownloadRequest
+ * \brief This packet is sent to server to ask for file download
+ */
+struct PacketFileDownloadRequest {
+    char type;
+    int fileId;
+};
+/** This instance is used to create new PacketFileDownloadRequest */
+extern const union Packet NewPacketFileDownloadRequest;
+
+/**
+ * \class PacketFileTransferValidation
+ * \brief This packet is sent to client by server to accept/reject a file transaction
+ */
+struct PacketFileTransferValidation {
+    char type;
+    char accepted;
+    int id;
+};
+/** This instance is used to create new PacketFileTransferValidation */
+extern const union Packet NewPacketFileTransferValidation;
+
+/**
+ * \class PacketFileDataTransfer
+ * \brief This packet is exchanged between client and server to transfer file content
+ */
+struct PacketFileDataTransfer {
+    char type;
+    int id;
+    char data[FILE_TRANSFER_CHUNK_SIZE];
+};
+/** This instance is used to create a new PacketFileDataTransfert */
+extern const union Packet NewPacketFileDataTransfer;
 
 /**
  * \class Packet
@@ -102,6 +149,10 @@ typedef union Packet {
     struct PacketServerErrorMessage asServerErrorMessagePacket;
     struct PacketUsernameChanged asUsernameChangedPacket;
     struct PacketQuit asQuitPacket;
+    struct PacketFileUploadRequest asFileUploadRequestPacket;
+    struct PacketFileDownloadRequest asFileDownloadRequestPacket;
+    struct PacketFileTransferValidation asFileTransferValidationPacket;
+    struct PacketFileDataTransfer asFileDataTransferPacket;
 } Packet;
 
 /**

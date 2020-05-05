@@ -7,6 +7,10 @@ const union Packet NewPacketDefineUsername = { DEFINE_USERNAME_MESSAGE_TYPE };
 const union Packet NewPacketServerErrorMessage = { SERVER_ERROR_MESSAGE_TYPE };
 const union Packet NewPacketUsernameChanged = { USERNAME_CHANGED_MESSAGE_TYPE };
 const union Packet NewPacketQuit = { QUIT_MESSAGE_TYPE };
+const union Packet NewPacketFileUploadRequest = { FILE_UPLOAD_REQUEST_MESSAGE_TYPE };
+const union Packet NewPacketFileDownloadRequest = { FILE_DOWNLOAD_REQUEST_MESSAGE_TYPE };
+const union Packet NewPacketFileTransferValidation = { FILE_TRANSFER_VALIDATION_MESSAGE_TYPE };
+const union Packet NewPacketFileDataTransfer = { FILE_DATA_TRANSFER_MESSAGE_TYPE };
 
 /**
  * \brief Retrieves the real size of the underlying type
@@ -30,6 +34,14 @@ unsigned int packets_sizeOf(Packet* packet) {
             return sizeof(struct PacketUsernameChanged);
         case QUIT_MESSAGE_TYPE:
             return sizeof(struct PacketQuit);
+        case FILE_UPLOAD_REQUEST_MESSAGE_TYPE:
+            return sizeof(struct PacketFileUploadRequest);
+        case FILE_DOWNLOAD_REQUEST_MESSAGE_TYPE:
+            return sizeof(struct PacketFileDownloadRequest);
+        case FILE_TRANSFER_VALIDATION_MESSAGE_TYPE:
+            return sizeof(struct PacketFileTransferValidation);
+        case FILE_DATA_TRANSFER_MESSAGE_TYPE:
+            return sizeof(struct PacketFileDataTransfer);
         default:
             return 0;
     }

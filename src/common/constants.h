@@ -23,18 +23,10 @@
 #define USERNAME_MAX_LENGTH 20
 
 /**
- * \def MAX_CONCURRENT_FILES_EXCHANGE_PER_CLIENT
- * \brief Maximum concurrent files exchange a client can operate with the server
- *
- * A file exchange is either receiving or sending a file.
+ * \def FILE_TRANSFER_CHUNK_SIZE
+ * \brief Size of data chunks for file transfer
  */
-#define MAX_CONCURRENT_FILES_EXCHANGE_PER_CLIENT 1
-
-/**
- * \def MESSAGE_TYPE_OVERHEAD
- * \brief The number of bytes the type of the message is
- */
-#define MESSAGE_TYPE_OVERHEAD 1
+#define FILE_TRANSFER_CHUNK_SIZE 150
 
 //---------------------------------------------------------//
 //              MESSAGES TYPES DEFINITION                  //
@@ -43,65 +35,67 @@
 /**
  * \def JOIN_MESSAGE_TYPE
  * \brief An integer representing a join message
- *
- * Content of packets of this type must contain :
- *  - the username of the joining user : (USERNAME_MAX_LENGTH + 1) bytes long
  */
 #define JOIN_MESSAGE_TYPE 0
 
 /**
  * \def LEAVE_MESSAGE_TYPE
  * \brief An integer representing a leave message
- *
- * Content of packets of this type must contain :
- *  - the username of the joining user : (USERNAME_MAX_LENGTH + 1) bytes long
  */
 #define LEAVE_MESSAGE_TYPE 1
 
 /**
  * \def TEXT_MESSAGE_TYPE
  * \brief An integer representing a text message
- *
- * Content of packets of this type must contain :
- *  - the text message : (MSG_MAX_LENGTH + 1) bytes long
- *  - the username of the user who sent to message : (USERNAME_MAX_LENGTH + 1) bytes long
  */
 #define TEXT_MESSAGE_TYPE 2
 
 /**
  * \def DEFINE_USERNAME_MESSAGE_TYPE
  * \brief An integer representing a message meant to define the client username
- *
- * Content of packets of this type must contain :
- *  - the new username of client : (USERNAME_MAX_LENGTH + 1) bytes long
  */
 #define DEFINE_USERNAME_MESSAGE_TYPE 3
 
 /**
  * \def SERVER_ERROR_MESSAGE_TYPE
  * \brief An integer representing an error message sent by server
- *
- * Content of packets of this type must contain :
- *  - the message sent by the server : (MSG_MAX_LENGTH + 1) bytes long
  */
 #define SERVER_ERROR_MESSAGE_TYPE 4
 
 /**
  * \def USERNAME_CHANGED_MESSAGE_TYPE
  * \brief An integer representing a message meant to notify clients a client changed its username
- *
- * Content of packets of this type must contain:
- *  - the old username: (USERNAME_MAX_LENGTH + 1) bytes long
- *  - the new username: (USERNAME_MAX_LENGTH + 1) bytes long
  */
 #define USERNAME_CHANGED_MESSAGE_TYPE 5
 
 /**
  * \def QUIT_MESSAGE_TYPE
  * \brief An integer representing a message meant to notify the server the client wants to quit the room
- *
- * Content of packets of this type must be empty.
  */
 #define QUIT_MESSAGE_TYPE 6
+
+/**
+ * \def FILE_UPLOAD_REQUEST_MESSAGE_TYPE
+ * \brief An integer representing a message meant to ask the server for file upload
+ */
+#define FILE_UPLOAD_REQUEST_MESSAGE_TYPE 7
+
+/**
+ * \def FILE_DOWNLOAD_REQUEST_MESSAGE_TYPE
+ * \brief An integer representing a message meant to ask the server for file download
+ */
+#define FILE_DOWNLOAD_REQUEST_MESSAGE_TYPE 8
+
+/**
+ * \def FILE_TRANSFER_VALIDATION_MESSAGE_TYPE
+ * \brief An integer representing a message sent by server to client to validate/invalidate its file upload/download request
+ */
+#define FILE_TRANSFER_VALIDATION_MESSAGE_TYPE 9
+
+/**
+ * \def FILE_DATA_TRANSFER_MESSAGE_TYPE
+ * \brief An integer representing a message that transfers file data between client and server
+ */
+#define FILE_DATA_TRANSFER_MESSAGE_TYPE 10
 
 #endif //C_CHAT_CONSTANTS_H
