@@ -10,6 +10,7 @@
 #include "../common/constants.h"
 #include "../common/threads.h"
 #include "../common/packets.h"
+#include "../common/synchronization.h"
 
 /**
  * \def NUMBER_CLIENT_MAX
@@ -35,14 +36,26 @@ typedef struct Client {
     Thread thread;
 } Client;
 
+extern ReadWriteLock clientsLock;
+extern Client* clients[NUMBER_CLIENT_MAX];
+
 /**
- * \brief Scan clients slots for an available slot.
- *
- * Iterates over clients slots to find an empty slot.
- *
- * \return -1 if no empty slot was found, else an available slot id
+ * \def SYNC_CLIENT_READ
+ * \brief Macro to synchronize clients read operation
  */
-int scanForFreeSocketSlot();
+#define SYNC_CLIENT_READ(op)     \
+acquireRead(clientsLock);        \
+op;                              \
+releaseRead(clientsLock);
+
+/**
+ * \def SYNC_CLIENT_WRITE
+ * \brief Macro to synchronize clients write operation
+ */
+#define SYNC_CLIENT_WRITE(op)     \
+acquireWrite(clientsLock);        \
+op;                               \
+releaseWrite(clientsLock);
 
 /**
  * \brief Catch interrupt signal.
@@ -52,30 +65,6 @@ int scanForFreeSocketSlot();
 void handleServerClose(int signal);
 
 /**
- * \brief Initialize a client connection to be ready to discuss.
- *
- * Receives the client username and performs checks to ensure its validity.
- *
- * \param client A pointer to an integer which contains the slot id of the client to initialize
- * \return EXIT_SUCCESS if client initialized correctly, else EXIT_FAILURE
- */
-int initClientConnection(Client* client);
-
-/**
- * \brief Disconnects the client and free allocated memory
- *
- * \param id The client slot id
- */
-void disconnectClient(int id);
-
-/**
- * \brief Broadcasts a packet to all clients
- *
- * \param packet The packet to send to all client
- */
-void broadcast(Packet* packet);
-
-/**
  * \brief Relay messages sent by given client to all known clients.
  *
  * Waits for an incoming message, and broadcast it (in a correctly formed relayed message) to all
@@ -83,6 +72,6 @@ void broadcast(Packet* packet);
  *
  * \param client The client to wait messages from
  */
-void relayClientMessages(Client* client);
+void handleClientsPackets(Client* client);
 
 #endif //C_CHAT_CLIENT_H
