@@ -1,5 +1,7 @@
 #include "communication.h"
 #include "client-info.h"
+#include <stdlib.h>
+#include <string.h>
 
 void broadcast(Packet* packet) {
     SYNC_CLIENT_READ(
