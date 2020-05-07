@@ -15,6 +15,7 @@
 #include "communication.h"
 #include "handshake.h"
 #include "client-info.h"
+#include "file-transfer.h"
 
 ReadWriteLock clientsLock;
 Client* clients[NUMBER_CLIENT_MAX] = {NULL};
@@ -50,6 +51,15 @@ void handleClientsPackets(Client* client) {
                     break;
                 case QUIT_MESSAGE_TYPE:
                     return; // Other option is to set bytesReceived to -1, but we want to keep semantic of variable
+                case FILE_UPLOAD_REQUEST_MESSAGE_TYPE:
+                    handleUploadRequest(client, &packet.asFileUploadRequestPacket);
+                    break;
+                case FILE_DATA_TRANSFER_MESSAGE_TYPE:
+                    handleFileDataUpload(client, &packet.asFileDataTransferPacket);
+                    break;
+                default:
+                    printf("Received a packet of type %d. Can't handle this type of packet.\n", packet.type);
+                    break;
             }
         }
     } while (bytesReceived >= 0);
@@ -113,6 +123,10 @@ int main () {
         Client *client = malloc(sizeof(Client)); // Free-ed in disconnectClient function
         client->socket = clientSocket;
         client->joined = 0;
+        client->fileId = 0;
+        client->fileContent = NULL;
+        client->fileSize = 0;
+        client->received = 0;
 
         SYNC_CLIENT_WRITE(clients[slotId] = client);
 

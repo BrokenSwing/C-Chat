@@ -26,7 +26,14 @@
  * \def FILE_TRANSFER_CHUNK_SIZE
  * \brief Size of data chunks for file transfer
  */
-#define FILE_TRANSFER_CHUNK_SIZE 150
+#define FILE_TRANSFER_CHUNK_SIZE 200
+
+/**
+ * \def MAX_FILE_SIZE_UPLOAD
+ * \brief Maximum allowed size for file upload (bytes)
+ */
+// 15 Ko
+#define MAX_FILE_SIZE_UPLOAD 15000
 
 //---------------------------------------------------------//
 //              MESSAGES TYPES DEFINITION                  //

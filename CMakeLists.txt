@@ -34,6 +34,7 @@ add_executable(Server
         src/server/handshake.c       src/server/handshake.h
         src/server/client-info.c     src/server/client-info.h
         src/server/communication.c   src/server/communication.h
+        src/server/file-transfer.c   src/server/file-transfer.h
 )
 
 target_link_libraries(Client ${CMAKE_THREAD_LIBS_INIT})

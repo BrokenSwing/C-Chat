@@ -16,8 +16,11 @@
 #include "../common/constants.h"
 #include "../common/sockets.h"
 #include "../common/threads.h"
+#include "../common/files.h"
 
 static Socket clientSocket;
+static char* uploadFilename = NULL;
+static Thread uploadThread;
 
 THREAD_ENTRY_POINT sendMessage(void* data) {
     Packet packet = NewPacketText;
@@ -31,11 +34,62 @@ THREAD_ENTRY_POINT sendMessage(void* data) {
     }
 }
 
+THREAD_ENTRY_POINT fileUploadWorker(void* data) {
+    unsigned int fileId = *((unsigned int*)data);
+    free(data);
+
+    FileInfo info = files_getInfo(uploadFilename);
+    char* content = malloc(info.size);
+    if (files_readFile(uploadFilename, content, info.size) != -1) {
+        Packet dataPacket = NewPacketFileDataTransfer;
+        dataPacket.asFileDataTransferPacket.id = fileId;
+        long long sent = 0;
+        while (sent < info.size) {
+            long long remaining = info.size - sent;
+            long long toSend = remaining > FILE_TRANSFER_CHUNK_SIZE ? FILE_TRANSFER_CHUNK_SIZE : remaining;
+            memcpy(dataPacket.asFileDataTransferPacket.data, content + sent, toSend);
+            sendPacket(clientSocket, &dataPacket);
+            sent += toSend;
+        }
+    } else {
+        ui_errorMessage("Unable to read file content.");
+    }
+    free(content);
+    free(uploadFilename);
+    uploadFilename = NULL;
+    destroyThread(&uploadThread);
+    return 0;
+}
+
+void sendFile(const char* filename) {
+    if (uploadFilename) {
+        ui_errorMessage("Already uploading a file.");
+        return;
+    }
+
+    FileInfo info = files_getInfo(filename);
+    if (info.exists && !info.isDirectory) {
+        uploadFilename = malloc(strlen(filename) + 1);
+        memcpy(uploadFilename, filename, strlen(filename) + 1);
+
+        Packet fileUploadPacket = NewPacketFileUploadRequest;
+        fileUploadPacket.asFileUploadRequestPacket.fileSize = info.size;
+        if(sendPacket(clientSocket, &fileUploadPacket) <= 0) {
+            ui_errorMessage("Unable to send the file, unknown error.");
+            free(uploadFilename);
+            uploadFilename = NULL;
+        }
+    } else {
+        ui_errorMessage("This file does not exist or is a directory.");
+    }
+
+}
+
 COMMAND_HANDLER(command,
 COMMAND(file, "Usage: /file <send | receive>",
         COMMAND(send, "Usage: /file send <filepath>",
             if (strlen(command) > 0) {
-                    ui_informationMessage("Command send detected");
+                    sendFile(command);
                     return;
                 }
             )
@@ -93,7 +147,17 @@ void receiveMessages() {
                     changeMessage[oldUsernameLength + 25 + newUsernameLength] = '\0';
                     ui_informationMessage(changeMessage);
                     break;
-                default:
+                case FILE_TRANSFER_VALIDATION_MESSAGE_TYPE:
+                    if (packet.asFileTransferValidationPacket.accepted) {
+                        ui_informationMessage("Beginning file upload.");
+                        unsigned int* fileId = malloc(sizeof(unsigned int));
+                        *fileId = packet.asFileTransferValidationPacket.id;
+                        uploadThread = createThread(fileUploadWorker, fileId);
+                    } else {
+                        ui_errorMessage("Server rejected file upload.");
+                        free(uploadFilename);
+                        uploadFilename = NULL;
+                    }
                     break;
             }
         }

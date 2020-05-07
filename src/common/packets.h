@@ -119,7 +119,7 @@ extern const union Packet NewPacketFileDownloadRequest;
 struct PacketFileTransferValidation {
     char type;
     char accepted;
-    int id;
+    unsigned int id;
 };
 /** This instance is used to create new PacketFileTransferValidation */
 extern const union Packet NewPacketFileTransferValidation;
@@ -130,7 +130,7 @@ extern const union Packet NewPacketFileTransferValidation;
  */
 struct PacketFileDataTransfer {
     char type;
-    int id;
+    unsigned int id;
     char data[FILE_TRANSFER_CHUNK_SIZE];
 };
 /** This instance is used to create a new PacketFileDataTransfert */

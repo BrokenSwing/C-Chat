@@ -63,5 +63,8 @@ void disconnectClient(int id) {
     printf("Client disconnected : %s\n", client->username);
 
     /* Free heap-allocated memory for client */
+    if (client->fileContent != NULL) {
+        free(client->fileContent);
+    }
     free(client);
 }
