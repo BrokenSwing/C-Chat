@@ -49,7 +49,21 @@ unsigned int packets_sizeOf(Packet* packet) {
 
 int receiveNextPacket(Socket socket, Packet* packet) {
     int bytesReceived;
-    bytesReceived = receiveFrom(socket, &(packet->type), sizeof(Packet));
+    bytesReceived = receiveFrom(socket, &(packet->type), sizeof(char));
+    if (bytesReceived <= 0) {
+        return bytesReceived;
+    }
+
+    unsigned packetSize = packets_sizeOf(packet) - sizeof(char);
+    if (packetSize < 0) { // Unknown packet type
+        return bytesReceived;
+    }
+
+    if (packetSize == 0) { // No more content to read for this packet
+        return bytesReceived;
+    }
+
+    bytesReceived = receiveFrom(socket, &(packet->type) + 1, packetSize);
     if (bytesReceived <= 0) {
         return bytesReceived;
     }
