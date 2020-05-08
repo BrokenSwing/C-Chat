@@ -34,10 +34,16 @@ typedef struct Client {
     short joined;
     /** Thread relaying messages sent by user */
     Thread thread;
+
+    // TODO: Implement in a better way
+    /* Upload */
     unsigned int fileId;
     long long fileSize;
     long long received;
     char* fileContent;
+    /* Download */
+    Thread downloadThread;
+    unsigned int downloadedFileId;
 } Client;
 
 extern ReadWriteLock clientsLock;

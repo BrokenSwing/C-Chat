@@ -57,6 +57,9 @@ void handleClientsPackets(Client* client) {
                 case FILE_DATA_TRANSFER_MESSAGE_TYPE:
                     handleFileDataUpload(client, &packet.asFileDataTransferPacket);
                     break;
+                case FILE_DOWNLOAD_REQUEST_MESSAGE_TYPE:
+                    handleDownloadRequest(client, &packet.asFileDownloadRequestPacket);
+                    break;
                 default:
                     printf("Received a packet of type %d. Can't handle this type of packet.\n", packet.type);
                     break;
@@ -127,6 +130,7 @@ int main () {
         client->fileContent = NULL;
         client->fileSize = 0;
         client->received = 0;
+        client->downloadedFileId = 0;
 
         SYNC_CLIENT_WRITE(clients[slotId] = client);
 

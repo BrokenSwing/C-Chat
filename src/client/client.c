@@ -17,10 +17,16 @@
 #include "../common/sockets.h"
 #include "../common/threads.h"
 #include "../common/files.h"
+#include <string.h>
+#include <stdio.h>
 
 static Socket clientSocket;
 static char* uploadFilename = NULL;
 static Thread uploadThread;
+static char* downloadBuffer = NULL;
+static long long downloadFileSize = -1;
+static long long downloadedSize = -1;
+static unsigned int downloadFileId = 0;
 
 THREAD_ENTRY_POINT sendMessage(void* data) {
     Packet packet = NewPacketText;
@@ -85,6 +91,12 @@ void sendFile(const char* filename) {
 
 }
 
+void downloadFile(unsigned int id) {
+    Packet downloadRequestPacket = NewPacketFileDownloadRequest;
+    downloadRequestPacket.asFileDownloadRequestPacket.fileId = id;
+    sendPacket(clientSocket, &downloadRequestPacket);
+}
+
 COMMAND_HANDLER(command,
 COMMAND(file, "Usage: /file <send | receive>",
         COMMAND(send, "Usage: /file send <filepath>",
@@ -94,9 +106,12 @@ COMMAND(file, "Usage: /file <send | receive>",
                 }
             )
             COMMAND(receive, "Usage: /file receive <id>",
-            if (strlen(command) > 0) {
-                    ui_informationMessage("Command receive detected");
-                    return;
+            if (strlen(command) > 0 && downloadBuffer == NULL) {
+                    long id = strtol(command, NULL, 10);
+                    if (id > 0) {
+                        downloadFile(id);
+                        return;
+                    }
                 }
             )
         )
@@ -112,6 +127,27 @@ COMMAND(file, "Usage: /file <send | receive>",
             return;
         )
 )
+
+void handleReceivedFileData(struct PacketFileDataTransfer* packet) {
+    if (downloadBuffer && packet->id == downloadFileId) {
+        unsigned remainingToDownload = downloadFileSize - downloadedSize;
+        unsigned int nextChunkSize = remainingToDownload > FILE_TRANSFER_CHUNK_SIZE ? FILE_TRANSFER_CHUNK_SIZE : remainingToDownload;
+        memcpy(downloadBuffer + downloadedSize, packet->data, nextChunkSize);
+        downloadedSize += nextChunkSize;
+
+        if (downloadedSize >= downloadFileSize) {
+            char filename[13];
+            sprintf(filename, "r%d", downloadFileId);
+            files_writeFile(filename, downloadBuffer, downloadFileSize);
+
+            free(downloadBuffer);
+            downloadBuffer = NULL;
+            downloadFileSize = -1;
+            downloadedSize = -1;
+            downloadFileId = 0;
+        }
+    }
+}
 
 void receiveMessages() {
     Packet packet;
@@ -147,17 +183,30 @@ void receiveMessages() {
                     changeMessage[oldUsernameLength + 25 + newUsernameLength] = '\0';
                     ui_informationMessage(changeMessage);
                     break;
-                case FILE_TRANSFER_VALIDATION_MESSAGE_TYPE:
-                    if (packet.asFileTransferValidationPacket.accepted) {
+                case FILE_UPLOAD_VALIDATION_MESSAGE_TYPE:
+                    if (packet.asFileUploadValidationPacket.accepted) {
                         ui_informationMessage("Beginning file upload.");
                         unsigned int* fileId = malloc(sizeof(unsigned int));
-                        *fileId = packet.asFileTransferValidationPacket.id;
+                        *fileId = packet.asFileUploadValidationPacket.id;
                         uploadThread = createThread(fileUploadWorker, fileId);
                     } else {
                         ui_errorMessage("Server rejected file upload.");
                         free(uploadFilename);
                         uploadFilename = NULL;
                     }
+                    break;
+                case FILE_DOWNLOAD_VALIDATION_MESSAGE_TYPE:
+                    if (packet.asFileDownloadValidationPacket.accepted) {
+                        downloadFileSize = packet.asFileDownloadValidationPacket.fileSize;
+                        downloadBuffer = malloc(sizeof(char) * downloadFileSize);
+                        downloadedSize = 0;
+                        downloadFileId = packet.asFileDownloadValidationPacket.fileId;
+                    } else {
+                        ui_errorMessage("Server rejected file download.");
+                    }
+                    break;
+                case FILE_DATA_TRANSFER_MESSAGE_TYPE:
+                    handleReceivedFileData(&packet.asFileDataTransferPacket);
                     break;
             }
         }

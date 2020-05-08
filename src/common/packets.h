@@ -107,22 +107,35 @@ extern const union Packet NewPacketFileUploadRequest;
  */
 struct PacketFileDownloadRequest {
     char type;
-    int fileId;
+    unsigned int fileId;
 };
 /** This instance is used to create new PacketFileDownloadRequest */
 extern const union Packet NewPacketFileDownloadRequest;
 
 /**
- * \class PacketFileTransferValidation
- * \brief This packet is sent to client by server to accept/reject a file transaction
+ * \class PacketFileUploadValidation
+ * \brief This packet is sent to client by server to accept/reject a file upload
  */
-struct PacketFileTransferValidation {
+struct PacketFileUploadValidation {
     char type;
     char accepted;
     unsigned int id;
 };
-/** This instance is used to create new PacketFileTransferValidation */
-extern const union Packet NewPacketFileTransferValidation;
+/** This instance is used to create new PacketFileUploadValidation */
+extern const union Packet NewPacketFileUploadValidation;
+
+/**
+ * \class PacketFileDownloadValidation
+ * \brief This packet is sent to client by server to accept/reject a file download
+ */
+struct PacketFileDownloadValidation {
+    char type;
+    char accepted;
+    unsigned int fileId;
+    long long fileSize;
+};
+/** This instance is used to create new PacketFileDownloadValidation */
+extern const union Packet NewPacketFileDownloadValidation;
 
 /**
  * \class PacketFileDataTransfer
@@ -151,7 +164,8 @@ typedef union Packet {
     struct PacketQuit asQuitPacket;
     struct PacketFileUploadRequest asFileUploadRequestPacket;
     struct PacketFileDownloadRequest asFileDownloadRequestPacket;
-    struct PacketFileTransferValidation asFileTransferValidationPacket;
+    struct PacketFileUploadValidation asFileUploadValidationPacket;
+    struct PacketFileDownloadValidation asFileDownloadValidationPacket;
     struct PacketFileDataTransfer asFileDataTransferPacket;
 } Packet;
 

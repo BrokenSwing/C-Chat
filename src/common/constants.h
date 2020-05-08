@@ -94,15 +94,21 @@
 #define FILE_DOWNLOAD_REQUEST_MESSAGE_TYPE 8
 
 /**
- * \def FILE_TRANSFER_VALIDATION_MESSAGE_TYPE
- * \brief An integer representing a message sent by server to client to validate/invalidate its file upload/download request
+ * \def FILE_UPLOAD_VALIDATION_MESSAGE_TYPE
+ * \brief An integer representing a message sent by server to client to validate/invalidate its file upload request
  */
-#define FILE_TRANSFER_VALIDATION_MESSAGE_TYPE 9
+#define FILE_UPLOAD_VALIDATION_MESSAGE_TYPE 9
 
 /**
  * \def FILE_DATA_TRANSFER_MESSAGE_TYPE
  * \brief An integer representing a message that transfers file data between client and server
  */
 #define FILE_DATA_TRANSFER_MESSAGE_TYPE 10
+
+/**
+ * \def FILE_DOWNLOAD_VALIDATION_MESSAGE_TYPE
+ * \brief An integer representing a message sent by server to client to validate/invalidate its file download request
+ */
+#define FILE_DOWNLOAD_VALIDATION_MESSAGE_TYPE 11
 
 #endif //C_CHAT_CONSTANTS_H

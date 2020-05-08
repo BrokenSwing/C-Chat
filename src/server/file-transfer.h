@@ -23,8 +23,16 @@ unsigned int generateNewFileId();
  * \brief Processes a received PacketFileDataTransfer
  *
  * \param client The client who sent the packet
- * @param packet The received packet
+ * \param packet The received packet
  */
 void handleFileDataUpload(Client* client, struct PacketFileDataTransfer* packet);
+
+/**
+ * \brief Processes a received PacketFileDownloadRequest
+ *
+ * \param client The client who sent the packet
+ * \param packet The received packet
+ */
+void handleDownloadRequest(Client* client, struct PacketFileDownloadRequest* packet);
 
 #endif //C_CHAT_FILE_TRANSFER_H

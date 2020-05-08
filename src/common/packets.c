@@ -9,7 +9,8 @@ const union Packet NewPacketUsernameChanged = { USERNAME_CHANGED_MESSAGE_TYPE };
 const union Packet NewPacketQuit = { QUIT_MESSAGE_TYPE };
 const union Packet NewPacketFileUploadRequest = { FILE_UPLOAD_REQUEST_MESSAGE_TYPE };
 const union Packet NewPacketFileDownloadRequest = { FILE_DOWNLOAD_REQUEST_MESSAGE_TYPE };
-const union Packet NewPacketFileTransferValidation = { FILE_TRANSFER_VALIDATION_MESSAGE_TYPE };
+const union Packet NewPacketFileUploadValidation = { FILE_UPLOAD_VALIDATION_MESSAGE_TYPE };
+const union Packet NewPacketFileDownloadValidation = { FILE_DOWNLOAD_VALIDATION_MESSAGE_TYPE };
 const union Packet NewPacketFileDataTransfer = { FILE_DATA_TRANSFER_MESSAGE_TYPE };
 
 /**
@@ -38,8 +39,10 @@ unsigned int packets_sizeOf(Packet* packet) {
             return sizeof(struct PacketFileUploadRequest);
         case FILE_DOWNLOAD_REQUEST_MESSAGE_TYPE:
             return sizeof(struct PacketFileDownloadRequest);
-        case FILE_TRANSFER_VALIDATION_MESSAGE_TYPE:
-            return sizeof(struct PacketFileTransferValidation);
+        case FILE_UPLOAD_VALIDATION_MESSAGE_TYPE:
+            return sizeof(struct PacketFileUploadValidation);
+        case FILE_DOWNLOAD_VALIDATION_MESSAGE_TYPE:
+            return sizeof(struct PacketFileDownloadValidation);
         case FILE_DATA_TRANSFER_MESSAGE_TYPE:
             return sizeof(struct PacketFileDataTransfer);
         default:
