@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-chat: Member List</title>
+<title>C-chat: PacketFileDownloadValidation Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,24 +62,40 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_packet_file_download_validation-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Client Member List</div>  </div>
+<div class="title">PacketFileDownloadValidation Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="struct_client.html">Client</a>, including all inherited members.</p>
-<table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>downloadedFileId</b> (defined in <a class="el" href="struct_client.html">Client</a>)</td><td class="entry"><a class="el" href="struct_client.html">Client</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>downloadThread</b> (defined in <a class="el" href="struct_client.html">Client</a>)</td><td class="entry"><a class="el" href="struct_client.html">Client</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>fileContent</b> (defined in <a class="el" href="struct_client.html">Client</a>)</td><td class="entry"><a class="el" href="struct_client.html">Client</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>fileId</b> (defined in <a class="el" href="struct_client.html">Client</a>)</td><td class="entry"><a class="el" href="struct_client.html">Client</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>fileSize</b> (defined in <a class="el" href="struct_client.html">Client</a>)</td><td class="entry"><a class="el" href="struct_client.html">Client</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="struct_client.html#a6f68cc770a6ac242eecebdcd1d3676d4">joined</a></td><td class="entry"><a class="el" href="struct_client.html">Client</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>received</b> (defined in <a class="el" href="struct_client.html">Client</a>)</td><td class="entry"><a class="el" href="struct_client.html">Client</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="struct_client.html#aaa5b0226a45898f348e498156e6f571b">socket</a></td><td class="entry"><a class="el" href="struct_client.html">Client</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="struct_client.html#a64cbb5220335c16891724ded215171c8">thread</a></td><td class="entry"><a class="el" href="struct_client.html">Client</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="struct_client.html#a7f5ba83c6457f6092e6615bcfec96053">username</a></td><td class="entry"><a class="el" href="struct_client.html">Client</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<p>This packet is sent to client by server to accept/reject a file download.  
+ <a href="struct_packet_file_download_validation.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="packets_8h_source.html">packets.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:aacad7aebbec2ed631daea99b7e7bf944"><td class="memItemLeft" align="right" valign="top"><a id="aacad7aebbec2ed631daea99b7e7bf944"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
+<tr class="separator:aacad7aebbec2ed631daea99b7e7bf944"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f41c93070b52730c4c5f63afad02155"><td class="memItemLeft" align="right" valign="top"><a id="a0f41c93070b52730c4c5f63afad02155"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>accepted</b></td></tr>
+<tr class="separator:a0f41c93070b52730c4c5f63afad02155"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34a8010747fd3ad3af47be9807ac4662"><td class="memItemLeft" align="right" valign="top"><a id="a34a8010747fd3ad3af47be9807ac4662"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>fileId</b></td></tr>
+<tr class="separator:a34a8010747fd3ad3af47be9807ac4662"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eb1d4aa111b387a0112118aa694d06c"><td class="memItemLeft" align="right" valign="top"><a id="a6eb1d4aa111b387a0112118aa694d06c"></a>
+long long&#160;</td><td class="memItemRight" valign="bottom"><b>fileSize</b></td></tr>
+<tr class="separator:a6eb1d4aa111b387a0112118aa694d06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This packet is sent to client by server to accept/reject a file download. </p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
+<li>src/common/<a class="el" href="packets_8h_source.html">packets.h</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

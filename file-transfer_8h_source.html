@@ -82,11 +82,14 @@ $(function() {
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">void</span> handleFileDataUpload(<a class="code" href="struct_client.html">Client</a>* client, <span class="keyword">struct</span> <a class="code" href="struct_packet_file_data_transfer.html">PacketFileDataTransfer</a>* packet);</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif //C_CHAT_FILE_TRANSFER_H</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> handleDownloadRequest(<a class="code" href="struct_client.html">Client</a>* client, <span class="keyword">struct</span> <a class="code" href="struct_packet_file_download_request.html">PacketFileDownloadRequest</a>* packet);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif //C_CHAT_FILE_TRANSFER_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astruct_packet_file_upload_request_html"><div class="ttname"><a href="struct_packet_file_upload_request.html">PacketFileUploadRequest</a></div><div class="ttdoc">This packet is sent to server to ask for file upload.</div><div class="ttdef"><b>Definition:</b> packets.h:97</div></div>
+<div class="ttc" id="astruct_packet_file_download_request_html"><div class="ttname"><a href="struct_packet_file_download_request.html">PacketFileDownloadRequest</a></div><div class="ttdoc">This packet is sent to server to ask for file download.</div><div class="ttdef"><b>Definition:</b> packets.h:108</div></div>
 <div class="ttc" id="astruct_client_html"><div class="ttname"><a href="struct_client.html">Client</a></div><div class="ttdoc">A type representing a connected client.</div><div class="ttdef"><b>Definition:</b> server.h:25</div></div>
-<div class="ttc" id="astruct_packet_file_data_transfer_html"><div class="ttname"><a href="struct_packet_file_data_transfer.html">PacketFileDataTransfer</a></div><div class="ttdoc">This packet is exchanged between client and server to transfer file content.</div><div class="ttdef"><b>Definition:</b> packets.h:131</div></div>
+<div class="ttc" id="astruct_packet_file_data_transfer_html"><div class="ttname"><a href="struct_packet_file_data_transfer.html">PacketFileDataTransfer</a></div><div class="ttdoc">This packet is exchanged between client and server to transfer file content.</div><div class="ttdef"><b>Definition:</b> packets.h:144</div></div>
 <div class="ttc" id="aserver_8h_html"><div class="ttname"><a href="server_8h.html">server.h</a></div><div class="ttdoc">Header file for server.c.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
