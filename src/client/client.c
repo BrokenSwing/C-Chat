@@ -22,12 +22,8 @@
 #include "file-transfer.h"
 
 Socket clientSocket;
-char* uploadFilename = NULL;
-Thread uploadThread;
-char* downloadBuffer = NULL;
-long long downloadFileSize = -1;
-long long downloadedSize = -1;
-unsigned int downloadFileId = 0;
+struct UploadData uploadData[MAX_CONCURRENT_FILE_TRANSFER];
+struct DownloadData downloadData[MAX_CONCURRENT_FILE_TRANSFER];
 
 THREAD_ENTRY_POINT sendMessage(void* data) {
     Packet packet = NewPacketText;
@@ -50,7 +46,7 @@ COMMAND(file, "Usage: /file <send | receive>",
                 }
             )
             COMMAND(receive, "Usage: /file receive <id>",
-            if (strlen(command) > 0 && downloadBuffer == NULL) {
+            if (strlen(command) > 0) {
                     long id = strtol(command, NULL, 10);
                     if (id > 0) {
                         sendFileDownloadRequest(id);
@@ -173,6 +169,13 @@ void setUsername(const char* newUsername) {
  * \return EXIT_SUCCESS - normal program termination.
  */
 int main() {
+    /* Initialize upload data */
+    for (int i = 0; i < MAX_CONCURRENT_FILE_TRANSFER; i++) {
+        uploadData[i].uploadFilename = NULL;
+        downloadData[i].downloadBuffer = NULL;
+        downloadData[i].downloadFileId = 0;
+    }
+
     ui_init();
     clientSocket = createClientSocket("127.0.0.1", "27015");
     ui_informationMessage("Hi, you're connected to server !");

@@ -37,13 +37,17 @@ typedef struct Client {
 
     // TODO: Implement in a better way
     /* Upload */
-    unsigned int fileId;
-    long long fileSize;
-    long long received;
-    char* fileContent;
+    struct {
+        unsigned int fileId;
+        long long fileSize;
+        long long received;
+        char* fileContent;
+    } uploadData[MAX_CONCURRENT_FILE_TRANSFER];
     /* Download */
-    Thread downloadThread;
-    unsigned int downloadedFileId;
+    struct {
+        Thread downloadThread;
+        unsigned int downloadedFileId;
+    } downloadData[MAX_CONCURRENT_FILE_TRANSFER];
 } Client;
 
 extern ReadWriteLock clientsLock;

@@ -11,10 +11,18 @@ unsigned int generateNewFileId() {
     return nextFileId++;
 }
 
+int findAvailableUploadSlot(Client* client) {
+    int i = 0;
+    while (i < MAX_CONCURRENT_FILE_TRANSFER && client->uploadData[i].fileId != 0) {
+        i++;
+    }
+    return i == MAX_CONCURRENT_FILE_TRANSFER ? -1 : i;
+}
+
 void handleUploadRequest(Client* client, struct PacketFileUploadRequest* packet) {
-    int alreadyUploading = client->fileId != 0;
+    int uploadId = findAvailableUploadSlot(client);
     int fileTooLarge = packet->fileSize <= 0 || packet->fileSize > MAX_FILE_SIZE_UPLOAD;
-    if (alreadyUploading || fileTooLarge) {
+    if (uploadId == -1 || fileTooLarge) {
         /* The client is already uploading a file or file is too large. Refusing file upload */
 
         /* Create refuse packet */
@@ -34,7 +42,7 @@ void handleUploadRequest(Client* client, struct PacketFileUploadRequest* packet)
         response = NewPacketServerErrorMessage;
 
         /* Set error message */
-        if (alreadyUploading) {
+        if (uploadId == -1) {
             memcpy(response.asServerErrorMessagePacket.message, "Already uploading.", 19);
         } else {
             memcpy(response.asServerErrorMessagePacket.message, "File too large.", 16);
@@ -58,59 +66,84 @@ void handleUploadRequest(Client* client, struct PacketFileUploadRequest* packet)
         sendPacket(client->socket, &response);
 
         /* Set client upload state */
-        client->fileId = fileId;
-        client->fileContent = malloc(sizeof(char) * packet->fileSize);
-        client->fileSize = packet->fileSize;
-        client->received = 0;
+        client->uploadData[uploadId].fileId = fileId;
+        client->uploadData[uploadId].fileContent = malloc(sizeof(char) * packet->fileSize);
+        client->uploadData[uploadId].fileSize = packet->fileSize;
+        client->uploadData[uploadId].received = 0;
     }
 }
 
+int findUploadIdForFile(Client* client, unsigned fileId) {
+    int i = 0;
+    while (i < MAX_CONCURRENT_FILE_TRANSFER && client->uploadData[i].fileId != fileId) {
+        i++;
+    }
+
+    return i == MAX_CONCURRENT_FILE_TRANSFER ? -1 : i;
+}
+
 void handleFileDataUpload(Client* client, struct PacketFileDataTransfer* packet) {
-    if (client->fileId > 0 && packet->id == client->fileId) {
+    int uploadId = findUploadIdForFile(client, packet->id);
+    if (packet->id > 0 && uploadId != -1) {
         /* The client is uploading and the packet data refers to the current upload file */
 
         /* Calculating expected data chunk size */
-        unsigned remainingToDownload = client->fileSize - client->received;
+        unsigned remainingToDownload = client->uploadData[uploadId].fileSize - client->uploadData[uploadId].received;
         unsigned int nextChunkSize = remainingToDownload > FILE_TRANSFER_CHUNK_SIZE ? FILE_TRANSFER_CHUNK_SIZE : remainingToDownload;
 
         /* Appending data to file content */
-        memcpy(client->fileContent + client->received, packet->data, nextChunkSize);
-        client->received += nextChunkSize;
+        memcpy(client->uploadData[uploadId].fileContent + client->uploadData[uploadId].received, packet->data, nextChunkSize);
+        client->uploadData[uploadId].received += nextChunkSize;
 
-        if (client->received >= client->fileSize) {
+        if (client->uploadData[uploadId].received >= client->uploadData[uploadId].fileSize) {
             /* We received all file content */
 
             /* Writing file to disk */
             char filename[12];
-            sprintf(filename, "%d", client->fileId);
-            files_writeFile(filename, client->fileContent, client->fileSize);
+            sprintf(filename, "%d", client->uploadData[uploadId].fileId);
+            files_writeFile(filename, client->uploadData[uploadId].fileContent, client->uploadData[uploadId].fileSize);
 
             /* Telling clients a new file is available */
             Packet uploadSuccessPacket = NewPacketServerErrorMessage; // TODO: Create a ServerInformation packet
-            sprintf(uploadSuccessPacket.asServerErrorMessagePacket.message, "%s uploaded file %d", client->username, client->fileId);
+            sprintf(
+                uploadSuccessPacket.asServerErrorMessagePacket.message,
+                "%s uploaded file %d",
+                client->username,
+                client->uploadData[uploadId].fileId
+            );
             broadcast(&uploadSuccessPacket);
 
             /* Set client upload state */
-            free(client->fileContent);
-            client->fileId = 0;
-            client->received = 0;
-            client->fileContent = NULL;
+            free(client->uploadData[uploadId].fileContent);
+            client->uploadData[uploadId].fileId = 0;
+            client->uploadData[uploadId].received = 0;
+            client->uploadData[uploadId].fileContent = NULL;
         }
     } // Just ignoring packet if id does not match
 }
 
+int findAvailableDownloadSlot(Client* client) {
+    int i = 0;
+    while(i < MAX_CONCURRENT_FILE_TRANSFER && client->downloadData[i].downloadedFileId != 0) {
+        i++;
+    }
+
+    return i == MAX_CONCURRENT_FILE_TRANSFER ? -1 : i;
+}
+
 THREAD_ENTRY_POINT uploadFileToClient(void* data) {
-    Client* client = (Client*)data;
+    Client* client = *((Client**)data);
+    int downloadId = *((int*)data + sizeof(Client*));
 
     char filename[12];
-    sprintf(filename, "%d", client->downloadedFileId);
+    sprintf(filename, "%d", client->downloadData[downloadId].downloadedFileId);
     FileInfo info = files_getInfo(filename);
 
     if (info.exists && !info.isDirectory) {
         char* fileContent = malloc(sizeof(char) * info.size);
         if (files_readFile(filename, fileContent, info.size) != -1) {
             Packet dataPacket = NewPacketFileDataTransfer;
-            dataPacket.asFileDataTransferPacket.id = client->downloadedFileId;
+            dataPacket.asFileDataTransferPacket.id = client->downloadData[downloadId].downloadedFileId;
             long long sent = 0;
             while (sent < info.size) {
                 long long remaining = info.size - sent;
@@ -118,32 +151,33 @@ THREAD_ENTRY_POINT uploadFileToClient(void* data) {
                 memcpy(dataPacket.asFileDataTransferPacket.data, fileContent + sent, toSend);
                 if (sendPacket(client->socket, &dataPacket) == -1) {
                     free(fileContent);
-                    client->downloadedFileId = 0;
-                    destroyThread(&client->downloadThread);
+                    client->downloadData[downloadId].downloadedFileId = 0;
+                    destroyThread(&client->downloadData[downloadId].downloadThread);
                     return 0;
                 }
                 sent += toSend;
             }
         } else {
             Packet cancelPacket = NewPacketFileTransferCancel;
-            cancelPacket.asFileTransferCancel.id = client->downloadedFileId;
+            cancelPacket.asFileTransferCancel.id = client->downloadData[downloadId].downloadedFileId;
             sendPacket(client->socket, &cancelPacket);
         }
 
         free(fileContent);
     } else {
         Packet cancelPacket = NewPacketFileTransferCancel;
-        cancelPacket.asFileTransferCancel.id = client->downloadedFileId;
+        cancelPacket.asFileTransferCancel.id = client->downloadData[downloadId].downloadedFileId;
         sendPacket(client->socket, &cancelPacket);
     }
 
-    client->downloadedFileId = 0;
-    destroyThread(&client->downloadThread);
+    client->downloadData[downloadId].downloadedFileId = 0;
+    destroyThread(&client->downloadData[downloadId].downloadThread);
     return 0;
 }
 
 void handleDownloadRequest(Client* client, struct PacketFileDownloadRequest* packet) {
-    if (client->downloadedFileId) {
+    int downloadId = findAvailableDownloadSlot(client);
+    if (downloadId == -1) {
         /* Client is already downloading a file. Refusing download request */
 
         /* Create packet */
@@ -179,9 +213,14 @@ void handleDownloadRequest(Client* client, struct PacketFileDownloadRequest* pac
             /* Send packet to client */
             sendPacket(client->socket, &acceptDownloadPacket);
 
+            /* Allocating thread data */
+            void* threadData = malloc(sizeof(Client*) + sizeof(int));
+            *((Client**)threadData) = client;
+            *((int*)threadData + sizeof(Client*)) = downloadId;
+
             /* Define client download state and start upload worker */
-            client->downloadedFileId = packet->fileId;
-            client->downloadThread = createThread(uploadFileToClient, client); // Start sending data
+            client->downloadData[downloadId].downloadedFileId = packet->fileId;
+            client->downloadData[downloadId].downloadThread = createThread(uploadFileToClient, threadData); // Start sending data
         } else {
             /* The requested file can't be downloaded */
 

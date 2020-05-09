@@ -63,8 +63,10 @@ void disconnectClient(int id) {
     printf("Client disconnected : %s\n", client->username);
 
     /* Free heap-allocated memory for client */
-    if (client->fileContent != NULL) {
-        free(client->fileContent);
+    for (int i = 0; i < MAX_CONCURRENT_FILE_TRANSFER; i++) {
+        if (client->uploadData[i].fileContent != NULL) {
+            free(client->uploadData[i].fileContent);
+        }
     }
     free(client);
 }

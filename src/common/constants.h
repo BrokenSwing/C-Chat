@@ -33,7 +33,13 @@
  * \brief Maximum allowed size for file upload (bytes)
  */
 // 15 Ko
-#define MAX_FILE_SIZE_UPLOAD 15000
+#define MAX_FILE_SIZE_UPLOAD 800000000
+
+/**
+ * \def MAX_CONCURRENT_FILE_TRANSFER
+ * \brief Maximum concurrent transfer of file allowed per client
+ */
+#define MAX_CONCURRENT_FILE_TRANSFER 2
 
 //---------------------------------------------------------//
 //              MESSAGES TYPES DEFINITION                  //

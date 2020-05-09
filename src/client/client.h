@@ -8,13 +8,24 @@
 
 #include "../common/threads.h"
 
+struct UploadData {
+    char* uploadFilename;
+    Thread uploadThread;
+};
+
+struct DownloadData {
+    char* downloadBuffer;
+    long long downloadFileSize;
+    long long downloadedSize;
+    unsigned int downloadFileId;
+};
+
 extern Socket clientSocket;
-extern char* uploadFilename;
-extern Thread uploadThread;
-extern char* downloadBuffer;
-extern long long downloadFileSize;
-extern long long downloadedSize;
-extern unsigned int downloadFileId;
+/* Upload */
+extern struct UploadData uploadData[MAX_CONCURRENT_FILE_TRANSFER]; // TODO: Sync access
+/* Download */
+extern struct DownloadData downloadData[MAX_CONCURRENT_FILE_TRANSFER]; // TODO: Sync access
+
 
 /**
  * \brief An entry point for a thread that gets user input and send it to server

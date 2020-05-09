@@ -126,11 +126,14 @@ int main () {
         Client *client = malloc(sizeof(Client)); // Free-ed in disconnectClient function
         client->socket = clientSocket;
         client->joined = 0;
-        client->fileId = 0;
-        client->fileContent = NULL;
-        client->fileSize = 0;
-        client->received = 0;
-        client->downloadedFileId = 0;
+        for (int i = 0; i < MAX_CONCURRENT_FILE_TRANSFER; i++) {
+            client->uploadData[i].fileId = 0;
+            client->uploadData[i].fileContent = NULL;
+            client->uploadData[i].fileSize = 0;
+            client->uploadData[i].received = 0;
+
+            client->downloadData[i].downloadedFileId = 0;
+        }
 
         SYNC_CLIENT_WRITE(clients[slotId] = client);
 
