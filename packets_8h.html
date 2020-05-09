@@ -121,6 +121,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_packet_file_data_transfer.html">PacketFileDataTransfer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This packet is exchanged between client and server to transfer file content.  <a href="struct_packet_file_data_transfer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_packet_file_transfer_cancel.html">PacketFileTransferCancel</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This packet is sent between client/server to cancel a file transfer.  <a href="struct_packet_file_transfer_cancel.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="union_packet.html">Packet</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A generic union type for packets.  <a href="union_packet.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,6 +169,8 @@ Variables</h2></td></tr>
 <tr class="separator:a9890b7cc61a9a3cb4349a2a66fdcbae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcfd189a56eb32474d813a14c2d7550d"><td class="memItemLeft" align="right" valign="top">const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="packets_8h.html#afcfd189a56eb32474d813a14c2d7550d">NewPacketFileDataTransfer</a></td></tr>
 <tr class="separator:afcfd189a56eb32474d813a14c2d7550d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72a5bef322a75921924f9de1e5a6d619"><td class="memItemLeft" align="right" valign="top">const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="packets_8h.html#a72a5bef322a75921924f9de1e5a6d619">NewPacketFileTransferCancel</a></td></tr>
+<tr class="separator:a72a5bef322a75921924f9de1e5a6d619"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Defines types of packets that are exchanged between client and server. </p>
@@ -273,7 +278,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This instance is used to create a new PacketFileDataTransfert </p>
+<p>This instance is used to create a new <a class="el" href="struct_packet_file_data_transfer.html" title="This packet is exchanged between client and server to transfer file content.">PacketFileDataTransfer</a> </p>
 
 </div>
 </div>
@@ -304,6 +309,21 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>This instance is used to create new <a class="el" href="struct_packet_file_download_validation.html" title="This packet is sent to client by server to accept/reject a file download.">PacketFileDownloadValidation</a> </p>
+
+</div>
+</div>
+<a id="a72a5bef322a75921924f9de1e5a6d619"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72a5bef322a75921924f9de1e5a6d619">&#9670;&nbsp;</a></span>NewPacketFileTransferCancel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const union <a class="el" href="union_packet.html">Packet</a> NewPacketFileTransferCancel</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This instance is used to create a new <a class="el" href="struct_packet_file_transfer_cancel.html" title="This packet is sent between client/server to cancel a file transfer.">PacketFileTransferCancel</a> </p>
 
 </div>
 </div>
