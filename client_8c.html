@@ -94,9 +94,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="threads_8h.html#a91f27d2387d2c4b4d574e81a0a18196f">THREAD_ENTRY_POINT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb">sendMessage</a> (void *data)</td></tr>
 <tr class="memdesc:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">An entry point for a thread that gets user input and send it to server.  <a href="client_8c.html#a6d051c7b1b427efe3f668a8fbafd15fb">More...</a><br /></td></tr>
 <tr class="separator:a6d051c7b1b427efe3f668a8fbafd15fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bf516b565b85b8abd9cdac4098cc636"><td class="memItemLeft" align="right" valign="top"><a id="a5bf516b565b85b8abd9cdac4098cc636"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>COMMAND_HANDLER</b> (command, <a class="el" href="commands_8h.html#a71b31656316a73877fe104b12afc1136">COMMAND</a>(file, &quot;Usage: /file &lt;send | receive&gt;&quot;, COMMAND(send, &quot;Usage: /file send &lt;filepath&gt;&quot;, if(strlen(command) &gt; 0) { sendFileUploadRequest(command);return;}) <a class="el" href="commands_8h.html#a71b31656316a73877fe104b12afc1136">COMMAND</a>(receive, &quot;Usage: /file receive &lt;id&gt;&quot;, if(strlen(command) &gt; 0 &amp;&amp;downloadBuffer==NULL) { long id=strtol(command, NULL, 10);if(id &gt; 0) { sendFileDownloadRequest(id);return;} })) <a class="el" href="commands_8h.html#a71b31656316a73877fe104b12afc1136">COMMAND</a>(nick, &quot;Usage: /nick &lt;username&gt;&quot;, if(strlen(command) &gt; 0) { <a class="el" href="client_8h.html#a5207171e621082adea5142b4079a91d1">setUsername</a>(command);return;}) <a class="el" href="commands_8h.html#a71b31656316a73877fe104b12afc1136">COMMAND</a>(quit, &quot;Usage: /quit&quot;, Packet quitPacket=<a class="el" href="packets_8h.html#aa1b2f5ae3f9a1aac88f80b95ef92f90d">NewPacketQuit</a>;<a class="el" href="packets_8h.html#a990a71e71ffd1e02fb7dbfce1408981c">sendPacket</a>(clientSocket, &amp;quitPacket);return;))</td></tr>
-<tr class="separator:a5bf516b565b85b8abd9cdac4098cc636"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b26ca7f81b9d1e13cfff32bcc133c86"><td class="memItemLeft" align="right" valign="top"><a id="a6b26ca7f81b9d1e13cfff32bcc133c86"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>COMMAND_HANDLER</b> (command, <a class="el" href="commands_8h.html#a71b31656316a73877fe104b12afc1136">COMMAND</a>(file, &quot;Usage: /file &lt;send | receive&gt;&quot;, COMMAND(send, &quot;Usage: /file send &lt;filepath&gt;&quot;, if(strlen(command) &gt; 0) { sendFileUploadRequest(command);return;}) <a class="el" href="commands_8h.html#a71b31656316a73877fe104b12afc1136">COMMAND</a>(receive, &quot;Usage: /file receive &lt;id&gt;&quot;, if(strlen(command) &gt; 0) { long id=strtol(command, NULL, 10);if(id &gt; 0) { sendFileDownloadRequest(id);return;} })) <a class="el" href="commands_8h.html#a71b31656316a73877fe104b12afc1136">COMMAND</a>(nick, &quot;Usage: /nick &lt;username&gt;&quot;, if(strlen(command) &gt; 0) { <a class="el" href="client_8h.html#a5207171e621082adea5142b4079a91d1">setUsername</a>(command);return;}) <a class="el" href="commands_8h.html#a71b31656316a73877fe104b12afc1136">COMMAND</a>(quit, &quot;Usage: /quit&quot;, Packet quitPacket=<a class="el" href="packets_8h.html#aa1b2f5ae3f9a1aac88f80b95ef92f90d">NewPacketQuit</a>;<a class="el" href="packets_8h.html#a990a71e71ffd1e02fb7dbfce1408981c">sendPacket</a>(clientSocket, &amp;quitPacket);return;))</td></tr>
+<tr class="separator:a6b26ca7f81b9d1e13cfff32bcc133c86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7fd3eb7b9a2fbf9510c4f2e7b49ea03"><td class="memItemLeft" align="right" valign="top"><a id="ad7fd3eb7b9a2fbf9510c4f2e7b49ea03"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>pickUsername</b> ()</td></tr>
 <tr class="separator:ad7fd3eb7b9a2fbf9510c4f2e7b49ea03"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,24 +112,12 @@ Variables</h2></td></tr>
 <tr class="memitem:a89b498bf5817107590128ae3f3ef4668"><td class="memItemLeft" align="right" valign="top"><a id="a89b498bf5817107590128ae3f3ef4668"></a>
 <a class="el" href="struct_socket.html">Socket</a>&#160;</td><td class="memItemRight" valign="bottom"><b>clientSocket</b></td></tr>
 <tr class="separator:a89b498bf5817107590128ae3f3ef4668"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf18bd081baa6a606824ff490e8c0c9c"><td class="memItemLeft" align="right" valign="top"><a id="acf18bd081baa6a606824ff490e8c0c9c"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>uploadFilename</b> = NULL</td></tr>
-<tr class="separator:acf18bd081baa6a606824ff490e8c0c9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a264d1894a1011d2f81aff9262891d99b"><td class="memItemLeft" align="right" valign="top"><a id="a264d1894a1011d2f81aff9262891d99b"></a>
-<a class="el" href="struct_thread.html">Thread</a>&#160;</td><td class="memItemRight" valign="bottom"><b>uploadThread</b></td></tr>
-<tr class="separator:a264d1894a1011d2f81aff9262891d99b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e93e6bff39124dda63e958dd38f1842"><td class="memItemLeft" align="right" valign="top"><a id="a2e93e6bff39124dda63e958dd38f1842"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>downloadBuffer</b> = NULL</td></tr>
-<tr class="separator:a2e93e6bff39124dda63e958dd38f1842"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7e073232d34d9f706fb63d94bcc1a1a"><td class="memItemLeft" align="right" valign="top"><a id="af7e073232d34d9f706fb63d94bcc1a1a"></a>
-long long&#160;</td><td class="memItemRight" valign="bottom"><b>downloadFileSize</b> = -1</td></tr>
-<tr class="separator:af7e073232d34d9f706fb63d94bcc1a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49abfe35d685daf2071cd13a9b22b90f"><td class="memItemLeft" align="right" valign="top"><a id="a49abfe35d685daf2071cd13a9b22b90f"></a>
-long long&#160;</td><td class="memItemRight" valign="bottom"><b>downloadedSize</b> = -1</td></tr>
-<tr class="separator:a49abfe35d685daf2071cd13a9b22b90f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72dfdb40656ebff8167cdf236a4c64f8"><td class="memItemLeft" align="right" valign="top"><a id="a72dfdb40656ebff8167cdf236a4c64f8"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>downloadFileId</b> = 0</td></tr>
-<tr class="separator:a72dfdb40656ebff8167cdf236a4c64f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74ad17ada974f66cbc414479886ea1ac"><td class="memItemLeft" align="right" valign="top"><a id="a74ad17ada974f66cbc414479886ea1ac"></a>
+struct <a class="el" href="struct_upload_data.html">UploadData</a>&#160;</td><td class="memItemRight" valign="bottom"><b>uploadData</b> [<a class="el" href="constants_8h.html#ad8fa68aa1f078ad743f85cdad1e7f44b">MAX_CONCURRENT_FILE_TRANSFER</a>]</td></tr>
+<tr class="separator:a74ad17ada974f66cbc414479886ea1ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1330ee83fd3c712a9d921b0cfef15911"><td class="memItemLeft" align="right" valign="top"><a id="a1330ee83fd3c712a9d921b0cfef15911"></a>
+struct <a class="el" href="struct_download_data.html">DownloadData</a>&#160;</td><td class="memItemRight" valign="bottom"><b>downloadData</b> [<a class="el" href="constants_8h.html#ad8fa68aa1f078ad743f85cdad1e7f44b">MAX_CONCURRENT_FILE_TRANSFER</a>]</td></tr>
+<tr class="separator:a1330ee83fd3c712a9d921b0cfef15911"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="struct_client.html" title="A type representing a connected client.">Client</a> file. </p>

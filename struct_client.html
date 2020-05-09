@@ -85,24 +85,32 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a6f68cc770a6ac242eecebdcd1d3676d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64cbb5220335c16891724ded215171c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_thread.html">Thread</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_client.html#a64cbb5220335c16891724ded215171c8">thread</a></td></tr>
 <tr class="separator:a64cbb5220335c16891724ded215171c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7381a96c95c45b33e38b0b149f408e7"><td class="memItemLeft" align="right" valign="top"><a id="af7381a96c95c45b33e38b0b149f408e7"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>fileId</b></td></tr>
-<tr class="separator:af7381a96c95c45b33e38b0b149f408e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36ab32a7134c76d3302deaf22a2dbdb0"><td class="memItemLeft" align="right" valign="top"><a id="a36ab32a7134c76d3302deaf22a2dbdb0"></a>
-long long&#160;</td><td class="memItemRight" valign="bottom"><b>fileSize</b></td></tr>
-<tr class="separator:a36ab32a7134c76d3302deaf22a2dbdb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fb5400be507b3c3b59e9d37f5cc3ea0"><td class="memItemLeft" align="right" valign="top"><a id="a6fb5400be507b3c3b59e9d37f5cc3ea0"></a>
-long long&#160;</td><td class="memItemRight" valign="bottom"><b>received</b></td></tr>
-<tr class="separator:a6fb5400be507b3c3b59e9d37f5cc3ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab14f2f42846293568e61a25fc847baab"><td class="memItemLeft" align="right" valign="top"><a id="ab14f2f42846293568e61a25fc847baab"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>fileContent</b></td></tr>
-<tr class="separator:ab14f2f42846293568e61a25fc847baab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af956f39235ee2ad4c3663ab9b51b04a4"><td class="memItemLeft" align="right" valign="top"><a id="af956f39235ee2ad4c3663ab9b51b04a4"></a>
-<a class="el" href="struct_thread.html">Thread</a>&#160;</td><td class="memItemRight" valign="bottom"><b>downloadThread</b></td></tr>
-<tr class="separator:af956f39235ee2ad4c3663ab9b51b04a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d19e479bc582d9723e9b105229b1cb9"><td class="memItemLeft" align="right" valign="top"><a id="a0d19e479bc582d9723e9b105229b1cb9"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>downloadedFileId</b></td></tr>
-<tr class="separator:a0d19e479bc582d9723e9b105229b1cb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a923748d1c2aea9da76acd9e85c4ac8ee"><td class="memItemLeft" ><a id="a923748d1c2aea9da76acd9e85c4ac8ee"></a>
+struct {</td></tr>
+<tr class="memitem:a6bc0ae65162f4037c754afbfc84ef66b"><td class="memItemLeft" >
+&#160;&#160;&#160;unsigned int&#160;&#160;&#160;<b>fileId</b></td></tr>
+<tr class="separator:a6bc0ae65162f4037c754afbfc84ef66b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6ca222435ed6d9fd0ecb87c5c7a057a"><td class="memItemLeft" >
+&#160;&#160;&#160;long long&#160;&#160;&#160;<b>fileSize</b></td></tr>
+<tr class="separator:aa6ca222435ed6d9fd0ecb87c5c7a057a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa67d07600e0afc2eced4a1b650f8ac50"><td class="memItemLeft" >
+&#160;&#160;&#160;long long&#160;&#160;&#160;<b>received</b></td></tr>
+<tr class="separator:aa67d07600e0afc2eced4a1b650f8ac50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa3388b6f518faad9abec221e45e5558"><td class="memItemLeft" >
+&#160;&#160;&#160;char *&#160;&#160;&#160;<b>fileContent</b></td></tr>
+<tr class="separator:afa3388b6f518faad9abec221e45e5558"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a923748d1c2aea9da76acd9e85c4ac8ee"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>uploadData</b> [<a class="el" href="constants_8h.html#ad8fa68aa1f078ad743f85cdad1e7f44b">MAX_CONCURRENT_FILE_TRANSFER</a>]</td></tr>
+<tr class="separator:a923748d1c2aea9da76acd9e85c4ac8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ef5d5442f31cef96964bacb1beb1eec"><td class="memItemLeft" ><a id="a0ef5d5442f31cef96964bacb1beb1eec"></a>
+struct {</td></tr>
+<tr class="memitem:acf07b20546f5a2df59da655bd0fcaaa3"><td class="memItemLeft" >
+&#160;&#160;&#160;<a class="el" href="struct_thread.html">Thread</a>&#160;&#160;&#160;<b>downloadThread</b></td></tr>
+<tr class="separator:acf07b20546f5a2df59da655bd0fcaaa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64fb452c9ce1c20d0697980c59b717fa"><td class="memItemLeft" >
+&#160;&#160;&#160;unsigned int&#160;&#160;&#160;<b>downloadedFileId</b></td></tr>
+<tr class="separator:a64fb452c9ce1c20d0697980c59b717fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ef5d5442f31cef96964bacb1beb1eec"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>downloadData</b> [<a class="el" href="constants_8h.html#ad8fa68aa1f078ad743f85cdad1e7f44b">MAX_CONCURRENT_FILE_TRANSFER</a>]</td></tr>
+<tr class="separator:a0ef5d5442f31cef96964bacb1beb1eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A type representing a connected client. </p>
