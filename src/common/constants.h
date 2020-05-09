@@ -111,4 +111,10 @@
  */
 #define FILE_DOWNLOAD_VALIDATION_MESSAGE_TYPE 11
 
+/**
+ * \def FILE_TRANSFER_CANCEL_MESSAGE_TYPE
+ * \brief An integer representing a message sent between client/server to cancel a file transfer
+ */
+#define FILE_TRANSFER_CANCEL_MESSAGE_TYPE 12
+
 #endif //C_CHAT_CONSTANTS_H

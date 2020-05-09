@@ -12,33 +12,52 @@ unsigned int generateNewFileId() {
 }
 
 void handleUploadRequest(Client* client, struct PacketFileUploadRequest* packet) {
-    if (client->fileId != 0) {
+    int alreadyUploading = client->fileId != 0;
+    int fileTooLarge = packet->fileSize <= 0 || packet->fileSize > MAX_FILE_SIZE_UPLOAD;
+    if (alreadyUploading || fileTooLarge) {
+        /* The client is already uploading a file or file is too large. Refusing file upload */
+
+        /* Create refuse packet */
         Packet response = NewPacketFileUploadValidation;
-        response.asFileUploadValidationPacket.accepted = 0;
-        response.asFileUploadValidationPacket.id = 0;
+        struct PacketFileUploadValidation* validationPacket = &response.asFileUploadValidationPacket;
+
+        /* Set packet attributes */
+        validationPacket->accepted = 0;
+        validationPacket->id = 0;
+
+        /* Send packet to client */
         sendPacket(client->socket, &response);
 
+        /* Tell the client the reason the upload is refused */
+
+        /* Create packet */
         response = NewPacketServerErrorMessage;
-        memcpy(response.asServerErrorMessagePacket.message, "Already uploading.", 19);
-        sendPacket(client->socket, &response);
-    } else if (packet->fileSize <= 0 || packet->fileSize > MAX_FILE_SIZE_UPLOAD) {
-        Packet response = NewPacketFileUploadValidation;
-        response.asFileUploadValidationPacket.accepted = 0;
-        response.asFileUploadValidationPacket.id = 0;
-        sendPacket(client->socket, &response);
 
-        response = NewPacketServerErrorMessage;
-        memcpy(response.asServerErrorMessagePacket.message, "File too large.", 16);
-        sendPacket(client->socket, &response);
+        /* Set error message */
+        if (alreadyUploading) {
+            memcpy(response.asServerErrorMessagePacket.message, "Already uploading.", 19);
+        } else {
+            memcpy(response.asServerErrorMessagePacket.message, "File too large.", 16);
+        }
 
+        /* Send packet to client */
+        sendPacket(client->socket, &response);
     } else {
+        /* The file can be uploaded. Generating a file ID */
         unsigned int fileId = generateNewFileId();
 
+        /* Create the packet */
         Packet response = NewPacketFileUploadValidation;
-        response.asFileUploadValidationPacket.accepted = 1;
-        response.asFileUploadValidationPacket.id = fileId;
+        struct PacketFileUploadValidation* validationPacket = &response.asFileUploadValidationPacket;
+
+        /* Set packet attributes */
+        validationPacket->accepted = 1;
+        validationPacket->id = fileId;
+
+        /* Send packet to client */
         sendPacket(client->socket, &response);
 
+        /* Set client upload state */
         client->fileId = fileId;
         client->fileContent = malloc(sizeof(char) * packet->fileSize);
         client->fileSize = packet->fileSize;
@@ -48,12 +67,18 @@ void handleUploadRequest(Client* client, struct PacketFileUploadRequest* packet)
 
 void handleFileDataUpload(Client* client, struct PacketFileDataTransfer* packet) {
     if (client->fileId > 0 && packet->id == client->fileId) {
+        /* The client is uploading and the packet data refers to the current upload file */
+
+        /* Calculating expected data chunk size */
         unsigned remainingToDownload = client->fileSize - client->received;
         unsigned int nextChunkSize = remainingToDownload > FILE_TRANSFER_CHUNK_SIZE ? FILE_TRANSFER_CHUNK_SIZE : remainingToDownload;
+
+        /* Appending data to file content */
         memcpy(client->fileContent + client->received, packet->data, nextChunkSize);
         client->received += nextChunkSize;
 
         if (client->received >= client->fileSize) {
+            /* We received all file content */
 
             /* Writing file to disk */
             char filename[12];
@@ -65,16 +90,16 @@ void handleFileDataUpload(Client* client, struct PacketFileDataTransfer* packet)
             sprintf(uploadSuccessPacket.asServerErrorMessagePacket.message, "%s uploaded file %d", client->username, client->fileId);
             broadcast(&uploadSuccessPacket);
 
+            /* Set client upload state */
+            free(client->fileContent);
             client->fileId = 0;
             client->received = 0;
-            free(client->fileContent);
             client->fileContent = NULL;
         }
     } // Just ignoring packet if id does not match
 }
 
 THREAD_ENTRY_POINT uploadFileToClient(void* data) {
-    // TODO: Add packet that cancels a download
     Client* client = (Client*)data;
 
     char filename[12];
@@ -91,19 +116,25 @@ THREAD_ENTRY_POINT uploadFileToClient(void* data) {
                 long long remaining = info.size - sent;
                 long long toSend = remaining > FILE_TRANSFER_CHUNK_SIZE ? FILE_TRANSFER_CHUNK_SIZE : remaining;
                 memcpy(dataPacket.asFileDataTransferPacket.data, fileContent + sent, toSend);
-                sendPacket(client->socket, &dataPacket); // TODO: Check sent size and cancel download in case of error
+                if (sendPacket(client->socket, &dataPacket) == -1) {
+                    free(fileContent);
+                    client->downloadedFileId = 0;
+                    destroyThread(&client->downloadThread);
+                    return 0;
+                }
                 sent += toSend;
             }
-            Packet downloadSuccessPacket = NewPacketServerErrorMessage; // TODO: Replace with ServerInformationPacket
-            memcpy(downloadSuccessPacket.asServerErrorMessagePacket.message, "File downloaded.", 17);
-            sendPacket(client->socket, &downloadSuccessPacket);
         } else {
-            // Cancel download
+            Packet cancelPacket = NewPacketFileTransferCancel;
+            cancelPacket.asFileTransferCancel.id = client->downloadedFileId;
+            sendPacket(client->socket, &cancelPacket);
         }
 
         free(fileContent);
     } else {
-        // Cancel download
+        Packet cancelPacket = NewPacketFileTransferCancel;
+        cancelPacket.asFileTransferCancel.id = client->downloadedFileId;
+        sendPacket(client->socket, &cancelPacket);
     }
 
     client->downloadedFileId = 0;
@@ -113,28 +144,56 @@ THREAD_ENTRY_POINT uploadFileToClient(void* data) {
 
 void handleDownloadRequest(Client* client, struct PacketFileDownloadRequest* packet) {
     if (client->downloadedFileId) {
+        /* Client is already downloading a file. Refusing download request */
+
+        /* Create packet */
         Packet refuseDownloadPacket = NewPacketFileDownloadValidation;
-        refuseDownloadPacket.asFileDownloadValidationPacket.accepted = 0;
-        refuseDownloadPacket.asFileDownloadValidationPacket.fileId = packet->fileId;
+        struct PacketFileDownloadValidation* validationPacket = &refuseDownloadPacket.asFileDownloadValidationPacket;
+
+        /* Set packet attributes */
+        validationPacket->accepted = 0;
+        validationPacket->fileId = packet->fileId;
+
+        /* Send packet to client */
         sendPacket(client->socket, &refuseDownloadPacket);
     } else {
+        /* Client is not downloading, checking if the requested file is downloadable */
+
+        /* Get file information */
         char filename[12];
         sprintf(filename, "%d", packet->fileId);
         FileInfo fileInfo = files_getInfo(filename);
-        if (fileInfo.exists && !fileInfo.isDirectory) {
-            Packet acceptDownloadPacket = NewPacketFileDownloadValidation;
-            acceptDownloadPacket.asFileDownloadValidationPacket.accepted = 1;
-            acceptDownloadPacket.asFileDownloadValidationPacket.fileId = packet->fileId;
-            acceptDownloadPacket.asFileDownloadValidationPacket.fileSize = fileInfo.size;
 
+        if (fileInfo.exists && !fileInfo.isDirectory) {
+            /* The requested file can be downloaded */
+
+            /* Create the packet */
+            Packet acceptDownloadPacket = NewPacketFileDownloadValidation;
+            struct PacketFileDownloadValidation* validationPacket = &acceptDownloadPacket.asFileDownloadValidationPacket;
+
+            /* Set packet attributes */
+            validationPacket->accepted = 1;
+            validationPacket->fileId = packet->fileId;
+            validationPacket->fileSize = fileInfo.size;
+
+            /* Send packet to client */
             sendPacket(client->socket, &acceptDownloadPacket);
 
+            /* Define client download state and start upload worker */
             client->downloadedFileId = packet->fileId;
             client->downloadThread = createThread(uploadFileToClient, client); // Start sending data
         } else {
+            /* The requested file can't be downloaded */
+
+            /* Create the packet */
             Packet refuseDownloadPacket = NewPacketFileDownloadValidation;
-            refuseDownloadPacket.asFileDownloadValidationPacket.accepted = 0;
-            refuseDownloadPacket.asFileDownloadValidationPacket.fileId = packet->fileId;
+            struct PacketFileDownloadValidation* validationPacket = &refuseDownloadPacket.asFileDownloadValidationPacket;
+
+            /* Set packet attributes */
+            validationPacket->accepted = 0;
+            validationPacket->fileId = packet->fileId;
+
+            /* Send packet to client */
             sendPacket(client->socket, &refuseDownloadPacket);
         }
     }

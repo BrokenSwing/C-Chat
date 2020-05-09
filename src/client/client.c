@@ -19,14 +19,15 @@
 #include "../common/files.h"
 #include <string.h>
 #include <stdio.h>
+#include "file-transfer.h"
 
-static Socket clientSocket;
-static char* uploadFilename = NULL;
-static Thread uploadThread;
-static char* downloadBuffer = NULL;
-static long long downloadFileSize = -1;
-static long long downloadedSize = -1;
-static unsigned int downloadFileId = 0;
+Socket clientSocket;
+char* uploadFilename = NULL;
+Thread uploadThread;
+char* downloadBuffer = NULL;
+long long downloadFileSize = -1;
+long long downloadedSize = -1;
+unsigned int downloadFileId = 0;
 
 THREAD_ENTRY_POINT sendMessage(void* data) {
     Packet packet = NewPacketText;
@@ -40,68 +41,11 @@ THREAD_ENTRY_POINT sendMessage(void* data) {
     }
 }
 
-THREAD_ENTRY_POINT fileUploadWorker(void* data) {
-    unsigned int fileId = *((unsigned int*)data);
-    free(data);
-
-    FileInfo info = files_getInfo(uploadFilename);
-    char* content = malloc(info.size);
-    if (files_readFile(uploadFilename, content, info.size) != -1) {
-        Packet dataPacket = NewPacketFileDataTransfer;
-        dataPacket.asFileDataTransferPacket.id = fileId;
-        long long sent = 0;
-        while (sent < info.size) {
-            long long remaining = info.size - sent;
-            long long toSend = remaining > FILE_TRANSFER_CHUNK_SIZE ? FILE_TRANSFER_CHUNK_SIZE : remaining;
-            memcpy(dataPacket.asFileDataTransferPacket.data, content + sent, toSend);
-            sendPacket(clientSocket, &dataPacket);
-            sent += toSend;
-        }
-    } else {
-        ui_errorMessage("Unable to read file content.");
-    }
-    free(content);
-    free(uploadFilename);
-    uploadFilename = NULL;
-    destroyThread(&uploadThread);
-    return 0;
-}
-
-void sendFile(const char* filename) {
-    if (uploadFilename) {
-        ui_errorMessage("Already uploading a file.");
-        return;
-    }
-
-    FileInfo info = files_getInfo(filename);
-    if (info.exists && !info.isDirectory) {
-        uploadFilename = malloc(strlen(filename) + 1);
-        memcpy(uploadFilename, filename, strlen(filename) + 1);
-
-        Packet fileUploadPacket = NewPacketFileUploadRequest;
-        fileUploadPacket.asFileUploadRequestPacket.fileSize = info.size;
-        if(sendPacket(clientSocket, &fileUploadPacket) <= 0) {
-            ui_errorMessage("Unable to send the file, unknown error.");
-            free(uploadFilename);
-            uploadFilename = NULL;
-        }
-    } else {
-        ui_errorMessage("This file does not exist or is a directory.");
-    }
-
-}
-
-void downloadFile(unsigned int id) {
-    Packet downloadRequestPacket = NewPacketFileDownloadRequest;
-    downloadRequestPacket.asFileDownloadRequestPacket.fileId = id;
-    sendPacket(clientSocket, &downloadRequestPacket);
-}
-
 COMMAND_HANDLER(command,
 COMMAND(file, "Usage: /file <send | receive>",
         COMMAND(send, "Usage: /file send <filepath>",
             if (strlen(command) > 0) {
-                    sendFile(command);
+                    sendFileUploadRequest(command);
                     return;
                 }
             )
@@ -109,7 +53,7 @@ COMMAND(file, "Usage: /file <send | receive>",
             if (strlen(command) > 0 && downloadBuffer == NULL) {
                     long id = strtol(command, NULL, 10);
                     if (id > 0) {
-                        downloadFile(id);
+                        sendFileDownloadRequest(id);
                         return;
                     }
                 }
@@ -127,27 +71,6 @@ COMMAND(file, "Usage: /file <send | receive>",
             return;
         )
 )
-
-void handleReceivedFileData(struct PacketFileDataTransfer* packet) {
-    if (downloadBuffer && packet->id == downloadFileId) {
-        unsigned remainingToDownload = downloadFileSize - downloadedSize;
-        unsigned int nextChunkSize = remainingToDownload > FILE_TRANSFER_CHUNK_SIZE ? FILE_TRANSFER_CHUNK_SIZE : remainingToDownload;
-        memcpy(downloadBuffer + downloadedSize, packet->data, nextChunkSize);
-        downloadedSize += nextChunkSize;
-
-        if (downloadedSize >= downloadFileSize) {
-            char filename[13];
-            sprintf(filename, "r%d", downloadFileId);
-            files_writeFile(filename, downloadBuffer, downloadFileSize);
-
-            free(downloadBuffer);
-            downloadBuffer = NULL;
-            downloadFileSize = -1;
-            downloadedSize = -1;
-            downloadFileId = 0;
-        }
-    }
-}
 
 void receiveMessages() {
     Packet packet;
@@ -184,29 +107,16 @@ void receiveMessages() {
                     ui_informationMessage(changeMessage);
                     break;
                 case FILE_UPLOAD_VALIDATION_MESSAGE_TYPE:
-                    if (packet.asFileUploadValidationPacket.accepted) {
-                        ui_informationMessage("Beginning file upload.");
-                        unsigned int* fileId = malloc(sizeof(unsigned int));
-                        *fileId = packet.asFileUploadValidationPacket.id;
-                        uploadThread = createThread(fileUploadWorker, fileId);
-                    } else {
-                        ui_errorMessage("Server rejected file upload.");
-                        free(uploadFilename);
-                        uploadFilename = NULL;
-                    }
+                    handleFileUploadValidation(&packet.asFileUploadValidationPacket);
                     break;
                 case FILE_DOWNLOAD_VALIDATION_MESSAGE_TYPE:
-                    if (packet.asFileDownloadValidationPacket.accepted) {
-                        downloadFileSize = packet.asFileDownloadValidationPacket.fileSize;
-                        downloadBuffer = malloc(sizeof(char) * downloadFileSize);
-                        downloadedSize = 0;
-                        downloadFileId = packet.asFileDownloadValidationPacket.fileId;
-                    } else {
-                        ui_errorMessage("Server rejected file download.");
-                    }
+                    handleFileDownloadValidation(&packet.asFileDownloadValidationPacket);
                     break;
                 case FILE_DATA_TRANSFER_MESSAGE_TYPE:
-                    handleReceivedFileData(&packet.asFileDataTransferPacket);
+                    handleFileData(&packet.asFileDataTransferPacket);
+                    break;
+                case FILE_TRANSFER_CANCEL_MESSAGE_TYPE:
+                    handleFileDownloadCancel(&packet.asFileTransferCancel);
                     break;
             }
         }

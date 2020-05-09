@@ -3,10 +3,18 @@
  * \brief Header file for client.c
  */
 
-#include "../common/threads.h"
-
 #ifndef C_CHAT_CLIENT_H
 #define C_CHAT_CLIENT_H
+
+#include "../common/threads.h"
+
+extern Socket clientSocket;
+extern char* uploadFilename;
+extern Thread uploadThread;
+extern char* downloadBuffer;
+extern long long downloadFileSize;
+extern long long downloadedSize;
+extern unsigned int downloadFileId;
 
 /**
  * \brief An entry point for a thread that gets user input and send it to server

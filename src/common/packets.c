@@ -12,6 +12,7 @@ const union Packet NewPacketFileDownloadRequest = { FILE_DOWNLOAD_REQUEST_MESSAG
 const union Packet NewPacketFileUploadValidation = { FILE_UPLOAD_VALIDATION_MESSAGE_TYPE };
 const union Packet NewPacketFileDownloadValidation = { FILE_DOWNLOAD_VALIDATION_MESSAGE_TYPE };
 const union Packet NewPacketFileDataTransfer = { FILE_DATA_TRANSFER_MESSAGE_TYPE };
+const union Packet NewPacketFileTransferCancel = { FILE_TRANSFER_CANCEL_MESSAGE_TYPE };
 
 /**
  * \brief Retrieves the real size of the underlying type
@@ -45,6 +46,8 @@ unsigned int packets_sizeOf(Packet* packet) {
             return sizeof(struct PacketFileDownloadValidation);
         case FILE_DATA_TRANSFER_MESSAGE_TYPE:
             return sizeof(struct PacketFileDataTransfer);
+        case FILE_TRANSFER_CANCEL_MESSAGE_TYPE:
+            return sizeof(struct PacketFileTransferCancel);
         default:
             return 0;
     }

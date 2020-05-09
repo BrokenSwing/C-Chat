@@ -146,8 +146,19 @@ struct PacketFileDataTransfer {
     unsigned int id;
     char data[FILE_TRANSFER_CHUNK_SIZE];
 };
-/** This instance is used to create a new PacketFileDataTransfert */
+/** This instance is used to create a new PacketFileDataTransfer */
 extern const union Packet NewPacketFileDataTransfer;
+
+/**
+ * \class PacketFileTransferCancel
+ * \brief This packet is sent between client/server to cancel a file transfer
+ */
+struct PacketFileTransferCancel {
+    char type;
+    unsigned int id;
+};
+/** This instance is used to create a new PacketFileTransferCancel */
+extern const union Packet NewPacketFileTransferCancel;
 
 /**
  * \class Packet
@@ -167,6 +178,7 @@ typedef union Packet {
     struct PacketFileUploadValidation asFileUploadValidationPacket;
     struct PacketFileDownloadValidation asFileDownloadValidationPacket;
     struct PacketFileDataTransfer asFileDataTransferPacket;
+    struct PacketFileTransferCancel asFileTransferCancel;
 } Packet;
 
 /**
