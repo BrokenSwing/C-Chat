@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "communication.h"
+#include "string.h"
 
 int scanForFreeSocketSlot() {
     int i = 0;
