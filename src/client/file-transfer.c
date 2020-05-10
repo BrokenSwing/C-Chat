@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "client.h"
 #include "../common/files.h"
+#include <string.h>
 
 int findFirstFreeUploadIndex() {
     int i = 0;

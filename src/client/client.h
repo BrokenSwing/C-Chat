@@ -7,6 +7,7 @@
 #define C_CHAT_CLIENT_H
 
 #include "../common/threads.h"
+#include "../common/sockets.h"
 
 struct UploadData {
     char* uploadFilename;
