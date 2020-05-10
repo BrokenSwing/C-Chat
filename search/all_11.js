@@ -10,9 +10,10 @@ var searchData=
   ['ui_5fleavemessage_120',['ui_leaveMessage',['../ui_8h.html#a7dd983899fdc724a8b4844d3c72a7b40',1,'ui.c']]],
   ['ui_5fmessagereceived_121',['ui_messageReceived',['../ui_8h.html#ae2513fb853fbc8737fb3ca7549c52de2',1,'ui.c']]],
   ['ui_5freset_122',['ui_reset',['../ui_8h.html#a720a37bebeb708da396e192733d59549',1,'ui.c']]],
-  ['ui_5fwelcomemessage_123',['ui_welcomeMessage',['../ui_8h.html#ab9e95c10d2a62e16bae06dae7eaf5df4',1,'ui.c']]],
-  ['uploaddata_124',['UploadData',['../struct_upload_data.html',1,'']]],
-  ['username_125',['username',['../struct_client.html#a7f5ba83c6457f6092e6615bcfec96053',1,'Client']]],
-  ['username_5fchanged_5fmessage_5ftype_126',['USERNAME_CHANGED_MESSAGE_TYPE',['../constants_8h.html#a52eec94e0668008f342136fb6bca3305',1,'constants.h']]],
-  ['username_5fmax_5flength_127',['USERNAME_MAX_LENGTH',['../constants_8h.html#ad9dcd73dd770affdc2097d8cd0aabaf7',1,'constants.h']]]
+  ['ui_5fusernamechanged_123',['ui_usernameChanged',['../ui_8h.html#affc36bfdc2e0fd80709ffc7cb2214fa4',1,'ui.c']]],
+  ['ui_5fwelcomemessage_124',['ui_welcomeMessage',['../ui_8h.html#ab9e95c10d2a62e16bae06dae7eaf5df4',1,'ui.c']]],
+  ['uploaddata_125',['UploadData',['../struct_upload_data.html',1,'']]],
+  ['username_126',['username',['../struct_client.html#a7f5ba83c6457f6092e6615bcfec96053',1,'Client']]],
+  ['username_5fchanged_5fmessage_5ftype_127',['USERNAME_CHANGED_MESSAGE_TYPE',['../constants_8h.html#a52eec94e0668008f342136fb6bca3305',1,'constants.h']]],
+  ['username_5fmax_5flength_128',['USERNAME_MAX_LENGTH',['../constants_8h.html#ad9dcd73dd770affdc2097d8cd0aabaf7',1,'constants.h']]]
 ];

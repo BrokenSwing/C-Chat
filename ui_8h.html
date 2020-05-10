@@ -113,6 +113,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#ab9e95c10d2a62e16bae06dae7eaf5df4">ui_welcomeMessage</a> ()</td></tr>
 <tr class="memdesc:ab9e95c10d2a62e16bae06dae7eaf5df4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays welcome message to the client. <br /></td></tr>
 <tr class="separator:ab9e95c10d2a62e16bae06dae7eaf5df4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affc36bfdc2e0fd80709ffc7cb2214fa4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#affc36bfdc2e0fd80709ffc7cb2214fa4">ui_usernameChanged</a> (const char *oldUsername, const char *newUsername)</td></tr>
+<tr class="memdesc:affc36bfdc2e0fd80709ffc7cb2214fa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells the client an user changed its username.  <a href="ui_8h.html#affc36bfdc2e0fd80709ffc7cb2214fa4">More...</a><br /></td></tr>
+<tr class="separator:affc36bfdc2e0fd80709ffc7cb2214fa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>API to communicate with user. </p>
@@ -321,6 +324,43 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8
 
 <p>Reset UI state. </p>
 <p>To be called in case of ui_getUserInput getting interrupted. </p>
+
+</div>
+</div>
+<a id="affc36bfdc2e0fd80709ffc7cb2214fa4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affc36bfdc2e0fd80709ffc7cb2214fa4">&#9670;&nbsp;</a></span>ui_usernameChanged()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ui_usernameChanged </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>oldUsername</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>newUsername</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tells the client an user changed its username. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">oldUsername</td><td>The old username of the user </td></tr>
+    <tr><td class="paramname">newUsername</td><td>The new username of the user </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
