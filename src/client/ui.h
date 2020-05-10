@@ -74,3 +74,11 @@ void ui_leaveMessage(const char* username);
  * \brief Displays welcome message to the client.
  */
 void ui_welcomeMessage();
+
+/**
+ * \brief Tells the client an user changed its username
+ *
+ * \param oldUsername The old username of the user
+ * \param newUsername The new username of the user
+ */
+void ui_usernameChanged(const char* oldUsername, const char* newUsername);

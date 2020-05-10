@@ -85,19 +85,7 @@ void receiveMessages() {
                     ui_errorMessage(packet.asServerErrorMessagePacket.message);
                     break;
                 case USERNAME_CHANGED_MESSAGE_TYPE:
-                    ; // https://stackoverflow.com/questions/18496282/why-do-i-get-a-label-can-only-be-part-of-a-statement-and-a-declaration-is-not-a
-                    char changeMessage[USERNAME_MAX_LENGTH * 2 + 25 + 1];
-                    unsigned int oldUsernameLength = strlen(packet.asUsernameChangedPacket.oldUsername);
-                    unsigned int newUsernameLength = strlen(packet.asUsernameChangedPacket.newUsername);
-                    memcpy(changeMessage, packet.asUsernameChangedPacket.oldUsername, oldUsernameLength);
-                    memcpy(changeMessage + oldUsernameLength, " changed its username to ", 25);
-                    memcpy(
-                            changeMessage + oldUsernameLength + 25,
-                            packet.asUsernameChangedPacket.newUsername,
-                            newUsernameLength
-                    );
-                    changeMessage[oldUsernameLength + 25 + newUsernameLength] = '\0';
-                    ui_informationMessage(changeMessage);
+                    ui_usernameChanged(packet.asUsernameChangedPacket.oldUsername, packet.asUsernameChangedPacket.newUsername);
                     break;
                 case FILE_UPLOAD_VALIDATION_MESSAGE_TYPE:
                     handleFileUploadValidation(&packet.asFileUploadValidationPacket);

@@ -40,6 +40,7 @@ void _storeUserInput() {
 void _restoreUserInput() {
     if (inputState & INPUT_STORED) {
        inputState = (inputState ^ 0) ^ INPUT_STORED;
+       resetColor();
        printf("%s", promptBuffer);
     }
 }
@@ -81,6 +82,7 @@ void _restoreUserInput() {
         short currentState = inputState;
         _beginUserInput();
         inputState = (currentState ^ 0) ^ INPUT_STORED;
+        resetColor();
         printf("%s", promptBuffer);
     }
 }
@@ -111,11 +113,12 @@ void ui_getUserInput(const char* prompt, char* buffer, int buffer_size) {
         {
             _beginUserInput();
             // Keep prompt in memory for future prompt restoration
-            int promptLength = strlen(prompt);
+            unsigned int promptLength = strlen(prompt);
             memcpy(promptBuffer, prompt, promptLength < PROMPT_MAX_LENGTH ? promptLength : PROMPT_MAX_LENGTH);
         }
         releaseMutex(inputStateMutex);
 
+        resetColor();
         printf("%s", promptBuffer);
         fgets(buffer, buffer_size, stdin);
         if ((strlen(buffer) - 1) == 0) { // If user entered an empty message.
@@ -164,7 +167,7 @@ void ui_informationMessage(const char* message) {
     }
     releaseMutex(inputStateMutex);
 
-    setTextColor(FG_YELLOW);
+    setTextColor(FG_BLUE);
     printf("%s\n", message);
     resetColor();
 
@@ -244,6 +247,23 @@ void ui_welcomeMessage() {
     printf("  * file: used to send or receive a file\n");
     printf("  * nick: used to choose a new username\n");
     printf("  * quit: used to quit the current room\n");
+
+    acquireMutex(inputStateMutex);
+    {
+        _restoreUserInput();
+    }
+    releaseMutex(inputStateMutex);
+}
+
+void ui_usernameChanged(const char* oldUsername, const char* newUsername) {
+    acquireMutex(inputStateMutex);
+    {
+        _storeUserInput();
+    }
+    releaseMutex(inputStateMutex);
+
+    setTextColor(FG_YELLOW);
+    printf("%s changed its username to %s\n", oldUsername, newUsername);
 
     acquireMutex(inputStateMutex);
     {
