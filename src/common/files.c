@@ -15,8 +15,8 @@ FileInfo files_getInfo(const char* filename) {
     if (stat(filename, &st) == 0) {
         info.exists = 1;
         info.isDirectory = S_ISDIR(st.st_mode);
-        if (info.isDirectory) {
-            info.size = st.st_size;
+        if (!info.isDirectory) {
+            info.size = (long long) st.st_size;
         } else {
             info.size = 0;
         }
@@ -37,7 +37,7 @@ unsigned long files_readFile(const char* filename, char* contentBuffer, unsigned
 
     FILE* file;
 
-    file = fopen(filename, "w+");
+    file = fopen(filename, "r");
     if (file == NULL) {
         printf("Unable to open file: %s\n", filename);
         return -1;
@@ -61,7 +61,7 @@ unsigned long files_writeFile(const char* filename, const char* contentBuffer, u
 
     FILE* file;
 
-    file = fopen(filename, "w+");
+    file = fopen(filename, "w");
     if (file == NULL) {
         printf("Unable to open file: %s\n", filename);
         return -1;
