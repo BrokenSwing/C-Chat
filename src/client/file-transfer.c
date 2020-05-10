@@ -163,7 +163,7 @@ void handleFileData(struct PacketFileDataTransfer* packet) {
             downloadData[downloadId].downloadFileSize = -1;
             downloadData[downloadId].downloadedSize = -1;
             downloadData[downloadId].downloadFileId = 0;
-            ui_informationMessage("File download complete");
+            ui_informationMessage("File download complete.");
         }
     }
 }

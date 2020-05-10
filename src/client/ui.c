@@ -160,14 +160,14 @@ void ui_messageReceived(const char* sender, const char* message) {
     releaseMutex(inputStateMutex);
 }
 
-void ui_informationMessage(const char* message) {
+void _ui_coloredMessage(const char* message, unsigned int colorCode) {
     acquireMutex(inputStateMutex);
     {
         _storeUserInput();
     }
     releaseMutex(inputStateMutex);
 
-    setTextColor(FG_BLUE);
+    setTextColor(colorCode);
     printf("%s\n", message);
     resetColor();
 
@@ -178,22 +178,16 @@ void ui_informationMessage(const char* message) {
     releaseMutex(inputStateMutex);
 }
 
+void ui_informationMessage(const char* message) {
+    _ui_coloredMessage(message, FG_BLUE);
+}
+
 void ui_errorMessage(const char* message) {
-    acquireMutex(inputStateMutex);
-    {
-        _storeUserInput();
-    }
-    releaseMutex(inputStateMutex);
+    _ui_coloredMessage(message, FG_RED);
+}
 
-    setTextColor(FG_RED);
-    printf("%s\n", message);
-    resetColor();
-
-    acquireMutex(inputStateMutex);
-    {
-        _restoreUserInput();
-    }
-    releaseMutex(inputStateMutex);
+void ui_successMessage(const char* message) {
+    _ui_coloredMessage(message, FG_GREEN);
 }
 
 void ui_joinMessage(const char* username) {

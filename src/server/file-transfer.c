@@ -105,7 +105,7 @@ void handleFileDataUpload(Client* client, struct PacketFileDataTransfer* packet)
             files_writeFile(filename, client->uploadData[uploadId].fileContent, client->uploadData[uploadId].fileSize);
 
             /* Telling clients a new file is available */
-            Packet uploadSuccessPacket = NewPacketServerErrorMessage; // TODO: Create a ServerInformation packet
+            Packet uploadSuccessPacket = NewPacketServerSuccess; // TODO: Create a ServerInformation packet
             sprintf(
                 uploadSuccessPacket.asServerErrorMessagePacket.message,
                 "%s uploaded file %d",
@@ -160,14 +160,14 @@ THREAD_ENTRY_POINT uploadFileToClient(void* data) {
             }
         } else {
             Packet cancelPacket = NewPacketFileTransferCancel;
-            cancelPacket.asFileTransferCancel.id = client->downloadData[downloadId].downloadedFileId;
+            cancelPacket.asFileTransferCancelPacket.id = client->downloadData[downloadId].downloadedFileId;
             sendPacket(client->socket, &cancelPacket);
         }
 
         free(fileContent);
     } else {
         Packet cancelPacket = NewPacketFileTransferCancel;
-        cancelPacket.asFileTransferCancel.id = client->downloadData[downloadId].downloadedFileId;
+        cancelPacket.asFileTransferCancelPacket.id = client->downloadData[downloadId].downloadedFileId;
         sendPacket(client->socket, &cancelPacket);
     }
 

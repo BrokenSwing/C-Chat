@@ -97,7 +97,10 @@ void receiveMessages() {
                     handleFileData(&packet.asFileDataTransferPacket);
                     break;
                 case FILE_TRANSFER_CANCEL_MESSAGE_TYPE:
-                    handleFileDownloadCancel(&packet.asFileTransferCancel);
+                    handleFileDownloadCancel(&packet.asFileTransferCancelPacket);
+                    break;
+                case SERVER_SUCCESS_MESSAGE_TYPE:
+                    ui_successMessage(packet.asServerSuccessMessagePacket.message);
                     break;
             }
         }

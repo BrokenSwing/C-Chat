@@ -82,3 +82,10 @@ void ui_welcomeMessage();
  * \param newUsername The new username of the user
  */
 void ui_usernameChanged(const char* oldUsername, const char* newUsername);
+
+/**
+ * \brief Displays a success message to the client
+ *
+ * \param message The message to display
+ */
+void ui_successMessage(const char* message);

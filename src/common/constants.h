@@ -123,4 +123,10 @@
  */
 #define FILE_TRANSFER_CANCEL_MESSAGE_TYPE 12
 
+/**
+ * \def SERVER_SUCCESS_MESSAGE_TYPE
+ * \brief An integer representing a success message sent by server
+ */
+#define SERVER_SUCCESS_MESSAGE_TYPE 13
+
 #endif //C_CHAT_CONSTANTS_H

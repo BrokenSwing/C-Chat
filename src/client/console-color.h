@@ -49,6 +49,11 @@ void resetColor();
  * \brief Blue text color constant.
  */
 #define FG_BLUE 96
+/**
+ * \def FG_GREEN
+ * \brief Green text color constant.
+ */
+#define FG_GREEN 32
 
 void setTextColor(unsigned int colorCode) {
     printf("\033[%dm", colorCode);
@@ -81,6 +86,12 @@ void setTextColor(unsigned int colorCode) {
  * \brief Blue text color constant.
  */
 #define FG_BLUE FOREGROUND_BLUE | FOREGROUND_INTENSITY | FOREGROUND_GREEN
+/**
+ * \def FG_GREEN
+ * \brief Green text color constant.
+ */
+#define FG_GREEN FOREGROUND_INTENSITY | FOREGROUND_GREEN
+
 
 void setTextColor(unsigned int colorCode) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);

@@ -161,6 +161,17 @@ struct PacketFileTransferCancel {
 extern const union Packet NewPacketFileTransferCancel;
 
 /**
+ * \class PacketServerSuccess
+ * \brief This packet is sent by server to client on success
+ */
+struct PacketServerSuccess {
+    char type;
+    char message[MSG_MAX_LENGTH +1];
+};
+/** This instance is used to create a new PacketServerSuccess */
+extern const union Packet NewPacketServerSuccess;
+
+/**
  * \class Packet
  * \brief A generic union type for packets
  */
@@ -178,7 +189,8 @@ typedef union Packet {
     struct PacketFileUploadValidation asFileUploadValidationPacket;
     struct PacketFileDownloadValidation asFileDownloadValidationPacket;
     struct PacketFileDataTransfer asFileDataTransferPacket;
-    struct PacketFileTransferCancel asFileTransferCancel;
+    struct PacketFileTransferCancel asFileTransferCancelPacket;
+    struct PacketServerSuccess asServerSuccessMessagePacket;
 } Packet;
 
 /**
