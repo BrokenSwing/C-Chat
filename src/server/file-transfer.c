@@ -3,6 +3,7 @@
 #include "../common/files.h"
 #include <stdio.h>
 #include "communication.h"
+#include "string.h"
 
 static unsigned int nextFileId = 1; // TODO: synchronize access
 
