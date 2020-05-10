@@ -11,7 +11,8 @@ var searchData=
   ['newpacketleave_63',['NewPacketLeave',['../packets_8h.html#a1882d139426f11655e2f8c64e5c2ba71',1,'packets.c']]],
   ['newpacketquit_64',['NewPacketQuit',['../packets_8h.html#aa1b2f5ae3f9a1aac88f80b95ef92f90d',1,'packets.c']]],
   ['newpacketservererrormessage_65',['NewPacketServerErrorMessage',['../packets_8h.html#ae291625fae5ce23c63628784075bcf11',1,'packets.c']]],
-  ['newpackettext_66',['NewPacketText',['../packets_8h.html#a9f8837cfff6abc005ffc8d8167bea845',1,'packets.c']]],
-  ['newpacketusernamechanged_67',['NewPacketUsernameChanged',['../packets_8h.html#a76ae55f04ff43b7e82e7b5d04de540cc',1,'packets.c']]],
-  ['number_5fclient_5fmax_68',['NUMBER_CLIENT_MAX',['../server_8h.html#ad172719f11bc41562233eec71e151cff',1,'server.h']]]
+  ['newpacketserversuccess_66',['NewPacketServerSuccess',['../packets_8h.html#a278b60e2de3cd258101be770665784ff',1,'packets.c']]],
+  ['newpackettext_67',['NewPacketText',['../packets_8h.html#a9f8837cfff6abc005ffc8d8167bea845',1,'packets.c']]],
+  ['newpacketusernamechanged_68',['NewPacketUsernameChanged',['../packets_8h.html#a76ae55f04ff43b7e82e7b5d04de540cc',1,'packets.c']]],
+  ['number_5fclient_5fmax_69',['NUMBER_CLIENT_MAX',['../server_8h.html#ad172719f11bc41562233eec71e151cff',1,'server.h']]]
 ];
