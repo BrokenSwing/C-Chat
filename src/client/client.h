@@ -8,6 +8,7 @@
 
 #include "../common/threads.h"
 #include "../common/sockets.h"
+#include "../common/constants.h"
 
 struct UploadData {
     char* uploadFilename;

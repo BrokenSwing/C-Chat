@@ -13,7 +13,6 @@
 #include "ui.h"
 #include "client.h"
 #include "commands.h"
-#include "../common/constants.h"
 #include "../common/files.h"
 #include <string.h>
 #include <stdio.h>
