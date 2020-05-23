@@ -28,7 +28,10 @@ void handleUsernameChange(Client* client, struct PacketDefineUsername* packet) {
         setClientUsername(client, packet->username);
         getClientUsername(client, changedUsernamePacket.asUsernameChangedPacket.newUsername);
 
-        broadcast(&changedUsernamePacket);
+        if (client->room != NULL) {
+            broadcastRoom(&changedUsernamePacket, client->room);
+        }
+
     } else {
         Packet serverErrorPacket = NewPacketServerErrorMessage;
         memcpy(serverErrorPacket.asServerErrorMessagePacket.message, "Invalid username", 17);

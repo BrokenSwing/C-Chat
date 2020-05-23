@@ -35,6 +35,13 @@ int findAvailableUploadSlot(Client* client) {
 }
 
 void handleUploadRequest(Client* client, struct PacketFileUploadRequest* packet) {
+    if (client->room == NULL) {
+        Packet errorPacket = NewPacketServerErrorMessage;
+        memcpy(errorPacket.asServerErrorMessagePacket.message, "First join a room using /room join <name>.", 43);
+        sendPacket(client->socket, &errorPacket);
+        return;
+    }
+
     int uploadId = findAvailableUploadSlot(client);
     int fileTooLarge = packet->fileSize <= 0 || packet->fileSize > MAX_FILE_SIZE_UPLOAD;
     if (uploadId == -1 || fileTooLarge) {
@@ -98,6 +105,11 @@ int findUploadIdForFile(Client* client, unsigned fileId) {
 }
 
 void handleFileDataUpload(Client* client, struct PacketFileDataTransfer* packet) {
+    // TODO: Cancel upload when client leaves room
+    if (client->room == NULL) {
+        return;
+    }
+
     int uploadId = findUploadIdForFile(client, packet->id);
     if (packet->id > 0 && uploadId != -1) {
         /* The client is uploading and the packet data refers to the current upload file */
@@ -126,7 +138,7 @@ void handleFileDataUpload(Client* client, struct PacketFileDataTransfer* packet)
                 client->username,
                 client->uploadData[uploadId].fileId
             );
-            broadcast(&uploadSuccessPacket);
+            broadcastRoom(&uploadSuccessPacket, client->room);
 
             /* Set client upload state */
             free(client->uploadData[uploadId].fileContent);
@@ -191,6 +203,14 @@ THREAD_ENTRY_POINT uploadFileToClient(void* data) {
 }
 
 void handleDownloadRequest(Client* client, struct PacketFileDownloadRequest* packet) {
+    // TODO: Cancel download when client leaves room
+    if (client->room == NULL) {
+        Packet errorPacket = NewPacketServerErrorMessage;
+        memcpy(errorPacket.asServerErrorMessagePacket.message, "First join a room using /room join <name>.", 43);
+        sendPacket(client->socket, &errorPacket);
+        return;
+    }
+
     int downloadId = findAvailableDownloadSlot(client);
     if (downloadId == -1) {
         /* Client is already downloading a file. Refusing download request */

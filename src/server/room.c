@@ -33,6 +33,10 @@ void handleRoomCreationRequest(Client* client, struct PacketCreateRoom* packet) 
         Packet errorPacket = NewPacketServerErrorMessage;
         memcpy(errorPacket.asServerErrorMessagePacket.message, "You're already in a room. First leave the room.", 48);
         sendPacket(client->socket, &errorPacket);
+    } else if (strlen(packet->roomName) == 0) {
+        Packet errorPacket = NewPacketServerErrorMessage;
+        memcpy(errorPacket.asServerErrorMessagePacket.message, "The room name can't be empty.", 30);
+        sendPacket(client->socket, &errorPacket);
     } else {
         Room* room = findRoomByName(packet->roomName);
 
@@ -59,6 +63,9 @@ void handleRoomCreationRequest(Client* client, struct PacketCreateRoom* packet) 
         memcpy(room->description, packet->roomDesc, ROOM_DESC_MAX_LENGTH + 1);
         room->owner = client;
         room->clients[0] = client;
+        for (int i = 1; i < MAX_USERS_PER_ROOM; i++) {
+            room->clients[i] = NULL;
+        }
         client->room = room;
         rooms[roomId] = room;
 

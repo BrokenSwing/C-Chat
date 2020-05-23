@@ -17,6 +17,13 @@
 void broadcast(Packet* packet);
 
 /**
+ * \brief Broadcast a packet to all clients of the given room
+ * \param packet The packet to broadcast
+ * \param room The room
+ */
+void broadcastRoom(Packet* packet, Room* room);
+
+/**
  * \brief Processes a received PacketText
  *
  * \param client The client who sent the packet
