@@ -4,12 +4,26 @@
 #include <stdio.h>
 #include "communication.h"
 #include "string.h"
+#include "../common/synchronization.h"
 
-static unsigned int nextFileId = 1; // TODO: synchronize access
+static unsigned int nextFileId = 1;
+static Mutex fileIdMutex;
+
+void fileTransfer_init() {
+    fileIdMutex = createMutex();
+}
+
+void fileTransfer_cleanUp() {
+    destroyMutex(fileIdMutex);
+}
 
 // Simple implementation
 unsigned int generateNewFileId() {
-    return nextFileId++;
+    unsigned int id;
+    acquireMutex(fileIdMutex);
+    id = nextFileId++;
+    releaseMutex(fileIdMutex);
+    return id;
 }
 
 int findAvailableUploadSlot(Client* client) {

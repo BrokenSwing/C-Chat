@@ -31,6 +31,7 @@ void handleServerClose(int signal) {
         }
     }
     cleanUp();
+    fileTransfer_cleanUp();
     destroyReadWriteLock(clientsLock);
     printf("Server closed.\n");
     exit(EXIT_SUCCESS);
@@ -95,12 +96,14 @@ THREAD_ENTRY_POINT clientThread(void* idPnt) {
  * \brief Program entry point.
  */
 int main () {
-    clientsLock = createReadWriteLock();
-
     /* Create server socket */
     Socket serverSocket = createServerSocket("27015");
     /* Capture interruption signal to be able to cleanup allocated resources when server stops */
     signal(SIGINT, handleServerClose);
+
+    /* Initialize systems */
+    clientsLock = createReadWriteLock();
+    fileTransfer_init();
 
     printf("Server ready to accept connections.\n");
 

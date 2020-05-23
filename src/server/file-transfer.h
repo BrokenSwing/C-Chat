@@ -35,4 +35,14 @@ void handleFileDataUpload(Client* client, struct PacketFileDataTransfer* packet)
  */
 void handleDownloadRequest(Client* client, struct PacketFileDownloadRequest* packet);
 
+/**
+ * \brief Initializes required memory for file transfer system to work
+ */
+void fileTransfer_init();
+
+/**
+ * \brief Cleans up the memory allocated for file transfer system
+ */
+void fileTransfer_cleanUp();
+
 #endif //C_CHAT_FILE_TRANSFER_H
