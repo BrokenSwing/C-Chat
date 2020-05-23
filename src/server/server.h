@@ -32,7 +32,7 @@ typedef struct Client {
      * Equal to 0 if client isn't in the discussion, else 1.
      */
     short joined;
-    /** Thread relaying messages sent by user */
+    /** Thread processing packets sent by user */
     Thread thread;
 
     // TODO: Implement in a better way
