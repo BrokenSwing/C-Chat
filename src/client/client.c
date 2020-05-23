@@ -55,6 +55,11 @@ void joinRoom(const char* command) {
     sendPacket(clientSocket, &packet);
 }
 
+void leaveRoom() {
+    Packet packet = NewPacketLeaveRoom;
+    sendPacket(clientSocket, &packet);
+}
+
 COMMAND_HANDLER(command,
 COMMAND(file, "Usage: /file <send | receive>",
         COMMAND(send, "Usage: /file send <filepath>",
@@ -91,6 +96,10 @@ COMMAND(file, "Usage: /file <send | receive>",
                 )
                 COMMAND(join, "Usage: /room join <name>",
                     joinRoom(command);
+                    return;
+                )
+                COMMAND(leave, "Usage: /room leave",
+                    leaveRoom();
                     return;
                 )
         )

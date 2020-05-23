@@ -195,6 +195,16 @@ struct PacketJoinRoom {
 extern const union Packet NewPacketJoinRoom;
 
 /**
+ * \class PacketLeaveRoom
+ * \brief This packet is sent by client to leave its room
+ */
+struct PacketLeaveRoom {
+    char type;
+};
+/** This instance is used to create a new PacketLeaveRoom */
+extern const union Packet NewPacketLeaveRoom;
+
+/**
  * \class Packet
  * \brief A generic union type for packets
  */
@@ -216,6 +226,7 @@ typedef union Packet {
     struct PacketServerSuccess asServerSuccessMessagePacket;
     struct PacketCreateRoom asCreateRoomPacket;
     struct PacketJoinRoom asJoinRoomPacket;
+    struct PacketLeaveRoom asLeaveRoomPacket;
 } Packet;
 
 /**

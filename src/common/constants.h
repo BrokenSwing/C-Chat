@@ -165,4 +165,10 @@
  */
 #define JOIN_ROOM_MESSAGE_TYPE 15
 
+/**
+ * \def LEAVE_ROOM_MESSAGE_TYPE
+ * \brief An integer representing a message sent by client to leave a room
+ */
+#define LEAVE_ROOM_MESSAGE_TYPE 16
+
 #endif //C_CHAT_CONSTANTS_H

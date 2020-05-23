@@ -54,10 +54,6 @@ void disconnectClient(int id) {
             clients[id] = NULL;
     )
 
-    Packet packet = NewPacketLeave;
-    memcpy(packet.asLeavePacket.username, client->username, USERNAME_MAX_LENGTH + 1);
-    broadcast(&packet);
-
     /* Closing connection with client */
     closeSocket(&(client->socket));
 

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "communication.h"
+#include <stdio.h>
 
 int findFirstFreeRoomSlot() {
     int i = 0;
@@ -27,6 +28,15 @@ Room* findRoomByName(const char* roomName) {
     }
 
     return i == NUMBER_ROOM_MAX ? NULL : rooms[i];
+}
+
+int findRoomId(Room* room) {
+    int i = 0;
+    while (i < NUMBER_ROOM_MAX && rooms[i] != room) {
+        i++;
+    }
+
+    return i == NUMBER_ROOM_MAX ? -1 : i;
 }
 
 void handleRoomCreationRequest(Client* client, struct PacketCreateRoom* packet) {
@@ -108,4 +118,43 @@ void handleRoomJoinRequest(Client* client, struct PacketJoinRoom* packet) {
     SYNC_CLIENT_READ(memcpy(joinPacket.asJoinPacket.username, client->username, USERNAME_MAX_LENGTH + 1));
 
     broadcastRoom(&joinPacket, room);
+}
+
+void handleRoomLeaveRequest(Client* client, struct PacketLeaveRoom* packet) {
+    if (client->room == NULL) {
+        Packet errorPacket = NewPacketServerErrorMessage;
+        memcpy(errorPacket.asServerErrorMessagePacket.message, "You're not in a room.", 48);
+        sendPacket(client->socket, &errorPacket);
+        return;
+    }
+
+    Room* room = client->room;
+
+    if (client == room->owner) {
+        Packet leavePacket = NewPacketLeave;
+        for (int i = 0; i < MAX_USERS_PER_ROOM; i++) {
+            if (room->clients[i] != NULL) {
+                memcpy(leavePacket.asLeavePacket.username, room->clients[i]->username, USERNAME_MAX_LENGTH + 1);
+                broadcastRoom(&leavePacket, room);
+                room->clients[i]->room = NULL;
+            }
+        }
+        int roomId = findRoomId(room);
+        free(rooms[roomId]);
+        rooms[roomId] = NULL;
+    } else {
+        Packet leavePacket = NewPacketLeave;
+        memcpy(leavePacket.asLeavePacket.username, client->username, USERNAME_MAX_LENGTH + 1);
+        broadcastRoom(&leavePacket, room);
+
+        client->room = NULL;
+        int slot = 0;
+        while (slot < MAX_USERS_PER_ROOM && room->clients[slot] != client) {
+            slot++;
+        }
+
+        if (slot < MAX_USERS_PER_ROOM) { // Should always be true
+            room->clients[slot] = NULL;
+        }
+    }
 }

@@ -32,6 +32,7 @@ void handleServerClose(int signal) {
             free(client);
         }
     }
+    // TODO: Free rooms
     cleanUp();
     fileTransfer_cleanUp();
     destroyReadWriteLock(clientsLock);
@@ -68,6 +69,9 @@ void handleClientsPackets(Client* client) {
                     break;
                 case JOIN_ROOM_MESSAGE_TYPE:
                     handleRoomJoinRequest(client, &packet.asJoinRoomPacket);
+                    break;
+                case LEAVE_ROOM_MESSAGE_TYPE:
+                    handleRoomLeaveRequest(client, &packet.asLeaveRoomPacket);
                     break;
                 default:
                     printf("Received a packet of type %d. Can't handle this type of packet.\n", packet.type);
