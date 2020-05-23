@@ -18,6 +18,8 @@
  */
 #define NUMBER_CLIENT_MAX 10
 
+struct Room;
+
 /**
  * \class Client
  * \brief A type representing a connected client
@@ -48,10 +50,20 @@ typedef struct Client {
         Thread downloadThread;
         unsigned int downloadedFileId;
     } downloadData[MAX_CONCURRENT_FILE_TRANSFER];
+
+    struct Room* room;
 } Client;
+
+typedef struct Room {
+    char name[ROOM_NAME_MAX_LENGTH + 1];
+    char description[ROOM_DESC_MAX_LENGTH + 1];
+    Client* clients[MAX_USERS_PER_ROOM];
+    Client* owner;
+} Room;
 
 extern ReadWriteLock clientsLock;
 extern Client* clients[NUMBER_CLIENT_MAX];
+extern Room* rooms[NUMBER_ROOM_MAX];
 
 /**
  * \def SYNC_CLIENT_READ

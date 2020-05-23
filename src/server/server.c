@@ -16,9 +16,11 @@
 #include "handshake.h"
 #include "client-info.h"
 #include "file-transfer.h"
+#include "room.h"
 
 ReadWriteLock clientsLock;
 Client* clients[NUMBER_CLIENT_MAX] = {NULL};
+Room* rooms[NUMBER_ROOM_MAX] = {NULL};
 
 void handleServerClose(int signal) {
     for (int i = 0; i < NUMBER_CLIENT_MAX; i++) {
@@ -60,6 +62,9 @@ void handleClientsPackets(Client* client) {
                     break;
                 case FILE_DOWNLOAD_REQUEST_MESSAGE_TYPE:
                     handleDownloadRequest(client, &packet.asFileDownloadRequestPacket);
+                    break;
+                case CREATE_ROOM_MESSAGE_TYPE:
+                    handleRoomCreationRequest(client, &packet.asCreateRoomPacket);
                     break;
                 default:
                     printf("Received a packet of type %d. Can't handle this type of packet.\n", packet.type);
@@ -129,6 +134,7 @@ int main () {
         Client *client = malloc(sizeof(Client)); // Free-ed in disconnectClient function
         client->socket = clientSocket;
         client->joined = 0;
+        client->room = NULL;
         for (int i = 0; i < MAX_CONCURRENT_FILE_TRANSFER; i++) {
             client->uploadData[i].fileId = 0;
             client->uploadData[i].fileContent = NULL;

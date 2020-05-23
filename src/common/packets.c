@@ -14,6 +14,7 @@ const union Packet NewPacketFileDownloadValidation = { FILE_DOWNLOAD_VALIDATION_
 const union Packet NewPacketFileDataTransfer = { FILE_DATA_TRANSFER_MESSAGE_TYPE };
 const union Packet NewPacketFileTransferCancel = { FILE_TRANSFER_CANCEL_MESSAGE_TYPE };
 const union Packet NewPacketServerSuccess = { SERVER_SUCCESS_MESSAGE_TYPE };
+const union Packet NewPacketCreateRoom = { CREATE_ROOM_MESSAGE_TYPE };
 
 /**
  * \brief Retrieves the real size of the underlying type
@@ -51,6 +52,8 @@ unsigned int packets_sizeOf(Packet* packet) {
             return sizeof(struct PacketFileTransferCancel);
         case SERVER_SUCCESS_MESSAGE_TYPE:
             return sizeof(struct PacketServerSuccess);
+        case CREATE_ROOM_MESSAGE_TYPE:
+            return sizeof(struct PacketCreateRoom);
         default:
             return 0;
     }

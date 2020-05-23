@@ -34,6 +34,16 @@ THREAD_ENTRY_POINT sendMessage(void* data) {
     }
 }
 
+void createRoom(const char* command) {
+    if (strlen(command) > ROOM_NAME_MAX_LENGTH) {
+        ui_errorMessage("The room name is too long.");
+        return;
+    }
+    Packet packet = NewPacketCreateRoom;
+    memcpy(packet.asCreateRoomPacket.roomName, command, ROOM_NAME_MAX_LENGTH + 1);
+    sendPacket(clientSocket, &packet);
+}
+
 COMMAND_HANDLER(command,
 COMMAND(file, "Usage: /file <send | receive>",
         COMMAND(send, "Usage: /file send <filepath>",
@@ -62,6 +72,12 @@ COMMAND(file, "Usage: /file <send | receive>",
             Packet quitPacket = NewPacketQuit;
             sendPacket(clientSocket, &quitPacket);
             return;
+        )
+        COMMAND(room, "Usage: /room <create | join | leave>",
+            COMMAND(create, "Usage: /room create <name> <description>",
+                    createRoom(command);
+                    return;
+                )
         )
 )
 

@@ -172,6 +172,18 @@ struct PacketServerSuccess {
 extern const union Packet NewPacketServerSuccess;
 
 /**
+ * \class PacketCreateRoom
+ * \brief This packet is sent by client to create a room
+ */
+struct PacketCreateRoom {
+    char type;
+    char roomName[ROOM_NAME_MAX_LENGTH + 1];
+    char roomDesc[ROOM_DESC_MAX_LENGTH + 1];
+};
+/** This instance is used to create a new PacketCreateRoom  */
+extern const union Packet NewPacketCreateRoom;
+
+/**
  * \class Packet
  * \brief A generic union type for packets
  */
@@ -191,6 +203,7 @@ typedef union Packet {
     struct PacketFileDataTransfer asFileDataTransferPacket;
     struct PacketFileTransferCancel asFileTransferCancelPacket;
     struct PacketServerSuccess asServerSuccessMessagePacket;
+    struct PacketCreateRoom asCreateRoomPacket;
 } Packet;
 
 /**

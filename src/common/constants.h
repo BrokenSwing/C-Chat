@@ -41,6 +41,30 @@
  */
 #define MAX_CONCURRENT_FILE_TRANSFER 2
 
+/**
+ * \def ROOM_NAME_MAX_LENGTH
+ * \brief The maximum length for a name of a room
+ */
+#define ROOM_NAME_MAX_LENGTH 20
+
+/**
+ * \def ROOM_DESC_MAX_LENGTH
+ * \brief The maximum length for the description of a room
+ */
+#define ROOM_DESC_MAX_LENGTH 120
+
+/**
+ * \def MAX_USERS_PER_ROOM
+ * \brief The maximum amount of users connected simultaneously to a room
+ */
+#define MAX_USERS_PER_ROOM 10
+
+/**
+ * \def NUMBER_ROOM_MAX
+ * \brief The maximum of supported rooms
+ */
+#define NUMBER_ROOM_MAX 20
+
 //---------------------------------------------------------//
 //              MESSAGES TYPES DEFINITION                  //
 //---------------------------------------------------------//
@@ -128,5 +152,11 @@
  * \brief An integer representing a success message sent by server
  */
 #define SERVER_SUCCESS_MESSAGE_TYPE 13
+
+/**
+ * \def CREATE_ROOM_MESSAGE_TYPE
+ * \brief An integer representing a message sent by client to ask for room creation
+ */
+#define CREATE_ROOM_MESSAGE_TYPE 14
 
 #endif //C_CHAT_CONSTANTS_H

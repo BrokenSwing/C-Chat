@@ -36,6 +36,7 @@ add_executable(Server
         src/common/synchronization.c src/common/synchronization.c
         src/common/files.c           src/common/files.h
         src/common/packets.c         src/common/packets.h
+        src/server/room.c            src/server/room.h
 )
 
 target_link_libraries(Client ${CMAKE_THREAD_LIBS_INIT})
