@@ -1,6 +1,7 @@
 #include "room.h"
 #include <stdlib.h>
 #include <string.h>
+#include "communication.h"
 
 int findFirstFreeRoomSlot() {
     int i = 0;
@@ -73,4 +74,38 @@ void handleRoomCreationRequest(Client* client, struct PacketCreateRoom* packet) 
         memcpy(successPacket.asServerSuccessMessagePacket.message, "Room created !", 15);
         sendPacket(client->socket, &successPacket);
     }
+}
+
+void handleRoomJoinRequest(Client* client, struct PacketJoinRoom* packet) {
+    Room* room = findRoomByName(packet->roomName);
+    if (room == NULL) {
+        Packet errorPacket = NewPacketServerErrorMessage;
+        memcpy(errorPacket.asServerErrorMessagePacket.message, "This room does not exist.", 26);
+        sendPacket(client->socket, &errorPacket);
+        return;
+    }
+
+    if (client->room == room) {
+        Packet errorPacket = NewPacketServerErrorMessage;
+        memcpy(errorPacket.asServerErrorMessagePacket.message, "You're already in this room.", 29);
+        sendPacket(client->socket, &errorPacket);
+        return;
+    }
+
+    int slot = findFirstFreeSlotForRoom(room);
+    if (slot == -1) {
+        Packet errorPacket = NewPacketServerErrorMessage;
+        memcpy(errorPacket.asServerErrorMessagePacket.message, "This room is full.", 19);
+        sendPacket(client->socket, &errorPacket);
+        return;
+    }
+
+    // TODO: Make user quit a room if already in one
+    room->clients[slot] = client;
+    client->room = room;
+
+    Packet joinPacket = NewPacketJoin;
+    SYNC_CLIENT_READ(memcpy(joinPacket.asJoinPacket.username, client->username, USERNAME_MAX_LENGTH + 1));
+
+    broadcastRoom(&joinPacket, room);
 }

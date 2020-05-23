@@ -11,4 +11,12 @@
  */
 void handleRoomCreationRequest(Client* client, struct PacketCreateRoom* packet);
 
+/**
+ * \brief Processes a received PacketJoinRoom
+ *
+ * \param client The client who sent the packet
+ * \param packet The received packet
+ */
+void handleRoomJoinRequest(Client* client, struct PacketJoinRoom* packet);
+
 #endif //C_CHAT_ROOM_H

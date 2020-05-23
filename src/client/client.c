@@ -39,8 +39,19 @@ void createRoom(const char* command) {
         ui_errorMessage("The room name is too long.");
         return;
     }
+    // TODO: Get description from command
     Packet packet = NewPacketCreateRoom;
     memcpy(packet.asCreateRoomPacket.roomName, command, ROOM_NAME_MAX_LENGTH + 1);
+    sendPacket(clientSocket, &packet);
+}
+
+void joinRoom(const char* command) {
+    if (strlen(command) > ROOM_NAME_MAX_LENGTH) {
+        ui_errorMessage("The room name is too long.");
+        return;
+    }
+    Packet packet = NewPacketJoinRoom;
+    memcpy(packet.asJoinRoomPacket.roomName, command, ROOM_NAME_MAX_LENGTH + 1);
     sendPacket(clientSocket, &packet);
 }
 
@@ -76,6 +87,10 @@ COMMAND(file, "Usage: /file <send | receive>",
         COMMAND(room, "Usage: /room <create | join | leave>",
             COMMAND(create, "Usage: /room create <name> <description>",
                     createRoom(command);
+                    return;
+                )
+                COMMAND(join, "Usage: /room join <name>",
+                    joinRoom(command);
                     return;
                 )
         )

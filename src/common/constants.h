@@ -159,4 +159,10 @@
  */
 #define CREATE_ROOM_MESSAGE_TYPE 14
 
+/**
+ * \def JOIN_ROOM_MESSAGE_TYPE
+ * \brief An integer representing a message sent by client to join room
+ */
+#define JOIN_ROOM_MESSAGE_TYPE 15
+
 #endif //C_CHAT_CONSTANTS_H

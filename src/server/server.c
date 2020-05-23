@@ -66,6 +66,9 @@ void handleClientsPackets(Client* client) {
                 case CREATE_ROOM_MESSAGE_TYPE:
                     handleRoomCreationRequest(client, &packet.asCreateRoomPacket);
                     break;
+                case JOIN_ROOM_MESSAGE_TYPE:
+                    handleRoomJoinRequest(client, &packet.asJoinRoomPacket);
+                    break;
                 default:
                     printf("Received a packet of type %d. Can't handle this type of packet.\n", packet.type);
                     break;
@@ -87,10 +90,6 @@ THREAD_ENTRY_POINT clientThread(void* idPnt) {
         return EXIT_FAILURE;
     }
 
-    Packet packet = NewPacketJoin;
-    SYNC_CLIENT_READ(memcpy(packet.asJoinPacket.username, clients[id]->username, USERNAME_MAX_LENGTH + 1));
-
-    broadcast(&packet);
     handleClientsPackets(client);
     disconnectClient(id);
 
