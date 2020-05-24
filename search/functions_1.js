@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['broadcast_176',['broadcast',['../communication_8h.html#a19facf75f52f106ed2be19ea65245505',1,'communication.c']]]
+  ['broadcastroom_200',['broadcastRoom',['../communication_8h.html#a1d3146403a1abad4407bde75ec4fe568',1,'communication.c']]]
 ];

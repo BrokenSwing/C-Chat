@@ -127,6 +127,15 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_packet_server_success.html">PacketServerSuccess</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This packet is sent by server to client on success.  <a href="struct_packet_server_success.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_packet_create_room.html">PacketCreateRoom</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This packet is sent by client to create a room.  <a href="struct_packet_create_room.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_packet_join_room.html">PacketJoinRoom</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This packet is sent by client to join a room.  <a href="struct_packet_join_room.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_packet_leave_room.html">PacketLeaveRoom</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This packet is sent by client to leave its room.  <a href="struct_packet_leave_room.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="union_packet.html">Packet</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A generic union type for packets.  <a href="union_packet.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,6 +185,12 @@ Variables</h2></td></tr>
 <tr class="separator:a72a5bef322a75921924f9de1e5a6d619"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a278b60e2de3cd258101be770665784ff"><td class="memItemLeft" align="right" valign="top">const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="packets_8h.html#a278b60e2de3cd258101be770665784ff">NewPacketServerSuccess</a></td></tr>
 <tr class="separator:a278b60e2de3cd258101be770665784ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a704e36fac1c218217200d9c6dd4f57a5"><td class="memItemLeft" align="right" valign="top">const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="packets_8h.html#a704e36fac1c218217200d9c6dd4f57a5">NewPacketCreateRoom</a></td></tr>
+<tr class="separator:a704e36fac1c218217200d9c6dd4f57a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a100dc91108e3822b29ad82aeb76a9ccb"><td class="memItemLeft" align="right" valign="top">const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="packets_8h.html#a100dc91108e3822b29ad82aeb76a9ccb">NewPacketJoinRoom</a></td></tr>
+<tr class="separator:a100dc91108e3822b29ad82aeb76a9ccb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0724cd4a24199b3d77b109f841209185"><td class="memItemLeft" align="right" valign="top">const union <a class="el" href="union_packet.html">Packet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="packets_8h.html#a0724cd4a24199b3d77b109f841209185">NewPacketLeaveRoom</a></td></tr>
+<tr class="separator:a0724cd4a24199b3d77b109f841209185"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Defines types of packets that are exchanged between client and server. </p>
@@ -257,6 +272,22 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="a704e36fac1c218217200d9c6dd4f57a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a704e36fac1c218217200d9c6dd4f57a5">&#9670;&nbsp;</a></span>NewPacketCreateRoom</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const union <a class="el" href="union_packet.html">Packet</a> NewPacketCreateRoom</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This instance is used to create a new <a class="el" href="struct_packet_create_room.html" title="This packet is sent by client to create a room.">PacketCreateRoom</a> <br  />
+ </p>
+
+</div>
+</div>
 <a id="a6ec0fb53b0d3eaf38155b617d06315db"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6ec0fb53b0d3eaf38155b617d06315db">&#9670;&nbsp;</a></span>NewPacketDefineUsername</h2>
 
@@ -377,6 +408,21 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a100dc91108e3822b29ad82aeb76a9ccb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a100dc91108e3822b29ad82aeb76a9ccb">&#9670;&nbsp;</a></span>NewPacketJoinRoom</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const union <a class="el" href="union_packet.html">Packet</a> NewPacketJoinRoom</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This instance is used to create a new <a class="el" href="struct_packet_join_room.html" title="This packet is sent by client to join a room.">PacketJoinRoom</a> </p>
+
+</div>
+</div>
 <a id="a1882d139426f11655e2f8c64e5c2ba71"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1882d139426f11655e2f8c64e5c2ba71">&#9670;&nbsp;</a></span>NewPacketLeave</h2>
 
@@ -389,6 +435,21 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>This instance is used to create a new <a class="el" href="struct_packet_leave.html" title="This packet is sent to all client of a room when a client leaves the room.">PacketLeave</a> </p>
+
+</div>
+</div>
+<a id="a0724cd4a24199b3d77b109f841209185"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0724cd4a24199b3d77b109f841209185">&#9670;&nbsp;</a></span>NewPacketLeaveRoom</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const union <a class="el" href="union_packet.html">Packet</a> NewPacketLeaveRoom</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This instance is used to create a new <a class="el" href="struct_packet_leave_room.html" title="This packet is sent by client to leave its room.">PacketLeaveRoom</a> </p>
 
 </div>
 </div>

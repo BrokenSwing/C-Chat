@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['username_240',['username',['../struct_client.html#a7f5ba83c6457f6092e6615bcfec96053',1,'Client']]]
+  ['size_268',['size',['../struct_file_info.html#ad269568d7fa05ef71dd0de872b670132',1,'FileInfo']]],
+  ['socket_269',['socket',['../struct_client.html#aaa5b0226a45898f348e498156e6f571b',1,'Client']]]
 ];

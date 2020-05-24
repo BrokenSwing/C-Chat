@@ -111,6 +111,8 @@ struct {</td></tr>
 <tr class="separator:a64fb452c9ce1c20d0697980c59b717fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ef5d5442f31cef96964bacb1beb1eec"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>downloadData</b> [<a class="el" href="constants_8h.html#ad8fa68aa1f078ad743f85cdad1e7f44b">MAX_CONCURRENT_FILE_TRANSFER</a>]</td></tr>
 <tr class="separator:a0ef5d5442f31cef96964bacb1beb1eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cf01d12dcc5a237c34cb43500cbe9b6"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_room.html">Room</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_client.html#a7cf01d12dcc5a237c34cb43500cbe9b6">room</a></td></tr>
+<tr class="separator:a7cf01d12dcc5a237c34cb43500cbe9b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A type representing a connected client. </p>
@@ -127,6 +129,23 @@ struct {</td></tr>
       </table>
 </div><div class="memdoc">
 <p>A short indicating whether or not, the client joined discussion. Equal to 0 if client isn't in the discussion, else 1. </p>
+
+</div>
+</div>
+<a id="a7cf01d12dcc5a237c34cb43500cbe9b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cf01d12dcc5a237c34cb43500cbe9b6">&#9670;&nbsp;</a></span>room</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_room.html">Room</a>* Client::room</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A pointer to the room the client joined. Can be NULL.</p>
+<p>It can be written to NULL by room-owner thread at any time if the room owner disband deletes the room. It can be written to NULL by self thread at any time if the client asks to leave the room. It can be written to non-NULL value ONLY by self thread when the client asks to create a join a room. It can be read by self thread at any time to relay packets to clients in the room.</p>
+<p>We MUST acquire clientsLock to access this field. </p>
 
 </div>
 </div>

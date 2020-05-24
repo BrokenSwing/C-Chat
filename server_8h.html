@@ -92,6 +92,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_client.html">Client</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing a connected client.  <a href="struct_client.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_room.html">Room</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -105,12 +107,27 @@ Macros</h2></td></tr>
 <tr class="memitem:ad9b5962f677b425a692d9fbb1eb89d0b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#ad9b5962f677b425a692d9fbb1eb89d0b">SYNC_CLIENT_WRITE</a>(op)</td></tr>
 <tr class="memdesc:ad9b5962f677b425a692d9fbb1eb89d0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to synchronize clients write operation.  <a href="server_8h.html#ad9b5962f677b425a692d9fbb1eb89d0b">More...</a><br /></td></tr>
 <tr class="separator:ad9b5962f677b425a692d9fbb1eb89d0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6df77763d204de64f0517f7cbe45285"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#ab6df77763d204de64f0517f7cbe45285">SYNC_ROOMS_READ</a>(op)</td></tr>
+<tr class="memdesc:ab6df77763d204de64f0517f7cbe45285"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to synchronize rooms read operation.  <a href="server_8h.html#ab6df77763d204de64f0517f7cbe45285">More...</a><br /></td></tr>
+<tr class="separator:ab6df77763d204de64f0517f7cbe45285"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0e6bbf0c458297d3d34f5b9b77151ec"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#aa0e6bbf0c458297d3d34f5b9b77151ec">SYNC_ROOMS_WRITE</a>(op)</td></tr>
+<tr class="memdesc:aa0e6bbf0c458297d3d34f5b9b77151ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to synchronize rooms write operation.  <a href="server_8h.html#aa0e6bbf0c458297d3d34f5b9b77151ec">More...</a><br /></td></tr>
+<tr class="separator:aa0e6bbf0c458297d3d34f5b9b77151ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ec7e3fb3d20bbe050a322830721df4b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a5ec7e3fb3d20bbe050a322830721df4b">SYNC_ROOM_READ</a>(room,  op)</td></tr>
+<tr class="memdesc:a5ec7e3fb3d20bbe050a322830721df4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to synchronize read operation on a single room.  <a href="server_8h.html#a5ec7e3fb3d20bbe050a322830721df4b">More...</a><br /></td></tr>
+<tr class="separator:a5ec7e3fb3d20bbe050a322830721df4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ec7e3fb3d20bbe050a322830721df4b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a5ec7e3fb3d20bbe050a322830721df4b">SYNC_ROOM_READ</a>(room,  op)</td></tr>
+<tr class="memdesc:a5ec7e3fb3d20bbe050a322830721df4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to synchronize read operation on a single room.  <a href="server_8h.html#a5ec7e3fb3d20bbe050a322830721df4b">More...</a><br /></td></tr>
+<tr class="separator:a5ec7e3fb3d20bbe050a322830721df4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a7302c9ba9fef6f7473f52cc61bd4bc40"><td class="memItemLeft" align="right" valign="top"><a id="a7302c9ba9fef6f7473f52cc61bd4bc40"></a>
 typedef struct <a class="el" href="struct_client.html">Client</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Client</b></td></tr>
 <tr class="separator:a7302c9ba9fef6f7473f52cc61bd4bc40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2809d44319d7553e1846b35be4b953d8"><td class="memItemLeft" align="right" valign="top"><a id="a2809d44319d7553e1846b35be4b953d8"></a>
+typedef struct <a class="el" href="struct_room.html">Room</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Room</b></td></tr>
+<tr class="separator:a2809d44319d7553e1846b35be4b953d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -126,9 +143,14 @@ Variables</h2></td></tr>
 <tr class="memitem:a96e2324844b8ce2aad1f5ab7a883675e"><td class="memItemLeft" align="right" valign="top"><a id="a96e2324844b8ce2aad1f5ab7a883675e"></a>
 <a class="el" href="struct_read_write_lock.html">ReadWriteLock</a>&#160;</td><td class="memItemRight" valign="bottom"><b>clientsLock</b></td></tr>
 <tr class="separator:a96e2324844b8ce2aad1f5ab7a883675e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01a929646f9eb1590b5c1de0686f403d"><td class="memItemLeft" align="right" valign="top"><a id="a01a929646f9eb1590b5c1de0686f403d"></a>
+<a class="el" href="struct_read_write_lock.html">ReadWriteLock</a>&#160;</td><td class="memItemRight" valign="bottom"><b>roomsLock</b></td></tr>
+<tr class="separator:a01a929646f9eb1590b5c1de0686f403d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13e222c8a1f14ddc1dbca7b7a037c33d"><td class="memItemLeft" align="right" valign="top"><a id="a13e222c8a1f14ddc1dbca7b7a037c33d"></a>
 <a class="el" href="struct_client.html">Client</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>clients</b> [<a class="el" href="server_8h.html#ad172719f11bc41562233eec71e151cff">NUMBER_CLIENT_MAX</a>]</td></tr>
 <tr class="separator:a13e222c8a1f14ddc1dbca7b7a037c33d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a658b61942bd345e60a57ccde5c0976e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_room.html">Room</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a658b61942bd345e60a57ccde5c0976e8">rooms</a> [<a class="el" href="constants_8h.html#a1e5500055f4d264cb172cd000a798ed0">NUMBER_ROOM_MAX</a>]</td></tr>
+<tr class="separator:a658b61942bd345e60a57ccde5c0976e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Header file for <a class="el" href="server_8c.html" title="Server file.">server.c</a>. </p>
@@ -176,6 +198,118 @@ Variables</h2></td></tr>
 <div class="line">releaseWrite(clientsLock);</div>
 </div><!-- fragment -->
 <p>Macro to synchronize clients write operation. </p>
+
+</div>
+</div>
+<a id="a5ec7e3fb3d20bbe050a322830721df4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ec7e3fb3d20bbe050a322830721df4b">&#9670;&nbsp;</a></span>SYNC_ROOM_READ <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SYNC_ROOM_READ</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">room, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">op&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><a class="code" href="synchronization_8h.html#ad9deb6c6d8c1237ee8881a9839ae6fd0">acquireRead</a>(room-&gt;lock);          \</div>
+<div class="line">op;                               \</div>
+<div class="line">releaseRead(room-&gt;lock);</div>
+</div><!-- fragment -->
+<p>Macro to synchronize read operation on a single room. </p>
+
+</div>
+</div>
+<a id="a5ec7e3fb3d20bbe050a322830721df4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ec7e3fb3d20bbe050a322830721df4b">&#9670;&nbsp;</a></span>SYNC_ROOM_READ <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SYNC_ROOM_READ</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">room, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">op&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><a class="code" href="synchronization_8h.html#ad9deb6c6d8c1237ee8881a9839ae6fd0">acquireRead</a>(room-&gt;lock);          \</div>
+<div class="line">op;                               \</div>
+<div class="line">releaseRead(room-&gt;lock);</div>
+</div><!-- fragment -->
+<p>Macro to synchronize read operation on a single room. </p>
+
+</div>
+</div>
+<a id="ab6df77763d204de64f0517f7cbe45285"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6df77763d204de64f0517f7cbe45285">&#9670;&nbsp;</a></span>SYNC_ROOMS_READ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SYNC_ROOMS_READ</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">op</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><a class="code" href="synchronization_8h.html#ad9deb6c6d8c1237ee8881a9839ae6fd0">acquireRead</a>(roomsLock);           \</div>
+<div class="line">op;                               \</div>
+<div class="line">releaseRead(roomsLock);</div>
+</div><!-- fragment -->
+<p>Macro to synchronize rooms read operation. </p>
+
+</div>
+</div>
+<a id="aa0e6bbf0c458297d3d34f5b9b77151ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0e6bbf0c458297d3d34f5b9b77151ec">&#9670;&nbsp;</a></span>SYNC_ROOMS_WRITE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SYNC_ROOMS_WRITE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">op</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><a class="code" href="synchronization_8h.html#ad68e8361a3cbbea18d9c760e46e8d038">acquireWrite</a>(roomsLock);          \</div>
+<div class="line">op;                               \</div>
+<div class="line">releaseWrite(roomsLock);</div>
+</div><!-- fragment -->
+<p>Macro to synchronize rooms write operation. </p>
 
 </div>
 </div>
@@ -230,6 +364,24 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a658b61942bd345e60a57ccde5c0976e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a658b61942bd345e60a57ccde5c0976e8">&#9670;&nbsp;</a></span>rooms</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_room.html">Room</a>* rooms[<a class="el" href="constants_8h.html#a1e5500055f4d264cb172cd000a798ed0">NUMBER_ROOM_MAX</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>An array containing all pointers to existing rooms.</p>
+<p>It can be written by any client thread at any time if a client creates or deletes a room. It can be read by any client thread at any time if a client joins a room.</p>
+<p>We MUST acquire roomsLock to access this field. </p>
 
 </div>
 </div>

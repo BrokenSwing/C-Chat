@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['exists_220',['exists',['../struct_file_info.html#ae12e8cdd690fa83a94d9b5cfb5159118',1,'FileInfo']]]
+  ['clients_245',['clients',['../struct_room.html#a9322f2e00c771ed857a442118a69fab6',1,'Room']]]
 ];

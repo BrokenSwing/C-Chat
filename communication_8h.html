@@ -82,9 +82,12 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a19facf75f52f106ed2be19ea65245505"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="communication_8h.html#a19facf75f52f106ed2be19ea65245505">broadcast</a> (<a class="el" href="union_packet.html">Packet</a> *packet)</td></tr>
-<tr class="memdesc:a19facf75f52f106ed2be19ea65245505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasts a packet to all clients.  <a href="communication_8h.html#a19facf75f52f106ed2be19ea65245505">More...</a><br /></td></tr>
-<tr class="separator:a19facf75f52f106ed2be19ea65245505"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d3146403a1abad4407bde75ec4fe568"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="communication_8h.html#a1d3146403a1abad4407bde75ec4fe568">broadcastRoom</a> (<a class="el" href="union_packet.html">Packet</a> *packet, <a class="el" href="struct_room.html">Room</a> *room)</td></tr>
+<tr class="memdesc:a1d3146403a1abad4407bde75ec4fe568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcast a packet to all clients of the given room.  <a href="communication_8h.html#a1d3146403a1abad4407bde75ec4fe568">More...</a><br /></td></tr>
+<tr class="separator:a1d3146403a1abad4407bde75ec4fe568"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeda7c27f502b8c0a0d9499df36441d2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="communication_8h.html#aeda7c27f502b8c0a0d9499df36441d2b">syncBroadcastRoom</a> (<a class="el" href="union_packet.html">Packet</a> *packet, <a class="el" href="struct_room.html">Room</a> *room)</td></tr>
+<tr class="memdesc:aeda7c27f502b8c0a0d9499df36441d2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcast a packet to all clients of the given room with room-lock acquirement.  <a href="communication_8h.html#aeda7c27f502b8c0a0d9499df36441d2b">More...</a><br /></td></tr>
+<tr class="separator:aeda7c27f502b8c0a0d9499df36441d2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0807f9c54b2374378a563879e70f0af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="communication_8h.html#ac0807f9c54b2374378a563879e70f0af">handleTextMessageRelay</a> (<a class="el" href="struct_client.html">Client</a> *client, struct <a class="el" href="struct_packet_text.html">PacketText</a> *packet)</td></tr>
 <tr class="memdesc:ac0807f9c54b2374378a563879e70f0af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes a received <a class="el" href="struct_packet_text.html" title="This packet is sent to all clients of a room when a client sends a message.">PacketText</a>.  <a href="communication_8h.html#ac0807f9c54b2374378a563879e70f0af">More...</a><br /></td></tr>
 <tr class="separator:ac0807f9c54b2374378a563879e70f0af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -92,26 +95,37 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Regroup functions that aim to communicate with clients. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a19facf75f52f106ed2be19ea65245505"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a19facf75f52f106ed2be19ea65245505">&#9670;&nbsp;</a></span>broadcast()</h2>
+<a id="a1d3146403a1abad4407bde75ec4fe568"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d3146403a1abad4407bde75ec4fe568">&#9670;&nbsp;</a></span>broadcastRoom()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void broadcast </td>
+          <td class="memname">void broadcastRoom </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="union_packet.html">Packet</a> *&#160;</td>
-          <td class="paramname"><em>packet</em></td><td>)</td>
+          <td class="paramname"><em>packet</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="struct_room.html">Room</a> *&#160;</td>
+          <td class="paramname"><em>room</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Broadcasts a packet to all clients. </p>
+<p>Broadcast a packet to all clients of the given room. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">packet</td><td>The packet to send to all client </td></tr>
+    <tr><td class="paramname">packet</td><td>The packet to broadcast </td></tr>
+    <tr><td class="paramname">room</td><td>The room </td></tr>
   </table>
   </dd>
 </dl>
@@ -149,6 +163,43 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">client</td><td>The client who sent the packet </td></tr>
     <tr><td class="paramname">packet</td><td>The received packet </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aeda7c27f502b8c0a0d9499df36441d2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeda7c27f502b8c0a0d9499df36441d2b">&#9670;&nbsp;</a></span>syncBroadcastRoom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void syncBroadcastRoom </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="union_packet.html">Packet</a> *&#160;</td>
+          <td class="paramname"><em>packet</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_room.html">Room</a> *&#160;</td>
+          <td class="paramname"><em>room</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Broadcast a packet to all clients of the given room with room-lock acquirement. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packet</td><td>The packet to broadcast </td></tr>
+    <tr><td class="paramname">room</td><td>The room </td></tr>
   </table>
   </dd>
 </dl>

@@ -81,8 +81,8 @@ $(function() {
 
 
 <h3><a id="index_b"></a>- b -</h3><ul>
-<li>broadcast()
-: <a class="el" href="communication_8h.html#a19facf75f52f106ed2be19ea65245505">communication.h</a>
+<li>broadcastRoom()
+: <a class="el" href="communication_8h.html#a1d3146403a1abad4407bde75ec4fe568">communication.h</a>
 </li>
 </ul>
 
@@ -102,6 +102,9 @@ $(function() {
 </li>
 <li>commandHandler()
 : <a class="el" href="client_8h.html#aebebd601d5d0f93c8c4471da2f88684d">client.h</a>
+</li>
+<li>CREATE_ROOM_MESSAGE_TYPE
+: <a class="el" href="constants_8h.html#a84e8eca99fe63eb34458ebda8ebec127">constants.h</a>
 </li>
 <li>createClientSocket()
 : <a class="el" href="sockets_8h.html#af6938caa4565a29aad133bb99f30e72a">sockets.h</a>
@@ -190,6 +193,9 @@ $(function() {
 <li>JOIN_MESSAGE_TYPE
 : <a class="el" href="constants_8h.html#ac4af6a17cc2f98499018102f83e61bee">constants.h</a>
 </li>
+<li>JOIN_ROOM_MESSAGE_TYPE
+: <a class="el" href="constants_8h.html#aa532f361c85fa97357d31cc948494588">constants.h</a>
+</li>
 <li>joinThread()
 : <a class="el" href="threads_8h.html#abd66887f14a3fd502b055323f7641898">threads.h</a>
 </li>
@@ -199,6 +205,9 @@ $(function() {
 <h3><a id="index_l"></a>- l -</h3><ul>
 <li>LEAVE_MESSAGE_TYPE
 : <a class="el" href="constants_8h.html#af9bd3683fe2cb88fb7047416e35259f7">constants.h</a>
+</li>
+<li>LEAVE_ROOM_MESSAGE_TYPE
+: <a class="el" href="constants_8h.html#afdec91d905323c8563212b929c085d94">constants.h</a>
 </li>
 </ul>
 
@@ -214,6 +223,9 @@ $(function() {
 <li>MAX_FILE_SIZE_UPLOAD
 : <a class="el" href="constants_8h.html#a66c7c3a89dfa194a52271bb1511f32d6">constants.h</a>
 </li>
+<li>MAX_USERS_PER_ROOM
+: <a class="el" href="constants_8h.html#a0c9a7c01e709155991ef7a479904dc6c">constants.h</a>
+</li>
 <li>MSG_MAX_LENGTH
 : <a class="el" href="constants_8h.html#af0d1fa332610c5ebdf75ae745359636b">constants.h</a>
 </li>
@@ -221,6 +233,9 @@ $(function() {
 
 
 <h3><a id="index_n"></a>- n -</h3><ul>
+<li>NewPacketCreateRoom
+: <a class="el" href="packets_8h.html#a704e36fac1c218217200d9c6dd4f57a5">packets.h</a>
+</li>
 <li>NewPacketDefineUsername
 : <a class="el" href="packets_8h.html#a6ec0fb53b0d3eaf38155b617d06315db">packets.h</a>
 </li>
@@ -245,8 +260,14 @@ $(function() {
 <li>NewPacketJoin
 : <a class="el" href="packets_8h.html#af4b17ac320cb4417d2f9ec16581021ad">packets.h</a>
 </li>
+<li>NewPacketJoinRoom
+: <a class="el" href="packets_8h.html#a100dc91108e3822b29ad82aeb76a9ccb">packets.h</a>
+</li>
 <li>NewPacketLeave
 : <a class="el" href="packets_8h.html#a1882d139426f11655e2f8c64e5c2ba71">packets.h</a>
+</li>
+<li>NewPacketLeaveRoom
+: <a class="el" href="packets_8h.html#a0724cd4a24199b3d77b109f841209185">packets.h</a>
 </li>
 <li>NewPacketQuit
 : <a class="el" href="packets_8h.html#aa1b2f5ae3f9a1aac88f80b95ef92f90d">packets.h</a>
@@ -265,6 +286,9 @@ $(function() {
 </li>
 <li>NUMBER_CLIENT_MAX
 : <a class="el" href="server_8h.html#ad172719f11bc41562233eec71e151cff">server.h</a>
+</li>
+<li>NUMBER_ROOM_MAX
+: <a class="el" href="constants_8h.html#a1e5500055f4d264cb172cd000a798ed0">constants.h</a>
 </li>
 </ul>
 
@@ -298,6 +322,16 @@ $(function() {
 <li>resetColor()
 : <a class="el" href="console-color_8h.html#afe00396766eb6b8ca4674de4c5d3d949">console-color.h</a>
 </li>
+<li>ROOM_DESC_MAX_LENGTH
+: <a class="el" href="constants_8h.html#ab4f0a9341dc25dde6453da908f840c8f">constants.h</a>
+</li>
+<li>ROOM_NAME_MAX_LENGTH
+: <a class="el" href="constants_8h.html#a33e99cfe6c05833b5f1c83d09865dbc0">constants.h</a>
+</li>
+<li>rooms
+: <a class="el" href="server_8c.html#a658b61942bd345e60a57ccde5c0976e8">server.c</a>
+, <a class="el" href="server_8h.html#a658b61942bd345e60a57ccde5c0976e8">server.h</a>
+</li>
 </ul>
 
 
@@ -322,14 +356,26 @@ $(function() {
 : <a class="el" href="console-color_8h.html#a0bf72a7e3dba93a4a09a5c1ff1c55a95">console-color.h</a>
 </li>
 <li>setUsername()
-: <a class="el" href="client_8h.html#a5207171e621082adea5142b4079a91d1">client.h</a>
-, <a class="el" href="client_8c.html#ab8a7ea1debe22a622bd5d1403497a760">client.c</a>
+: <a class="el" href="client_8c.html#ab8a7ea1debe22a622bd5d1403497a760">client.c</a>
+, <a class="el" href="client_8h.html#a5207171e621082adea5142b4079a91d1">client.h</a>
 </li>
 <li>SYNC_CLIENT_READ
 : <a class="el" href="server_8h.html#a40edd539950cd6e70ba11cc4e5dd561e">server.h</a>
 </li>
 <li>SYNC_CLIENT_WRITE
 : <a class="el" href="server_8h.html#ad9b5962f677b425a692d9fbb1eb89d0b">server.h</a>
+</li>
+<li>SYNC_ROOM_READ
+: <a class="el" href="server_8h.html#a5ec7e3fb3d20bbe050a322830721df4b">server.h</a>
+</li>
+<li>SYNC_ROOMS_READ
+: <a class="el" href="server_8h.html#ab6df77763d204de64f0517f7cbe45285">server.h</a>
+</li>
+<li>SYNC_ROOMS_WRITE
+: <a class="el" href="server_8h.html#aa0e6bbf0c458297d3d34f5b9b77151ec">server.h</a>
+</li>
+<li>syncBroadcastRoom()
+: <a class="el" href="communication_8h.html#aeda7c27f502b8c0a0d9499df36441d2b">communication.h</a>
 </li>
 </ul>
 

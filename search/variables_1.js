@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['isdirectory_221',['isDirectory',['../struct_file_info.html#afbd57064215845c3a083afb10169d254',1,'FileInfo']]]
+  ['exists_246',['exists',['../struct_file_info.html#ae12e8cdd690fa83a94d9b5cfb5159118',1,'FileInfo']]]
 ];
