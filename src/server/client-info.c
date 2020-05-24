@@ -28,8 +28,18 @@ void handleUsernameChange(Client* client, struct PacketDefineUsername* packet) {
         setClientUsername(client, packet->username);
         getClientUsername(client, changedUsernamePacket.asUsernameChangedPacket.newUsername);
 
-        if (client->room != NULL) {
-            broadcastRoom(&changedUsernamePacket, client->room);
+        acquireRead(clientsLock);
+        Room* clientRoom = client->room;
+        if (clientRoom != NULL) {
+            acquireRead(clientRoom->lock);
+            releaseRead(clientsLock);
+
+            broadcastRoom(&changedUsernamePacket, clientRoom);
+
+            releaseRead(clientRoom->lock);
+        } else {
+            releaseRead(clientsLock);
+            sendPacket(client->socket, &changedUsernamePacket);
         }
 
     } else {

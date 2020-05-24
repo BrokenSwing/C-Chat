@@ -23,8 +23,14 @@ void handleRoomJoinRequest(Client* client, struct PacketJoinRoom* packet);
  * \brief Processes a received PacketLeaveRoom
  *
  * \param client The client who sent the packet
- * \param packet The received packet
  */
-void handleRoomLeaveRequest(Client* client, struct PacketLeaveRoom* packet);
+void handleRoomLeaveRequest(Client* client);
+
+/**
+ * \brief Destroys allocated resources for the given room
+ *
+ * \param room The room to destroy
+ */
+void destroyRoom(Room *room);
 
 #endif //C_CHAT_ROOM_H

@@ -28,6 +28,7 @@ add_executable(Server
         src/server/client-info.c     src/server/client-info.h
         src/server/communication.c   src/server/communication.h
         src/server/file-transfer.c   src/server/file-transfer.h
+        src/server/room.c            src/server/room.h
 
         src/common/constants.h
         src/common/interop.h
@@ -36,7 +37,6 @@ add_executable(Server
         src/common/synchronization.c src/common/synchronization.c
         src/common/files.c           src/common/files.h
         src/common/packets.c         src/common/packets.h
-        src/server/room.c            src/server/room.h
 )
 
 target_link_libraries(Client ${CMAKE_THREAD_LIBS_INIT})

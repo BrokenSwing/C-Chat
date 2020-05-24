@@ -3,6 +3,7 @@
 #include <string.h>
 #include "communication.h"
 #include <stdio.h>
+#include "client-info.h"
 
 int findFirstFreeRoomSlot() {
     int i = 0;
@@ -12,7 +13,7 @@ int findFirstFreeRoomSlot() {
     return i == NUMBER_ROOM_MAX ? -1 : i;
 }
 
-int findFirstFreeSlotForRoom(Room* room) {
+int findFirstFreeSlotForRoom(Room *room) {
     int i = 0;
     while (i < MAX_USERS_PER_ROOM && room->clients[i] != NULL) {
         i++;
@@ -21,7 +22,7 @@ int findFirstFreeSlotForRoom(Room* room) {
     return i == MAX_USERS_PER_ROOM ? -1 : i;
 }
 
-Room* findRoomByName(const char* roomName) {
+Room *findRoomByName(const char *roomName) {
     int i = 0;
     while (i < NUMBER_ROOM_MAX && (rooms[i] == NULL || strcmp(rooms[i]->name, roomName) != 0)) {
         i++;
@@ -30,7 +31,7 @@ Room* findRoomByName(const char* roomName) {
     return i == NUMBER_ROOM_MAX ? NULL : rooms[i];
 }
 
-int findRoomId(Room* room) {
+int findRoomId(Room *room) {
     int i = 0;
     while (i < NUMBER_ROOM_MAX && rooms[i] != room) {
         i++;
@@ -39,8 +40,63 @@ int findRoomId(Room* room) {
     return i == NUMBER_ROOM_MAX ? -1 : i;
 }
 
-void handleRoomCreationRequest(Client* client, struct PacketCreateRoom* packet) {
-    if (client->room != NULL) {
+/**
+ * \brief Creates a room with the given name, the given description and the given owner.
+ *
+ * It initializes all room fields and add the owner to the clients connected to the room.
+ *
+ * \param owner The owner of the room
+ * \param name The name of the room
+ * \param description The description of the room
+ * \return the newly created room
+ */
+Room *createRoom(Client *owner, const char *name, const char *description) {
+    Room *room = malloc(sizeof(Room));
+    memcpy(room->name, name, ROOM_NAME_MAX_LENGTH + 1);
+    memcpy(room->description, description, ROOM_DESC_MAX_LENGTH + 1);
+    room->owner = owner;
+    room->lock = createReadWriteLock();
+    room->clients[0] = owner;
+    for (int i = 1; i < MAX_USERS_PER_ROOM; i++) {
+        room->clients[i] = NULL;
+    }
+    return room;
+}
+
+void destroyRoom(Room *room) {
+    destroyReadWriteLock(room->lock);
+    free(room);
+}
+
+/**
+ * \brief Tries to insert the given room in the rooms array.
+ *
+ * It fails if a room with the same name as the given room already exists (error code: 1).<br>
+ * It fails if the maximum amount of rooms is already reached (error code: 2).
+ *
+ * \param roomToInsert The new room to add to the rooms array
+ * \return 0 if insertion is a success, else the error code
+ */
+int tryInsertRoom(Room *roomToInsert) {
+    Room *room = findRoomByName(roomToInsert->name);
+    /* Name already taken */
+    if (room != NULL) {
+        return 1;
+    }
+
+    int roomId = findFirstFreeRoomSlot();
+    /* No room slot available */
+    if (roomId == -1) {
+        return 2;
+    }
+
+    rooms[roomId] = roomToInsert;
+    return 0;
+}
+
+void handleRoomCreationRequest(Client *client, struct PacketCreateRoom *packet) {
+    SYNC_CLIENT_READ(int isInRoom = client->room != NULL);
+    if (isInRoom) {
         Packet errorPacket = NewPacketServerErrorMessage;
         memcpy(errorPacket.asServerErrorMessagePacket.message, "You're already in a room. First leave the room.", 48);
         sendPacket(client->socket, &errorPacket);
@@ -49,86 +105,86 @@ void handleRoomCreationRequest(Client* client, struct PacketCreateRoom* packet) 
         memcpy(errorPacket.asServerErrorMessagePacket.message, "The room name can't be empty.", 30);
         sendPacket(client->socket, &errorPacket);
     } else {
-        Room* room = findRoomByName(packet->roomName);
-
-        /* Name already taken */
-        if (room != NULL) {
+        Room *room = createRoom(client, packet->roomName, packet->roomDesc);
+        SYNC_ROOMS_WRITE(int error = tryInsertRoom(room));
+        if (error == 1) {
+            destroyRoom(room);
             Packet errorPacket = NewPacketServerErrorMessage;
             memcpy(errorPacket.asServerErrorMessagePacket.message, "This room name is already used.", 32);
             sendPacket(client->socket, &errorPacket);
-            return;
-        }
-
-        int roomId = findFirstFreeRoomSlot();
-
-        /* No room slot available */
-        if (roomId == -1) {
+        } else if (error == 2) {
+            destroyRoom(room);
             Packet errorPacket = NewPacketServerErrorMessage;
             memcpy(errorPacket.asServerErrorMessagePacket.message, "The maximum amount of rooms is reached.", 40);
             sendPacket(client->socket, &errorPacket);
-            return;
+        } else {
+            client->room = room; // SAFE, because we are room owner
+            Packet joinPacket = NewPacketJoin;
+            getClientUsername(client, joinPacket.asJoinPacket.username);
+            sendPacket(client->socket, &joinPacket);
         }
-
-        room = malloc(sizeof(Room));
-        memcpy(room->name, packet->roomName, ROOM_NAME_MAX_LENGTH + 1);
-        memcpy(room->description, packet->roomDesc, ROOM_DESC_MAX_LENGTH + 1);
-        room->owner = client;
-        room->clients[0] = client;
-        for (int i = 1; i < MAX_USERS_PER_ROOM; i++) {
-            room->clients[i] = NULL;
-        }
-        client->room = room;
-        rooms[roomId] = room;
-
-        Packet successPacket = NewPacketServerSuccess;
-        memcpy(successPacket.asServerSuccessMessagePacket.message, "Room created !", 15);
-        sendPacket(client->socket, &successPacket);
     }
 }
 
-void handleRoomJoinRequest(Client* client, struct PacketJoinRoom* packet) {
-    Room* room = findRoomByName(packet->roomName);
+void handleRoomJoinRequest(Client *client, struct PacketJoinRoom *packet) {
+    acquireRead(clientsLock);
+    if (client->room != NULL) {
+        releaseRead(clientsLock);
+
+        Packet errorPacket = NewPacketServerErrorMessage;
+        memcpy(errorPacket.asServerErrorMessagePacket.message, "You're already in a room. First leave the room.", 48);
+        sendPacket(client->socket, &errorPacket);
+        return;
+    }
+    releaseRead(clientsLock);
+
+    acquireRead(roomsLock);
+    Room *room = findRoomByName(packet->roomName);
     if (room == NULL) {
+        releaseRead(roomsLock);
+
         Packet errorPacket = NewPacketServerErrorMessage;
         memcpy(errorPacket.asServerErrorMessagePacket.message, "This room does not exist.", 26);
         sendPacket(client->socket, &errorPacket);
         return;
     }
 
-    if (client->room == room) {
-        Packet errorPacket = NewPacketServerErrorMessage;
-        memcpy(errorPacket.asServerErrorMessagePacket.message, "You're already in this room.", 29);
-        sendPacket(client->socket, &errorPacket);
-        return;
-    }
+    acquireWrite(room->lock);
+    releaseRead(roomsLock);
 
     int slot = findFirstFreeSlotForRoom(room);
     if (slot == -1) {
+        releaseWrite(room->lock);
+
         Packet errorPacket = NewPacketServerErrorMessage;
         memcpy(errorPacket.asServerErrorMessagePacket.message, "This room is full.", 19);
         sendPacket(client->socket, &errorPacket);
         return;
     }
 
-    // TODO: Make user quit a room if already in one
-    room->clients[slot] = client;
     client->room = room;
+    room->clients[slot] = client;
+    releaseWrite(room->lock);
 
     Packet joinPacket = NewPacketJoin;
-    SYNC_CLIENT_READ(memcpy(joinPacket.asJoinPacket.username, client->username, USERNAME_MAX_LENGTH + 1));
+    getClientUsername(client, joinPacket.asJoinPacket.username);
 
-    broadcastRoom(&joinPacket, room);
+    syncBroadcastRoom(&joinPacket, room);
 }
 
-void handleRoomLeaveRequest(Client* client, struct PacketLeaveRoom* packet) {
-    if (client->room == NULL) {
+void handleRoomLeaveRequest(Client *client) {
+    acquireWrite(clientsLock);
+    Room *room = client->room;
+
+    if (room == NULL) {
+        releaseRead(clientsLock);
         Packet errorPacket = NewPacketServerErrorMessage;
         memcpy(errorPacket.asServerErrorMessagePacket.message, "You're not in a room.", 48);
         sendPacket(client->socket, &errorPacket);
         return;
     }
 
-    Room* room = client->room;
+    acquireWrite(room->lock);
 
     if (client == room->owner) {
         Packet leavePacket = NewPacketLeave;
@@ -139,15 +195,24 @@ void handleRoomLeaveRequest(Client* client, struct PacketLeaveRoom* packet) {
                 room->clients[i]->room = NULL;
             }
         }
-        int roomId = findRoomId(room);
+        releaseWrite(clientsLock);
+
+        SYNC_ROOMS_WRITE(
+            int roomId = findRoomId(room);
+            rooms[roomId] = NULL;
+        );
+
+        releaseWrite(room->lock);
+        destroyReadWriteLock(room->lock);
         free(rooms[roomId]);
-        rooms[roomId] = NULL;
     } else {
+        client->room = NULL;
+        releaseWrite(clientsLock);
+
         Packet leavePacket = NewPacketLeave;
         memcpy(leavePacket.asLeavePacket.username, client->username, USERNAME_MAX_LENGTH + 1);
         broadcastRoom(&leavePacket, room);
 
-        client->room = NULL;
         int slot = 0;
         while (slot < MAX_USERS_PER_ROOM && room->clients[slot] != client) {
             slot++;
@@ -156,5 +221,7 @@ void handleRoomLeaveRequest(Client* client, struct PacketLeaveRoom* packet) {
         if (slot < MAX_USERS_PER_ROOM) { // Should always be true
             room->clients[slot] = NULL;
         }
+
+        releaseWrite(room->lock);
     }
 }

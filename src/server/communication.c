@@ -15,27 +15,40 @@ void broadcast(Packet* packet) {
 }
 
 void broadcastRoom(Packet* packet, Room* room) {
-    SYNC_CLIENT_READ(
-        for (int i = 0; i < MAX_USERS_PER_ROOM; i++) {
-            if (room->clients[i] != NULL) {
-                sendPacket(room->clients[i]->socket, packet);
-            }
+    for (int i = 0; i < MAX_USERS_PER_ROOM; i++) {
+        if (room->clients[i] != NULL) {
+            sendPacket(room->clients[i]->socket, packet);
         }
-    )
+    }
+}
+
+void syncBroadcastRoom(Packet* packet, Room* room) {
+    SYNC_ROOM_READ(room, broadcastRoom(packet, room));
 }
 
 void handleTextMessageRelay(Client* client, struct PacketText* packet) {
-    if (client->room == NULL) {
-        Packet errorPacket = NewPacketServerErrorMessage;
-        memcpy(errorPacket.asServerErrorMessagePacket.message, "First join a room using /room join <name>.", 43);
-        sendPacket(client->socket, &errorPacket);
-        return;
-    }
-
     unsigned int messageLength = strlen(packet->message);
+
     if (messageLength > 0 && messageLength <= MSG_MAX_LENGTH) {
         getClientUsername(client, packet->username);
-        broadcastRoom( (Packet*) packet, client->room);
+
+        // Allow to be sure client's room don't change between NULL check and room-lock acquire
+        acquireRead(clientsLock);
+
+        Room* room = client->room;
+        if (room == NULL) {
+            releaseRead(clientsLock);
+            Packet errorPacket = NewPacketServerErrorMessage;
+            memcpy(errorPacket.asServerErrorMessagePacket.message, "First join a room using /room join <name>.", 43);
+            sendPacket(client->socket, &errorPacket);
+            return;
+        }
+
+        acquireRead(room->lock);
+        releaseRead(clientsLock);
+
+        broadcastRoom( (Packet*) packet, room);
+        releaseRead(room->lock);
     } else {
         Packet serverErrorPacket = NewPacketServerErrorMessage;
         memcpy(serverErrorPacket.asServerErrorMessagePacket.message, "Invalid message.", 17);

@@ -240,7 +240,8 @@ void ui_welcomeMessage() {
     printf("Here are the available commands:\n");
     printf("  * file: used to send or receive a file\n");
     printf("  * nick: used to choose a new username\n");
-    printf("  * quit: used to quit the current room\n");
+    printf("  * quit: used to quit the server\n");
+    printf("  * room: used to create, join or leave a room\n");
 
     acquireMutex(inputStateMutex);
     {

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "communication.h"
 #include "string.h"
+#include "room.h"
 
 int scanForFreeSocketSlot() {
     int i = 0;
@@ -53,6 +54,9 @@ void disconnectClient(int id) {
             Client* client = clients[id];
             clients[id] = NULL;
     )
+
+    /* Simulate room leave request */
+    handleRoomLeaveRequest(client);
 
     /* Closing connection with client */
     closeSocket(&(client->socket));

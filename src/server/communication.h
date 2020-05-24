@@ -10,24 +10,26 @@
 #include "server.h"
 
 /**
- * \brief Broadcasts a packet to all clients
- *
- * \param packet The packet to send to all client
- */
-void broadcast(Packet* packet);
-
-/**
  * \brief Broadcast a packet to all clients of the given room
+ *
  * \param packet The packet to broadcast
  * \param room The room
  */
 void broadcastRoom(Packet* packet, Room* room);
 
 /**
+ * \brief Broadcast a packet to all clients of the given room with room-lock acquirement
+ *
+ * \param packet The packet to broadcast
+ * \param room The room
+ */
+void syncBroadcastRoom(Packet* packet, Room* room);
+
+/**
  * \brief Processes a received PacketText
  *
  * \param client The client who sent the packet
- * @param packet The received packet
+ * \param packet The received packet
  */
 void handleTextMessageRelay(Client* client, struct PacketText* packet);
 

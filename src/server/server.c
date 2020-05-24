@@ -19,6 +19,7 @@
 #include "room.h"
 
 ReadWriteLock clientsLock;
+ReadWriteLock roomsLock;
 Client* clients[NUMBER_CLIENT_MAX] = {NULL};
 Room* rooms[NUMBER_ROOM_MAX] = {NULL};
 
@@ -29,13 +30,25 @@ void handleServerClose(int signal) {
             clients[i] = NULL;
             closeSocket(&(client->socket));
             destroyThread(&(client->thread));
+
+            for (int j = 0; j < MAX_CONCURRENT_FILE_TRANSFER; j++) {
+                if (client->uploadData[j].fileContent != NULL) {
+                    free(client->uploadData[j].fileContent);
+                }
+            }
+
             free(client);
         }
     }
-    // TODO: Free rooms
+    for (int i = 0; i < NUMBER_ROOM_MAX; i++) {
+        if (rooms[i] != NULL) {
+            destroyRoom(rooms[i]);
+        }
+    }
     cleanUp();
     fileTransfer_cleanUp();
     destroyReadWriteLock(clientsLock);
+    destroyReadWriteLock(roomsLock);
     printf("Server closed.\n");
     exit(EXIT_SUCCESS);
 }
@@ -71,7 +84,7 @@ void handleClientsPackets(Client* client) {
                     handleRoomJoinRequest(client, &packet.asJoinRoomPacket);
                     break;
                 case LEAVE_ROOM_MESSAGE_TYPE:
-                    handleRoomLeaveRequest(client, &packet.asLeaveRoomPacket);
+                    handleRoomLeaveRequest(client);
                     break;
                 default:
                     printf("Received a packet of type %d. Can't handle this type of packet.\n", packet.type);
@@ -111,6 +124,7 @@ int main () {
 
     /* Initialize systems */
     clientsLock = createReadWriteLock();
+    roomsLock = createReadWriteLock();
     fileTransfer_init();
 
     printf("Server ready to accept connections.\n");

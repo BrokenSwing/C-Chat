@@ -35,7 +35,8 @@ int findAvailableUploadSlot(Client* client) {
 }
 
 void handleUploadRequest(Client* client, struct PacketFileUploadRequest* packet) {
-    if (client->room == NULL) {
+    SYNC_CLIENT_READ(int mustJoinRoom = client->room == NULL);
+    if (mustJoinRoom) {
         Packet errorPacket = NewPacketServerErrorMessage;
         memcpy(errorPacket.asServerErrorMessagePacket.message, "First join a room using /room join <name>.", 43);
         sendPacket(client->socket, &errorPacket);
@@ -105,11 +106,6 @@ int findUploadIdForFile(Client* client, unsigned fileId) {
 }
 
 void handleFileDataUpload(Client* client, struct PacketFileDataTransfer* packet) {
-    // TODO: Cancel upload when client leaves room
-    if (client->room == NULL) {
-        return;
-    }
-
     int uploadId = findUploadIdForFile(client, packet->id);
     if (packet->id > 0 && uploadId != -1) {
         /* The client is uploading and the packet data refers to the current upload file */
@@ -138,7 +134,19 @@ void handleFileDataUpload(Client* client, struct PacketFileDataTransfer* packet)
                 client->username,
                 client->uploadData[uploadId].fileId
             );
-            broadcastRoom(&uploadSuccessPacket, client->room);
+
+            acquireRead(clientsLock);
+            Room* room = client->room;
+            if (room != NULL) {
+                acquireRead(room->lock);
+                releaseRead(clientsLock);
+
+                broadcastRoom(&uploadSuccessPacket, room);
+
+                releaseRead(room->lock);
+            } else {
+                releaseRead(clientsLock);
+            }
 
             /* Set client upload state */
             free(client->uploadData[uploadId].fileContent);
