@@ -27,6 +27,13 @@ void handleRoomJoinRequest(Client* client, struct PacketJoinRoom* packet);
 void handleRoomLeaveRequest(Client* client);
 
 /**
+ * \brief Processes a received PacketListRooms
+ *
+ * \param client The client who sent the packet
+ */
+void handleRoomListRequest(Client* client);
+
+/**
  * \brief Destroys allocated resources for the given room
  *
  * \param room The room to destroy

@@ -205,6 +205,16 @@ struct PacketLeaveRoom {
 extern const union Packet NewPacketLeaveRoom;
 
 /**
+ * \class PacketListRooms
+ * \brief This packet is sent by client to request existing rooms list
+ */
+struct PacketListRooms {
+    char type;
+};
+/** This instance is used to create a new PacketListRooms */
+extern const union Packet NewPacketListRooms;
+
+/**
  * \class Packet
  * \brief A generic union type for packets
  */
@@ -216,7 +226,6 @@ typedef union Packet {
     struct PacketDefineUsername asDefineUsernamePacket;
     struct PacketServerErrorMessage asServerErrorMessagePacket;
     struct PacketUsernameChanged asUsernameChangedPacket;
-    struct PacketQuit asQuitPacket;
     struct PacketFileUploadRequest asFileUploadRequestPacket;
     struct PacketFileDownloadRequest asFileDownloadRequestPacket;
     struct PacketFileUploadValidation asFileUploadValidationPacket;
@@ -226,7 +235,6 @@ typedef union Packet {
     struct PacketServerSuccess asServerSuccessMessagePacket;
     struct PacketCreateRoom asCreateRoomPacket;
     struct PacketJoinRoom asJoinRoomPacket;
-    struct PacketLeaveRoom asLeaveRoomPacket;
 } Packet;
 
 /**

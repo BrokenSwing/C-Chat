@@ -86,6 +86,9 @@ void handleClientsPackets(Client* client) {
                 case LEAVE_ROOM_MESSAGE_TYPE:
                     handleRoomLeaveRequest(client);
                     break;
+                case LIST_ROOMS_MESSAGE_TYPE:
+                    handleRoomListRequest(client);
+                    break;
                 default:
                     printf("Received a packet of type %d. Can't handle this type of packet.\n", packet.type);
                     break;

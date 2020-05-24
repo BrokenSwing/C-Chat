@@ -10,6 +10,7 @@ add_executable(Client
         src/client/client.c          src/client/client.h
         src/client/ui.c              src/client/ui.h
         src/client/file-transfer.c   src/client/file-transfer.h
+        src/client/room.c            src/client/room.h
         src/client/console-color.h
         src/client/commands.h
 

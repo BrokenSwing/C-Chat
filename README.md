@@ -45,7 +45,8 @@ You can use commands on client, here are the available commands :
     * `/file send <filename>` : sends the file with the given name to other clients of the room
     * `/file receive <file_id>` : receives the file with the given id (file sent by a client)
 * `/quit` : quits the server
-* `/room <create | join | leave>`
+* `/room <create | join | leave | list>`
     * `/room create <name> <description>` : creates a room with the given name and the given description
     * `/room join <name>` : joins the room with the given name
     * `/room leave` : leaves the room you're currently in
+    * `/room list` : list all existing rooms

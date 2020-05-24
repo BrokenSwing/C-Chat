@@ -17,6 +17,7 @@ const union Packet NewPacketServerSuccess = { SERVER_SUCCESS_MESSAGE_TYPE };
 const union Packet NewPacketCreateRoom = { CREATE_ROOM_MESSAGE_TYPE };
 const union Packet NewPacketJoinRoom = { JOIN_ROOM_MESSAGE_TYPE };
 const union Packet NewPacketLeaveRoom = { LEAVE_ROOM_MESSAGE_TYPE };
+const union Packet NewPacketListRooms = { LIST_ROOMS_MESSAGE_TYPE };
 
 /**
  * \brief Retrieves the real size of the underlying type
@@ -60,6 +61,8 @@ unsigned int packets_sizeOf(Packet* packet) {
             return sizeof(struct PacketJoinRoom);
         case LEAVE_ROOM_MESSAGE_TYPE:
             return sizeof(struct PacketLeaveRoom);
+        case LIST_ROOMS_MESSAGE_TYPE:
+            return sizeof(struct PacketListRooms);
         default:
             return 0;
     }

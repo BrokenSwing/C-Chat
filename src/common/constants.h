@@ -171,4 +171,10 @@
  */
 #define LEAVE_ROOM_MESSAGE_TYPE 16
 
+/**
+ * \def LIST_ROOMS_MESSAGE_TYPE
+ * \brief An integer representing a message sent by client to ask existing rooms list
+ */
+#define LIST_ROOMS_MESSAGE_TYPE 17
+
 #endif //C_CHAT_CONSTANTS_H

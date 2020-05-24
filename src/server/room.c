@@ -225,3 +225,33 @@ void handleRoomLeaveRequest(Client *client) {
         releaseWrite(room->lock);
     }
 }
+
+void handleRoomListRequest(Client* client) {
+    Packet packet = NewPacketServerSuccess;
+    memcpy(packet.asServerSuccessMessagePacket.message, "List of rooms :", 19);
+    sendPacket(client->socket, &packet);
+    unsigned int total = 0;
+    SYNC_ROOMS_READ(
+            for (int i = 0; i < NUMBER_ROOM_MAX; i++) {
+                Room* room = rooms[i];
+                if (room != NULL) {
+                    unsigned int nameLength = strlen(room->name);
+                    unsigned int descriptionLength = strlen(room->description);
+                    memcpy(packet.asServerSuccessMessagePacket.message, room->name, nameLength);
+                    if (descriptionLength) {
+                        memcpy(packet.asServerSuccessMessagePacket.message + nameLength, " : ", 3);
+                        memcpy(packet.asServerSuccessMessagePacket.message + nameLength + 3, room->description, descriptionLength + 1);
+                    } else {
+                        packet.asServerSuccessMessagePacket.message[nameLength + 3] = '\0';
+                    }
+                    sendPacket(client->socket, &packet);
+                    total++;
+                }
+            }
+    );
+    if (total == 0) {
+        packet = NewPacketServerErrorMessage;
+        memcpy(packet.asServerErrorMessagePacket.message, "No rooms.", 10);
+        sendPacket(client->socket, &packet);
+    }
+}
