@@ -15,12 +15,13 @@
 
 Releases of the client and the server can be found in [releases tab](https://github.com/BrokenSwing/C-Chat/releases).
 
-| Version | Multiple clients support (2+) | Parallel messages sending/receiving | File exchange support |
-|:-------:|:-----------------------------:|:-----------------------------------:|:---------------------:|
-| v1.0.0  |   :x:                         |  :x:                                |   :x:                 |
-| v2.0.0  |   :x:                         |  :white_check_mark:                 |   :x:                 |
-| v3.0.0  |   :white_check_mark:          |  :white_check_mark:                 |   :x:                 |
-| v4.0.0  |   :white_check_mark:          |  :white_check_mark:                 |   :white_check_mark:  |
+| Version | Multiple clients support (2+) | Parallel messages sending/receiving | File exchange support | Rooms                |
+|:-------:|:-----------------------------:|:-----------------------------------:|:---------------------:|:--------------------:|
+| v1.0.0  |   :x:                         |  :x:                                |   :x:                 | :x:                  |
+| v2.0.0  |   :x:                         |  :white_check_mark:                 |   :x:                 | :x:                  |
+| v3.0.0  |   :white_check_mark:          |  :white_check_mark:                 |   :x:                 | :x:                  |
+| v4.0.0  |   :white_check_mark:          |  :white_check_mark:                 |   :white_check_mark:  | :x:                  |
+| v5.0.0  |   :white_check_mark:          |  :white_check_mark:                 |   :white_check_mark:  | :white_check_mark:   |
 
 ## Building manually
 
