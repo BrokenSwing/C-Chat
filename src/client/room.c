@@ -65,7 +65,7 @@ void joinRoom(const char* command) {
     roomName[i] = '\0';
 
     Packet packet = NewPacketJoinRoom;
-    memcpy(packet.asJoinRoomPacket.roomName, command, ROOM_NAME_MAX_LENGTH + 1);
+    memcpy(packet.asJoinRoomPacket.roomName, roomName, ROOM_NAME_MAX_LENGTH + 1);
     sendPacket(clientSocket, &packet);
 }
 
